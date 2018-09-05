@@ -24,7 +24,7 @@
 
     <script src="<%=URL_STATIC%>static/newjs/final_jo.js"></script>
     <script src="<%=URL_STATIC%>static/newjs/final_jo-adapt.js"></script>
-    <script src="<%=URL_STATIC%>static/prototype/js/final_grid_no.js"></script>
+    <script src="<%=URL_STATIC%>static/prototype/js/final_grid_website_no.js"></script>
     <script src="<%=URL_STATIC%>static/js/common.js"></script>
     <script src="<%=URL_STATIC%>static/js/common_biz.js"></script>
 
