@@ -114,6 +114,12 @@ public class PmsWebsiteController {
         service.insert(pmsWebsite);
         return new Result();
     }
+    @RequestMapping("/update")
+    public Object update(PmsWebsite pmsWebsite, HttpServletRequest request) throws Exception {
+        pmsWebsite.setUserId(pmsWebsite.getUserId().replaceAll(",",""));
+        service.update(pmsWebsite);
+        return new Result();
+    }
     @RequestMapping("/delete")
     public Object delete(String ids, String id, HttpServletRequest request) throws Exception {
         Result result = new Result();

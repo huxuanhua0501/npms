@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>工作经历列表页</title>
+    <title>家庭关系列表页</title>
     <%--常量--%>
     <%@ include file="/common/constHead.jsp"%>
     <link rel="shortcut icon" href="<%=URL_STATIC%>static/images/favicon.ico">
@@ -24,13 +24,13 @@
 
     <script src="<%=URL_STATIC%>static/newjs/final_jo.js"></script>
     <script src="<%=URL_STATIC%>static/newjs/final_jo-adapt.js"></script>
-    <script src="<%=URL_STATIC%>static/newjs/final_grid.js"></script>
+    <script src="<%=URL_STATIC%>static/prototype/js/final_grid_no.js"></script>
     <script src="<%=URL_STATIC%>static/js/common.js"></script>
     <script src="<%=URL_STATIC%>static/js/common_biz.js"></script>
 
     <script type="text/javascript">
         $(function(){
-           // sfSet();//在初始化表格之前
+            sfSet();//在初始化表格之前
             joViewInitAboutDoc();//joView初始化处理
         });
         //行处理
@@ -42,7 +42,6 @@
         var userId = jo.getDefVal(jo.getUrlParam("userId"), loginUser.id);
         var sf = jo.getDefVal(jo.getUrlParam("sf"),"");
         var _edit = jo.getDefVal(jo.getUrlParam("edit"),"");
-
         $(function(){
             goto();
         });
@@ -61,83 +60,15 @@
                     $(this).attr("lay-href",$(this).attr("lay-href") + "&edit=true");
                 });
             }
-        }
-        // function sfSet() {
-        //     console.log("打印表格属性sf："  + sf);
-        //     if (jo.isValid(sf)) {
-        //         $("#mainList").attr("formUrl",$("#mainList").attr("formUrl") + "?sf=rs");
-        //         console.log("打印表格属性："  + $("#mainList").attr("formUrl"));
-        //     }
-        // }
-    </script>
-    <script>
-        //diff
-        var collectData;
-        var addCollect = false;
-        $(function () {
-            $("#userId").val(userId);
-            getCollectData();
 
+        }
+        function sfSet() {
+            console.log("打印表格属性sf："  + sf);
             if (jo.isValid(sf)) {
-                $("#collectDiv").show();
-                $("#content").removeAttr("readonly");
-                $("#content").removeClass("readonly");
-                $('textarea').css("border","");
-                $("#saveBtn").show();
-            }else {
-                $("#content").attr("readonly","readonly");
-                $("#content").addClass("readonly");
-                $("#saveBtn").hide();
-            }
-            initCollectVal();
-        });
-        function getCollectData() {
-            var result = jo.postAjax("pms/pmsCollectWork/get",{"id":userId});
-            if(result != null && result.data.length > 0 && result.data[0]){
-                collectData = result.data[0];
-            }else{
-                collectData = {};
-                $("#collectDiv").hide();
-                addCollect = true;
+                $("#mainList").attr("formUrl",$("#mainList").attr("formUrl") + "?sf=rs");
+                console.log("打印表格属性："  + $("#mainList").attr("formUrl"));
             }
         }
-        function initCollectVal(oJson) {
-            oJson = collectData;
-            if(jo.isValid(oJson["content"])){//值有效才赋值
-                $("#content").val(oJson["content"]);
-            }
-            if (oJson["lockStatus"]=="1") {
-                $("#lockStatus").show();
-            }
-        }
-        function saveCollect(sUrl){
-
-            if (addCollect) {
-                sUrl = "pms/pmsCollectWork/insert";
-            }else {
-                sUrl = "pms/pmsCollectWork/update";
-            }
-            if(jo.isValid(sUrl)){
-
-                var oData = {};
-                oData["id"] = $("#userId").val();
-                oData["content"] = $("#content").val();
-                oData["lockStatus"] = "1";
-
-                jo.postAjax(sUrl,oData, function(result){
-                    if(result.code == 0){
-                        window.parent.jo.showMsg("操作成功!");
-                        window.location.reload();
-                    }else{
-                        jo.showMsg(result.info)
-                    }
-                });
-
-            }else{
-                jo.showMsg("URL无效!");
-            }
-        };
-        //diff
     </script>
     <style>
         /*分页条start*/
@@ -190,32 +121,6 @@
             margin-left: -30px;
             width: 92%;
         }
-        /*分页条样式end*/
-        .icon-msnui-menu-down {
-            transform: rotateZ(45deg);
-            display: inline-block;
-            color: #C7C7CD;
-            margin-right: 10px;
-            /* margin-top: 4px; */
-            font-size: 12px;
-        }
-
-        .icon-msnui-menu-down.child {
-            margin-left: 10px;
-        }
-
-        .icon-msnui-menu-down.childs {
-            margin-left: 20px;
-        }
-
-        .person-tit .title {
-            padding: 0;
-        }
-
-        .person-tit {
-            padding: 18px;
-        }
-
         button.close {
             background: #fff;
             color: #378CEF;
@@ -227,22 +132,18 @@
             color: #378CEF;
         }
 
-        .layui-table a.edit {
-            margin: 0;
-        }
+        /*分页条样式end*/
     </style>
 </head>
 
 <body>
 <div class="container">
     <div class="layui-row">
-        <form  class="layui-form layui-form-box layui-col-md12 person">
+        <form id="pageForm" class="layui-form layui-form-box layui-col-md12 person">
             <div class="person-tit clear">
-                <span class="left title">常用网站</span>
+                <span class="left title">信息编辑</span>
                 <div class="layui-form right">
                     <div class="layui-inline button-group">
-                        <button id="saveBtn" type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry" onclick="saveCollect()">保存并锁定</button>
-
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary add" onclick="joView.add()">新增</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary del" onclick="joView.del()">删除</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary reset" onclick="window.location.reload()"><i class="layui-icon layui-icon-refresh"></i> 刷新</button>
@@ -250,42 +151,45 @@
 
                     </div>
 
+
+
+
                 </div>
             </div>
-        </form>
-        <form id="pageForm" class="layui-form layui-form-box layui-col-md12 person">
+
             <div class="form-content">
                 <i class="layui-icon layui-icon-search" style="position: absolute;top: 35px;left: 40px;"></i>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">名称</label>
+                    <label class="layui-form-label">姓名</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="chinese_name" name="chinese_name" placeholder="" autocomplete="off" class="layui-input list-input">
+                        <input type="text" name="chinese_name" placeholder="" autocomplete="off" class="layui-input list-input">
                     </div>
                 </div>
+
                 <div class="layui-form-item">
                     <div class="layui-input-inline button-inline">
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry" onclick="joView.select()">搜索</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry" onclick="joView.select()">查询</button>
                     </div>
                 </div>
             </div>
-        </form>
-        <form class="layui-form layui-form-box layui-col-md12 person">
 
-        <div class="person-list-content">
 
-                        <input type="hidden" id="userId" name="userId" />
-
-                </div>
-                <%--汇总end--%>
-            </div>
-
-                <table class="layui-table layui-form" id="mainList" dataUrl="pms/website/getPage.action?userId=${loginUser.id}&chinese_name=${chinese_name}"  deleteUrl="pms/website/delete.action" formUrl="page/pms/common-web-add_no.jsp?sf=rs">
+            <div class="person-list-content">
+                <table class="layui-table layui-form" id="mainList" dataUrl="pms/website/getPage.action?userId=${loginUser.id}&chinese_name=${chinese_name}" deleteUrl="pms/website/delete.action" formUrl="page/portal/common-web-add_no.jsp">
                     <col field="chinese_name" title="中文名字" width="10%" align="left"  />
                     <col field="website" title="网址" width="60%" align=""/>
                     <col field="add_time" title="添加时间" width="10%" align=""/>
                     <col field="sort" title="排序" width="10%" align=""/>
                     <col field="id" title="操作" width="10%" align=""  event="click"/>
                 </table>
+                <%--                <div id="pages">
+                                    <div class="prompt">共<span>2</span>条记录</div>
+                                    <button type="button" class="layui-btn layui-btn-primary">尾页</button>
+                                    <button type="button" class="layui-btn layui-btn-primary">下一页</button>
+                                    <button type="button" class="layui-btn layui-btn-primary">上一页</button>
+                                    <button type="button" class="layui-btn layui-btn-primary">首页</button>
+                                </div>--%>
+                <%--分页条--%>
                 <div class="page-bar page-bar-float layui-row" gridid="mainList">
 
                 </div>
@@ -294,6 +198,7 @@
         </form>
     </div>
 </div>
+
 <script>
     $(function() {
         layui.use(['layer', 'form', 'laydate'], function() {
@@ -311,31 +216,39 @@
             });
             form.on('select(choicePageSize)', function(data) {
                 var iNum = $(data.elem).val();
-                var chinese_name = $("#chinese_name").val();
                 joView.choicePageSize(iNum);
             });
+            /*                $(".edit").click(function() {
+                                var url = "";
+                                if ($(this).parents("tr").find("i").hasClass("icon-suoding")) {
+                                    url = 'relationship-info-edit.html?lock=true';
+                                } else {
+                                    url = 'relationship-info-edit.html';
+                                }
+                                layer.open({ /!*弹出框*!/
+                                    type: 2,
+                                    title: '编辑家庭成员和社会关系',
+                                    //maxmin: true,//大小窗口切换
+                                    shadeClose: true, //点击遮罩关闭层
+                                    area: ['650px', '390px'],
+                                    content: url
+                                });
+                            });*/
+            /*                $(".add").click(function() {
+                                layer.open({ /!*弹出框*!/
+                                    type: 2,
+                                    title: '新增家庭成员和社会关系',
+                                    // maxmin: true,//大小窗口切换
+                                    shadeClose: true, //点击遮罩关闭层
+                                    area: ['650px', '390px'],
+                                    content: 'relationship-info-add.html'
+                                });
+                            });*/
+            $(".close").click(function() {
+                history.back(-1);
+            })
         });
-
-        //textarea高度自适应
-        $.fn.autoHeight = function(){
-            function autoHeight(elem){
-                elem.style.height = 'auto';
-                elem.scrollTop = 0; //防抖动
-                elem.style.height = elem.scrollHeight + 'px';
-            }
-            this.each(function(){
-                autoHeight(this);
-                $(this).on('keyup', function(){
-                    autoHeight(this);
-                });
-            });
-        }
-        $('textarea[autoHeight]').autoHeight();
-        $(".close").click(function() {
-            history.back(-1);
-        })
-        //textarea end
-    });
+    })
 </script>
 <script type="text/javascript">
     jo.formatUI();//格式化jo组件

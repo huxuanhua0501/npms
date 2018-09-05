@@ -41,7 +41,7 @@ public class PmsWebsiteService implements IPmsWebsiteService {
 
     @Override
     public int update(PmsWebsite pmsWebsite) throws Exception {
-        return 0;
+        return dataAccessService.update(PmsConstants.MAPPER.PMS_WEBSITE + ".update", pmsWebsite);
     }
 
     @Override

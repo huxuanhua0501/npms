@@ -9,9 +9,16 @@
         (id, user_id, chinese_name, website, add_time, sort)
         VALUES
             (
-                #{id}, #{userId}, #{chinese_name}, #{website}, CURRENT_DATE, #{sort}
+                #{id}, #{userId}, #{chinese_name}, #{website}, #{add_time}, #{sort}
             )
     </insert>
+    <update id="update" parameterType="com.yy.young.pms.model.PmsWebsite">
+        UPDATE pms_website
+        SET user_id = #{userId}, chinese_name = #{chinese_name}, website = #{website}, add_time = #{add_time},
+            sort = #{sort}
+
+        WHERE id = #{id}
+    </update>
     <select id="getList" parameterType="com.yy.young.pms.model.PmsWebsite"
             resultType="com.yy.young.pms.model.PmsWebsite">
         SELECT
@@ -33,7 +40,7 @@
     <select id="get" resultType="com.yy.young.pms.model.PmsWebsite">
         SELECT
             id,
-            user_id AS  userId,
+            user_id AS userId,
             chinese_name,
             website,
             add_time,

@@ -337,6 +337,16 @@ joView.showData = function(oList){
                                     _val = "未锁定";
                                 }
                             }
+                            if (statusKey == "id") {
+                                if (_val.length== 32) {
+
+                                    _val = '<option style="color: blue " value="'+_val+'" calss="update">编辑</option>'
+                                  /*   _val = "<span style='color:blue'>编辑</span>";*/
+
+                                }else {
+                                    _val = "未锁定";
+                                }
+                            }
                             //新增状态：end
 
                         }
