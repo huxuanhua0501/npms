@@ -11,6 +11,9 @@
     <title>家庭关系列表页</title>
     <%--常量--%>
     <%@ include file="/common/constHead.jsp"%>
+    <%--公共--%>
+
+    <%@ include file="/common/commonHead.jsp"%>
     <link rel="shortcut icon" href="<%=URL_STATIC%>static/images/favicon.ico">
 
     <script src="<%=URL_STATIC%>static/final/js/layui.js"></script>

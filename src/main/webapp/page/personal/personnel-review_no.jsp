@@ -47,7 +47,7 @@
 
     <script src="<%=URL_STATIC%>static/newjs/final_jo.js"></script>
     <script src="<%=URL_STATIC%>static/newjs/final_jo-adapt.js"></script>
-    <script src="<%=URL_STATIC%>static/prototype/js/final_grid_website_no.js"></script>
+    <script src="<%=URL_STATIC%>static/prototype/js/final_grid_personnel_no.js"></script>
     <script src="<%=URL_STATIC%>static/js/common.js"></script>
     <script src="<%=URL_STATIC%>static/prototype/js/common_biz_no.js"></script>
 
@@ -169,7 +169,7 @@
     <div class="layui-row">
         <form id="pageForm" class="layui-form layui-form-box layui-col-md12 person">
             <div class="person-tit clear">
-                <span class="left title">信息编辑</span>
+                <span class="left title">按人员审核</span>
                 <div class="layui-form right">
                     <div class="layui-inline button-group">
                       <%--  <button type="button" class="layui-btn layui-btn-radius layui-btn-primary add" onclick="joView.add()">新增</button>
