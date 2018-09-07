@@ -11,9 +11,32 @@
     <title>家庭关系列表页</title>
     <%--常量--%>
     <%@ include file="/common/constHead.jsp"%>
-    <link rel="shortcut icon" href="<%=URL_STATIC%>static/images/favicon.ico">
+    <%--jQuery--%>
+<%--
+    <%@ include file="/common/jqueryHead.jsp"%>
+--%>
+    <%--jo--%>
+<%--
+    <%@ include file="/common/joHead.jsp"%>
+--%>
+    <%--bootstrap和字体--%>
+<%--
+    <%@ include file="/common/bootstrapHead.jsp"%>
+--%>
+    <%--layer--%>
+<%--
+    <%@ include file="/common/layerHead.jsp"%>
+--%>
+    <%--zTree树--%>
+<%--
+    <%@ include file="/common/zTreeHead.jsp"%>
+--%>
+    <%--公共--%>
 
-    <script src="<%=URL_STATIC%>static/final/js/layui.js"></script>
+    <%@ include file="/common/commonHead.jsp"%>
+     <link rel="shortcut icon" href="<%=URL_STATIC%>static/images/favicon.ico">
+
+    <script src="<%=URL_STATIC%>static/prototype/js/layui.js"></script>
     <link rel="stylesheet" href="<%=URL_STATIC%>static/final/css/layui.css">
     <script src="<%=URL_STATIC%>static/final/js/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=URL_STATIC%>static/final/font/font2/iconfont.css">
@@ -26,7 +49,7 @@
     <script src="<%=URL_STATIC%>static/newjs/final_jo-adapt.js"></script>
     <script src="<%=URL_STATIC%>static/prototype/js/final_grid_website_no.js"></script>
     <script src="<%=URL_STATIC%>static/js/common.js"></script>
-    <script src="<%=URL_STATIC%>static/js/common_biz.js"></script>
+    <script src="<%=URL_STATIC%>static/prototype/js/common_biz_no.js"></script>
 
     <script type="text/javascript">
         $(function(){
@@ -38,8 +61,9 @@
         //
         // };
         joView.handleItem = function(oItem,iIndex){
-            oItem._opt = '&nbsp;&nbsp;<button type="button" class="btn btn-xs btn-outline btn-primary" onclick="lookUserDoc(\''+oItem.id+'\')"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;查看</button>';
-            oItem._opt += '&nbsp;&nbsp;<button type="button" class="btn btn-xs btn-outline btn-warning" onclick="joView.edit(\''+oItem.id+'\')"><i class="fa fa-file-o" aria-hidden="true"></i>&nbsp;审核</button>';
+            oItem._opt = '&nbsp;&nbsp;<span style="color: #62abff;  cursor:pointer;"   onclick="lookUserDoc(\''+oItem.id+'\')"> &nbsp;禁用</span>';
+            oItem._opt += '&nbsp;&nbsp;<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\''+oItem.id+'\')"> &nbsp;查看</span>';
+            oItem._opt += '&nbsp;&nbsp;<span style="color: #62abff;  cursor:pointer;" onclick="joView.edit(\''+oItem.id+'\')">&nbsp;审核</>';
         };
     </script>
     <script type="text/javascript">

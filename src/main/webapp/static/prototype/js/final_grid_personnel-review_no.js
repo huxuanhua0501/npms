@@ -950,18 +950,18 @@ joView.del = function(sIds){
  * @param id 数据的主键值
  * @param sWidth 弹窗的宽度,或者是该行数据的json格式的值(object类型)
  */
-joView.edit = function(id,sWidth,sHeight,sTitle){
-    if(typeof(joView.clickItem) == "function"){
-        joView.clickItem(id,sWidth,sHeight,sTitle);
-    }else{
-        if(jo.isValid(joView.params["formUrl"])){//有效的表单地址
-            if(typeof(sWidth) == "object"){
-                sWidth = '';
-            }
-            //getPopWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+id +"&"+ joView.params["transferParam"],jo.getDefVal(sWidth,'780px'),jo.getDefVal(sHeight,'80%'),jo.getDefVal(sTitle,'编辑'));
-            // jo.showWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+id +"&"+ joView.params["transferParam"],jo.getDefVal("85%", joView.params["formWidth"]),jo.getDefVal("85%", joView.params["formHeight"]),jo.getDefVal(sTitle, joView.params["winTitleOfUpdate"]), joView.params["winNameOfUpdate"]);
-            top.jo.showWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+(id) +"&sf=rs&edit=true&"+ joView.params["transferParam"],jo.getDefVal("85%", joView.params["formWidth"]),jo.getDefVal("85%", joView.params["formHeight"]),jo.getDefVal("按人员审核", joView.params["winTitleOfUpdate"]), joView.params["winNameOfUpdate"]);
-
-        }
-    }
-};
+// joView.edit = function(id,sWidth,sHeight,sTitle){
+//     if(typeof(joView.clickItem) == "function"){
+//         joView.clickItem(id,sWidth,sHeight,sTitle);
+//     }else{
+//         if(jo.isValid(joView.params["formUrl"])){//有效的表单地址
+//             if(typeof(sWidth) == "object"){
+//                 sWidth = '';
+//             }
+//             //getPopWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+id +"&"+ joView.params["transferParam"],jo.getDefVal(sWidth,'780px'),jo.getDefVal(sHeight,'80%'),jo.getDefVal(sTitle,'编辑'));
+//             // jo.showWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+id +"&"+ joView.params["transferParam"],jo.getDefVal("85%", joView.params["formWidth"]),jo.getDefVal("85%", joView.params["formHeight"]),jo.getDefVal(sTitle, joView.params["winTitleOfUpdate"]), joView.params["winNameOfUpdate"]);
+//             top.jo.showWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+(id) +"&sf=rs&edit=true&"+ joView.params["transferParam"],jo.getDefVal("85%", joView.params["formWidth"]),jo.getDefVal("85%", joView.params["formHeight"]),jo.getDefVal("按人员审核", joView.params["winTitleOfUpdate"]), joView.params["winNameOfUpdate"]);
+//
+//         }
+//     }
+// };
