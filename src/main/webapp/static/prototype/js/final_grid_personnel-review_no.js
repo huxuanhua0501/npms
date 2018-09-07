@@ -32,10 +32,10 @@ joView.params = {
     "deleteUrl" : "",//[删除]数据的url
     "dataUrl" : "",//[Grid数据]的url
     "grid" : null//grid表格jq对象	2017-06-16新增参数
-    ,"formWidth" : "650px"//表单窗口的宽度，新界面area: ['650px', '390px'],
-    ,"formHeight" : "80%"//表单窗口的高度,2018-03-05新加参数
+    ,"formWidth" : "85%"//表单窗口的宽度，新界面area: ['650px', '390px'],
+    ,"formHeight" : "85%"//表单窗口的高度,2018-03-05新加参数
     ,"winTitleOfAdd" : "新增"//新增弹窗的标题,2018-03-05新加参数
-    ,"winTitleOfUpdate" : "编辑"//修改弹窗的标题,2018-03-05新加参数
+    ,"winTitleOfUpdate" : "按人员审核"//修改弹窗的标题,2018-03-05新加参数
     ,"winNameOfAdd" : "WIN_ADD"//新增弹窗的标题,2018-03-05新加参数
     ,"winNameOfUpdate" : "WIN_EDIT"//修改弹窗的标题,2018-03-05新加参数
     ,"orderBy" : ""//排序字段,2018-04-25新加参数
@@ -330,22 +330,22 @@ joView.showData = function(oList){
                                     _val = "暂无";
                                 }
                             }
-                            if (statusKey == "lockStatus") {
+                         /*   if (statusKey == "lockStatus") {
                                 if (_val == 1) {
                                     _val = "<span style='color:red'>已锁定</span>";
                                 }else {
                                     _val = "未锁定";
                                 }
-                            }
+                            }*/
                             if (statusKey == "id") {
-                                if (_val.length== 32) {
+                                // if (_val.length== 32) {
 
-                                    _val = '<option style="color: blue " value="'+_val+'" calss="update">编辑</option>'
+                                    _val ='<option style="color: blue " value="'+_val+'" calss="get">查看</option>' '<option style="color: blue " value="'+_val+'" calss="update">审核</option>'
                                   /*   _val = "<span style='color:blue'>编辑</span>";*/
 
-                                }else {
-                                    _val = "未锁定";
-                                }
+                                // }/*else {
+                                //     _val = "未锁定";
+                                // }*/
                             }
                             //新增状态：end
 
@@ -959,7 +959,9 @@ joView.edit = function(id,sWidth,sHeight,sTitle){
                 sWidth = '';
             }
             //getPopWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+id +"&"+ joView.params["transferParam"],jo.getDefVal(sWidth,'780px'),jo.getDefVal(sHeight,'80%'),jo.getDefVal(sTitle,'编辑'));
-            jo.showWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+id +"&"+ joView.params["transferParam"],jo.getDefVal(sWidth, joView.params["formWidth"]),jo.getDefVal(sHeight, joView.params["formHeight"]),jo.getDefVal(sTitle, joView.params["winTitleOfUpdate"]), joView.params["winNameOfUpdate"]);
+            // jo.showWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+id +"&"+ joView.params["transferParam"],jo.getDefVal("85%", joView.params["formWidth"]),jo.getDefVal("85%", joView.params["formHeight"]),jo.getDefVal(sTitle, joView.params["winTitleOfUpdate"]), joView.params["winNameOfUpdate"]);
+            top.jo.showWin(joView.params["formUrl"]+jo.getLinkSign(joView.params["formUrl"])+joView.params["PKName"]+'='+(id) +"&sf=rs&edit=true&"+ joView.params["transferParam"],jo.getDefVal("85%", joView.params["formWidth"]),jo.getDefVal("85%", joView.params["formHeight"]),jo.getDefVal("按人员审核", joView.params["winTitleOfUpdate"]), joView.params["winNameOfUpdate"]);
+
         }
     }
 };
