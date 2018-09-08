@@ -364,7 +364,11 @@ joView.showData = function(oList){
                     }else{//使用.replace(/\'/ig,"\\\"")是为了解决因为单引号造成的显示问题和点击事件异常
                         var evt = showFieldsInfo[j]['event'];
                         if(evt == "none"){//event属性为none时表示禁用点击事件
-                            _html += "<td "+alignHtml+" >"+_val+2222222+"</td>";
+                            if(i%2==0) {
+                                _html += "<td "+alignHtml+" style='color:  #1AAD19;'>"+_val+"</td>";
+                            }else{
+                                _html += "<td "+alignHtml+" style='color: #D0021B;'>"+_val+"</td>";
+                            }
                         }else{
                             _html += "<td "+alignHtml+" onclick='joView.edit(\""+oList[i][joView.params["PKName"]]+"\","+JSON.stringify(oList[i]).replace(/\'/ig,"\\\"")+")'><a href='javascript:;' style='color: #337ab7'>"+_val+"</a></td>";
                         }

@@ -68,7 +68,7 @@ public class PmsUserServiceImpl implements ICommonService<PmsUser>,IPmsUserExtSe
             //格式化为带单引号形式,在sql中使用in关键字
             pmsUser.setAdministrativeLevel("'"+pmsUser.getAdministrativeLevel().replaceAll(",", "','")+"'");
         }
-        return dataAccessService.getList(PmsConstants.MAPPER.PMS_USER + ".getPmsUserList", pmsUser);
+        return dataAccessService.getList(PmsConstants.MAPPER.PMS_USER + ".getnewPmsUserList", pmsUser);
     }
 
     //获取数据列表(分页),默认查询作废标识!=1的人员

@@ -48,6 +48,52 @@
         ,O.remark_modify_time AS "remarkModifyTime"
         ,(SELECT string_agg(DE.NAME,',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
     </sql>
+    <sql id="searchnewCol">
+        O.id AS "id"
+        ,O.user_id AS "userId"
+        ,O.user_name AS "userName"
+        ,O.old_name AS "oldName"
+        ,O.sex AS "sex"
+        ,O.birth AS "birth"
+        ,O.nation AS "nation"
+        ,O.place_of_origin AS "placeOfOrigin"
+        ,O.place_of_birth AS "placeOfBirth"
+        ,O.work_start_time AS "workStartTime"
+        ,O.political_outlook AS "politicalOutlook"
+        ,O.join_party_time AS "joinPartyTime"
+        ,O.technical_position AS "technicalPosition"
+        ,O.get_time AS "getTime"
+        ,O.appointment_time AS "appointmentTime"
+        ,O.technical_level AS "technicalLevel"
+        ,O.administrative_duty AS "administrativeDuty"
+        ,O.tenure_time AS "tenureTime"
+        ,O.administrative_level AS "administrativeLevel"
+        ,O.research_field AS "researchField"
+        ,O.specialty AS "specialty"
+        ,O.highest_education AS "highestEducation"
+        ,O.highest_degree AS "highestDegree"
+        ,O.id_card AS "idCard"
+        ,O.overseas_study_experience AS "overseasStudyExperience"
+        ,O.english_level AS "englishLevel"
+        ,O.photo_address AS "photoAddress"
+        ,O.remark AS "remark"
+        ,O.first_education AS "firstEducation"
+        ,O.job_education AS "jobEducation"
+        ,O.person_type AS "personType"
+        ,O.num AS "num"
+        ,O.trash_flag AS "trashFlag"
+        ,O.first_degree AS "firstDegree"
+        ,O.station AS "station"
+        ,O.take_work AS "takeWork"
+        ,O.research_field_detail AS "researchFieldDetail"
+        ,O.job_degree AS "jobDegree"
+        ,O.temp_work_experience AS "tempWorkExperience"
+        ,O.to_there_time AS "toThereTime"
+        ,O.remark_modify_time AS "remarkModifyTime"
+        ,(SELECT string_agg(DE.NAME,',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
+        ,tuu.state AS "userState"
+    </sql>
+
     <!--关联查询相关sql-->
     <sql id="joinSql">
     </sql>
@@ -135,6 +181,89 @@
             </otherwise>
         </choose>
     </select>
+
+    <select id="getnewPmsUserList" parameterType="com.yy.young.pms.model.PmsUser" resultType="com.yy.young.pms.model.PmsUser">
+        SELECT
+        <include refid="searchCol"></include>
+        FROM pms_user O
+        LEFT JOIN   tb_ums_user tuu ON  tuu.account = O.user_id
+        <include refid="joinSql"></include>
+        <where>
+            <if test="deptList != null">
+                O.ID IN (
+                SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+                <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                    #{item.deptId}
+                </foreach>
+                )
+            </if>
+            <if test="id != null and id != ''">
+                AND O.ID = #{id}
+            </if>
+            <if test="userId != null and userId != ''">
+                AND O.user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                AND O.user_name like '%${userName}%'
+            </if>
+            <if test="personType != null and personType != ''">
+                AND O.person_type = #{personType}
+            </if>
+            <if test="sex != null and sex != ''">
+                AND O.sex = #{sex}
+            </if>
+            <if test="nation != null and nation != ''">
+                AND O.nation = #{nation}
+            </if>
+            <if test="highestEducation != null and highestEducation != ''">
+                AND O.highest_education = #{highestEducation}
+            </if>
+            <if test="highestDegree != null and highestDegree != ''">
+                AND O.highest_degree = #{highestDegree}
+            </if>
+            <if test="technicalPosition != null and technicalPosition != ''">
+                AND O.technical_position = #{technicalPosition}
+            </if>
+            <if test="administrativeLevel != null and administrativeLevel != ''">
+                AND O.administrative_level IN (${administrativeLevel})
+            </if>
+            <if test="firstEducation != null and firstEducation != ''">
+                AND O.first_education = #{firstEducation}
+            </if>
+            <if test="firstDegree != null and firstDegree != ''">
+                AND O.first_degree = #{firstDegree}
+            </if>
+            <if test="jobEducation != null and jobEducation != ''">
+                AND O.job_education = #{jobEducation}
+            </if>
+            <if test="jobDegree != null and jobDegree != ''">
+                AND O.job_degree = #{jobDegree}
+            </if>
+            <if test="tempWorkExperience != null and tempWorkExperience != ''">
+                AND O.temp_work_experience = #{tempWorkExperience}
+            </if>
+            <if test="administrativeDuty != null and administrativeDuty != ''">
+                AND O.administrative_duty LIKE '%${administrativeDuty}%'
+            </if>
+            <choose>
+                <when test="trashFlag != null and trashFlag != ''">
+                    AND O.trash_flag = #{trashFlag}
+                </when>
+                <otherwise>
+                    AND (O.trash_flag != '1' OR  O.trash_flag IS NULL)
+                </otherwise>
+            </choose>
+        </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                ORDER BY O.${orderBy} ${orderType}
+            </when>
+            <otherwise>
+                ORDER BY O.num ASC,O.id ASC
+            </otherwise>
+        </choose>
+    </select>
+
     <!--管辖内的人员查询-->
     <select id="getPmsUserListInDept" parameterType="com.yy.young.pms.model.PmsUser" resultType="com.yy.young.pms.model.PmsUser">
         SELECT
