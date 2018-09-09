@@ -129,6 +129,7 @@ public class PmsUser{
     private String toThereTime;//来院时间
     private String remarkModifyTime;
     private String state;
+    private String dicName;
 
     public String getRemarkModifyTime() {
         return remarkModifyTime;
@@ -472,6 +473,14 @@ public class PmsUser{
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getDicName() {
+        return dicName;
+    }
+
+    public void setDicName(String dicName) {
+        this.dicName = dicName;
     }
 
     public AuditPmsUser toAnother() {

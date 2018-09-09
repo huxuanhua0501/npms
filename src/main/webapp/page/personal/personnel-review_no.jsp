@@ -62,6 +62,11 @@
         // };
 
         joView.handleItem = function(oItem,iIndex){
+
+            oItem._cvm = (oItem.state == 1 ? "启用" : "禁用") ;
+            oItem._cvm +="/";
+             oItem._cvm += oItem.dicName;
+            // oItem._cvm = (oItem.state == 0 ? '<span style="color:green ;cursor:pointer;"  onclick="changeState(\''+oItem.state+'\',\''+oItem.id+'\')">启用</span>' : '<span style="color:red ;cursor:pointer;" onclick="changeState(\''+oItem.state+'\',\''+oItem.id+'\')">禁用</span>');
             oItem._opt = (oItem.state == 0 ? '<span style="color:green ;cursor:pointer;"  onclick="changeState(\''+oItem.state+'\',\''+oItem.id+'\')">启用</span>' : '<span style="color:red ;cursor:pointer;" onclick="changeState(\''+oItem.state+'\',\''+oItem.id+'\')">禁用</span>');
             oItem._opt += '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\''+oItem.id+'\')"> &nbsp;查看</span>';
             oItem._opt += '<span style="color: #62abff;  cursor:pointer;" onclick="joView.edit(\''+oItem.id+'\')">&nbsp;审核</span>';
@@ -217,7 +222,7 @@
                     <col field="deptNames" title="部门" width="20%" align="left"/>
                     <col field="technicalPosition" title="职称" width="15%" align="" order="technical_Level"/>
                     <col field="administrativeDuty" title="行政职务" width="10%" align="" order="administrative_Duty"/>
-                    <col field="userState" title="当前状态" width="20%" />
+                    <col field="_cvm" title="当前状态" width="20%" />
                     <col field="_opt" title="操作" width="25%" align=""/>
                 </table>
                 <div class="page-bar page-bar-float layui-row" gridid="mainList">

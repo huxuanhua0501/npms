@@ -92,6 +92,7 @@
         ,O.remark_modify_time AS "remarkModifyTime"
         ,(SELECT string_agg(DE.NAME,',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
         ,tuu.state AS "state"
+        ,pd.dic_value AS "dicName"
     </sql>
 
     <!--关联查询相关sql-->
@@ -187,6 +188,7 @@
         <include refid="searchnewCol"></include>
         FROM pms_user O
         LEFT JOIN   tb_ums_user tuu ON  tuu.account = O.user_id
+        LEFT JOIN   pms_dictionary pd ON  pd.id = tuu.remark
         <include refid="joinSql"></include>
         <where>
             <if test="deptList != null">
