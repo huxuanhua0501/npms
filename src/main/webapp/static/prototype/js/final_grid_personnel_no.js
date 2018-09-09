@@ -337,6 +337,13 @@ joView.showData = function(oList){
                                     _val = "未锁定";
                                 }
                             }
+                            // if (statusKey == "state") {
+                            //     if (_val == 0) {
+                            //         _val = "<span style='color:#D0021B;'>禁用</span>";
+                            //     }else {
+                            //         _val = "<span style='color:#1AAD19;'>启用</span>";
+                            //     }
+                            // }
                             if (statusKey == "id") {
                                 if (_val.length== 32) {
 

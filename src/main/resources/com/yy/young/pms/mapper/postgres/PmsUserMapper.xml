@@ -91,7 +91,7 @@
         ,O.to_there_time AS "toThereTime"
         ,O.remark_modify_time AS "remarkModifyTime"
         ,(SELECT string_agg(DE.NAME,',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
-        ,tuu.state AS "userState"
+        ,tuu.state AS "state"
     </sql>
 
     <!--关联查询相关sql-->
@@ -184,7 +184,7 @@
 
     <select id="getnewPmsUserList" parameterType="com.yy.young.pms.model.PmsUser" resultType="com.yy.young.pms.model.PmsUser">
         SELECT
-        <include refid="searchCol"></include>
+        <include refid="searchnewCol"></include>
         FROM pms_user O
         LEFT JOIN   tb_ums_user tuu ON  tuu.account = O.user_id
         <include refid="joinSql"></include>
@@ -249,9 +249,9 @@
                 <when test="trashFlag != null and trashFlag != ''">
                     AND O.trash_flag = #{trashFlag}
                 </when>
-                <otherwise>
+            <!--   <otherwise>
                     AND (O.trash_flag != '1' OR  O.trash_flag IS NULL)
-                </otherwise>
+                </otherwise>-->
             </choose>
         </where>
         <choose>

@@ -60,10 +60,11 @@
         // joView.handleItem = function(oItem,iIndex){
         //
         // };
+
         joView.handleItem = function(oItem,iIndex){
-            oItem._opt = '<span style="color: #62abff;  cursor:pointer;"   onclick="lookUserDoc(\''+oItem.id+'\')"> &nbsp;禁用</span>';
+            oItem._opt = (oItem.state == 0 ? '<span style="color:green ;cursor:pointer;"  onclick="changeState(\''+oItem.state+'\',\''+oItem.id+'\')">启用</span>' : '<span style="color:red ;cursor:pointer;" onclick="changeState(\''+oItem.state+'\',\''+oItem.id+'\')">禁用</span>');
             oItem._opt += '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\''+oItem.id+'\')"> &nbsp;查看</span>';
-            oItem._opt += '<span style="color: #62abff;  cursor:pointer;" onclick="joView.edit(\''+oItem.id+'\')">&nbsp;审核</>';
+            oItem._opt += '<span style="color: #62abff;  cursor:pointer;" onclick="joView.edit(\''+oItem.id+'\')">&nbsp;审核</span>';
         };
     </script>
     <script type="text/javascript">
@@ -216,7 +217,7 @@
                     <col field="deptNames" title="部门" width="20%" align="left"/>
                     <col field="technicalPosition" title="职称" width="15%" align="" order="technical_Level"/>
                     <col field="administrativeDuty" title="行政职务" width="10%" align="" order="administrative_Duty"/>
-                    <col field="administrativeDuty" title="当前状态" width="15%" align="" order="administrative_Duty"/>
+                    <col field="userState" title="当前状态" width="20%" />
                     <col field="_opt" title="操作" width="25%" align=""/>
                 </table>
                 <div class="page-bar page-bar-float layui-row" gridid="mainList">
@@ -281,6 +282,18 @@
 </script>
 <script type="text/javascript">
     jo.formatUI();//格式化jo组件
+    function changeState(oldState, id){
+        var state = oldState == 1 ? 0 : 1;
+        // jo.postAjax("{URL_UMS}ums/user/updateUser.action", {STATE:state,ID:id}, function(json){//old
+        jo.postAjax("pms/pmsUser/updateUser.action", {STATE:state,ID:id}, function(json){
+            if(json && json.code == 0){
+                jo.showMsg("状态切换成功!");
+                joView.reloadCurrentPage();
+            }else{
+                jo.showMsg(jo.getDefVal(json.info, "切换失败"));
+            }
+        });
+    }
 </script>
 </body>
 

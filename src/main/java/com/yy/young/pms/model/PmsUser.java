@@ -128,7 +128,7 @@ public class PmsUser{
     private String tempWorkExperience;//是否有挂职经历
     private String toThereTime;//来院时间
     private String remarkModifyTime;
-    private String userState;
+    private String state;
 
     public String getRemarkModifyTime() {
         return remarkModifyTime;
@@ -466,12 +466,12 @@ public class PmsUser{
         this.toThereTime = toThereTime;
     }
 
-    public String getUserState() {
-        return userState;
+    public String getState() {
+        return state;
     }
 
-    public void setUserState(String userState) {
-        this.userState = userState;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public AuditPmsUser toAnother() {
