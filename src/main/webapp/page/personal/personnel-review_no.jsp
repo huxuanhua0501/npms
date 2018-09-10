@@ -304,16 +304,15 @@
             </div>
 
             <div class="person-list-content">
-                </table>
-                <table class="layui-table layui-form" id="mainList" dataUrl="pms/auditShowUser/getPage.action"
+                 <table class="layui-table layui-form" id="mainList" dataUrl="pms/auditShowUser/getPage.action"
                        deleteUrl="" formUrl="page/pms/auditUserDoc.jsp">
                     <col field="userName" title="姓名" width="15%" align="" event="" order="user_Name"/>
-                    <col field="sex" title="性别" width="10%" align="" order="sex"/>
+                    <col field="sex" title="性别" width="15%" align="" order="sex"/>
                     <col field="deptNames" title="部门" width="20%" align="left"/>
                     <col field="technicalPosition" title="职称" width="15%" align="" order="technical_Level"/>
-                    <col field="administrativeDuty" title="行政职务" width="10%" align="" order="administrative_Duty"/>
+                    <col field="administrativeDuty" title="行政职务" width="15%" align="" order="administrative_Duty"/>
                     <col field="_cvm" title="当前状态" width="20%"/>
-                    <col field="_opt" title="操作" width="25%" align=""/>
+                    <col field="_opt" title="操作" width="18%" align=""/>
                 </table>
                 <div class="page-bar page-bar-float layui-row" gridid="mainList">
 
