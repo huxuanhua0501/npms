@@ -20,6 +20,8 @@
     <%@ include file="/common/zTreeHead.jsp"%>
     <%--公共--%>
     <%@ include file="/common/commonHead.jsp"%>
+    <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
+
     <title>选择</title>
     <script type="text/javascript">
         (function(){
@@ -342,15 +344,18 @@
 <!-- /列表选择区域 -->
 
 <!-- 按钮区域 -->
-<div style="width:100%;height:40px;">
-    <div style="width:calc(100% - 2px);height:calc(100% - 6px);padding-top:5px;text-align:center;/* border:#CCCCCC solid 1px;border-top:none;*/">
+<%--<div style="width:100%;height:40px;">--%>
+    <%--<div style="width:calc(100% - 2px);height:calc(100% - 6px);padding-top:5px;text-align:center;/* border:#CCCCCC solid 1px;border-top:none;*/">--%>
         <%--<input type="button" value="确定" onclick="joList.yes()"/>
         &nbsp;&nbsp;
         <input type="button" value="取消" onclick="joList.no()"/>--%>
-        <button class="btn btn-default btn-sm" type="button" onclick="joList.yes()"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;确定</button>
+<div class="layui-layer-btn layui-layer-btn-" style="text-align: center;margin-top: 10px;">
+
+        <button  class="layui-layer-btn0" type="button" onclick="joList.yes()">&nbsp;确定</button>
         &nbsp;&nbsp;
-        <button class="btn btn-default btn-sm" type="button" onclick="joList.no()"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;取消</button>
-    </div>
+        <button class="layui-layer-btn1" type="button" onclick="joList.no()"></i>&nbsp;取消</button>
+</div>
+    <%--</div>--%>
 </div>
 <!-- /按钮区域 -->
 <script src="<%=URL_STATIC%>static/plugin/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
