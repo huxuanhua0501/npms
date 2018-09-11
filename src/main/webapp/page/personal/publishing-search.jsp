@@ -5,14 +5,37 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%--<meta http-equiv="X-UA-Compatible" content="ie=edge">--%>
     <title>Document</title>
     <%@ include file="/common/constHead.jsp" %>
 
     <script src="<%=URL_STATIC%>static/prototype/js/layui.js"></script>
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
     <script src="<%=URL_STATIC%>static/final/js/jquery.min.js"></script>
+    <script>
+        $(function() {
+            //调取出版著作/译著数据
+            $.ajax({
+                type: "get",
+                url: "pms/pmsDictionary/getListByDictionary/WORK_TYPE",
+                dataType: "text",
+                success: function (jsonStr) {
+                    var obj = JSON.parse(jsonStr);
+                    var listline = "";
+                    for (var i = 0; i < obj.data.length; i++) {
+                        listline += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                    }
+                    $("#work").append(listline);
+                }
+
+            });
+        });
+
+    </script>
     <style>
         .layui-input-inline {
             width: 180px;
@@ -54,6 +77,7 @@
             width: 90px;
         }
     </style>
+
 </head>
 
 <body>
@@ -70,30 +94,16 @@
                 <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
-        <!-- <div class="edit-item layui-col-md6 layui-col-xs6">
-            <label class="layui-form-label">著作类型</label>
-            <div class="layui-input-inline">
-                <select name="" lay-verify="">
-                    <option value=""></option>
-                    <option value="著作" selected>著作</option>
-                    <option value="编著">编著</option>
-                    <option value="译著">译著</option>
-                    <option value="独著">独著</option>
-                    <option value="合著">合著</option>
-                    <option value="其他">其他</option>
-                </select>
-            </div>
-        </div> -->
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label layui-col-md3 layui-col-xs3">著作类型</label>
-            <div class="layui-col-md9 layui-col-xs9" style="padding: 10px 15px;">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="所有" title="所有">
+            <div class="layui-col-md9 layui-col-xs9" style="padding: 10px 15px;" id="work">
+               <%-- <input type="checkbox" name="" class="col-item" lay-skin="primary" value="所有" title="所有">
                 <input type="checkbox" name="" class="col-item" lay-skin="primary" value="著作" title="著作">
                 <input type="checkbox" name="" class="col-item" lay-skin="primary" value="编著" title="编著">
                 <input type="checkbox" name="" class="col-item" lay-skin="primary" value="译著" title="译著">
                 <input type="checkbox" name="" class="col-item" lay-skin="primary" value="独著" title="独著">
                 <input type="checkbox" name="" class="col-item" lay-skin="primary" value="合著" title="合著">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="其他" title="其他">
+                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="其他" title="其他">--%>
             </div>
         </div>
         <!-- <div class="edit-item layui-col-md6 layui-col-xs6">

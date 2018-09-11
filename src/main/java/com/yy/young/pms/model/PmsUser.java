@@ -131,6 +131,12 @@ public class PmsUser{
     private String state;
     private String dicName;
 
+    /*出版著作开始*/
+    private String bookName;//书名
+    private String press;//出版社
+    private String start_years;//出版开始时间
+    private String end_years;//出版结束时间
+    /*出版著作结束*/
     public String getRemarkModifyTime() {
         return remarkModifyTime;
     }
@@ -481,6 +487,38 @@ public class PmsUser{
 
     public void setDicName(String dicName) {
         this.dicName = dicName;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public String getPress() {
+        return press;
+    }
+
+    public void setPress(String press) {
+        this.press = press;
+    }
+
+    public String getStart_years() {
+        return start_years;
+    }
+
+    public void setStart_years(String start_years) {
+        this.start_years = start_years;
+    }
+
+    public String getEnd_years() {
+        return end_years;
+    }
+
+    public void setEnd_years(String end_years) {
+        this.end_years = end_years;
     }
 
     public AuditPmsUser toAnother() {
