@@ -50,7 +50,7 @@
     <script src="<%=URL_STATIC%>static/prototype/js/final_grid_personnel_no.js"></script>
     <script src="<%=URL_STATIC%>static/js/common.js"></script>
     <script src="<%=URL_STATIC%>static/prototype/js/common_biz_no.js"></script>
-    <
+
     <script src="<%=URL_STATIC%>static/prototype/js/layui.js"></script>
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/font/font2/iconfont.css">
@@ -71,10 +71,10 @@
                 dataType: "text",
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
-                    var list="",listline="";
-                    listline  += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                    var list = "", listline = "";
+                    listline += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
                     for (var i = 0; i < obj.data.length; i++) {
-                        listline  += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value='+obj.data[i].dicValue+' title='+obj.data[i].dicValue+'>';
+                        listline += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
                     }
                     $("#checkbox_0").append(listline);
                 }
@@ -321,6 +321,12 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <input id="startEducation" name="startEducation" type="hidden"/>
+                <input id="endEducation" name="endEducation" type="hidden"/>
+                <input id="endSchool" name="endSchool" type="hidden"/>
+            </div>
+
             <div class="form-content">
                 <label class="layui-form-label" style="width: 100px;">当前筛选条件</label>
                 <div class="now-item">
@@ -356,7 +362,6 @@
         </form>
     </div>
 </div>
-
 <script>
     $(function () {
         layui.use(['layer', 'form', 'laydate'], function () {
@@ -376,32 +381,100 @@
                 var iNum = $(data.elem).val();
                 joView.choicePageSize(iNum);
             });
-            /*                $(".edit").click(function() {
-                                var url = "";
-                                if ($(this).parents("tr").find("i").hasClass("icon-suoding")) {
-                                    url = 'relationship-info-edit.html?lock=true';
-                                } else {
-                                    url = 'relationship-info-edit.html';
-                                }
-                                layer.open({ /!*弹出框*!/
-                                    type: 2,
-                                    title: '编辑家庭成员和社会关系',
-                                    //maxmin: true,//大小窗口切换
-                                    shadeClose: true, //点击遮罩关闭层
-                                    area: ['650px', '390px'],
-                                    content: url
-                                });
-                            });*/
-            /*                $(".add").click(function() {
-                                layer.open({ /!*弹出框*!/
-                                    type: 2,
-                                    title: '新增家庭成员和社会关系',
-                                    // maxmin: true,//大小窗口切换
-                                    shadeClose: true, //点击遮罩关闭层
-                                    area: ['650px', '390px'],
-                                    content: 'relationship-info-add.html'
-                                });
-                            });*/
+
+            //添加通讯信息搜索条件
+            $(".message").click(function() {
+                layer.open({ /*弹出框*/
+                    type: 2,
+                    title: '添加通讯信息搜索条件',
+                    // maxmin: true,//大小窗口切换
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['650px', '290px'],
+                    content: 'page/personal/message-info-search.jsp',
+                });
+            })
+            //添加基本信息搜索条件
+            $(".primary").click(function() {
+                layer.open({ /*弹出框*/
+                    type: 2,
+                    title: '添加基本信息搜索条件',
+                    // maxmin: true,//大小窗口切换
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['840px', '350px'],
+                    content: ['page/personal/primary-info-search.jsp'],
+                });
+            })
+            //教育经历
+            $(".education").click(function () {
+                layer.open({
+                    /*弹出框*/
+                    type: 2,
+                    title: '添加教育经历搜索条件',
+                    // maxmin: true,//大小窗口切换
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['650px', '290px'],
+                    // content: ['/education-info-search.jsp'],
+                    content: 'page/personal/education-info-search.jsp',
+
+
+                });
+            })
+            //添加工作经历搜索条件
+            $(".work").click(function() {
+                layer.open({ /*弹出框*/
+                    type: 2,
+                    title: '添加工作经历搜索条件',
+                    // maxmin: true,//大小窗口切换
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['650px', '350px'],
+                    content: 'page/personal/work-info-search.jsp',
+                });
+            })
+            //添加论文情况搜索条件
+            $(".the-situation").click(function() {
+                layer.open({ /*弹出框*/
+                    type: 2,
+                    title: '添加论文情况搜索条件',
+                    // maxmin: true,//大小窗口切换
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['650px', '290px'],
+                    content: ['page/personal/the-situation-info-search.jsp'],
+                });
+            })
+            //添加出版著作/译著搜索条件
+            $(".publishing").click(function() {
+                layer.open({ /*弹出框*/
+                    type: 2,
+                    title: '添加出版著作/译著搜索条件',
+                    // maxmin: true,//大小窗口切换
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['650px', '290px'],
+                    content: ['page/personal/publishing-search.jsp'],
+                });
+            })
+           // 添加获奖情况搜索条件
+            $(".awards").click(function() {
+                layer.open({ /*弹出框*/
+                    type: 2,
+                    title: '添加获奖情况搜索条件',
+                    // maxmin: true,//大小窗口切换
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['650px', '350px'],
+                    content: 'page/personal/awards-search.jsp',
+                });
+            })
+            //添加年度考核搜索条件
+            $(".annual-check").click(function() {
+                layer.open({ /*弹出框*/
+                    type: 2,
+                    title: '添加年度考核搜索条件',
+                    // maxmin: true,//大小窗口切换
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['650px', '350px'],
+                    content: 'page/personal/annual-check-search.jsp',
+                });
+            })
+
             $(".close").click(function () {
                 history.back(-1);
             })
