@@ -13,6 +13,26 @@
     <script src="<%=URL_STATIC%>static/prototype/js/layui.js"></script>
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
     <script src="<%=URL_STATIC%>static/final/js/jquery.min.js"></script>
+    <script>
+        $(function() {
+            //调取出版著作/译著数据
+            $.ajax({
+                type: "get",
+                url: "pms/pmsDictionary/getListByDictionary/PERIODICAL_TYPE",
+                dataType: "text",
+                success: function (jsonStr) {
+                    var obj = JSON.parse(jsonStr);
+                    var listline = "";
+                    listline += '<input type=\"checkbox\" name=\"periodicalType\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                    for (var i = 0; i < obj.data.length; i++) {
+                        listline += '<input type=\"checkbox\" name=\"periodicalType\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                    }
+                    $("#periodical").append(listline);
+                }
+
+            });
+        });
+    </script>
     <style>
         .layui-input-inline {
             width: 180px;
@@ -62,13 +82,13 @@
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">题目</label>
             <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="periodicalTitle" name="periodicalTitle" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">期刊名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="periodicalName" name="periodicalName" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <!-- <div class="edit-item layui-col-md6 layui-col-xs6">
@@ -85,18 +105,18 @@
         </div> -->
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label layui-col-md3 layui-col-xs3">期刊类型</label>
-            <div class="layui-col-md9 layui-col-xs9" style="padding: 10px 15px;">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="所有" title="所有">
+            <div class="layui-col-md9 layui-col-xs9" style="padding: 10px 15px;" id="periodical">
+                <%--input type="checkbox" name="" class="col-item" lay-skin="primary" value="所有" title="所有">
                 <input type="checkbox" name="" class="col-item" lay-skin="primary" value="SCI" title="SCI">
                 <input type="checkbox" name="" class="col-item" lay-skin="primary" value="EI" title="EI">
                 <input type="checkbox" name="" class="col-item" lay-skin="primary" value="中文核心" title="中文核心">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="其他" title="其他">
+                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="其他" title="其他">--%>
             </div>
         </div>
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">年　　月</label>
-            <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="startY" style="width: 100px;display: inline-block;">--
-            <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="endY" style="width: 100px;display: inline-block;">
+            <input type="text" id="periodicalStartYears" name="periodicalStartYears" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"  style="width: 100px;display: inline-block;">--
+            <input type="text" id="periodicalEndYears" name="periodicalEndYears" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"  style="width: 100px;display: inline-block;">
         </div>
 
         <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
@@ -119,11 +139,29 @@
                 //     type: 'month'
                 // });
 
-                $(".save").click(function() {
-                    parent.document.getElementsByClassName("the-situation")[0].className += " active";
-                    //当你在iframe页面关闭自身时
+                $(".save").click(function () {
+
+
+                    obj = document.getElementsByName("periodicalType");
+                    var check_val=new Array();
+                    for(k in obj){
+                        if(obj[k].checked)
+                            check_val.push(obj[k].value);
+                    }
+
+
+                    var periodicalTitle = $('#periodicalTitle').val();
+                    var periodicalName = $('#periodicalName').val();
+                    var periodicalStartYears = $('#periodicalStartYears').val();
+                    var periodicalEndYears = $('#periodicalEndYears').val();
+                    parent.$('#periodicalTitle').val(periodicalTitle);
+                    parent.$('#periodicalName').val(periodicalName);
+                    parent.$('#periodicalType').val(check_val);
+                    parent.$('#periodicalStartYears').val(periodicalStartYears);
+                    parent.$('#periodicalEndYears').val(periodicalEndYears);
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index); //再执行关闭 
+                    parent.layer.close(index); //再执行关闭
+
 
                 })
             });

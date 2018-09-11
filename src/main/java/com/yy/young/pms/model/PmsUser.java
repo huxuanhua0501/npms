@@ -10,7 +10,7 @@ import java.util.List;
  * 用户基础信息实体类
  * Created by rookie on 2018-03-27.
  */
-public class PmsUser{
+public class PmsUser {
 
 
     @ExcelColumn(value = "编号，主键，无意义", order = 1)
@@ -134,9 +134,27 @@ public class PmsUser{
     /*出版著作开始*/
     private String bookName;//书名
     private String press;//出版社
-    private String start_years;//出版开始时间
-    private String end_years;//出版结束时间
+    private String workType;//著作类型
+    private String startYears;//出版开始Y时间
+    private String endYears;//出版结束时间
     /*出版著作结束*/
+    /*添加获奖情况搜索条件开始*/
+    private String awardWinProjectName;//获奖项目名称
+    private String awardType;//奖励类别
+    private String awardWinProjectLevel;//获奖等级
+    private String awardLevel;//奖励层次
+    private String awardsStartYears;//奖励开始时间
+    private String awardsEndYears;//奖励结束时间
+
+    /*添加获奖情况搜索条件结束*/
+    /*论文开始*/
+    private String periodicalTitle;//题目
+    private String periodicalName;//期刊名称
+    private String periodicalType;//期刊类型
+    private String periodicalStartYears;//论文开始时间
+    private String periodicalEndYears;//论文结束时间
+
+    /*论文结束*/
     public String getRemarkModifyTime() {
         return remarkModifyTime;
     }
@@ -147,9 +165,10 @@ public class PmsUser{
 
     /**
      * PmsUser对象转换为User对象
+     *
      * @return User ums用户对象
      */
-    public User toUser(){
+    public User toUser() {
         User user = new User();
         user.setId(this.id);
         user.setAccount(this.userId);
@@ -158,173 +177,227 @@ public class PmsUser{
         user.setCompanyId(PmsConstants.HKY_COMPANY_ID);
         user.setNum(99);
         //user.setState("1");//用户状态
-        if ("男".equals(this.sex)){
+        if ("男".equals(this.sex)) {
             user.setSex("1");
-        }else if ("女".equals(this.sex)){
+        } else if ("女".equals(this.sex)) {
             user.setSex("0");
         }
         user.setBirthday(this.birth);
         return user;
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
     public String getUserId() {
         return userId;
     }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
     public String getOldName() {
         return oldName;
     }
+
     public void setOldName(String oldName) {
         this.oldName = oldName;
     }
+
     public String getSex() {
         return sex;
     }
+
     public void setSex(String sex) {
         this.sex = sex;
     }
+
     public String getBirth() {
         return birth;
     }
+
     public void setBirth(String birth) {
         this.birth = birth;
     }
+
     public String getNation() {
         return nation;
     }
+
     public void setNation(String nation) {
         this.nation = nation;
     }
+
     public String getPlaceOfOrigin() {
         return placeOfOrigin;
     }
+
     public void setPlaceOfOrigin(String placeOfOrigin) {
         this.placeOfOrigin = placeOfOrigin;
     }
+
     public String getPlaceOfBirth() {
         return placeOfBirth;
     }
+
     public void setPlaceOfBirth(String placeOfBirth) {
         this.placeOfBirth = placeOfBirth;
     }
+
     public String getWorkStartTime() {
         return workStartTime;
     }
+
     public void setWorkStartTime(String workStartTime) {
         this.workStartTime = workStartTime;
     }
+
     public String getPoliticalOutlook() {
         return politicalOutlook;
     }
+
     public void setPoliticalOutlook(String politicalOutlook) {
         this.politicalOutlook = politicalOutlook;
     }
+
     public String getJoinPartyTime() {
         return joinPartyTime;
     }
+
     public void setJoinPartyTime(String joinPartyTime) {
         this.joinPartyTime = joinPartyTime;
     }
+
     public String getTechnicalPosition() {
         return technicalPosition;
     }
+
     public void setTechnicalPosition(String technicalPosition) {
         this.technicalPosition = technicalPosition;
     }
+
     public String getGetTime() {
         return getTime;
     }
+
     public void setGetTime(String getTime) {
         this.getTime = getTime;
     }
+
     public String getAppointmentTime() {
         return appointmentTime;
     }
+
     public void setAppointmentTime(String appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
+
     public String getTechnicalLevel() {
         return technicalLevel;
     }
+
     public void setTechnicalLevel(String technicalLevel) {
         this.technicalLevel = technicalLevel;
     }
+
     public String getAdministrativeDuty() {
         return administrativeDuty;
     }
+
     public void setAdministrativeDuty(String administrativeDuty) {
         this.administrativeDuty = administrativeDuty;
     }
+
     public String getTenureTime() {
         return tenureTime;
     }
+
     public void setTenureTime(String tenureTime) {
         this.tenureTime = tenureTime;
     }
+
     public String getAdministrativeLevel() {
         return administrativeLevel;
     }
+
     public void setAdministrativeLevel(String administrativeLevel) {
         this.administrativeLevel = administrativeLevel;
     }
+
     public String getResearchField() {
         return researchField;
     }
+
     public void setResearchField(String researchField) {
         this.researchField = researchField;
     }
+
     public String getSpecialty() {
         return specialty;
     }
+
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }
+
     public String getHighestEducation() {
         return highestEducation;
     }
+
     public void setHighestEducation(String highestEducation) {
         this.highestEducation = highestEducation;
     }
+
     public String getHighestDegree() {
         return highestDegree;
     }
+
     public void setHighestDegree(String highestDegree) {
         this.highestDegree = highestDegree;
     }
+
     public String getIdCard() {
         return idCard;
     }
+
     public void setIdCard(String idCard) {
         this.idCard = idCard;
     }
+
     public String getOverseasStudyExperience() {
         return overseasStudyExperience;
     }
+
     public void setOverseasStudyExperience(String overseasStudyExperience) {
         this.overseasStudyExperience = overseasStudyExperience;
     }
+
     public String getEnglishLevel() {
         return englishLevel;
     }
+
     public void setEnglishLevel(String englishLevel) {
         this.englishLevel = englishLevel;
     }
+
     public String getPhotoAddress() {
         return photoAddress;
     }
+
     public void setPhotoAddress(String photoAddress) {
         this.photoAddress = photoAddress;
     }
@@ -505,20 +578,118 @@ public class PmsUser{
         this.press = press;
     }
 
-    public String getStart_years() {
-        return start_years;
+
+    public String getWorkType() {
+        return workType;
     }
 
-    public void setStart_years(String start_years) {
-        this.start_years = start_years;
+    public void setWorkType(String workType) {
+        this.workType = workType;
     }
 
-    public String getEnd_years() {
-        return end_years;
+
+    public String getStartYears() {
+        return startYears;
     }
 
-    public void setEnd_years(String end_years) {
-        this.end_years = end_years;
+    public void setStartYears(String startYears) {
+        this.startYears = startYears;
+    }
+
+    public String getEndYears() {
+        return endYears;
+    }
+
+    public void setEndYears(String endYears) {
+        this.endYears = endYears;
+    }
+
+    public String getAwardWinProjectName() {
+        return awardWinProjectName;
+    }
+
+    public void setAwardWinProjectName(String awardWinProjectName) {
+        this.awardWinProjectName = awardWinProjectName;
+    }
+
+    public String getAwardType() {
+        return awardType;
+    }
+
+    public void setAwardType(String awardType) {
+        this.awardType = awardType;
+    }
+
+    public String getAwardWinProjectLevel() {
+        return awardWinProjectLevel;
+    }
+
+    public void setAwardWinProjectLevel(String awardWinProjectLevel) {
+        this.awardWinProjectLevel = awardWinProjectLevel;
+    }
+
+    public String getAwardLevel() {
+        return awardLevel;
+    }
+
+    public void setAwardLevel(String awardLevel) {
+        this.awardLevel = awardLevel;
+    }
+
+    public String getAwardsStartYears() {
+        return awardsStartYears;
+    }
+
+    public void setAwardsStartYears(String awardsStartYears) {
+        this.awardsStartYears = awardsStartYears;
+    }
+
+    public String getAwardsEndYears() {
+        return awardsEndYears;
+    }
+
+    public void setAwardsEndYears(String awardsEndYears) {
+        this.awardsEndYears = awardsEndYears;
+    }
+
+    public String getPeriodicalTitle() {
+        return periodicalTitle;
+    }
+
+    public void setPeriodicalTitle(String periodicalTitle) {
+        this.periodicalTitle = periodicalTitle;
+    }
+
+    public String getPeriodicalName() {
+        return periodicalName;
+    }
+
+    public void setPeriodicalName(String periodicalName) {
+        this.periodicalName = periodicalName;
+    }
+
+    public String getPeriodicalType() {
+        return periodicalType;
+    }
+
+    public void setPeriodicalType(String periodicalType) {
+        this.periodicalType = periodicalType;
+    }
+
+    public String getPeriodicalStartYears() {
+        return periodicalStartYears;
+    }
+
+    public void setPeriodicalStartYears(String periodicalStartYears) {
+        this.periodicalStartYears = periodicalStartYears;
+    }
+
+    public String getPeriodicalEndYears() {
+        return periodicalEndYears;
+    }
+
+    public void setPeriodicalEndYears(String periodicalEndYears) {
+        this.periodicalEndYears = periodicalEndYears;
     }
 
     public AuditPmsUser toAnother() {

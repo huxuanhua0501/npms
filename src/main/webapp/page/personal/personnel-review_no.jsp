@@ -321,10 +321,36 @@
                     </div>
                 </div>
             </div>
+            <%-- 教育--%>
             <div>
                 <input id="startEducation" name="startEducation" type="hidden"/>
                 <input id="endEducation" name="endEducation" type="hidden"/>
                 <input id="endSchool" name="endSchool" type="hidden"/>
+            </div>
+            <%-- 著作--%>
+            <div>
+                <input id="bookName" name="bookName" type="text"/>
+                <input id="press" name="press" type="text"/>
+                <input id="workType" name="workType" type="text"/>
+                <input id="startYears" name="startYears" type="text"/>
+                <input id="endYears" name="endYears" type="text"/>
+            </div>
+            <%-- 获奖--%>
+            <div>
+                <input id="awardWinProjectName" name="awardWinProjectName" type="text"/>
+                <input id="awardType" name="awardType" type="text"/>
+                <input id="awardWinProjectLevel" name="awardWinProjectLevel" type="text"/>
+                <input id="awardLevel" name="awardLevel" type="text"/>
+                <input id="awardsStartYears" name="awardsStartYears" type="text"/>
+                <input id="awardsEndYears" name="awardsEndYears" type="text"/>
+            </div>
+            <%-- 论文--%>
+            <div>
+                <input id="periodicalTitle" name="periodicalTitle" type="text"/>
+                <input id="periodicalName" name="periodicalName" type="text"/>
+                <input id="periodicalType" name="periodicalType" type="text"/>
+                <input id="periodicalStartYears" name="periodicalStartYears" type="text"/>
+                <input id="periodicalEndYears" name="periodicalEndYears" type="text"/>
             </div>
 
             <div class="form-content">
@@ -360,6 +386,7 @@
                 <%--/分页条--%>
             </div>
         </form>
+
     </div>
 </div>
 <script>
@@ -383,8 +410,9 @@
             });
 
             //添加通讯信息搜索条件
-            $(".message").click(function() {
-                layer.open({ /*弹出框*/
+            $(".message").click(function () {
+                layer.open({
+                    /*弹出框*/
                     type: 2,
                     title: '添加通讯信息搜索条件',
                     // maxmin: true,//大小窗口切换
@@ -394,8 +422,9 @@
                 });
             })
             //添加基本信息搜索条件
-            $(".primary").click(function() {
-                layer.open({ /*弹出框*/
+            $(".primary").click(function () {
+                layer.open({
+                    /*弹出框*/
                     type: 2,
                     title: '添加基本信息搜索条件',
                     // maxmin: true,//大小窗口切换
@@ -420,8 +449,9 @@
                 });
             })
             //添加工作经历搜索条件
-            $(".work").click(function() {
-                layer.open({ /*弹出框*/
+            $(".work").click(function () {
+                layer.open({
+                    /*弹出框*/
                     type: 2,
                     title: '添加工作经历搜索条件',
                     // maxmin: true,//大小窗口切换
@@ -431,8 +461,9 @@
                 });
             })
             //添加论文情况搜索条件
-            $(".the-situation").click(function() {
-                layer.open({ /*弹出框*/
+            $(".the-situation").click(function () {
+                layer.open({
+                    /*弹出框*/
                     type: 2,
                     title: '添加论文情况搜索条件',
                     // maxmin: true,//大小窗口切换
@@ -442,8 +473,9 @@
                 });
             })
             //添加出版著作/译著搜索条件
-            $(".publishing").click(function() {
-                layer.open({ /*弹出框*/
+            $(".publishing").click(function () {
+                layer.open({
+                    /*弹出框*/
                     type: 2,
                     title: '添加出版著作/译著搜索条件',
                     // maxmin: true,//大小窗口切换
@@ -452,9 +484,10 @@
                     content: ['page/personal/publishing-search.jsp'],
                 });
             })
-           // 添加获奖情况搜索条件
-            $(".awards").click(function() {
-                layer.open({ /*弹出框*/
+            // 添加获奖情况搜索条件
+            $(".awards").click(function () {
+                layer.open({
+                    /*弹出框*/
                     type: 2,
                     title: '添加获奖情况搜索条件',
                     // maxmin: true,//大小窗口切换
@@ -464,8 +497,9 @@
                 });
             })
             //添加年度考核搜索条件
-            $(".annual-check").click(function() {
-                layer.open({ /*弹出框*/
+            $(".annual-check").click(function () {
+                layer.open({
+                    /*弹出框*/
                     type: 2,
                     title: '添加年度考核搜索条件',
                     // maxmin: true,//大小窗口切换

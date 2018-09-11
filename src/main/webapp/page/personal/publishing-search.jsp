@@ -27,7 +27,7 @@
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
                     for (var i = 0; i < obj.data.length; i++) {
-                        listline += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                        listline += '<input type=\"checkbox\" name=\"workType\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
                     }
                     $("#work").append(listline);
                 }
@@ -85,25 +85,18 @@
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">书名</label>
             <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="bookName" name="bookName" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">出版社</label>
             <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="press" name="press" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label layui-col-md3 layui-col-xs3">著作类型</label>
             <div class="layui-col-md9 layui-col-xs9" style="padding: 10px 15px;" id="work">
-               <%-- <input type="checkbox" name="" class="col-item" lay-skin="primary" value="所有" title="所有">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="著作" title="著作">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="编著" title="编著">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="译著" title="译著">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="独著" title="独著">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="合著" title="合著">
-                <input type="checkbox" name="" class="col-item" lay-skin="primary" value="其他" title="其他">--%>
             </div>
         </div>
         <!-- <div class="edit-item layui-col-md6 layui-col-xs6">
@@ -114,8 +107,8 @@
         </div> -->
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">时间段</label>
-            <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="startY" style="width: 100px;display: inline-block;">--
-            <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="endY" style="width: 100px;display: inline-block;">
+            <input type="text"  id="startYears"  name="startYears" required lay-verify="required"  placeholder="格式：2018-08" ErrBirthBad4 autocomplete="off" class="layui-input" id="startY" style="width: 100px;display: inline-block;">--
+            <input type="text" id="endYears" name="endYears" required lay-verify="required" placeholder="格式：2018-08" ErrBirthBad4 autocomplete="off" class="layui-input" id="endY" style="width: 100px;display: inline-block;">
         </div>
 
         <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
@@ -133,65 +126,36 @@
             layui.use(['form', 'laydate'], function() {
                 var form = layui.form;
                 var laydate = layui.laydate;
-                // laydate.render({
-                //     elem: '#time',
-                //     type: 'month'
-                // });
 
-                $(".save").click(function() {
-                    parent.document.getElementsByClassName("publishing")[0].className += " active";
-                    //当你在iframe页面关闭自身时
+
+
+                $(".save").click(function () {
+
+
+                    obj = document.getElementsByName("workType");
+                    var check_val=new Array();
+                    for(k in obj){
+                        if(obj[k].checked)
+                            check_val.push(obj[k].value);
+                    }
+
+
+                    var bookName = $('#bookName').val();
+                    var press = $('#press').val();
+                    // var workType = $('#workType').val();
+                    var startYears = $('#startYears').val();
+                    var endYears = $('#endYears').val();
+                    parent.$('#bookName').val(bookName);
+                    parent.$('#press').val(press);
+                    parent.$('#workType').val(check_val);
+                    parent.$('#startYears').val(startYears);
+                    parent.$('#endYears').val(endYears);
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index); //再执行关闭 
+                    parent.layer.close(index); //再执行关闭
+
 
                 })
 
-                //设置开始时间
-                // var startDate = laydate.render({
-                //     elem: '#startY', //开始时间选择控件id
-                //     // min: '2018 - 6 - 1',
-                //     type: 'month',
-                //     format: 'yyyy-MM', //可任意组合
-                //     done: function(value, date) {
-                //         if (value !== '') {
-                //             endDate.config.min.year = date.year;
-                //             // endDate.config.min.month = date.month - 1;
-                //             // endDate.config.min.date = date.date;
-                //             // endDate.config.min.hours = date.hours;
-                //             // endDate.config.min.minutes = date.minutes;
-
-                //         } else {
-                //             endDate.config.min.year = '';
-                //             // endDate.config.min.month = '';
-                //             // endDate.config.min.date = '';
-                //             // endDate.config.min.hours = '';
-                //             // endDate.config.min.minutes = '';
-                //         }
-                //     }
-                // });
-
-
-                //设置结束时间
-                // var endDate = laydate.render({
-                //     elem: '#endY', //结束时间选择控件id
-                //     type: 'month',
-                //     format: 'yyyy-MM', //可任意组合
-                //     done: function(value, date) {
-                //         if (value !== '') {
-                //             startDate.config.max.year = date.year;
-                //             // startDate.config.max.month = date.month - 1;
-                //             // startDate.config.max.date = date.date;
-                //             // startDate.config.max.hours = date.date;
-                //             // startDate.config.max.minutes = date.date;
-                //         } else {
-                //             startDate.config.max.year = '';
-                //             // startDate.config.max.month = '';
-                //             // startDate.config.max.date = '';
-                //             // startDate.config.max.hours = '';
-                //             // startDate.config.max.minutes = '';
-                //         }
-                //     }
-                // });
             });
 
 
