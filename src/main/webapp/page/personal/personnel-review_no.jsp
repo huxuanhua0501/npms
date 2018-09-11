@@ -64,6 +64,22 @@
         $(function () {
             sfSet();//在初始化表格之前
             joViewInitAboutDoc();//joView初始化处理
+            var html_string;
+            $.ajax({
+                type: "get",
+                url: "pms/pmsDictionary/getListByDictionary/PERSON_TYPE",
+                dataType: "text",
+                success: function (jsonStr) {
+                    var obj = JSON.parse(jsonStr);
+                    var list="",listline="";
+                    listline  += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                    for (var i = 0; i < obj.data.length; i++) {
+                        listline  += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value='+obj.data[i].dicValue+' title='+obj.data[i].dicValue+'>';
+                    }
+                    $("#checkbox_0").append(listline);
+                }
+
+            });
         });
         //行处理
         // joView.handleItem = function(oItem,iIndex){
@@ -199,7 +215,8 @@
             <div class="form-content">
 
                 <div class="layui-form-item" style="line-height: 200%">
-                    <label class="layui-form-label"> <i class="layui-icon layui-icon-search"></i>&nbsp;&nbsp;基本搜索</label>
+                    <label class="layui-form-label"> <i
+                            class="layui-icon layui-icon-search"></i>&nbsp;&nbsp;基本搜索</label>
                     <div class="layui-input-inline">
                         <input type="text" name="userName" placeholder="请输入姓名" autocomplete="off"
                                class="layui-input list-input" ErrBirthBad4>
@@ -217,7 +234,7 @@
             <div class="form-content">
                 <div class="shaixuanBtn">
 
-                    <div class="layui-form-item" >
+                    <div class="layui-form-item">
                         <label class="layui-form-label"><i class="iconfont icon-shaixuan"></i>&nbsp;&nbsp;高级筛选</label>
                         <a class="layui-btn layui-btn-radius layui-btn-primary primary">基本信息</a>
                         <a class="layui-btn layui-btn-radius layui-btn-primary message">通讯信息</a>
@@ -231,19 +248,29 @@
 
                     <div class="edit-item layui-row">
                         <label class="layui-col-md2 layui-col-xs2" style="float:left;padding:5px 15px;width: 130px;">工作性质及状态</label>
-                        <div class="layui-col-md10 layui-col-xs10" style="padding: 10px 15px;">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="所有" title="所有">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="在编" title="在编">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="院聘" title="院聘">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="劳务派遣"
-                                   title="劳务派遣">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="劳务协议"
-                                   title="劳务协议">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="离职" title="离职">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="退休" title="退休">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="离休" title="离休">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="博士后" title="博士后">
-                            <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="其他" title="其他">
+                        <div class="layui-col-md10 layui-col-xs10" style="padding: 10px 15px;" id="checkbox_0">
+
+                            <%--   <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="所有"
+                                   title="所有">
+
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="在编"
+                                  title="在编">
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="院聘"
+                                  title="院聘">
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="劳务派遣"
+                                  title="劳务派遣">
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="劳务协议"
+                                  title="劳务协议">
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="离职"
+                                  title="离职">
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="退休"
+                                  title="退休">
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="离休"
+                                  title="离休">
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="博士后"
+                                  title="博士后">
+                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="其他"
+                                  title="其他">--%>
                         </div>
                     </div>
                     <div class="edit-item layui-row">
@@ -251,15 +278,19 @@
                                style="float:left;padding:5px 15px;width: 130px;text-align: right;">当前状态</label>
                         <div class="layui-col-md10 layui-col-xs10" style="padding: 10px 15px;">
                             <input type="checkbox" name="state" class="col-item" lay-skin="primary" value="" title="所有">
-                            <input type="checkbox" name="state" class="col-item" lay-skin="primary" value="1" title="启用">
-                            <input type="checkbox" name="state" class="col-item" lay-skin="primary" value="0" title="禁用">
+                            <input type="checkbox" name="state" class="col-item" lay-skin="primary" value="1"
+                                   title="启用">
+                            <input type="checkbox" name="state" class="col-item" lay-skin="primary" value="0"
+                                   title="禁用">
                         </div>
                     </div>
                     <div class="layui-form-item" style="line-height: 200%">
                         <label class="layui-form-label">时间段</label>
-                        <input type="text" name="start_time" required lay-verify="required" placeholder="" autocomplete="off"
+                        <input type="text" name="start_time" required lay-verify="required" placeholder=""
+                               autocomplete="off"
                                class="layui-input list-input" id="startY" style="width: 100px;display: inline-block;">至
-                        <input type="text" name="end_time" required lay-verify="required" placeholder="" autocomplete="off"
+                        <input type="text" name="end_time" required lay-verify="required" placeholder=""
+                               autocomplete="off"
                                class="layui-input list-input" id="endY" style="width: 100px;display: inline-block;">
                     </div>
 
@@ -267,9 +298,12 @@
                         <label class="layui-form-label">所属部门</label>
                         <div class="layui-input-inline">
                             <input type="hidden" id="deptIds" name="deptIds" class="form-control input-sm" value="">
-                            <input type="text"  id="names"  name="names" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input list-input" style="width: 100px;display: inline-block;">
+                            <input type="text" id="names" name="names" required lay-verify="required" placeholder=""
+                                   autocomplete="off" class="layui-input list-input"
+                                   style="width: 100px;display: inline-block;">
                             <span class="input-group-btn" style=" display: inline-block;">
-                                        <button class="layui-btn layui-btn-primary choose-btn" type="button" onclick="choiceDept('deptIds','names',true)">
+                                        <button class="layui-btn layui-btn-primary choose-btn" type="button"
+                                                onclick="choiceDept('deptIds','names',true)">
                                             <i class="iconfont icon-menu" aria-hidden="true"></i>&nbsp;选择
                                         </button>
                                     </span>
@@ -304,7 +338,7 @@
             </div>
 
             <div class="person-list-content">
-                 <table class="layui-table layui-form" id="mainList" dataUrl="pms/auditShowUser/getPage.action"
+                <table class="layui-table layui-form" id="mainList" dataUrl="pms/auditShowUser/getPage.action"
                        deleteUrl="" formUrl="page/pms/auditUserDoc.jsp">
                     <col field="userName" title="姓名" width="15%" align="" event="" order="user_Name"/>
                     <col field="sex" title="性别" width="15%" align="" order="sex"/>
