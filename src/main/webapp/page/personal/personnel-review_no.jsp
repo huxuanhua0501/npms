@@ -325,7 +325,7 @@
             <div>
                 <input id="startEducation" name="startEducation" type="hidden"/>
                 <input id="endEducation" name="endEducation" type="hidden"/>
-                <input id="endSchool" name="endSchool" type="hidden"/>
+                <input id="educationContent" name="educationContent" type="hidden"/>
             </div>
             <%-- 著作--%>
             <div>
@@ -352,7 +352,18 @@
                 <input id="periodicalStartYears" name="periodicalStartYears" type="text"/>
                 <input id="periodicalEndYears" name="periodicalEndYears" type="text"/>
             </div>
-
+            <%-- 工作--%>
+            <div>
+                <input id="workContent" name="workContent" type="text"/>
+                <input id="work_StartTime" name="work_StartTime" type="text"/>
+                <input id="workStopTime" name="workStopTime" type="text"/>
+            </div>
+            <%-- 通讯--%>
+            <div>
+                <input id="officePhone" name="officePhone" type="text"/>
+                <input id="mobilePhone" name="mobilePhone" type="text"/>
+                <input id="emailAddress" name="emailAddress" type="text"/>
+            </div>
             <div class="form-content">
                 <label class="layui-form-label" style="width: 100px;">当前筛选条件</label>
                 <div class="now-item">

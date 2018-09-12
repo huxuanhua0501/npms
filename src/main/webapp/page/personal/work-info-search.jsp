@@ -17,24 +17,24 @@
         .layui-input-inline {
             width: 180px;
         }
-        
+
         .layui-input-inline input {
             height: 32px;
             background: #FCFCFC;
             border: 1px solid #DDDDDD;
             border-radius: 4px;
         }
-        
+
         .layui-form {
             padding-top: 30px;
             padding-bottom: 30px;
             position: relative;
         }
-        
+
         .edit-item {
             margin-bottom: 10px;
         }
-        
+
         button.layui-btn-primary.save,
         button.layui-btn-primary.reset {
             /* width: 20px;
@@ -45,11 +45,11 @@
             margin-top: 30px;
             /* margin-right: 50px; */
         }
-        
+
         .lang input {
             width: 506px;
         }
-        
+
         .layui-form-label {
             width: 90px;
         }
@@ -57,115 +57,64 @@
 </head>
 
 <body>
-    <form class="layui-form layui-row" action="">
-        <!-- <div class="edit-item layui-col-md6 layui-col-xs6">
-            <label class="layui-form-label">院校名称</label>
-            <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-            </div>
+<form class="layui-form layui-row" action="">
+    <div class="edit-item layui-col-md6 layui-col-xs6">
+        <label class="layui-form-label">起始时间</label>
+        <div class="layui-input-inline">
+            <input type="text" id="workStartTime" name="workStartTime" required lay-verify="required" placeholder=""
+                   autocomplete="off" class="layui-input">
         </div>
-        <div class="edit-item layui-col-md6 layui-col-xs6">
-            <label class="layui-form-label">专业名称</label>
-            <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-            </div>
-        </div> -->
-        <div class="edit-item layui-col-md6 layui-col-xs6">
-            <label class="layui-form-label">起始时间</label>
-            <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="start">
-            </div>
+    </div>
+    <div class="edit-item layui-col-md6 layui-col-xs6">
+        <label class="layui-form-label">终止时间</label>
+        <div class="layui-input-inline">
+            <input type="text" id="workStopTime" name="workStopTime" required lay-verify="required" placeholder=""
+                   autocomplete="off" class="layui-input">
         </div>
-        <div class="edit-item layui-col-md6 layui-col-xs6">
-            <label class="layui-form-label">终止时间</label>
-            <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-            </div>
+    </div>
+    <div class="edit-item layui-col-md12 layui-col-xs12">
+        <label class="layui-form-label">内容</label>
+        <div class="layui-input-inline lang">
+            <input type="text" id="workContent" name="workContent" required lay-verify="required"
+                   placeholder="公司名称/技术等级/技术职务" autocomplete="off" class="layui-input">
         </div>
-        <div class="edit-item layui-col-md12 layui-col-xs12">
-            <label class="layui-form-label">内容</label>
-            <div class="layui-input-inline lang">
-                <input type="text" name="" required lay-verify="required" placeholder="公司名称/技术等级/技术职务" autocomplete="off" class="layui-input" id="start">
-            </div>
-        </div>
+    </div>
 
-        <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
-        <button class="layui-btn layui-btn-primary save">确认添加</button> -->
-        <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;">
-            <button class="layui-btn layui-btn-primary reset">重置</button>
-            <button class="layui-btn layui-btn-primary save">确认添加</button>
-        </div>
-    </form>
+    <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
+    <button class="layui-btn layui-btn-primary save">确认添加</button> -->
+    <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;">
+        <button class="layui-btn layui-btn-primary reset">重置</button>
+        <button class="layui-btn layui-btn-primary save">确认添加</button>
+    </div>
+</form>
 
 
-
-    <script>
-        $(function() {
-            layui.use(['form', 'laydate'], function() {
-                var form = layui.form;
-                var laydate = layui.laydate;
-                // laydate.render({
-                //     elem: '#time',
-                // });
-
-                //设置开始时间
-                // var startDate = laydate.render({
-                //     elem: '#start', //开始时间选择控件id
-                //     // min: '2018 - 6 - 1',
-                //     type: 'date',
-                //     format: 'yyyy-MM-dd', //可任意组合
-                //     done: function(value, date) {
-                //         if (value !== '') {
-                //             endDate.config.min.year = date.year;
-                //             endDate.config.min.month = date.month - 1;
-                //             endDate.config.min.date = date.date;
-                //             endDate.config.min.hours = date.hours;
-                //             endDate.config.min.minutes = date.minutes;
-
-                //         } else {
-                //             endDate.config.min.year = '';
-                //             endDate.config.min.month = '';
-                //             endDate.config.min.date = '';
-                //             endDate.config.min.hours = '';
-                //             endDate.config.min.minutes = '';
-                //         }
-                //     }
-                // });
-
-                //设置结束时间
-                // var endDate = laydate.render({
-                //     elem: '#end', //结束时间选择控件id
-                //     type: 'date',
-                //     format: 'yyyy-MM-dd', //可任意组合
-                //     done: function(value, date) {
-                //         if (value !== '') {
-                //             startDate.config.max.year = date.year;
-                //             startDate.config.max.month = date.month - 1;
-                //             startDate.config.max.date = date.date;
-                //             startDate.config.max.hours = date.date;
-                //             startDate.config.max.minutes = date.date;
-                //         } else {
-                //             startDate.config.max.year = '';
-                //             startDate.config.max.month = '';
-                //             startDate.config.max.date = '';
-                //             startDate.config.max.hours = '';
-                //             startDate.config.max.minutes = '';
-                //         }
-                //     }
-                // });
-
-                $(".save").click(function() {
-                    parent.document.getElementsByClassName("work")[0].className += " active";
-                    //当你在iframe页面关闭自身时
-                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index); //再执行关闭 
-
-                })
-            });
+<script>
+    $(function () {
+        layui.use(['form', 'laydate'], function () {
+            var form = layui.form;
+            var laydate = layui.laydate;
 
 
-        })
-    </script>
+            $(".save").click(function () {
+                var workContent = $('#workContent').val();
+                var work_StartTime = $('#workStartTime').val();
+                var workStopTime = $('#workStopTime').val();
+
+                parent.$('#workContent').val(workContent);
+                parent.$('#work_StartTime').val(work_StartTime);
+                parent.$('#workStopTime').val(workStopTime);
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index); //再执行关闭
+
+
+            })
+
+        });
+
+
+    })
+</script>
 </body>
 
 </html>

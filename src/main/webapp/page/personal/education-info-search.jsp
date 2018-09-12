@@ -59,37 +59,25 @@
 
 <body>
 <form class="layui-form layui-row" action="">
-    <!-- <div class="edit-item layui-col-md6 layui-col-xs6">
-        <label class="layui-form-label">院校名称</label>
-        <div class="layui-input-inline">
-            <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="edit-item layui-col-md6 layui-col-xs6">
-        <label class="layui-form-label">专业名称</label>
-        <div class="layui-input-inline">
-            <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-        </div>
-    </div> -->
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">起始时间</label>
         <div class="layui-input-inline">
-            <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off"
+            <input type="text" id="startEducation" name="startEducation" required lay-verify="required" placeholder="" autocomplete="off"
                    class="layui-input"  >
         </div>
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">终止时间</label>
         <div class="layui-input-inline">
-            <input type="text" name="namessss" required lay-verify="required" placeholder="" autocomplete="off"
-                   class="layui-input" id="namessss">
+            <input type="text" name="endEducation" required lay-verify="required" placeholder="" autocomplete="off"
+                   class="layui-input" id="endEducation">
         </div>
     </div>
     <div class="edit-item layui-col-md12 layui-col-xs12">
         <label class="layui-form-label">内容</label>
         <div class="layui-input-inline lang">
-            <input type="text" name="" required lay-verify="required" placeholder="院校名称/专业名称/学历/学位" autocomplete="off"
-                   class="layui-input" id="start">
+            <input type="text"  name="educationContent" required lay-verify="required" placeholder="院校名称/专业名称/学历/学位" autocomplete="off"
+                   class="layui-input" id="educationContent">
         </div>
     </div>
 
@@ -107,71 +95,19 @@
         layui.use(['form', 'laydate'], function () {
             var form = layui.form;
             var laydate = layui.laydate;
-            // laydate.render({
-            //     elem: '#time',
-            // });
-
-            //设置开始时间
-            // var startDate = laydate.render({
-            //     elem: '#start', //开始时间选择控件id
-            //     // min: '2018 - 6 - 1',
-            //     type: 'date',
-            //     format: 'yyyy-MM-dd', //可任意组合
-            //     done: function(value, date) {
-            //         if (value !== '') {
-            //             endDate.config.min.year = date.year;
-            //             endDate.config.min.month = date.month - 1;
-            //             endDate.config.min.date = date.date;
-            //             endDate.config.min.hours = date.hours;
-            //             endDate.config.min.minutes = date.minutes;
-
-            //         } else {
-            //             endDate.config.min.year = '';
-            //             endDate.config.min.month = '';
-            //             endDate.config.min.date = '';
-            //             endDate.config.min.hours = '';
-            //             endDate.config.min.minutes = '';
-            //         }
-            //     }
-            // });
-
-            //设置结束时间
-            // var endDate = laydate.render({
-            //     elem: '#end', //结束时间选择控件id
-            //     type: 'date',
-            //     format: 'yyyy-MM-dd', //可任意组合
-            //     done: function(value, date) {
-            //         if (value !== '') {
-            //             startDate.config.max.year = date.year;
-            //             startDate.config.max.month = date.month - 1;
-            //             startDate.config.max.date = date.date;
-            //             startDate.config.max.hours = date.date;
-            //             startDate.config.max.minutes = date.date;
-            //         } else {
-            //             startDate.config.max.year = '';
-            //             startDate.config.max.month = '';
-            //             startDate.config.max.date = '';
-            //             startDate.config.max.hours = '';
-            //             startDate.config.max.minutes = '';
-            //         }
-            //     }
-            // });
-
-            // $(".save").click(function() {
-            //     parent.document.getElementsByClassName("education")[0].className += " active";
-            //     //当你在iframe页面关闭自身时
-            //     parent.layer.close(index); //再执行关闭
-            //
-            // })
-
             $(".save").click(function () {
-                var value = $('#namessss').val();
-                parent.$('#shuzhi').val(value);
+                var startEducation = $('#startEducation').val();
+                var endEducation = $('#endEducation').val();
+                var educationContent = $('#educationContent').val();
+                parent.$('#startEducation').val(startEducation);
+                parent.$('#endEducation').val(endEducation);
+                parent.$('#educationContent').val(educationContent);
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                 parent.layer.close(index); //再执行关闭
 
 
             })
+
         });
 
 

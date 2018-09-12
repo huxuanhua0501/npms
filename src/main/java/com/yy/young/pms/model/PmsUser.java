@@ -131,6 +131,11 @@ public class PmsUser {
     private String state;
     private String dicName;
 
+    /*教育开始*/
+    private String startEducation;//教育起始时间
+    private String endEducation;//教育结束时间
+    private String educationContent;//教育内容
+    /*教育结束*/
     /*出版著作开始*/
     private String bookName;//书名
     private String press;//出版社
@@ -155,6 +160,19 @@ public class PmsUser {
     private String periodicalEndYears;//论文结束时间
 
     /*论文结束*/
+    /*工作开始*/
+    private String workContent;//工作内容
+    private String work_StartTime;//工作开始时间
+    private String workStopTime;//工作结束时间
+
+    /*工作结束*/
+    /*通讯开始*/
+    private String officePhone;//办公司电话
+    private String mobilePhone;//移动电话
+    private String emailAddress;//邮箱地址
+
+    //联系人，就是userName
+    /*通讯结束*/
     public String getRemarkModifyTime() {
         return remarkModifyTime;
     }
@@ -690,6 +708,78 @@ public class PmsUser {
 
     public void setPeriodicalEndYears(String periodicalEndYears) {
         this.periodicalEndYears = periodicalEndYears;
+    }
+
+    public String getWorkContent() {
+        return workContent;
+    }
+
+    public void setWorkContent(String workContent) {
+        this.workContent = workContent;
+    }
+
+    public String getWork_StartTime() {
+        return work_StartTime;
+    }
+
+    public void setWork_StartTime(String work_StartTime) {
+        this.work_StartTime = work_StartTime;
+    }
+
+    public String getWorkStopTime() {
+        return workStopTime;
+    }
+
+    public void setWorkStopTime(String workStopTime) {
+        this.workStopTime = workStopTime;
+    }
+
+    public String getStartEducation() {
+        return startEducation;
+    }
+
+    public void setStartEducation(String startEducation) {
+        this.startEducation = startEducation;
+    }
+
+    public String getEndEducation() {
+        return endEducation;
+    }
+
+    public void setEndEducation(String endEducation) {
+        this.endEducation = endEducation;
+    }
+
+    public String getEducationContent() {
+        return educationContent;
+    }
+
+    public void setEducationContent(String educationContent) {
+        this.educationContent = educationContent;
+    }
+
+    public String getOfficePhone() {
+        return officePhone;
+    }
+
+    public void setOfficePhone(String officePhone) {
+        this.officePhone = officePhone;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public AuditPmsUser toAnother() {

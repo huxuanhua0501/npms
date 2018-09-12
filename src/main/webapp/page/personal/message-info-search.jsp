@@ -61,32 +61,30 @@
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">办公电话</label>
             <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="officePhone" name="officePhone" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">手机号</label>
             <div class="layui-input-inline">
-                <input type="number" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="number" id="mobilePhone" name="mobilePhone" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         </div>
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">邮箱地址</label>
             <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="emailAddress" name="emailAddress" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md6 layui-col-xs6">
             <label class="layui-form-label">联系人姓名</label>
             <div class="layui-input-inline">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="userName" name="userName" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
 
 
-        <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
-        <button class="layui-btn layui-btn-primary save">确认添加</button> -->
         <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;">
             <button class="layui-btn layui-btn-primary reset">重置</button>
             <button class="layui-btn layui-btn-primary save">确认添加</button>
@@ -103,14 +101,23 @@
                 // laydate.render({
                 //     elem: '#time',
                 // });
+                $(".save").click(function () {
 
-                $(".save").click(function() {
-                    parent.document.getElementsByClassName("message")[0].className += " active";
-                    //当你在iframe页面关闭自身时
+                    var officePhone = $('#officePhone').val();
+                    var mobilePhone = $('#mobilePhone').val();
+                    var emailAddress = $('#emailAddress').val();
+                    var userName = $('#userName').val();
+                    parent.$('#officePhone').val(officePhone);
+                    parent.$('#mobilePhone').val(mobilePhone);
+                    parent.$('#emailAddress').val(emailAddress);
+                    parent.$('#userName').val(userName);
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index); //再执行关闭 
+                    parent.layer.close(index); //再执行关闭
+
 
                 })
+
+
             });
 
 
