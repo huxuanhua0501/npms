@@ -25,14 +25,10 @@ public class PmsUser {
     @ExcelColumn(value = "曾用名", order = 4)
     private String oldName;//曾用名
 
-    @ExcelColumn(value = "性别", order = 5)
-    private String sex;//性别
 
     @ExcelColumn(value = "出生年月", order = 6)
     private String birth;//出生年月
 
-    @ExcelColumn(value = "民族", order = 7)
-    private String nation;//民族
 
     @ExcelColumn(value = "籍贯", order = 8)
     private String placeOfOrigin;//籍贯
@@ -43,14 +39,12 @@ public class PmsUser {
     @ExcelColumn(value = "参加工作时间", order = 10)
     private String workStartTime;//参加工作时间
 
-    @ExcelColumn(value = "政治面貌", order = 11)
-    private String politicalOutlook;//政治面貌
+
 
     @ExcelColumn(value = "入党时间", order = 12)
     private String joinPartyTime;//入党时间
 
-    @ExcelColumn(value = "专业技术职务", order = 13)
-    private String technicalPosition;//专业技术职务
+
 
     @ExcelColumn(value = "取得时间", order = 14)
     private String getTime;//取得时间
@@ -58,17 +52,13 @@ public class PmsUser {
     @ExcelColumn(value = "聘任时间", order = 15)
     private String appointmentTime;//聘任时间
 
-    @ExcelColumn(value = "专业技术等级", order = 16)
-    private String technicalLevel;//专业技术等级
 
-    @ExcelColumn(value = "行政职务", order = 17)
-    private String administrativeDuty;//行政职务
+
 
     @ExcelColumn(value = "任职时间", order = 18)
     private String tenureTime;//任职时间
 
-    @ExcelColumn(value = "行政级别", order = 19)
-    private String administrativeLevel;//行政级别
+
 
     @ExcelColumn(value = "研究领域", order = 20)
     private String researchField;//研究领域
@@ -76,17 +66,12 @@ public class PmsUser {
     @ExcelColumn(value = "专业特长", order = 21)
     private String specialty;//专业特长
 
-    @ExcelColumn(value = "最高学历", order = 22)
-    private String highestEducation;//最高学历
 
-    @ExcelColumn(value = "最高学位", order = 23)
-    private String highestDegree;//最高学位
 
-    @ExcelColumn(value = "身份证号", order = 24)
-    private String idCard;//身份证号
 
-    @ExcelColumn(value = "国外1年以上留学经历", order = 25)
-    private String overseasStudyExperience;//国外1年以上留学经历
+
+
+
 
     @ExcelColumn(value = "外语水平", order = 26)
     private String englishLevel;//外语水平
@@ -100,8 +85,7 @@ public class PmsUser {
     @ExcelColumn(value = "第一学历", order = 29)
     private String firstEducation;//第一学历
 
-    @ExcelColumn(value = "在职学历", order = 30)
-    private String jobEducation;//在职学历
+
 
     @ExcelColumn(value = "人员类型", order = 31)
     private String personType;//人员类型
@@ -111,7 +95,6 @@ public class PmsUser {
     private String trashFlag;//作废标识,1标识已作废,180503新加字段
 
     private String firstDegree;//第一学位
-    private String station;//岗位
     private String takeWork;//承担的工作
 
     private List<UserDept> deptList;//部门列表
@@ -122,10 +105,8 @@ public class PmsUser {
     private String orderBy;//排序字段
     private String orderType;//排序类型,asc或desc
 
-    private String researchFieldDetail;//研究领域细分
-    private String jobDegree;//在职学位
 
-    private String tempWorkExperience;//是否有挂职经历
+
     private String toThereTime;//来院时间
     private String remarkModifyTime;
     private String state;
@@ -173,6 +154,49 @@ public class PmsUser {
 
     //联系人，就是userName
     /*通讯结束*/
+    /*基本信息开始*/
+    @ExcelColumn(value = "性别", order = 5)
+    private String sex;//性别
+    @ExcelColumn(value = "民族", order = 7)
+    private String nation;//民族
+    @ExcelColumn(value = "政治面貌", order = 11)
+    private String politicalOutlook;//政治面貌
+    @ExcelColumn(value = "专业技术职务", order = 13)
+    private String technicalPosition;//专业技术职务
+    @ExcelColumn(value = "专业技术等级", order = 16)
+    private String technicalLevel;//专业技术等级
+    @ExcelColumn(value = "行政级别", order = 19)
+    private String administrativeLevel;//行政级别
+    private String researchFieldDetail;//研究领域细分
+    @ExcelColumn(value = "最高学历", order = 22)
+    private String highestEducation;//最高学历
+    @ExcelColumn(value = "最高学位", order = 23)
+    private String highestDegree;//最高学位
+    @ExcelColumn(value = "在职学历", order = 30)
+    private String jobEducation;//在职学历
+    private String jobDegree;//在职学位
+    private String tempWorkExperience;//是否有挂职经历
+    @ExcelColumn(value = "国外1年以上留学经历", order = 25)
+    private String overseasStudyExperience;//国外1年以上留学经历
+    @ExcelColumn(value = "身份证号", order = 24)
+    private String idCard;//身份证号
+    private String station;//岗位
+    @ExcelColumn(value = "行政职务", order = 17)
+    private String administrativeDuty;//行政职务
+    private String startBirth;//出生开始日期
+    private String endBirth;//出生结束日期
+    private String startWorkTime;//工作开始时间
+    private String endWorkTime;//工作结束时间
+    private String startTenureTime;//任职开始时间
+    private String endTenureTime;//任职结束时间
+    private String startTechnicalGetTime;//技术职务取得开始时间
+    private String endTechnicalGetTime;//技术职务取得结束时间
+    private String startAppointmentTime;//技术等级聘任开始时间
+    private String endAppointmentTime;//技术等级聘任结束时间
+
+
+
+    /*基本信息结束*/
     public String getRemarkModifyTime() {
         return remarkModifyTime;
     }
@@ -780,6 +804,86 @@ public class PmsUser {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getStartBirth() {
+        return startBirth;
+    }
+
+    public void setStartBirth(String startBirth) {
+        this.startBirth = startBirth;
+    }
+
+    public String getEndBirth() {
+        return endBirth;
+    }
+
+    public void setEndBirth(String endBirth) {
+        this.endBirth = endBirth;
+    }
+
+    public String getStartWorkTime() {
+        return startWorkTime;
+    }
+
+    public void setStartWorkTime(String startWorkTime) {
+        this.startWorkTime = startWorkTime;
+    }
+
+    public String getEndWorkTime() {
+        return endWorkTime;
+    }
+
+    public void setEndWorkTime(String endWorkTime) {
+        this.endWorkTime = endWorkTime;
+    }
+
+    public String getStartTenureTime() {
+        return startTenureTime;
+    }
+
+    public void setStartTenureTime(String startTenureTime) {
+        this.startTenureTime = startTenureTime;
+    }
+
+    public String getEndTenureTime() {
+        return endTenureTime;
+    }
+
+    public void setEndTenureTime(String endTenureTime) {
+        this.endTenureTime = endTenureTime;
+    }
+
+    public String getStartTechnicalGetTime() {
+        return startTechnicalGetTime;
+    }
+
+    public void setStartTechnicalGetTime(String startTechnicalGetTime) {
+        this.startTechnicalGetTime = startTechnicalGetTime;
+    }
+
+    public String getEndTechnicalGetTime() {
+        return endTechnicalGetTime;
+    }
+
+    public void setEndTechnicalGetTime(String endTechnicalGetTime) {
+        this.endTechnicalGetTime = endTechnicalGetTime;
+    }
+
+    public String getStartAppointmentTime() {
+        return startAppointmentTime;
+    }
+
+    public void setStartAppointmentTime(String startAppointmentTime) {
+        this.startAppointmentTime = startAppointmentTime;
+    }
+
+    public String getEndAppointmentTime() {
+        return endAppointmentTime;
+    }
+
+    public void setEndAppointmentTime(String endAppointmentTime) {
+        this.endAppointmentTime = endAppointmentTime;
     }
 
     public AuditPmsUser toAnother() {

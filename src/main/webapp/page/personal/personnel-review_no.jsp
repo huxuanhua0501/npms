@@ -249,28 +249,6 @@
                     <div class="edit-item layui-row">
                         <label class="layui-col-md2 layui-col-xs2" style="float:left;padding:5px 15px;width: 130px;">工作性质及状态</label>
                         <div class="layui-col-md10 layui-col-xs10" style="padding: 10px 15px;" id="checkbox_0">
-
-                            <%--   <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="所有"
-                                   title="所有">
-
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="在编"
-                                  title="在编">
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="院聘"
-                                  title="院聘">
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="劳务派遣"
-                                  title="劳务派遣">
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="劳务协议"
-                                  title="劳务协议">
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="离职"
-                                  title="离职">
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="退休"
-                                  title="退休">
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="离休"
-                                  title="离休">
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="博士后"
-                                  title="博士后">
-                           <input type="checkbox" name="remark" class="col-item" lay-skin="primary" value="其他"
-                                  title="其他">--%>
                         </div>
                     </div>
                     <div class="edit-item layui-row">
@@ -363,6 +341,36 @@
                 <input id="officePhone" name="officePhone" type="text"/>
                 <input id="mobilePhone" name="mobilePhone" type="text"/>
                 <input id="emailAddress" name="emailAddress" type="text"/>
+            </div>
+            <%-- 基本信息--%>
+            <div>
+                <input id="sex" name="sex" type="text"/>
+                <input id="nation" name="nation" type="text"/>
+                <input id="politicalOutlook" name="politicalOutlook" type="text"/>
+                <input id="technicalPosition" name="technicalPosition" type="text"/>
+                <input id="technicalLevel" name="technicalLevel" type="text"/>
+                <input id="administrativeLevel" name="administrativeLevel" type="text"/>
+                <input id="researchField" name="researchField" type="text"/>
+                <input id="highestEducation" name="highestEducation" type="text"/>
+                <input id="highestDegree" name="highestDegree" type="text"/>
+                <input id="jobEducation" name="jobEducation" type="text"/>
+                <input id="jobDegree" name="jobDegree" type="text"/>
+                <input id="tempWorkExperience" name="tempWorkExperience" type="text"/>
+                <input id="overseasStudyExperience" name="overseasStudyExperience" type="text"/>
+                <input id="idCard" name="idCard" type="text"/>
+                <input id="station" name="station" type="text"/>
+                <input id="administrativeDuty" name="administrativeDuty" type="text"/>
+                <input id="maritalStatus" name="maritalStatus" type="text"/>
+                <input id="startBirth" name="startBirth" type="text"/>
+                <input id="endBirth" name="endBirth" type="text"/>
+                <input id="startWorkTime" name="startWorkTime" type="text"/>
+                <input id="endWorkTime" name="endWorkTime" type="text"/>
+                <input id="startTenureTime" name="startTenureTime" type="text"/>
+                <input id="endTenureTime" name="endTenureTime" type="text"/>
+                <input id="startTechnicalGetTime" name="startTechnicalGetTime" type="text"/>
+                <input id="endTechnicalGetTime" name="endTechnicalGetTime" type="text"/>
+                <input id="startAppointmentTime" name="startAppointmentTime" type="text"/>
+                <input id="endAppointmentTime" name="endAppointmentTime" type="text"/>
             </div>
             <div class="form-content">
                 <label class="layui-form-label" style="width: 100px;">当前筛选条件</label>
