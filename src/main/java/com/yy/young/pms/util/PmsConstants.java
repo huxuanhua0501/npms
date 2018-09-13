@@ -9,6 +9,7 @@ public class PmsConstants {
     public interface MAPPER{
         String PMS_USER = "com.yy.young.pms.mapper.pmsUser";
         String PMS_WEBSITE = "com.yy.young.pms.mapper.pmsWebsite";
+        String PMS_Related = "com.yy.young.pms.mapper.pmsRelated";
 
         String PMS_COMMUNICATION = "com.yy.young.pms.mapper.communication";
         String PMS_EDUCATION = "com.yy.young.pms.mapper.education";

@@ -184,6 +184,7 @@ public class PmsUser {
     private String station;//岗位
     @ExcelColumn(value = "行政职务", order = 17)
     private String administrativeDuty;//行政职务
+    private String maritalStatus;//婚姻
     private String startBirth;//出生开始日期
     private String endBirth;//出生结束日期
     private String startWorkTime;//工作开始时间
@@ -200,11 +201,24 @@ public class PmsUser {
     /*基本信息结束*/
 
     /*拼装list*/
-    private  List<String>periodical_typeList;
+    private  List<String>periodical_typeList;//期刊类型
+    private  List<String>workTypeList;//著作类型
+    private  List<String>awardLevelList;//获奖层次
+    private  List<String>nationList;//民族
+    private  List<String>politicalOutlookList;//政治面貌
+    private  List<String>technicalPositionList;//专业技术职务
+    private  List<String>technicalLevelList;//专业技术等级
+    private  List<String>administrativeLevelList;//行政级别
+    private  List<String>researchFieldDetailList;//研究领域
+    private  List<String>highestEducationList;//全日制学历
+    private  List<String>highestDegreeList;//全日制学位
+    private  List<String>jobEducationList;//在职学历
+    private  List<String>jobDegreeList;//在职学位
+
 
 
     /*拼装返回id*/
-    private Set<String> set;
+    private List<String> list;
 
 
 
@@ -237,6 +251,110 @@ public class PmsUser {
         }
         user.setBirthday(this.birth);
         return user;
+    }
+
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public List<String> getNationList() {
+        return nationList;
+    }
+
+    public void setNationList(List<String> nationList) {
+        this.nationList = nationList;
+    }
+
+    public List<String> getPoliticalOutlookList() {
+        return politicalOutlookList;
+    }
+
+    public void setPoliticalOutlookList(List<String> politicalOutlookList) {
+        this.politicalOutlookList = politicalOutlookList;
+    }
+
+    public List<String> getTechnicalPositionList() {
+        return technicalPositionList;
+    }
+
+    public void setTechnicalPositionList(List<String> technicalPositionList) {
+        this.technicalPositionList = technicalPositionList;
+    }
+
+    public List<String> getTechnicalLevelList() {
+        return technicalLevelList;
+    }
+
+    public void setTechnicalLevelList(List<String> technicalLevelList) {
+        this.technicalLevelList = technicalLevelList;
+    }
+
+    public List<String> getAdministrativeLevelList() {
+        return administrativeLevelList;
+    }
+
+    public void setAdministrativeLevelList(List<String> administrativeLevelList) {
+        this.administrativeLevelList = administrativeLevelList;
+    }
+
+    public List<String> getResearchFieldDetailList() {
+        return researchFieldDetailList;
+    }
+
+    public void setResearchFieldDetailList(List<String> researchFieldDetailList) {
+        this.researchFieldDetailList = researchFieldDetailList;
+    }
+
+    public List<String> getHighestEducationList() {
+        return highestEducationList;
+    }
+
+    public void setHighestEducationList(List<String> highestEducationList) {
+        this.highestEducationList = highestEducationList;
+    }
+
+    public List<String> getHighestDegreeList() {
+        return highestDegreeList;
+    }
+
+    public void setHighestDegreeList(List<String> highestDegreeList) {
+        this.highestDegreeList = highestDegreeList;
+    }
+
+    public List<String> getJobEducationList() {
+        return jobEducationList;
+    }
+
+    public void setJobEducationList(List<String> jobEducationList) {
+        this.jobEducationList = jobEducationList;
+    }
+
+    public List<String> getJobDegreeList() {
+        return jobDegreeList;
+    }
+
+    public void setJobDegreeList(List<String> jobDegreeList) {
+        this.jobDegreeList = jobDegreeList;
+    }
+
+    public List<String> getAwardLevelList() {
+        return awardLevelList;
+    }
+
+    public void setAwardLevelList(List<String> awardLevelList) {
+        this.awardLevelList = awardLevelList;
+    }
+
+    public List<String> getWorkTypeList() {
+        return workTypeList;
+    }
+
+    public void setWorkTypeList(List<String> workTypeList) {
+        this.workTypeList = workTypeList;
     }
 
     public String getId() {
@@ -905,12 +1023,12 @@ public class PmsUser {
         this.periodical_typeList = periodical_typeList;
     }
 
-    public Set<String> getSet() {
-        return set;
+    public List<String> getList() {
+        return list;
     }
 
-    public void setSet(Set<String> set) {
-        this.set = set;
+    public void setList(List<String> list) {
+        this.list = list;
     }
 
     public AuditPmsUser toAnother() {

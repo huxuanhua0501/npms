@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yy.young.pms.mapper.pmsRelated">
+    <select id="selectEducation"  parameterType="com.yy.young.pms.model.PmsUser" resultType="java.lang.String">
+        SELECT DISTINCT pe.user_id
+        FROM  pms_education pe
+        <where>
+            <!--教育经历开始-->
+            <if test="startEducation != null and startEducation != ''">
+                AND pe.start_time &gt;= #{startEducation}
+            </if>
+            <if test="endEducation != null and endEducation != ''">
+                AND pe.stop_time &lt;= #{endEducation}
+            </if>
+            <if test="educationContent != null and educationContent != ''">
+                AND pe.content LIKE  '%${educationContent}%'
+            </if>
+            <!--教育经历结束-->
+        </where>
+    </select>
+    <select id="selectWork"  parameterType="com.yy.young.pms.model.PmsUser" resultType="java.lang.String">
+        SELECT DISTINCT pw.user_id
+        FROM  pms_work pw
+        <where>
+            <!--工作经历开始-->
+            <if test="work_StartTime != null and work_StartTime != ''">
+                AND pw.start_time &gt;= #{work_StartTime}
+            </if>
+            <if test="workStopTime != null and workStopTime != ''">
+                AND pw.stop_time &lt;= #{workStopTime}
+            </if>
+            <if test="workContent != null and workContent != ''">
+                AND pw.content LIKE  '%${workContent}%'
+            </if>
+            <!--工作经历结束-->
+        </where>
+    </select>
+    <select id="selectCommunication"  parameterType="com.yy.young.pms.model.PmsUser" resultType="java.lang.String">
+        SELECT DISTINCT pc.id
+        FROM  pms_communication pc
+        <where>
+            <!--通讯开始-->
+            <if test="officePhone != null and officePhone != ''">
+                AND pc.office_phone = #{officePhone}
+            </if>
+            <if test="mobilePhone != null and mobilePhone != ''">
+                AND pc.mobile_phone = #{mobilePhone}
+            </if>
+            <if test="emailAddress != null and emailAddress != ''">
+                AND pc.email_address = #{emailAddress}
+            </if>
+            <!--通讯结束-->
+        </where>
+    </select>
+    <select id="selectPaper"  parameterType="com.yy.young.pms.model.PmsUser" resultType="java.lang.String">
+        SELECT DISTINCT pp.user_id
+        FROM  pms_paper pp
+        <where>
+            <!--论文开始-->
+            <if test="periodicalTitle != null and periodicalTitle != ''">
+                AND pp.title LIKE  '%${periodicalTitle}%'
+            </if>
+            <if test="periodicalName != null and periodicalName != ''">
+                AND pp.periodical_name LIKE  '%${periodicalName}%'
+            </if>
+              <if test="periodical_typeList != null and periodical_typeList != ''">
+                  AND pp.periodical_type in
+                  <foreach collection="periodical_typeList" item="item" separator="," open="(" close=")">
+                      #{item}
+                  </foreach>
+              </if>
+            <if test="periodicalStartYears != null and periodicalStartYears != ''">
+                AND pp.years &lt;= #{periodicalStartYears}
+            </if>
+            <if test="periodicalEndYears != null and periodicalEndYears != ''">
+                AND pp.years &gt;= #{periodicalEndYears}
+            </if>
+
+            <!--论文结束-->
+        </where>
+    </select>
+    <select id="selectPublish"  parameterType="com.yy.young.pms.model.PmsUser" resultType="java.lang.String">
+        SELECT DISTINCT pp.user_id
+        FROM  pms_publish pp
+        <where>
+            <!--著作开始-->
+            <if test="bookName != null and bookName != ''">
+                AND pp.book_name LIKE  '%${bookName}%'
+            </if>
+            <if test="press != null and press != ''">
+                AND pp.press LIKE  '%${press}%'
+            </if>
+            <if test="workTypeList != null and workTypeList != ''">
+                AND pp.work_type in
+                <foreach collection="workTypeList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="startYears != null and startYears != ''">
+                AND pp.years &gt;= #{startYears}
+            </if>
+            <if test="endYears != null and endYears != ''">
+                AND pp.years &lt;= #{endYears}
+            </if>
+
+            <!--著作结束-->
+        </where>
+    </select>
+    <select id="selectAward"  parameterType="com.yy.young.pms.model.PmsUser" resultType="java.lang.String">
+        SELECT DISTINCT pp.user_id
+        FROM  pms_tech_awards pp
+        <where>
+            <!--获奖开始-->
+            <if test="awardWinProjectName != null and awardWinProjectName != ''">
+                AND pp.award_win_project_name LIKE  '%${awardWinProjectName}%'
+            </if>
+            <if test="awardType != null and awardType != ''">
+                AND pp.award_type LIKE  '%${awardType}%'
+            </if>
+            <if test="awardWinProjectLevel != null and awardWinProjectLevel != ''">
+                AND pp.award_win_project_level LIKE  '%${awardWinProjectLevel}%'
+            </if>
+            <if test="awardLevelList != null and awardLevelList != ''">
+                AND pp.award_level in
+                <foreach collection="awardLevelList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="awardsStartYears != null and awardsStartYears != ''">
+                AND pp.years &gt;= #{awardsStartYears}
+            </if>
+            <if test="awardsEndYears != null and awardsEndYears != ''">
+                AND pp.years &lt;= #{awardsEndYears}
+            </if>
+
+            <!--获奖结束-->
+        </where>
+    </select>
+</mapper>

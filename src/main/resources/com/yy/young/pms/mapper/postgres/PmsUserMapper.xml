@@ -250,7 +250,128 @@
             </if>
 
 
+            <if test="nationList != null and nationList != ''">
+                AND O.nation in
+                <foreach collection="nationList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="politicalOutlookList != null and politicalOutlookList != ''">
+                AND O.political_outlook in
+                <foreach collection="politicalOutlookList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
 
+            <if test="technicalPositionList != null and technicalPositionList != ''">
+                AND O.technical_position in
+                <foreach collection="technicalPositionList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="technicalLevelList != null and technicalLevelList != ''">
+                AND O.technical_level in
+                <foreach collection="technicalLevelList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+
+            <if test="administrativeLevelList != null and administrativeLevelList != ''">
+                AND O.administrative_level in
+                <foreach collection="administrativeLevelList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="researchFieldDetailList != null and researchFieldDetailList != ''">
+                AND O.research_field in
+                <foreach collection="researchFieldDetailList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="highestEducationList != null and highestEducationList != ''">
+                AND O.highest_education in
+                <foreach collection="highestEducationList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="highestDegreeList != null and highestDegreeList != ''">
+                AND O.highest_degree in
+                <foreach collection="highestDegreeList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+
+            <if test="highestDegreeList != null and highestDegreeList != ''">
+                AND O.highest_degree in
+                <foreach collection="highestDegreeList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="jobEducationList != null and jobEducationList != ''">
+                AND O.job_education in
+                <foreach collection="jobEducationList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="jobDegreeList != null and jobDegreeList != ''">
+                AND O.job_degree in
+                <foreach collection="jobDegreeList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="overseasStudyExperience != null and overseasStudyExperience != ''">
+                AND O.overseas_study_experience =#{overseasStudyExperience}
+            </if>
+
+            <if test="idCard != null and idCard != ''">
+                AND O.id_card =#{idCard}
+            </if>
+            <if test="station != null and station != ''">
+                AND O.station =#{station}
+            </if>
+
+
+            <if test="maritalStatus != null and maritalStatus != ''">
+                AND O.marital_status =#{maritalStatus}
+            </if>
+            <if test="startBirth != null and startBirth != ''">
+                AND O.birth  &gt;=#{startBirth}
+            </if>
+            <if test="endBirth != null and endBirth != ''">
+                AND O.birth  &lt;=#{endBirth}
+            </if>
+
+            <if test="startWorkTime != null and startWorkTime != ''">
+                AND O.work_start_time  &gt;=#{startWorkTime}
+            </if>
+            <if test="endWorkTime != null and endWorkTime != ''">
+                AND O.work_start_time  &lt;=#{endWorkTime}
+            </if>
+            <if test="startTenureTime != null and startTenureTime != ''">
+                AND O.tenure_time  &gt;=#{startTenureTime}
+            </if>
+            <if test="endTenureTime != null and endTenureTime != ''">
+                AND O.tenure_time  &lt;=#{endTenureTime}
+            </if>
+            <if test="startTechnicalGetTime != null and startTechnicalGetTime != ''">
+                AND O.get_time  &gt;=#{startTechnicalGetTime}
+            </if>
+            <if test="endTechnicalGetTime != null and endTechnicalGetTime != ''">
+                AND O.get_time  &lt;=#{endTechnicalGetTime}
+            </if>
+
+            <if test="startAppointmentTime != null and startAppointmentTime != ''">
+                AND O.appointment_time  &gt;=#{startAppointmentTime}
+            </if>
+            <if test="endAppointmentTime != null and endAppointmentTime != ''">
+                AND O.appointment_time  &lt;=#{endAppointmentTime}
+            </if>
+            <if test="list != null and list != ''">
+                 and O.id in
+                <foreach collection="list" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
             <choose>
                 <when test="trashFlag != null and trashFlag != ''">
                     AND O.trash_flag = #{trashFlag}

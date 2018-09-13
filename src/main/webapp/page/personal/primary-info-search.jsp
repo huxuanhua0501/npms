@@ -253,7 +253,7 @@
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">性别</label>
         <div class="layui-input-inline">
-            <select name="sex" lay-verify="">
+            <select id="sex" name="sex" lay-verify="">
                 <option value=""></option>
                 <option value="男">男</option>
                 <option value="女">女</option>
@@ -356,8 +356,8 @@
         <div class="layui-input-inline">
             <select name="overseasStudyExperience" lay-verify="">
                 <option value=""></option>
-                <option value="是">是</option>
-                <option value="否">否</option>
+                <option value="有">是</option>
+                <option value="无">否</option>
             </select>
         </div>
     </div>
