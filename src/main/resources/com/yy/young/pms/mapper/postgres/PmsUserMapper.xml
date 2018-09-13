@@ -190,9 +190,6 @@
         <include refid="searchnewCol"></include>
         FROM pms_user O
         LEFT JOIN tb_ums_user tuu ON tuu.account = O.user_id
-        LEFT JOIN pms_education pe ON pe.user_id = O.id
-        LEFT JOIN pms_work pw ON pw.user_id = O.id
-        LEFT JOIN pms_communication pc ON pc.id = O.id
         <include refid="joinSql"></include>
         <where>
             <if test="deptList != null">
@@ -252,44 +249,6 @@
                 AND O.administrative_duty LIKE '%${administrativeDuty}%'
             </if>
 
-            <!--新添条件开始-->
-            <!--教育经历开始-->
-            <if test="startEducation != null and startEducation != ''">
-                AND pe.start_time &gt;= #{startEducation}
-            </if>
-            <if test="endEducation != null and endEducation != ''">
-                AND pe.stop_time &lt;= #{endEducation}
-            </if>
-            <if test="educationContent != null and educationContent != ''">
-                AND pe.content LIKE  '%${educationContent}%'
-            </if>
-            <!--教育经历结束-->
-
-            <!--工作经历开始-->
-            <if test="work_StartTime != null and work_StartTime != ''">
-                AND pw.start_time &gt;= #{work_StartTime}
-            </if>
-            <if test="workStopTime != null and workStopTime != ''">
-                AND pw.stop_time &lt;= #{workStopTime}
-            </if>
-            <if test="workContent != null and workContent != ''">
-                AND pw.content LIKE  '%${workContent}%'
-            </if>
-            <!--工作经历结束-->
-
-            <!--通讯开始-->
-            <if test="officePhone != null and officePhone != ''">
-                AND pc.office_phone = #{officePhone}
-            </if>
-            <if test="mobilePhone != null and mobilePhone != ''">
-                AND pc.mobile_phone = #{mobilePhone}
-            </if>
-            <if test="emailAddress != null and emailAddress != ''">
-                AND pc.email_address = #{emailAddress}
-            </if>
-            <!--通讯结束-->
-
-            <!--新添条件结束-->
 
 
             <choose>

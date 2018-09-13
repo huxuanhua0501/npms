@@ -5,6 +5,7 @@ import com.yy.young.interfaces.model.User;
 import com.yy.young.pms.util.PmsConstants;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 用户基础信息实体类
@@ -197,6 +198,16 @@ public class PmsUser {
 
 
     /*基本信息结束*/
+
+    /*拼装list*/
+    private  List<String>periodical_typeList;
+
+
+    /*拼装返回id*/
+    private Set<String> set;
+
+
+
     public String getRemarkModifyTime() {
         return remarkModifyTime;
     }
@@ -884,6 +895,22 @@ public class PmsUser {
 
     public void setEndAppointmentTime(String endAppointmentTime) {
         this.endAppointmentTime = endAppointmentTime;
+    }
+
+    public List<String> getPeriodical_typeList() {
+        return periodical_typeList;
+    }
+
+    public void setPeriodical_typeList(List<String> periodical_typeList) {
+        this.periodical_typeList = periodical_typeList;
+    }
+
+    public Set<String> getSet() {
+        return set;
+    }
+
+    public void setSet(Set<String> set) {
+        this.set = set;
     }
 
     public AuditPmsUser toAnother() {
