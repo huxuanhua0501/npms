@@ -218,7 +218,7 @@
                     <label class="layui-form-label"> <i
                             class="layui-icon layui-icon-search"></i>&nbsp;&nbsp;基本搜索</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="userName" placeholder="请输入姓名" autocomplete="off"
+                        <input type="text" id="userName" name="userName" placeholder="请输入姓名" autocomplete="off"
                                class="layui-input list-input" ErrBirthBad4>
                     </div>
                 </div>
@@ -301,9 +301,9 @@
             </div>
             <%-- 教育--%>
             <div>
-                <input id="startEducation" name="startEducation" type="hidden"/>
-                <input id="endEducation" name="endEducation" type="hidden"/>
-                <input id="educationContent" name="educationContent" type="hidden"/>
+                <input id="startEducation" name="startEducation" type="text"/>
+                <input id="endEducation" name="endEducation" type="text"/>
+                <input id="educationContent" name="educationContent" type="text"/>
             </div>
             <%-- 著作--%>
             <div>

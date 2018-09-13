@@ -6,93 +6,93 @@
     <!--查询字段信息-->
     <sql id="searchCol">
         O.id AS "id"
-        ,O.user_id AS "userId"
-        ,O.user_name AS "userName"
-        ,O.old_name AS "oldName"
-        ,O.sex AS "sex"
-        ,O.birth AS "birth"
-        ,O.nation AS "nation"
-        ,O.place_of_origin AS "placeOfOrigin"
-        ,O.place_of_birth AS "placeOfBirth"
-        ,O.work_start_time AS "workStartTime"
-        ,O.political_outlook AS "politicalOutlook"
-        ,O.join_party_time AS "joinPartyTime"
-        ,O.technical_position AS "technicalPosition"
-        ,O.get_time AS "getTime"
-        ,O.appointment_time AS "appointmentTime"
-        ,O.technical_level AS "technicalLevel"
-        ,O.administrative_duty AS "administrativeDuty"
-        ,O.tenure_time AS "tenureTime"
-        ,O.administrative_level AS "administrativeLevel"
-        ,O.research_field AS "researchField"
-        ,O.specialty AS "specialty"
-        ,O.highest_education AS "highestEducation"
-        ,O.highest_degree AS "highestDegree"
-        ,O.id_card AS "idCard"
-        ,O.overseas_study_experience AS "overseasStudyExperience"
-        ,O.english_level AS "englishLevel"
-        ,O.photo_address AS "photoAddress"
-        ,O.remark AS "remark"
-        ,O.first_education AS "firstEducation"
-        ,O.job_education AS "jobEducation"
-        ,O.person_type AS "personType"
-        ,O.num AS "num"
-        ,O.trash_flag AS "trashFlag"
-        ,O.first_degree AS "firstDegree"
-        ,O.station AS "station"
-        ,O.take_work AS "takeWork"
-        ,O.research_field_detail AS "researchFieldDetail"
-        ,O.job_degree AS "jobDegree"
-        ,O.temp_work_experience AS "tempWorkExperience"
-        ,O.to_there_time AS "toThereTime"
-        ,O.remark_modify_time AS "remarkModifyTime"
-        ,(SELECT string_agg(DE.NAME,',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
+        , O.user_id AS "userId"
+        , O.user_name AS "userName"
+        , O.old_name AS "oldName"
+        , O.sex AS "sex"
+        , O.birth AS "birth"
+        , O.nation AS "nation"
+        , O.place_of_origin AS "placeOfOrigin"
+        , O.place_of_birth AS "placeOfBirth"
+        , O.work_start_time AS "workStartTime"
+        , O.political_outlook AS "politicalOutlook"
+        , O.join_party_time AS "joinPartyTime"
+        , O.technical_position AS "technicalPosition"
+        , O.get_time AS "getTime"
+        , O.appointment_time AS "appointmentTime"
+        , O.technical_level AS "technicalLevel"
+        , O.administrative_duty AS "administrativeDuty"
+        , O.tenure_time AS "tenureTime"
+        , O.administrative_level AS "administrativeLevel"
+        , O.research_field AS "researchField"
+        , O.specialty AS "specialty"
+        , O.highest_education AS "highestEducation"
+        , O.highest_degree AS "highestDegree"
+        , O.id_card AS "idCard"
+        , O.overseas_study_experience AS "overseasStudyExperience"
+        , O.english_level AS "englishLevel"
+        , O.photo_address AS "photoAddress"
+        , O.remark AS "remark"
+        , O.first_education AS "firstEducation"
+        , O.job_education AS "jobEducation"
+        , O.person_type AS "personType"
+        , O.num AS "num"
+        , O.trash_flag AS "trashFlag"
+        , O.first_degree AS "firstDegree"
+        , O.station AS "station"
+        , O.take_work AS "takeWork"
+        , O.research_field_detail AS "researchFieldDetail"
+        , O.job_degree AS "jobDegree"
+        , O.temp_work_experience AS "tempWorkExperience"
+        , O.to_there_time AS "toThereTime"
+        , O.remark_modify_time AS "remarkModifyTime"
+        , ( SELECT string_agg(DE.NAME, ',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
     </sql>
     <sql id="searchnewCol">
         O.id AS "id"
-        ,O.user_id AS "userId"
-        ,O.user_name AS "userName"
-        ,O.old_name AS "oldName"
-        ,O.sex AS "sex"
-        ,O.birth AS "birth"
-        ,O.nation AS "nation"
-        ,O.place_of_origin AS "placeOfOrigin"
-        ,O.place_of_birth AS "placeOfBirth"
-        ,O.work_start_time AS "workStartTime"
-        ,O.political_outlook AS "politicalOutlook"
-        ,O.join_party_time AS "joinPartyTime"
-        ,O.technical_position AS "technicalPosition"
-        ,O.get_time AS "getTime"
-        ,O.appointment_time AS "appointmentTime"
-        ,O.technical_level AS "technicalLevel"
-        ,O.administrative_duty AS "administrativeDuty"
-        ,O.tenure_time AS "tenureTime"
-        ,O.administrative_level AS "administrativeLevel"
-        ,O.research_field AS "researchField"
-        ,O.specialty AS "specialty"
-        ,O.highest_education AS "highestEducation"
-        ,O.highest_degree AS "highestDegree"
-        ,O.id_card AS "idCard"
-        ,O.overseas_study_experience AS "overseasStudyExperience"
-        ,O.english_level AS "englishLevel"
-        ,O.photo_address AS "photoAddress"
-        ,O.remark AS "remark"
-        ,O.first_education AS "firstEducation"
-        ,O.job_education AS "jobEducation"
-        ,O.person_type AS "personType"
-        ,O.num AS "num"
-        ,O.trash_flag AS "trashFlag"
-        ,O.first_degree AS "firstDegree"
-        ,O.station AS "station"
-        ,O.take_work AS "takeWork"
-        ,O.research_field_detail AS "researchFieldDetail"
-        ,O.job_degree AS "jobDegree"
-        ,O.temp_work_experience AS "tempWorkExperience"
-        ,O.to_there_time AS "toThereTime"
-        ,O.remark_modify_time AS "remarkModifyTime"
-        ,(SELECT string_agg(DE.NAME,',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
-        ,tuu.state AS "state"
-        ,O.remark AS "dicName"
+        , O.user_id AS "userId"
+        , O.user_name AS "userName"
+        , O.old_name AS "oldName"
+        , O.sex AS "sex"
+        , O.birth AS "birth"
+        , O.nation AS "nation"
+        , O.place_of_origin AS "placeOfOrigin"
+        , O.place_of_birth AS "placeOfBirth"
+        , O.work_start_time AS "workStartTime"
+        , O.political_outlook AS "politicalOutlook"
+        , O.join_party_time AS "joinPartyTime"
+        , O.technical_position AS "technicalPosition"
+        , O.get_time AS "getTime"
+        , O.appointment_time AS "appointmentTime"
+        , O.technical_level AS "technicalLevel"
+        , O.administrative_duty AS "administrativeDuty"
+        , O.tenure_time AS "tenureTime"
+        , O.administrative_level AS "administrativeLevel"
+        , O.research_field AS "researchField"
+        , O.specialty AS "specialty"
+        , O.highest_education AS "highestEducation"
+        , O.highest_degree AS "highestDegree"
+        , O.id_card AS "idCard"
+        , O.overseas_study_experience AS "overseasStudyExperience"
+        , O.english_level AS "englishLevel"
+        , O.photo_address AS "photoAddress"
+        , O.remark AS "remark"
+        , O.first_education AS "firstEducation"
+        , O.job_education AS "jobEducation"
+        , O.person_type AS "personType"
+        , O.num AS "num"
+        , O.trash_flag AS "trashFlag"
+        , O.first_degree AS "firstDegree"
+        , O.station AS "station"
+        , O.take_work AS "takeWork"
+        , O.research_field_detail AS "researchFieldDetail"
+        , O.job_degree AS "jobDegree"
+        , O.temp_work_experience AS "tempWorkExperience"
+        , O.to_there_time AS "toThereTime"
+        , O.remark_modify_time AS "remarkModifyTime"
+        , ( SELECT string_agg(DE.NAME, ',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
+        , tuu.state AS "state"
+        , O.remark AS "dicName"
     </sql>
 
     <!--关联查询相关sql-->
@@ -102,7 +102,8 @@
                 AND (SELECT string_agg(DE.ID,',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) like '%${deptIds}%'
             </if>-->
     <!-- 查询 -->
-    <select id="getPmsUserList" parameterType="com.yy.young.pms.model.PmsUser" resultType="com.yy.young.pms.model.PmsUser">
+    <select id="getPmsUserList" parameterType="com.yy.young.pms.model.PmsUser"
+            resultType="com.yy.young.pms.model.PmsUser">
         SELECT
         <include refid="searchCol"></include>
         FROM pms_user O
@@ -169,7 +170,7 @@
                     AND O.trash_flag = #{trashFlag}
                 </when>
                 <otherwise>
-                    AND (O.trash_flag != '1' OR  O.trash_flag IS NULL)
+                    AND (O.trash_flag != '1' OR O.trash_flag IS NULL)
                 </otherwise>
             </choose>
         </where>
@@ -183,12 +184,15 @@
         </choose>
     </select>
 
-    <select id="getnewPmsUserList" parameterType="com.yy.young.pms.model.PmsUser" resultType="com.yy.young.pms.model.PmsUser">
+    <select id="getnewPmsUserList" parameterType="com.yy.young.pms.model.PmsUser"
+            resultType="com.yy.young.pms.model.PmsUser">
         SELECT
         <include refid="searchnewCol"></include>
         FROM pms_user O
-        LEFT JOIN   tb_ums_user tuu ON  tuu.account = O.user_id
---         LEFT JOIN   pms_dictionary pd ON  pd.id = tuu.remark
+        LEFT JOIN tb_ums_user tuu ON tuu.account = O.user_id
+        LEFT JOIN pms_education pe ON pe.user_id = O.id
+        LEFT JOIN pms_work pw ON pw.user_id = O.id
+        LEFT JOIN pms_communication pc ON pc.id = O.id
         <include refid="joinSql"></include>
         <where>
             <if test="deptList != null">
@@ -247,13 +251,54 @@
             <if test="administrativeDuty != null and administrativeDuty != ''">
                 AND O.administrative_duty LIKE '%${administrativeDuty}%'
             </if>
+
+            <!--新添条件开始-->
+            <!--教育经历开始-->
+            <if test="startEducation != null and startEducation != ''">
+                AND pe.start_time &gt;= #{startEducation}
+            </if>
+            <if test="endEducation != null and endEducation != ''">
+                AND pe.stop_time &lt;= #{endEducation}
+            </if>
+            <if test="educationContent != null and educationContent != ''">
+                AND pe.content LIKE  '%${educationContent}%'
+            </if>
+            <!--教育经历结束-->
+
+            <!--工作经历开始-->
+            <if test="work_StartTime != null and work_StartTime != ''">
+                AND pw.start_time &gt;= #{work_StartTime}
+            </if>
+            <if test="workStopTime != null and workStopTime != ''">
+                AND pw.stop_time &lt;= #{workStopTime}
+            </if>
+            <if test="workContent != null and workContent != ''">
+                AND pw.content LIKE  '%${workContent}%'
+            </if>
+            <!--工作经历结束-->
+
+            <!--通讯开始-->
+            <if test="officePhone != null and officePhone != ''">
+                AND pc.office_phone = #{officePhone}
+            </if>
+            <if test="mobilePhone != null and mobilePhone != ''">
+                AND pc.mobile_phone = #{mobilePhone}
+            </if>
+            <if test="emailAddress != null and emailAddress != ''">
+                AND pc.email_address = #{emailAddress}
+            </if>
+            <!--通讯结束-->
+
+            <!--新添条件结束-->
+
+
             <choose>
                 <when test="trashFlag != null and trashFlag != ''">
                     AND O.trash_flag = #{trashFlag}
                 </when>
-            <!--   <otherwise>
-                    AND (O.trash_flag != '1' OR  O.trash_flag IS NULL)
-                </otherwise>-->
+                <!--   <otherwise>
+                        AND (O.trash_flag != '1' OR  O.trash_flag IS NULL)
+                    </otherwise>-->
             </choose>
         </where>
         <choose>
@@ -267,7 +312,8 @@
     </select>
 
     <!--管辖内的人员查询-->
-    <select id="getPmsUserListInDept" parameterType="com.yy.young.pms.model.PmsUser" resultType="com.yy.young.pms.model.PmsUser">
+    <select id="getPmsUserListInDept" parameterType="com.yy.young.pms.model.PmsUser"
+            resultType="com.yy.young.pms.model.PmsUser">
         SELECT
         <include refid="searchCol"></include>
         FROM pms_user O
@@ -329,7 +375,7 @@
                     AND O.trash_flag = #{trashFlag}
                 </when>
                 <otherwise>
-                    AND (O.trash_flag != '1' OR  O.trash_flag IS NULL)
+                    AND (O.trash_flag != '1' OR O.trash_flag IS NULL)
                 </otherwise>
             </choose>
         </where>
@@ -360,90 +406,90 @@
     </select>
     <!-- 插入 -->
     <insert id="insert" parameterType="com.yy.young.pms.model.PmsUser">
-        INSERT INTO pms_user(
-        id
-        ,user_id
-        ,user_name
-        ,old_name
-        ,sex
-        ,birth
-        ,nation
-        ,place_of_origin
-        ,place_of_birth
-        ,work_start_time
-        ,political_outlook
-        ,join_party_time
-        ,technical_position
-        ,get_time
-        ,appointment_time
-        ,technical_level
-        ,administrative_duty
-        ,tenure_time
-        ,administrative_level
-        ,research_field
-        ,specialty
-        ,highest_education
-        ,highest_degree
-        ,id_card
-        ,overseas_study_experience
-        ,english_level
-        ,photo_address
-        ,remark
-        ,first_education
-        ,job_education
-        ,person_type
-        ,num
-        ,trash_flag
-        ,first_degree
-        ,station
-        ,take_work
-        ,research_field_detail
-        ,job_degree
-        ,temp_work_experience
-        ,to_there_time
-        ,remark_modify_time
-        ) VALUES(
-        #{id}
-        ,#{userId}
-        ,#{userName}
-        ,#{oldName}
-        ,#{sex}
-        ,#{birth}
-        ,#{nation}
-        ,#{placeOfOrigin}
-        ,#{placeOfBirth}
-        ,#{workStartTime}
-        ,#{politicalOutlook}
-        ,#{joinPartyTime}
-        ,#{technicalPosition}
-        ,#{getTime}
-        ,#{appointmentTime}
-        ,#{technicalLevel}
-        ,#{administrativeDuty}
-        ,#{tenureTime}
-        ,#{administrativeLevel}
-        ,#{researchField}
-        ,#{specialty}
-        ,#{highestEducation}
-        ,#{highestDegree}
-        ,#{idCard}
-        ,#{overseasStudyExperience}
-        ,#{englishLevel}
-        ,#{photoAddress}
-        ,#{remark}
-        ,#{firstEducation}
-        ,#{jobEducation}
-        ,#{personType}
-        ,#{num}
-        ,#{trashFlag}
-        ,#{firstDegree}
-        ,#{station}
-        ,#{takeWork}
-        ,#{researchFieldDetail}
-        ,#{jobDegree}
-        ,#{tempWorkExperience}
-        ,#{toThereTime}
-        ,#{remarkModifyTime}
+        INSERT INTO pms_user (
+            id
+            , user_id
+            , user_name
+            , old_name
+            , sex
+            , birth
+            , nation
+            , place_of_origin
+            , place_of_birth
+            , work_start_time
+            , political_outlook
+            , join_party_time
+            , technical_position
+            , get_time
+            , appointment_time
+            , technical_level
+            , administrative_duty
+            , tenure_time
+            , administrative_level
+            , research_field
+            , specialty
+            , highest_education
+            , highest_degree
+            , id_card
+            , overseas_study_experience
+            , english_level
+            , photo_address
+            , remark
+            , first_education
+            , job_education
+            , person_type
+            , num
+            , trash_flag
+            , first_degree
+            , station
+            , take_work
+            , research_field_detail
+            , job_degree
+            , temp_work_experience
+            , to_there_time
+            , remark_modify_time
+        ) VALUES (
+            #{id}
+            , #{userId}
+            , #{userName}
+            , #{oldName}
+            , #{sex}
+            , #{birth}
+            , #{nation}
+            , #{placeOfOrigin}
+            , #{placeOfBirth}
+            , #{workStartTime}
+            , #{politicalOutlook}
+            , #{joinPartyTime}
+            , #{technicalPosition}
+            , #{getTime}
+            , #{appointmentTime}
+            , #{technicalLevel}
+            , #{administrativeDuty}
+            , #{tenureTime}
+            , #{administrativeLevel}
+            , #{researchField}
+            , #{specialty}
+            , #{highestEducation}
+            , #{highestDegree}
+            , #{idCard}
+            , #{overseasStudyExperience}
+            , #{englishLevel}
+            , #{photoAddress}
+            , #{remark}
+            , #{firstEducation}
+            , #{jobEducation}
+            , #{personType}
+            , #{num}
+            , #{trashFlag}
+            , #{firstDegree}
+            , #{station}
+            , #{takeWork}
+            , #{researchFieldDetail}
+            , #{jobDegree}
+            , #{tempWorkExperience}
+            , #{toThereTime}
+            , #{remarkModifyTime}
         )
     </insert>
     <!-- 修改 -->
@@ -578,27 +624,44 @@
     </update>
     <!-- 删除 -->
     <delete id="delete">
-        DELETE FROM pms_user WHERE ID = #{id}
+        DELETE FROM pms_user
+        WHERE ID = #{id}
     </delete>
     <!--删除人员相关的所有子信息-->
     <delete id="deleteAllInfoAboutUser">
-        DELETE FROM pms_education WHERE USER_ID = #{userId};
-        DELETE FROM pms_honor_title WHERE USER_ID = #{userId};
-        DELETE FROM pms_join_project WHERE USER_ID = #{userId};
-        DELETE FROM pms_leader_evaluation WHERE USER_ID = #{userId};
-        DELETE FROM pms_main_tech_group WHERE USER_ID = #{userId};
-        DELETE FROM pms_paper WHERE USER_ID = #{userId};
-        DELETE FROM pms_patent WHERE USER_ID = #{userId};
-        DELETE FROM pms_publish WHERE USER_ID = #{userId};
-        DELETE FROM pms_support_project WHERE USER_ID = #{userId};
-        DELETE FROM pms_tech_awards WHERE USER_ID = #{userId};
-        DELETE FROM pms_technology_brace WHERE USER_ID = #{userId};
-        DELETE FROM pms_work WHERE USER_ID = #{userId};
-        DELETE FROM pms_year_check WHERE USER_ID = #{userId};
-        DELETE FROM pms_relations WHERE USER_ID = #{userId}
+        DELETE FROM pms_education
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_honor_title
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_join_project
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_leader_evaluation
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_main_tech_group
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_paper
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_patent
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_publish
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_support_project
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_tech_awards
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_technology_brace
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_work
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_year_check
+        WHERE USER_ID = #{userId};
+        DELETE FROM pms_relations
+        WHERE USER_ID = #{userId}
     </delete>
     <!--作废用户-->
     <update id="trashUser">
-      UPDATE pms_user SET trash_flag = '1' WHERE ID=#{userId}
+        UPDATE pms_user
+        SET trash_flag = '1'
+        WHERE ID = #{userId}
     </update>
 </mapper>
