@@ -392,37 +392,37 @@
 
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">出生日期</label>
-        <input type="text" id="startBirth" name="startBirth" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="startBirth" name="startBirth" required lay-verify="required" placeholder="2018-08-01" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">--
-        <input type="text" id="endBirth" name="endBirth" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="endBirth" name="endBirth" required lay-verify="required" placeholder="2018-10-01" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">参加工作时间</label>
-        <input type="text"  id="startWorkTime" name="startWorkTime" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text"  id="startWorkTime" name="startWorkTime" required lay-verify="required" placeholder="2018-08" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">--
-        <input type="text" id="endWorkTime" name="endWorkTime" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="endWorkTime" name="endWorkTime" required lay-verify="required" placeholder="2018-10" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">来院时间</label>
-        <input type="text" id="startTenureTime" name="startTenureTime" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="startTenureTime" name="startTenureTime" required lay-verify="required" placeholder="2018-08" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">--
-        <input type="text" id="endTenureTime" name="endTenureTime" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="endTenureTime" name="endTenureTime" required lay-verify="required" placeholder="2018-10" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">技术职务取得时间</label>
-        <input type="text" id="startTechnicalGetTime" name="startTechnicalGetTime" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="startTechnicalGetTime" name="startTechnicalGetTime" required lay-verify="required" placeholder="2018-08" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">--
-        <input type="text" id="endTechnicalGetTime" name="endTechnicalGetTime" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="endTechnicalGetTime" name="endTechnicalGetTime" required lay-verify="required" placeholder="2018-10" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">技术等级聘任时间</label>
-        <input type="text" id="startAppointmentTime" name="startAppointmentTime" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="startAppointmentTime" name="startAppointmentTime" required lay-verify="required" placeholder="2018-08" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">--
-        <input type="text" id="endAppointmentTime" name="endAppointmentTime" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
+        <input type="text" id="endAppointmentTime" name="endAppointmentTime" required lay-verify="required" placeholder="2018-10" autocomplete="off" class="layui-input"
                style="width: 100px;display: inline-block;">
     </div>
 

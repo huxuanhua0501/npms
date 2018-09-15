@@ -107,8 +107,8 @@
         </div> -->
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">时间段</label>
-            <input type="text"  id="startYears"  name="startYears" required lay-verify="required"  placeholder="格式：2018-08" ErrBirthBad4 autocomplete="off" class="layui-input" id="startY" style="width: 100px;display: inline-block;">--
-            <input type="text" id="endYears" name="endYears" required lay-verify="required" placeholder="格式：2018-08" ErrBirthBad4 autocomplete="off" class="layui-input" id="endY" style="width: 100px;display: inline-block;">
+            <input type="text"  id="startYears"  name="startYears" required lay-verify="required"  placeholder="2018-08" ErrBirthBad4 autocomplete="off" class="layui-input" id="startY" style="width: 100px;display: inline-block;">--
+            <input type="text" id="endYears" name="endYears" required lay-verify="required" placeholder="2018-10" ErrBirthBad4 autocomplete="off" class="layui-input" id="endY" style="width: 100px;display: inline-block;">
         </div>
 
         <!-- <button class="layui-btn layui-btn-primary reset">重置</button>

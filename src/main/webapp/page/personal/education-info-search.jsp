@@ -62,14 +62,14 @@
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">起始时间</label>
         <div class="layui-input-inline">
-            <input type="text" id="startEducation" name="startEducation" required lay-verify="required" placeholder="" autocomplete="off"
+            <input type="text" id="startEducation" name="startEducation" required lay-verify="required" placeholder="2018-08" autocomplete="off"
                    class="layui-input"  >
         </div>
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">终止时间</label>
         <div class="layui-input-inline">
-            <input type="text" name="endEducation" required lay-verify="required" placeholder="" autocomplete="off"
+            <input type="text" name="endEducation" required lay-verify="required" placeholder="2018-10" autocomplete="off"
                    class="layui-input" id="endEducation">
         </div>
     </div>

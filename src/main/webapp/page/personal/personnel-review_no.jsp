@@ -89,9 +89,7 @@
         joView.handleItem = function (oItem, iIndex) {
 
             oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
-            oItem._cvm += "/";
-            oItem._cvm += oItem.dicName;
-            // oItem._cvm = (oItem.state == 0 ? '<span style="color:green ;cursor:pointer;"  onclick="changeState(\''+oItem.state+'\',\''+oItem.id+'\')">启用</span>' : '<span style="color:red ;cursor:pointer;" onclick="changeState(\''+oItem.state+'\',\''+oItem.id+'\')">禁用</span>');
+            oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
             oItem._opt = (oItem.state == 0 ? '<span style="color:green ;cursor:pointer;"  onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span style="color:red ;cursor:pointer;" onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
             oItem._opt += '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
             oItem._opt += '<span style="color: #62abff;  cursor:pointer;" onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;审核</span>';
@@ -229,6 +227,12 @@
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry"
                                 onclick="xxselect()">查询
                         </button>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-inline button-inline">
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry"
+                                onclick="window.location.reload()">刷新</button>
+
                     </div>
                 </div>
             </div>
@@ -265,10 +269,10 @@
                     </div>
                     <div class="layui-form-item" style="line-height: 200%">
                         <label class="layui-form-label">时间段</label>
-                        <input type="text" name="start_time" required lay-verify="required" placeholder=""
+                        <input type="text" name="start_time" required lay-verify="required" placeholder="2018-08"
                                autocomplete="off"
                                class="layui-input list-input" id="startY" style="width: 100px;display: inline-block;">至
-                        <input type="text" name="end_time" required lay-verify="required" placeholder=""
+                        <input type="text" name="end_time" required lay-verify="required"placeholder="2018-10"
                                autocomplete="off"
                                class="layui-input list-input" id="endY" style="width: 100px;display: inline-block;">
                     </div>
@@ -292,7 +296,7 @@
                 </div>
                 <div class="layui-form-item inquiry-item">
                     <div class="layui-input-inline button-inline">
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry">查询</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry"    onclick="xxselect()">查询</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export"
                                 style="color: rgb(255, 102, 0);border-color: rgb(255, 102, 0);height: 28px;line-height: 28px;">
                             导出Excel
@@ -302,78 +306,78 @@
             </div>
             <%-- 教育--%>
             <div>
-                <input id="startEducation" name="startEducation" type="text"/>
-                <input id="endEducation" name="endEducation" type="text"/>
-                <input id="educationContent" name="educationContent" type="text"/>
+                <input id="startEducation" name="startEducation" type="hidden"/>
+                <input id="endEducation" name="endEducation" type="hidden"/>
+                <input id="educationContent" name="educationContent" type="hidden"/>
             </div>
             <%-- 著作--%>
             <div>
-                <input id="bookName" name="bookName" type="text"/>
-                <input id="press" name="press" type="text"/>
-                <input id="workType" name="workType" type="text"/>
-                <input id="startYears" name="startYears" type="text"/>
-                <input id="endYears" name="endYears" type="text"/>
+                <input id="bookName" name="bookName" type="hidden"/>
+                <input id="press" name="press" type="hidden"/>
+                <input id="workType" name="workType" type="hidden"/>
+                <input id="startYears" name="startYears" type="hidden"/>
+                <input id="endYears" name="endYears" type="hidden"/>
             </div>
             <%-- 获奖--%>
             <div>
-                <input id="awardWinProjectName" name="awardWinProjectName" type="text"/>
-                <input id="awardType" name="awardType" type="text"/>
-                <input id="awardWinProjectLevel" name="awardWinProjectLevel" type="text"/>
-                <input id="awardLevel" name="awardLevel" type="text"/>
-                <input id="awardsStartYears" name="awardsStartYears" type="text"/>
-                <input id="awardsEndYears" name="awardsEndYears" type="text"/>
+                <input id="awardWinProjectName" name="awardWinProjectName" type="hidden"/>
+                <input id="awardType" name="awardType" type="hidden"/>
+                <input id="awardWinProjectLevel" name="awardWinProjectLevel" type="hidden"/>
+                <input id="awardLevel" name="awardLevel" type="hidden"/>
+                <input id="awardsStartYears" name="awardsStartYears" type="hidden"/>
+                <input id="awardsEndYears" name="awardsEndYears" type="hidden"/>
             </div>
             <%-- 论文--%>
             <div>
-                <input id="periodicalTitle" name="periodicalTitle" type="text"/>
-                <input id="periodicalName" name="periodicalName" type="text"/>
-                <input id="periodicalType" name="periodicalType" type="text"/>
-                <input id="periodicalStartYears" name="periodicalStartYears" type="text"/>
-                <input id="periodicalEndYears" name="periodicalEndYears" type="text"/>
+                <input id="periodicalTitle" name="periodicalTitle" type="hidden"/>
+                <input id="periodicalName" name="periodicalName" type="hidden"/>
+                <input id="periodicalType" name="periodicalType" type="hidden"/>
+                <input id="periodicalStartYears" name="periodicalStartYears" type="hidden"/>
+                <input id="periodicalEndYears" name="periodicalEndYears" type="hidden"/>
             </div>
             <%-- 工作--%>
             <div>
-                <input id="workContent" name="workContent" type="text"/>
-                <input id="work_StartTime" name="work_StartTime" type="text"/>
-                <input id="workStopTime" name="workStopTime" type="text"/>
+                <input id="workContent" name="workContent" type="hidden"/>
+                <input id="work_StartTime" name="work_StartTime" type="hidden"/>
+                <input id="workStopTime" name="workStopTime" type="hidden"/>
             </div>
             <%-- 通讯--%>
             <div>
-                <input id="officePhone" name="officePhone" type="text"/>
-                <input id="mobilePhone" name="mobilePhone" type="text"/>
-                <input id="emailAddress" name="emailAddress" type="text"/>
+                <input id="officePhone" name="officePhone" type="hidden"/>
+                <input id="mobilePhone" name="mobilePhone" type="hidden"/>
+                <input id="emailAddress" name="emailAddress" type="hidden"/>
             </div>
             <%-- 基本信息--%>
             <div>
-                <input id="sex" name="sex" type="text"/>
-                <input id="nation" name="nation" type="text"/>
-                <input id="politicalOutlook" name="politicalOutlook" type="text"/>
-                <input id="technicalPosition" name="technicalPosition" type="text"/>
-                <input id="technicalLevel" name="technicalLevel" type="text"/>
-                <input id="administrativeLevel" name="administrativeLevel" type="text"/>
-                <input id="researchField" name="researchField" type="text"/>
-                <input id="highestEducation" name="highestEducation" type="text"/>
-                <input id="highestDegree" name="highestDegree" type="text"/>
-                <input id="jobEducation" name="jobEducation" type="text"/>
-                <input id="jobDegree" name="jobDegree" type="text"/>
-                <input id="tempWorkExperience" name="tempWorkExperience" type="text"/>
-                <input id="overseasStudyExperience" name="overseasStudyExperience" type="text"/>
-                <input id="idCard" name="idCard" type="text"/>
-                <input id="station" name="station" type="text"/>
-                <input id="administrativeDuty" name="administrativeDuty" type="text"/>
-                <input id="maritalStatus" name="maritalStatus" type="text"/>
-                <input id="startBirth" name="startBirth" type="text"/>
-                <input id="endBirth" name="endBirth" type="text"/>
-                <input id="startWorkTime" name="startWorkTime" type="text"/>
-                <input id="endWorkTime" name="endWorkTime" type="text"/>
-                <input id="startTenureTime" name="startTenureTime" type="text"/>
-                <input id="endTenureTime" name="endTenureTime" type="text"/>
-                <input id="startTechnicalGetTime" name="startTechnicalGetTime" type="text"/>
-                <input id="endTechnicalGetTime" name="endTechnicalGetTime" type="text"/>
-                <input id="startAppointmentTime" name="startAppointmentTime" type="text"/>
-                <input id="endAppointmentTime" name="endAppointmentTime" type="text"/>
-                <input id="trashFlag" name="trashFlag" type="text"/>
-                <input id="remark" name="remark" type="text"/>
+                <input id="sex" name="sex" type="hidden"/>
+                <input id="nation" name="nation" type="hidden"/>
+                <input id="politicalOutlook" name="politicalOutlook" type="hidden"/>
+                <input id="technicalPosition" name="technicalPosition" type="hidden"/>
+                <input id="technicalLevel" name="technicalLevel" type="hidden"/>
+                <input id="administrativeLevel" name="administrativeLevel" type="hidden"/>
+                <input id="researchField" name="researchField" type="hidden"/>
+                <input id="highestEducation" name="highestEducation" type="hidden"/>
+                <input id="highestDegree" name="highestDegree" type="hidden"/>
+                <input id="jobEducation" name="jobEducation" type="hidden"/>
+                <input id="jobDegree" name="jobDegree" type="hidden"/>
+                <input id="tempWorkExperience" name="tempWorkExperience" type="hidden"/>
+                <input id="overseasStudyExperience" name="overseasStudyExperience" type="hidden"/>
+                <input id="idCard" name="idCard" type="hidden"/>
+                <input id="station" name="station" type="hidden"/>
+                <input id="administrativeDuty" name="administrativeDuty" type="hidden"/>
+                <input id="maritalStatus" name="maritalStatus" type="hidden"/>
+                <input id="startBirth" name="startBirth" type="hidden"/>
+                <input id="endBirth" name="endBirth" type="hidden"/>
+                <input id="startWorkTime" name="startWorkTime" type="hidden"/>
+                <input id="endWorkTime" name="endWorkTime" type="hidden"/>
+                <input id="startTenureTime" name="startTenureTime" type="hidden"/>
+                <input id="endTenureTime" name="endTenureTime" type="hidden"/>
+                <input id="startTechnicalGetTime" name="startTechnicalGetTime" type="hidden"/>
+                <input id="endTechnicalGetTime" name="endTechnicalGetTime" type="hidden"/>
+                <input id="startAppointmentTime" name="startAppointmentTime" type="hidden"/>
+                <input id="endAppointmentTime" name="endAppointmentTime" type="hidden"/>
+                <input id="trashFlag" name="trashFlag" type="hidden"/>
+                <input id="remark" name="remark" type="hidden"/>
             </div>
             <div class="form-content">
                 <label class="layui-form-label" style="width: 100px;">当前筛选条件</label>
@@ -570,6 +574,7 @@
         $("#remark").val(remark);
         joView.select();
     }
+
 </script>
 </body>
 

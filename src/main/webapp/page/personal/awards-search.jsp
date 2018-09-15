@@ -107,8 +107,8 @@
 
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">时间段</label>
-            <input type="text" id="awardsStartYears" name="awardsStartYears" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"  style="width: 100px;display: inline-block;">--
-            <input type="text" id="awardsEndYears" name="awardsEndYears" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input"  style="width: 100px;display: inline-block;">
+            <input type="text" id="awardsStartYears" name="awardsStartYears" required lay-verify="required" placeholder="2018-08" autocomplete="off" class="layui-input"  style="width: 100px;display: inline-block;">--
+            <input type="text" id="awardsEndYears" name="awardsEndYears" required lay-verify="required" placeholder="2018-10" autocomplete="off" class="layui-input"  style="width: 100px;display: inline-block;">
         </div>
 
 
