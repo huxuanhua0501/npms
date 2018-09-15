@@ -102,6 +102,33 @@
                 parent.$('#startEducation').val(startEducation);
                 parent.$('#endEducation').val(endEducation);
                 parent.$('#educationContent').val(educationContent);
+                var kaishi;
+                var jieshu;
+                var neirong;
+
+                if (startEducation !== '') {
+                      kaishi = "&nbsp;&nbsp;&nbsp;"+"起始时间"+"&nbsp;"+startEducation;
+
+                }else{
+                    kaishi=" ";
+                }
+                if (endEducation!=='') {
+                      jieshu = "&nbsp;&nbsp;&nbsp;"+"终止时间 "+"&nbsp;"+endEducation;
+
+                }else{
+                    jieshu=" ";
+                }
+                if (educationContent!=='') {
+                    neirong =  "&nbsp;&nbsp;&nbsp;"+"内容 "+"&nbsp;"+educationContent;
+
+                }else{
+                    neirong=" ";
+                }
+                if (kaishi!==" "||kaishi!==" "||kaishi!==" ") {
+                    parent.$('#jiaoyujingli').html("教育经历"+"&nbsp;"+kaishi+jieshu+neirong);
+
+                }
+
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                 parent.layer.close(index); //再执行关闭
 

@@ -381,17 +381,7 @@
             </div>
             <div class="form-content">
                 <label class="layui-form-label" style="width: 100px;">当前筛选条件</label>
-                <div class="now-item">
-                    <label class="layui-form-label">基本信息</label>
-                    <div class="info">张小虎</div>
-                </div>
-                <div class="now-item">
-                    <label class="layui-form-label">性别</label>
-                    <div class="info">男</div>
-                </div>
-                <div class="now-item">
-                    <label class="layui-form-label">通讯信息</label>
-                    <div class="info num">13120910203</div>
+                <div class="now-item" id="jiaoyujingli" >
                 </div>
             </div>
 
