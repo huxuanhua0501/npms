@@ -344,7 +344,7 @@
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">是否有挂职经历</label>
         <div class="layui-input-inline">
-            <select name="tempWorkExperience" lay-verify="">
+            <select name="tempWorkExperience" lay-verify="" id="tempWorkExperience">
                 <option value=""></option>
                 <option value="是">是</option>
                 <option value="否">否</option>
@@ -354,7 +354,7 @@
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">国外一年以上留学经历</label>
         <div class="layui-input-inline">
-            <select name="overseasStudyExperience" lay-verify="">
+            <select name="overseasStudyExperience" lay-verify="" id="overseasStudyExperience">
                 <option value=""></option>
                 <option value="有">是</option>
                 <option value="无">否</option>
@@ -443,21 +443,16 @@
 
             $(".save").click(function () {
 
+                var sex = $("#sex option:selected").val();
 
-                sex_obj = document.getElementsByName("sex");
-                var sex=new Array();
-                for(a in sex_obj){
-                    if(sex_obj[a].checked)
-                        sex.push(sex_obj[a].value);
-                }
+                var overseasStudyExperience = $("#overseasStudyExperience option:selected").val();
+
                 nation_obj = document.getElementsByName("nation");
                 var nation=new Array();
                 for(b in nation_obj){
                     if(nation_obj[b].checked)
                         nation.push(nation_obj[b].value);
                 }
-
-
 
                 politicalOutlook_obj = document.getElementsByName("politicalOutlook");
                 var politicalOutlook=new Array();
@@ -524,32 +519,11 @@
                         jobDegree.push(jobDegree_obj[b].value);
                 }
 
-                tempWorkExperience_obj = document.getElementsByName("tempWorkExperience");
-                var tempWorkExperience=new Array();
-                for(b in tempWorkExperience_obj){
-                    if(tempWorkExperience_obj[b].checked)
-                        tempWorkExperience.push(tempWorkExperience_obj[b].value);
-                }
-                overseasStudyExperience_obj = document.getElementsByName("overseasStudyExperience");
-                var overseasStudyExperience=new Array();
-                for(b in overseasStudyExperience_obj){
-                    if(overseasStudyExperience_obj[b].checked)
-                        overseasStudyExperience.push(overseasStudyExperience_obj[b].value);
-                }
 
-                var sex = $('#sex').val();
-                var nation = $('#nation').val();
-                var politicalOutlook = $('#politicalOutlook').val();
-                var technicalPosition = $('#technicalPosition').val();
-                var technicalLevel = $('#technicalLevel').val();
-                var administrativeLevel = $('#administrativeLevel').val();
-                var researchField = $('#researchField').val();
-                var highestEducation = $('#highestEducation').val();
-                var highestDegree = $('#highestDegree').val();
-                var jobEducation = $('#jobEducation').val();
-                var jobDegree = $('#jobDegree').val();
-                var tempWorkExperience = $('#tempWorkExperience').val();
-                var overseasStudyExperience = $('#overseasStudyExperience').val();
+                var tempWorkExperience = $("#tempWorkExperience option:selected").val();
+
+
+
                 var idCard = $('#idCard').val();
                 var station = $('#station').val();
                 var administrativeDuty = $('#administrativeDuty').val();

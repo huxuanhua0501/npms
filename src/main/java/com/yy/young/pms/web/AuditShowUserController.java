@@ -286,7 +286,21 @@ public class AuditShowUserController {
         }
 
 
+        if (obj.getTrashFlag() != ""&&obj.getTrashFlag()!=null) {
+            if (obj.getTrashFlag().contains("3")) {
+                obj.setTrashFlag("");
+            } else if (obj.getTrashFlag().contains("0") && obj.getTrashFlag().contains("1")) {
+                obj.setTrashFlag("");
+            } else if (obj.getTrashFlag().contains("0") && !obj.getTrashFlag().contains("1")) {
+                obj.setTrashFlag("2");
+            } else {
+                obj.setTrashFlag("1");
 
+            }
+        }
+        if (obj.getRemark() != ""&&obj.getRemark()!=null) {
+            obj.setRemarkList(this.getList(obj.getRemark()));
+        }
         List<PmsUser> ofPmsUserList = pmsUserService2.getList(obj);
         AuditShowUser auditShowUser = new AuditShowUser();
         auditShowUser.setPersonalShow(1);

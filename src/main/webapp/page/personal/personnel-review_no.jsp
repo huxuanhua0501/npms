@@ -72,9 +72,9 @@
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var list = "", listline = "";
-                    listline += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                    listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
                     for (var i = 0; i < obj.data.length; i++) {
-                        listline += '<input type=\"checkbox\" name=\"remark\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                        listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
                     }
                     $("#checkbox_0").append(listline);
                 }
@@ -130,6 +130,7 @@
                 console.log("打印表格属性：" + $("#mainList").attr("formUrl"));
             }
         }
+
     </script>
     <style>
         /*分页条start*/
@@ -226,7 +227,7 @@
                 <div class="layui-form-item">
                     <div class="layui-input-inline button-inline">
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry"
-                                onclick="joView.select()">查询
+                                onclick="xxselect()">查询
                         </button>
                     </div>
                 </div>
@@ -255,10 +256,10 @@
                         <label class="layui-col-md2 layui-col-xs2"
                                style="float:left;padding:5px 15px;width: 130px;text-align: right;">当前状态</label>
                         <div class="layui-col-md10 layui-col-xs10" style="padding: 10px 15px;">
-                            <input type="checkbox" name="state" class="col-item" lay-skin="primary" value="" title="所有">
-                            <input type="checkbox" name="state" class="col-item" lay-skin="primary" value="1"
-                                   title="启用">
-                            <input type="checkbox" name="state" class="col-item" lay-skin="primary" value="0"
+                            <input type="checkbox" name="trashFlagxxx"  class="col-item " lay-skin="primary" value="3" title="所有">
+                            <input type="checkbox" name="trashFlagxxx" class="col-item" lay-skin="primary" value="0"
+                                   title="启用" >
+                            <input type="checkbox" name="trashFlagxxx" class="col-item" lay-skin="primary" value="1"
                                    title="禁用">
                         </div>
                     </div>
@@ -371,6 +372,8 @@
                 <input id="endTechnicalGetTime" name="endTechnicalGetTime" type="text"/>
                 <input id="startAppointmentTime" name="startAppointmentTime" type="text"/>
                 <input id="endAppointmentTime" name="endAppointmentTime" type="text"/>
+                <input id="trashFlag" name="trashFlag" type="text"/>
+                <input id="remark" name="remark" type="text"/>
             </div>
             <div class="form-content">
                 <label class="layui-form-label" style="width: 100px;">当前筛选条件</label>
@@ -531,6 +534,7 @@
             $(".close").click(function () {
                 history.back(-1);
             })
+
         });
     })
 </script>
@@ -547,6 +551,24 @@
                 jo.showMsg(jo.getDefVal(json.info, "切换失败"));
             }
         });
+    }
+    function xxselect(){
+
+        trashFlagArray = document.getElementsByName("trashFlagxxx");
+        var  trashFlag=new Array();
+        for(b in trashFlagArray){
+            if(trashFlagArray[b].checked)
+                trashFlag.push(trashFlagArray[b].value);
+        }
+       $("#trashFlag").val(trashFlag);
+        remarkArray = document.getElementsByName("remarkxxx");
+        var  remark=new Array();
+        for(b in remarkArray){
+            if(remarkArray[b].checked)
+                remark.push(remarkArray[b].value);
+        }
+        $("#remark").val(remark);
+        joView.select();
     }
 </script>
 </body>

@@ -353,6 +353,12 @@
             <if test="endTenureTime != null and endTenureTime != ''">
                 AND O.tenure_time  &lt;=#{endTenureTime}
             </if>
+            <if test="start_time != null and start_time != ''">
+                AND O.tenure_time  &gt;=#{start_time}
+            </if>
+            <if test="end_time != null and end_time != ''">
+                AND O.tenure_time  &lt;=#{end_time}
+            </if>
             <if test="startTechnicalGetTime != null and startTechnicalGetTime != ''">
                 AND O.get_time  &gt;=#{startTechnicalGetTime}
             </if>
@@ -372,14 +378,32 @@
                     #{item}
                 </foreach>
             </if>
-            <choose>
+            <if test="remarkList != null and remarkList != ''">
+                and O.remark in
+                <foreach collection="remarkList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="trashFlag ==2">
+                (O.trash_flag is null or o.trash_flag='0' or O.trash_flag='')
+            </if>
+            <if test="trashFlag ==1">
+                AND O.trash_flag = '1'
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND O.id_card =#{idCard}
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND O.id_card =#{idCard}
+            </if>
+          <!--  <choose>
                 <when test="trashFlag != null and trashFlag != ''">
                     AND O.trash_flag = #{trashFlag}
                 </when>
-                <!--   <otherwise>
+                &lt;!&ndash;   <otherwise>
                         AND (O.trash_flag != '1' OR  O.trash_flag IS NULL)
-                    </otherwise>-->
-            </choose>
+                    </otherwise>&ndash;&gt;
+            </choose>-->
         </where>
         <choose>
             <when test="orderBy != null and orderBy != ''">

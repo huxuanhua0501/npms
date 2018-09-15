@@ -195,6 +195,8 @@ public class PmsUser {
     private String endTechnicalGetTime;//技术职务取得结束时间
     private String startAppointmentTime;//技术等级聘任开始时间
     private String endAppointmentTime;//技术等级聘任结束时间
+    private String start_time;//开始时间段
+    private String end_time;//结束时间段
 
 
 
@@ -214,13 +216,45 @@ public class PmsUser {
     private  List<String>highestDegreeList;//全日制学位
     private  List<String>jobEducationList;//在职学历
     private  List<String>jobDegreeList;//在职学位
+    private  List<String>remarkList;//工作性质及状态
+    private  List<String>trashFlagList;//当前状态
 
 
 
     /*拼装返回id*/
     private List<String> list;
 
+    public String getEnd_time() {
+        return end_time;
+    }
 
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
+    }
+
+    public List<String> getRemarkList() {
+        return remarkList;
+    }
+
+    public void setRemarkList(List<String> remarkList) {
+        this.remarkList = remarkList;
+    }
+
+    public List<String> getTrashFlagList() {
+        return trashFlagList;
+    }
+
+    public void setTrashFlagList(List<String> trashFlagList) {
+        this.trashFlagList = trashFlagList;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
 
     public String getRemarkModifyTime() {
         return remarkModifyTime;
