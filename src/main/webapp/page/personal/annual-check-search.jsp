@@ -68,37 +68,37 @@
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">年　　份</label>
             <div class="layui-input-inline lang">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="year">
+                <input type="text" name="checkYears" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="checkYears">
             </div>
         </div>
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">年度考核等级</label>
             <div class="layui-input-inline lang">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="checkScore" name="checkScore" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">第一季度等级</label>
             <div class="layui-input-inline lang">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="quarterOne" name="quarterOne" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">第二季度等级</label>
             <div class="layui-input-inline lang">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="quarterTwo" name="quarterTwo" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">第三季度等级</label>
             <div class="layui-input-inline lang">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text"  id="quarterThree" name="quarterThree" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="edit-item layui-col-md12 layui-col-xs12">
             <label class="layui-form-label">第四季度等级</label>
             <div class="layui-input-inline lang">
-                <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                <input type="text" id="quarterFour" name="quarterFour" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -115,18 +115,84 @@
             layui.use(['form', 'laydate'], function() {
                 var form = layui.form;
                 var laydate = layui.laydate;
-                // laydate.render({
-                //     elem: '#year',
-                //     type: 'year'
-                // })
-                $(".save").click(function() {
-                    parent.document.getElementsByClassName("publishing")[0].className += " active";
-                    //当你在iframe页面关闭自身时
+                $(".save").click(function () {
+
+
+
+
+
+                    var checkYears = $('#checkYears').val();
+                    var checkScore = $('#checkScore').val();
+                    var quarterOne = $('#quarterOne').val();
+                    var quarterTwo = $('#quarterTwo').val();
+                    var quarterThree = $('#quarterThree').val();
+                    var quarterFour = $('#quarterFour').val();
+
+
+                    parent.$('#checkYears').val(checkYears);
+                    parent.$('#checkScore').val(checkScore);
+                    parent.$('#quarterOne').val(quarterOne);
+                    parent.$('#quarterTwo').val(quarterTwo);
+                    parent.$('#quarterThree').val(quarterThree);
+                    parent.$('#quarterFour').val(quarterFour);
+                    var yi;
+                    var er;
+                    var san;
+                    var si;
+                    var wu;
+                    var liu;
+
+                    if (checkYears !== '') {
+                        yi = "&nbsp;&nbsp;&nbsp;"+"年　　份"+"&nbsp;"+checkYears;
+
+                    }else{
+                        yi=" ";
+                    }
+                    if (checkScore!=='') {
+                        er = "&nbsp;&nbsp;&nbsp;"+"年度考核等级 "+"&nbsp;"+checkScore;
+
+                    }else{
+                        er=" ";
+                    }
+                    if (quarterOne!=='') {
+                        san =  "&nbsp;&nbsp;&nbsp;"+"第一季度等级 "+"&nbsp;"+quarterOne;
+
+                    }else{
+                        san=" ";
+                    }
+                    if (quarterTwo!=='') {
+                        si =  "&nbsp;&nbsp;&nbsp;"+"第二季度等级 "+"&nbsp;"+quarterTwo;
+
+                    }else{
+                        si=" ";
+                    }
+                    if (quarterThree!=='') {
+                        wu =  "&nbsp;&nbsp;&nbsp;"+"第三季度等级  "+"&nbsp;"+quarterThree;
+
+                    }else{
+                        wu=" ";
+                    }
+                    if (quarterFour!=='') {
+                        liu =  "&nbsp;&nbsp;&nbsp;"+"第四季度等级  "+"&nbsp;"+quarterFour;
+
+                    }else{
+                        liu=" ";
+                    }
+                    if (yi!==" "||er!==" "||san!==" "||si!==" "||wu!=" "||liu!=" ") {
+                        parent.$('#niandukaohe').html("年度考核"+"&nbsp;"+yi+er+san+si+wu+liu);
+
+                    }
+
+
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index); //再执行关闭 
+                    parent.layer.close(index); //再执行关闭
+
 
                 })
+
             });
+
+
         })
     </script>
 </body>

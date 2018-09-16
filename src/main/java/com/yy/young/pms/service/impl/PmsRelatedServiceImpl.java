@@ -49,4 +49,9 @@ public class PmsRelatedServiceImpl implements IPmsRelatedService{
     public List selectAward(PmsUser obj) throws Exception {
         return dataAccessService.getList(PmsConstants.MAPPER.PMS_Related+".selectAward",obj);
     }
+
+    @Override
+    public List selectAssessment(PmsUser obj) throws Exception {
+        return dataAccessService.getList(PmsConstants.MAPPER.PMS_Related+".selectAssessment",obj);
+    }
 }

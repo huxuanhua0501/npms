@@ -138,4 +138,30 @@
             <!--获奖结束-->
         </where>
     </select>
+    <select id="selectAssessment" parameterType="com.yy.young.pms.model.PmsUser" resultType="java.lang.String">
+        select user_id from pms_year_check pp
+        <where>
+            <!--考核开始-->
+            <if test="checkYears != null and checkYears != ''">
+                AND pp.years LIKE  '%${checkYears}%'
+            </if>
+            <if test="checkScore != null and checkScore != ''">
+                AND pp.check_score LIKE  '%${checkScore}%'
+            </if>
+            <if test="quarterOne != null and quarterOne != ''">
+                AND pp.quarter_one LIKE  '%${quarterOne}%'
+            </if>
+            <if test="quarterTwo != null and quarterTwo != ''">
+                AND pp.quarter_two LIKE  '%${quarterTwo}%'
+            </if>
+            <if test="quarterThree != null and quarterThree != ''">
+                AND pp.quarter_three LIKE  '%${quarterThree}%'
+            </if>
+            <if test="quarterFour != null and quarterFour != ''">
+                AND pp.quarter_four LIKE  '%${quarterFour}%'
+            </if>
+
+            <!--考核结束-->
+        </where>
+    </select>
 </mapper>

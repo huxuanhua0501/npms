@@ -155,6 +155,14 @@ public class PmsUser {
 
     //联系人，就是userName
     /*通讯结束*/
+    /*考核开始*/
+    private  String checkYears;//年份
+    private  String checkScore;//年度考核等级
+    private  String quarterOne;//第一季度
+    private  String quarterTwo;//二季度
+    private  String quarterThree;//三季度
+    private  String quarterFour;//四季度
+    /*考核结束*/
     /*基本信息开始*/
     @ExcelColumn(value = "性别", order = 5)
     private String sex;//性别
@@ -223,6 +231,54 @@ public class PmsUser {
 
     /*拼装返回id*/
     private List<String> list;
+
+    public String getCheckYears() {
+        return checkYears;
+    }
+
+    public void setCheckYears(String checkYears) {
+        this.checkYears = checkYears;
+    }
+
+    public String getCheckScore() {
+        return checkScore;
+    }
+
+    public void setCheckScore(String checkScore) {
+        this.checkScore = checkScore;
+    }
+
+    public String getQuarterOne() {
+        return quarterOne;
+    }
+
+    public void setQuarterOne(String quarterOne) {
+        this.quarterOne = quarterOne;
+    }
+
+    public String getQuarterTwo() {
+        return quarterTwo;
+    }
+
+    public void setQuarterTwo(String quarterTwo) {
+        this.quarterTwo = quarterTwo;
+    }
+
+    public String getQuarterThree() {
+        return quarterThree;
+    }
+
+    public void setQuarterThree(String quarterThree) {
+        this.quarterThree = quarterThree;
+    }
+
+    public String getQuarterFour() {
+        return quarterFour;
+    }
+
+    public void setQuarterFour(String quarterFour) {
+        this.quarterFour = quarterFour;
+    }
 
     public String getEnd_time() {
         return end_time;

@@ -569,8 +569,172 @@
                 parent.$('#endTechnicalGetTime').val(endTechnicalGetTime);
                 parent.$('#startAppointmentTime').val(startAppointmentTime);
                 parent.$('#endAppointmentTime').val(endAppointmentTime);
+                var yi;
+                var er;
+                var san;
+                var si;
+                var wu;
+                var qi;
+                var ba;
+                var jiu;
+                var shi;
+                var shiyi;
+                var shier;
+                var shisan;
+                var shisi;
+                var shiwu;
+                var shiliu;
+                var shiqi;
+                var shiba;
+                var shijiu;
+                var ershi;
+                var ershiyi;
+                var ershier;
+
+                if (sex !== '') {
+                    yi = "&nbsp;&nbsp;&nbsp;"+"性别"+"&nbsp;"+sex;
+
+                }else{
+                    yi=" ";
+                }
+                if (nation!=='') {
+                    er = "&nbsp;&nbsp;&nbsp;"+"民族 "+"&nbsp;"+nation;
+
+                }else{
+                    er=" ";
+                }
+                if (politicalOutlook!=='') {
+                    san =  "&nbsp;&nbsp;&nbsp;"+"政治面貌 "+"&nbsp;"+politicalOutlook;
+
+                }else{
+                    san=" ";
+                }
+                if (technicalPosition!=='') {
+                    si =  "&nbsp;&nbsp;&nbsp;"+"专业技术职务 "+"&nbsp;"+technicalPosition;
+
+                }else{
+                    si=" ";
+                }
+                if (technicalLevel!=='') {
+                    wu =  "&nbsp;&nbsp;&nbsp;"+"专业技术等级  "+"&nbsp;"+technicalLevel;
+
+                }else{
+                    wu=" ";
+                }
+                if (administrativeLevel!=='') {
+                    liu =  "&nbsp;&nbsp;&nbsp;"+"行政级别  "+"&nbsp;"+administrativeLevel;
+
+                }else{
+                    liu=" ";
+                }
+                if (researchField!=='') {
+                    qi =  "&nbsp;&nbsp;&nbsp;"+"研究领域  "+"&nbsp;"+researchField;
+
+                }else{
+                    qi=" ";
+                }
+                if (highestEducation!=='') {
+                    ba =  "&nbsp;&nbsp;&nbsp;"+"全日制学历  "+"&nbsp;"+highestEducation;
+
+                }else{
+                    ba=" ";
+                }
+                if (highestDegree!=='') {
+                    jiu =  "&nbsp;&nbsp;&nbsp;"+"全日制学位  "+"&nbsp;"+highestDegree;
+
+                }else{
+                    jiu=" ";
+                }
+                if (jobEducation!=='') {
+                    shi =  "&nbsp;&nbsp;&nbsp;"+"在职学历  "+"&nbsp;"+jobEducation;
+
+                }else{
+                    shi=" ";
+                }
+                if (jobDegree!=='') {
+                    shiyi =  "&nbsp;&nbsp;&nbsp;"+"在职学位  "+"&nbsp;"+jobDegree;
+
+                }else{
+                    shiyi=" ";
+                }
+                if (tempWorkExperience!=='') {
+                    shier =  "&nbsp;&nbsp;&nbsp;"+"是否有挂职经历  "+"&nbsp;"+tempWorkExperience;
+
+                }else{
+                    shier=" ";
+                }
+                if (overseasStudyExperience!=='') {
+                    shisan =  "&nbsp;&nbsp;&nbsp;"+"国外一年以上留学经历  "+"&nbsp;"+overseasStudyExperience;
+
+                }else{
+                    shisan=" ";
+                }
+                if (idCard!=='') {
+                    shisi =  "&nbsp;&nbsp;&nbsp;"+"身份证号  "+"&nbsp;"+idCard;
+
+                }else{
+                    shisi=" ";
+                }
+                if (station!=='') {
+                    shiwu =  "&nbsp;&nbsp;&nbsp;"+"岗位  "+"&nbsp;"+station;
+
+                }else{
+                    shiwu=" ";
+                }
+                if (administrativeDuty!=='') {
+                    shiliu =  "&nbsp;&nbsp;&nbsp;"+"行政职务  "+"&nbsp;"+administrativeDuty;
+
+                }else{
+                    shiliu=" ";
+                }
+                if (maritalStatus!=='') {
+                    shiqi =  "&nbsp;&nbsp;&nbsp;"+"婚姻状况  "+"&nbsp;"+maritalStatus;
+
+                }else{
+                    shiqi=" ";
+                }
+                if (startBirth!==''||endBirth!=='') {
+                    shiba =  "&nbsp;&nbsp;&nbsp;"+"出生日期  "+"&nbsp;"+startBirth+"--"+endBirth;
+
+                }else{
+                    shiba=" ";
+                }
+                if (startWorkTime!==''||endWorkTime!=='') {
+                    shijiu =  "&nbsp;&nbsp;&nbsp;"+"参加工作时间  "+"&nbsp;"+startWorkTime+"--"+endWorkTime;
+
+                }else{
+                    shijiu=" ";
+                }
+                if (startTenureTime!==''||endTenureTime!=='') {
+                    ershi =  "&nbsp;&nbsp;&nbsp;"+"来院时间  "+"&nbsp;"+startTenureTime+"--"+endTenureTime;
+
+                }else{
+                    ershi=" ";
+                }
+                if (startTechnicalGetTime!==''||endTechnicalGetTime!=='') {
+                    ershiyi =  "&nbsp;&nbsp;&nbsp;"+"技术职务取得时间  "+"&nbsp;"+startTechnicalGetTime+"--"+endTechnicalGetTime;
+
+                }else{
+                    ershiyi=" ";
+                }
+                if (startAppointmentTime!==''||startAppointmentTime!=='') {
+                    ershier =  "&nbsp;&nbsp;&nbsp;"+"技术等级聘任时间  "+"&nbsp;"+startAppointmentTime+"--"+startAppointmentTime;
+
+                }else{
+                    ershier=" ";
+                }
 
 
+                if (yi!==" "||er!==" "||san!==" "||si!==" "||wu!=" "||liu!=" "
+                    ||qi!==" "||ba!==" "||jiu!==" "||shi!==" "||shiyi!=" "||shier!=" "
+                ||shisan!==" "||shisi!==" "||shiwu!==" "||shiliu!==" "||shiqi!=" "||shiba!=" "
+                ||shijiu!==" "||ershi!==" "||ershiyi!==" "||ershier!==" ") {
+                    parent.$('#jibenxinxi').html("基本信息"+"&nbsp;"
+                        +yi+er+san+si+wu+liu+qi+ba+jiu+shi+shiyi
+                        +shier+shisan+shisi+shiwu+shiliu+shiqi
+                        +shiba+shijiu+ershi+ershiyi+ershier);
+
+                }
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                 parent.layer.close(index); //再执行关闭
 

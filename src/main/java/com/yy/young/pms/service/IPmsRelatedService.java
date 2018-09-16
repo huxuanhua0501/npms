@@ -18,4 +18,5 @@ public interface IPmsRelatedService {
     List selectPaper(PmsUser obj) throws Exception;
     List selectPublish(PmsUser obj) throws Exception;
     List selectAward(PmsUser obj) throws Exception;
+    List selectAssessment(PmsUser obj) throws Exception;
 }

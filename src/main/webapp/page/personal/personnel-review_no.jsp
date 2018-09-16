@@ -347,6 +347,15 @@
                 <input id="mobilePhone" name="mobilePhone" type="hidden"/>
                 <input id="emailAddress" name="emailAddress" type="hidden"/>
             </div>
+                <%-- 年度考核--%>
+                <div>
+                    <input id="checkYears" name="checkYears" type="hidden"/>
+                    <input id="checkScore" name="checkScore" type="hidden"/>
+                    <input id="quarterOne" name="quarterOne" type="hidden"/>
+                    <input id="quarterTwo" name="quarterTwo" type="hidden"/>
+                    <input id="quarterThree" name="quarterThree" type="hidden"/>
+                    <input id="quarterFour" name="quarterFour" type="hidden"/>
+                </div>
             <%-- 基本信息--%>
             <div>
                 <input id="sex" name="sex" type="hidden"/>
@@ -382,12 +391,14 @@
             <div class="form-content">
                 <label class="layui-form-label" style="width: 100px;">当前筛选条件</label>
                 <div>
+                <div class="now-item" id="jibenxinxi" > </div>
                 <div class="now-item" id="tongxun" > </div>
                 <div class="now-item" id="jiaoyujingli" ></div>
                 <div class="now-item" id="gongzuojingli" ></div>
                 <div class="now-item" id="lunwen" ></div>
                 <div class="now-item" id="zhuzuo" ></div>
                 <div class="now-item" id="huojiang" ></div>
+                <div class="now-item" id="niandukaohe" ></div>
                 </div>
             </div>
 

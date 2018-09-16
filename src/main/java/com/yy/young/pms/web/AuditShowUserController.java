@@ -195,6 +195,14 @@ public class AuditShowUserController {
         List<String> paperList = new ArrayList<String>();
         List<String> publishList = new ArrayList<String>();
         List<String> awardList = new ArrayList<String>();
+        List<String> assessmentList = new ArrayList<String>();
+        if (!obj.getCheckYears().equals("") || !obj.getCheckScore().equals("") || !obj.getQuarterOne().equals("")
+                || !obj.getQuarterTwo().equals("")|| !obj.getQuarterThree().equals("")
+                || !obj.getQuarterFour().equals("")) {
+            assessmentList = pmsRelatedService.getEducation(obj);
+        } else {
+            assessmentList.add("1");
+        }
         if (!obj.getStartEducation().equals("") || !obj.getEndEducation().equals("") || !obj.getEducationContent().equals("")) {
             educationList = pmsRelatedService.getEducation(obj);
         } else {
@@ -244,11 +252,15 @@ public class AuditShowUserController {
             publishList.add("1");
         }
 
-        if (educationList == null || workList == null || communicationList == null || paperList == null || publishList == null || awardList == null) {
+        if (educationList == null || workList == null || communicationList == null || paperList == null
+                || publishList == null || awardList == null|| assessmentList == null) {
             return page;
         }
 
         List<List<String>> listFor = new ArrayList<List<String>>();
+        if (assessmentList.size() > 0 && assessmentList.get(0) != "1") {
+            listFor.add(assessmentList);
+        }
         if (educationList.size() > 0 && educationList.get(0) != "1") {
             listFor.add(educationList);
         }
