@@ -111,6 +111,40 @@
                     parent.$('#mobilePhone').val(mobilePhone);
                     parent.$('#emailAddress').val(emailAddress);
                     parent.$('#userName').val(userName);
+                    var shouji;
+                    var yidong;
+                    var email;
+                    var xingming;
+
+                    if (officePhone !== '') {
+                        shouji = "&nbsp;&nbsp;&nbsp;"+"办公电话"+"&nbsp;"+officePhone;
+
+                    }else{
+                        shouji=" ";
+                    }
+                    if (mobilePhone!=='') {
+                        yidong = "&nbsp;&nbsp;&nbsp;"+"手机号 "+"&nbsp;"+mobilePhone;
+
+                    }else{
+                        yidong=" ";
+                    }
+                    if (emailAddress!=='') {
+                        email =  "&nbsp;&nbsp;&nbsp;"+"邮箱地址 "+"&nbsp;"+emailAddress;
+
+                    }else{
+                        email=" ";
+                    }
+                    if (userName!=='') {
+                        xingming =  "&nbsp;&nbsp;&nbsp;"+"联系人姓名 "+"&nbsp;"+userName;
+
+                    }else{
+                        xingming=" ";
+                    }
+                    if (shouji!==" "||yidong!==" "||email!==" "||xingming!==" ") {
+                        parent.$('#tongxun').html("通讯信息"+"&nbsp;"+shouji+yidong+email+xingming);
+
+                    }
+
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
 

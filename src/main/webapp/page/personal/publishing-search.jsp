@@ -150,6 +150,48 @@
                     parent.$('#workType').val(check_val);
                     parent.$('#startYears').val(startYears);
                     parent.$('#endYears').val(endYears);
+                    var shouji;
+                    var yidong;
+                    var email;
+                    var xingming;
+                    var jieshunianyue;
+
+                    if (bookName !== '') {
+                        shouji = "&nbsp;&nbsp;&nbsp;"+"书名"+"&nbsp;"+bookName;
+
+                    }else{
+                        shouji=" ";
+                    }
+                    if (press!=='') {
+                        yidong = "&nbsp;&nbsp;&nbsp;"+"出版社 "+"&nbsp;"+press;
+
+                    }else{
+                        yidong=" ";
+                    }
+                    if (check_val!=='') {
+                        email =  "&nbsp;&nbsp;&nbsp;"+"著作类型 "+"&nbsp;"+check_val;
+
+                    }else{
+                        email=" ";
+                    }
+                    if (startYears!=='') {
+                        xingming =  "&nbsp;&nbsp;&nbsp;"+"起始时间 "+"&nbsp;"+startYears;
+
+                    }else{
+                        xingming=" ";
+                    }
+                    if (endYears!=='') {
+                        jieshunianyue =  "&nbsp;&nbsp;&nbsp;"+"终止时间  "+"&nbsp;"+endYears;
+
+                    }else{
+                        jieshunianyue=" ";
+                    }
+                    if (shouji!==" "||yidong!==" "||email!==" "||xingming!==" "||jieshunianyue!=" ") {
+                        parent.$('#zhuzuo').html("出版著作/译著"+"&nbsp;"+shouji+yidong+email+xingming+jieshunianyue);
+
+                    }
+
+
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
 

@@ -381,7 +381,13 @@
             </div>
             <div class="form-content">
                 <label class="layui-form-label" style="width: 100px;">当前筛选条件</label>
-                <div class="now-item" id="jiaoyujingli" >
+                <div>
+                <div class="now-item" id="tongxun" > </div>
+                <div class="now-item" id="jiaoyujingli" ></div>
+                <div class="now-item" id="gongzuojingli" ></div>
+                <div class="now-item" id="lunwen" ></div>
+                <div class="now-item" id="zhuzuo" ></div>
+                <div class="now-item" id="huojiang" ></div>
                 </div>
             </div>
 

@@ -159,6 +159,48 @@
                     parent.$('#periodicalType').val(check_val);
                     parent.$('#periodicalStartYears').val(periodicalStartYears);
                     parent.$('#periodicalEndYears').val(periodicalEndYears);
+
+                    var shouji;
+                    var yidong;
+                    var email;
+                    var xingming;
+                    var jieshunianyue;
+
+                    if (periodicalTitle !== '') {
+                        shouji = "&nbsp;&nbsp;&nbsp;"+"题目"+"&nbsp;"+periodicalTitle;
+
+                    }else{
+                        shouji=" ";
+                    }
+                    if (periodicalName!=='') {
+                        yidong = "&nbsp;&nbsp;&nbsp;"+"期刊名称 "+"&nbsp;"+periodicalName;
+
+                    }else{
+                        yidong=" ";
+                    }
+                    if (check_val!=='') {
+                        email =  "&nbsp;&nbsp;&nbsp;"+"期刊类型 "+"&nbsp;"+check_val;
+
+                    }else{
+                        email=" ";
+                    }
+                    if (periodicalStartYears!=='') {
+                        xingming =  "&nbsp;&nbsp;&nbsp;"+"起始时间 "+"&nbsp;"+periodicalStartYears;
+
+                    }else{
+                        xingming=" ";
+                    }
+                    if (periodicalEndYears!=='') {
+                        jieshunianyue =  "&nbsp;&nbsp;&nbsp;"+"终止时间  "+"&nbsp;"+periodicalEndYears;
+
+                    }else{
+                        jieshunianyue=" ";
+                    }
+                    if (shouji!==" "||yidong!==" "||email!==" "||xingming!==" "||jieshunianyue!=" ") {
+                        parent.$('#lunwen').html("论文情况"+"&nbsp;"+shouji+yidong+email+xingming+jieshunianyue);
+
+                    }
+
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
 

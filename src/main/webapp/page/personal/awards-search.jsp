@@ -152,6 +152,56 @@
                     parent.$('#awardLevel').val(check_val);
                     parent.$('#awardsStartYears').val(awardsStartYears);
                     parent.$('#awardsEndYears').val(awardsEndYears);
+                    var yi;
+                    var er;
+                    var san;
+                    var si;
+                    var wu;
+                    var liu;
+
+
+                    if (awardWinProjectName !== '') {
+                        yi = "&nbsp;&nbsp;&nbsp;"+"名称"+"&nbsp;"+awardWinProjectName;
+
+                    }else{
+                        yi=" ";
+                    }
+                    if (awardType!=='') {
+                        er = "&nbsp;&nbsp;&nbsp;"+"类别 "+"&nbsp;"+awardType;
+
+                    }else{
+                        er=" ";
+                    }
+                    if (awardWinProjectLevel!=='') {
+                        san =  "&nbsp;&nbsp;&nbsp;"+"等级 "+"&nbsp;"+awardWinProjectLevel;
+
+                    }else{
+                        san=" ";
+                    }
+                    if (check_val!=='') {
+                        si =  "&nbsp;&nbsp;&nbsp;"+"奖励层次 "+"&nbsp;"+check_val;
+
+                    }else{
+                        si=" ";
+                    }
+                    if (awardsStartYears!=='') {
+                        wu =  "&nbsp;&nbsp;&nbsp;"+"起始时间  "+"&nbsp;"+awardsStartYears;
+
+                    }else{
+                        wu=" ";
+                    }
+                    if (awardsEndYears!=='') {
+                        liu =  "&nbsp;&nbsp;&nbsp;"+"终止时间  "+"&nbsp;"+awardsEndYears;
+
+                    }else{
+                        liu=" ";
+                    }
+                    if (yi!==" "||er!==" "||san!==" "||si!==" "||wu!=" "||liu!=" ") {
+                        parent.$('#huojiang').html("获奖情况"+"&nbsp;"+yi+er+san+si+wu+liu);
+
+                    }
+
+
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
 

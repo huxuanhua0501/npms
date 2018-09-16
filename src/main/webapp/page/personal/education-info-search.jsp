@@ -63,14 +63,14 @@
         <label class="layui-form-label">起始时间</label>
         <div class="layui-input-inline">
             <input type="text" id="startEducation" name="startEducation" required lay-verify="required" placeholder="2018-08" autocomplete="off"
-                   class="layui-input"  >
+                   class="layui-input" ErrBirthBad4 >
         </div>
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">终止时间</label>
         <div class="layui-input-inline">
             <input type="text" name="endEducation" required lay-verify="required" placeholder="2018-10" autocomplete="off"
-                   class="layui-input" id="endEducation">
+                   class="layui-input" id="endEducation" ErrBirthBad4>
         </div>
     </div>
     <div class="edit-item layui-col-md12 layui-col-xs12">
@@ -124,7 +124,7 @@
                 }else{
                     neirong=" ";
                 }
-                if (kaishi!==" "||kaishi!==" "||kaishi!==" ") {
+                if (kaishi!==" "||jieshu!==" "||neirong!==" ") {
                     parent.$('#jiaoyujingli').html("教育经历"+"&nbsp;"+kaishi+jieshu+neirong);
 
                 }

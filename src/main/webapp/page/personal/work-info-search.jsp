@@ -62,14 +62,14 @@
         <label class="layui-form-label">起始时间</label>
         <div class="layui-input-inline">
             <input type="text" id="workStartTime" name="workStartTime" required lay-verify="required" placeholder="2018-08"
-                   autocomplete="off" class="layui-input">
+                   autocomplete="off" class="layui-input" ErrBirthBad4>
         </div>
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">终止时间</label>
         <div class="layui-input-inline">
             <input type="text" id="workStopTime" name="workStopTime" required lay-verify="required" placeholder="2018-10"
-                   autocomplete="off" class="layui-input">
+                   autocomplete="off" class="layui-input" ErrBirthBad4>
         </div>
     </div>
     <div class="edit-item layui-col-md12 layui-col-xs12">
@@ -105,6 +105,34 @@
                 parent.$('#work_StartTime').val(work_StartTime);
                 parent.$('#workStopTime').val(workStopTime);
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+                var kaishi;
+                var jieshu;
+                var neirong;
+
+                if (work_StartTime !== '') {
+                    kaishi = "&nbsp;&nbsp;&nbsp;"+"起始时间"+"&nbsp;"+work_StartTime;
+
+                }else{
+                    kaishi=" ";
+                }
+                if (workStopTime!=='') {
+                    jieshu = "&nbsp;&nbsp;&nbsp;"+"终止时间 "+"&nbsp;"+workStopTime;
+
+                }else{
+                    jieshu=" ";
+                }
+                if (workContent!=='') {
+                    neirong =  "&nbsp;&nbsp;&nbsp;"+"内容 "+"&nbsp;"+workContent;
+
+                }else{
+                    neirong=" ";
+                }
+                if (kaishi!==" "||jieshu!==" "||neirong!==" ") {
+                    parent.$('#gongzuojingli').html("工作经历"+"&nbsp;"+kaishi+jieshu+neirong);
+
+                }
+
                 parent.layer.close(index); //再执行关闭
 
 
