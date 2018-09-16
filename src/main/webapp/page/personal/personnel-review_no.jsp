@@ -231,7 +231,7 @@
                 <div class="layui-form-item">
                     <div class="layui-input-inline button-inline">
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry"
-                                onclick="window.location.reload()">刷新</button>
+                                onclick="window.location.reload(true)">刷新</button>
 
                     </div>
                 </div>
