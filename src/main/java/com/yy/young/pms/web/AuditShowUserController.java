@@ -249,11 +249,11 @@ public class AuditShowUserController {
             awardList = pmsRelatedService.selectAward(obj);
 
         } else {
-            publishList.add("1");
+            awardList.add("1");
         }
 
-        if (educationList == null || workList == null || communicationList == null || paperList == null
-                || publishList == null || awardList == null|| assessmentList == null) {
+        if (educationList.size() == 0 || workList.size() ==0  || communicationList.size() == 0 || paperList.size() == 0
+                || publishList.size() == 0 || awardList.size() == 0|| assessmentList.size() == 0) {
             return page;
         }
 

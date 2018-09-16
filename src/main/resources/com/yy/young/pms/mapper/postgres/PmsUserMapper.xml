@@ -385,7 +385,7 @@
                 </foreach>
             </if>
             <if test="trashFlag ==2">
-                (O.trash_flag is null or o.trash_flag='0' or O.trash_flag='')
+                AND (O.trash_flag is null or o.trash_flag='0' or O.trash_flag='')
             </if>
             <if test="trashFlag ==1">
                 AND O.trash_flag = '1'
