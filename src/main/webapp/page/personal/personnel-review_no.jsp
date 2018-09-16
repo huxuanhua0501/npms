@@ -64,22 +64,33 @@
         $(function () {
             sfSet();//在初始化表格之前
             joViewInitAboutDoc();//joView初始化处理
-            var html_string;
-            $.ajax({
-                type: "get",
-                url: "pms/pmsDictionary/getListByDictionary/PERSON_TYPE",
-                dataType: "text",
-                success: function (jsonStr) {
-                    var obj = JSON.parse(jsonStr);
-                    var list = "", listline = "";
-                    listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
-                    for (var i = 0; i < obj.data.length; i++) {
-                        listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
-                    }
-                    $("#checkbox_0").append(listline);
-                }
 
-            });
+            jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
+                var list = "", listline = "";
+                listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                for (var i = 0; i < obj.data.length; i++) {
+                    listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                }
+                $("#checkbox_0").html("");
+                $("#checkbox_0").html(listline);
+
+            }, true);
+
+            // $.ajax({
+            //     type: "get",
+            //     url: "pms/pmsDictionary/getListByDictionary/PERSON_TYPE",
+            //     dataType: "text",
+            //     success: function (jsonStr) {
+            //         var obj = JSON.parse(jsonStr);
+            //         var list = "", listline = "";
+            //         listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+            //         for (var i = 0; i < obj.data.length; i++) {
+            //             listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+            //         }
+            //         $("#checkbox_0").append(listline);
+            //     }
+            //
+            // });
         });
         //行处理
         // joView.handleItem = function(oItem,iIndex){
