@@ -44,10 +44,38 @@
                     }
                 }
             }, true);
+            loadAnnouncement();//加载公告
             new Grid($("#mainList")).loadData();
             new Grid($("#mainList2")).loadData();
-        });
 
+        });
+        function loadAnnouncement(){
+            var sUrl = "{URL_PORTAL}pms/announcement/getPage.action?pageSize=8";
+
+            jo.postAjax(sUrl, {}, function(json){
+                if(json && json.code == "0"){
+                    if(json.data && json.data[0]){
+                        var list = json.data;
+                        var liHtml ='';
+                        for(var i =0;i<list.length;i++){
+                            var title = list[i].title;
+                            var createTime = list[i].createTime;
+                            var announcementId = list[i].id;
+                            liHtml += '<li class="clear">\n' +
+                                '                    <a href="<%=basePath%>page/portal/home_announcement_detail_no.jsp?announId='+announcementId+'" class="left">\n' +
+                                '                        <i class="iconfont icon-quan"></i>' +title+
+                                '                    </a>\n' +
+                                '                    <span class="date right">\n' +createTime+
+                                '                    </span>\n' +
+                                '                </li>\n';
+                        }
+                        $("#announcement").html(liHtml);
+                    }else{
+                        $("#announcement").html('');
+                    }
+                }
+            }, true);
+        }
 
      /*   function goto(){
             if (jo.isValid(sf)) {
@@ -93,59 +121,9 @@
             <div class="home-tit clear">
                 <span class="left">公告</span>
                 <i class="layui-icon layui-icon-triangle-r right"></i>
-                <a class="right more" href="announcement-list.html">更多</a>
+                <a class="right more" href="<%=basePath%>page/portal/home_announcement_list_no.jsp">更多</a>
             </div>
-            <ul>
-                <li class="clear">
-                    <a href="javascript:;" class="left">
-                        <i class="iconfont icon-quan"></i>陈斌书记应邀率团访问澳大利亚联邦科学与工业研究组织并签署科研合作谅解备忘录
-                    </a>
-                    <span class="date right">
-                        2018/06/21
-                    </span>
-                </li>
-                <li class="clear">
-                    <a href="javascript:;" class="left">
-                        <i class="iconfont icon-quan"></i>陈斌书记应邀率团访问澳大利亚联邦科学与工业研究组织并签署科研合作谅解备忘录
-                    </a>
-                    <span class="date right">2018/06/21</span>
-                </li>
-                <li class="clear">
-                    <a href="javascript:;" class="left">
-                        <i class="iconfont icon-quan"></i>陈斌书记应邀率团访问澳大利亚联邦科学与工业研究组织并签署科研合作谅解备忘录
-                    </a>
-                    <span class="date right">2018/06/21</span>
-                </li>
-                <li class="clear">
-                    <a href="javascript:;" class="left">
-                        <i class="iconfont icon-quan"></i>陈斌书记应邀率团访问澳大利亚联邦科学与工业研究组织并签署科研合作谅解备忘录
-                    </a>
-                    <span class="date right">2018/06/21</span>
-                </li>
-                <li class="clear">
-                    <a href="javascript:;" class="left">
-                        <i class="iconfont icon-quan"></i>陈斌书记应邀率团访问澳大利亚联邦科学与工业研究组织并签署科研合作谅解备忘录
-                    </a>
-                    <span class="date right">2018/06/21</span>
-                </li>
-                <li class="clear">
-                    <a href="javascript:;" class="left">
-                        <i class="iconfont icon-quan"></i>陈斌书记应邀率团访问澳大利亚联邦科学与工业研究组织并签署科研合作谅解备忘录
-                    </a>
-                    <span class="date right">2018/06/21</span>
-                </li>
-                <li class="clear">
-                    <a href="javascript:;" class="left">
-                        <i class="iconfont icon-quan"></i>陈斌书记应邀率团访问澳大利亚联邦科学与工业研究组织并签署科研合作谅解备忘录
-                    </a>
-                    <span class="date right">2018/06/21</span>
-                </li>
-                <li class="clear">
-                    <a href="javascript:;" class="left">
-                        <i class="iconfont icon-quan"></i>陈斌书记应邀率团访问澳大利亚联邦科学与工业研究组织并签署科研合作谅解备忘录
-                    </a>
-                    <span class="date right">2018/06/21</span>
-                </li>
+            <ul id="announcement">
             </ul>
         </div>
     </div>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yy.young.pms.mapper.pmsAnnouncement">
+    <!--查询字段信息-->
+    <insert id="insert" parameterType="com.yy.young.pms.model.PmsAnnouncement">
+        INSERT INTO pms_announcement
+        (id, serial_number, point, title, content, create_time,create_name,user_id,system_time)
+        VALUES
+            (
+                #{id}, #{serialNumber}, #{point}, #{title}, #{content}, #{createTime}, #{createName}, #{userId},
+                #{systemTime}
+            )
+    </insert>
+    <update id="update" parameterType="com.yy.young.pms.model.PmsAnnouncement">
+        UPDATE pms_announcement
+        SET serial_number = #{serialNumber}, point = #{point}, title = #{title}, content = #{content},
+            create_time = #{createTime},create_name = #{createName},user_id = #{userId},
+            system_time= #{systemTime}
+
+        WHERE id = #{id}
+    </update>
+    <select id="getList" parameterType="com.yy.young.pms.model.PmsAnnouncement"
+            resultType="com.yy.young.pms.model.PmsAnnouncement">
+        SELECT
+        id, serial_number as serialNumber, point, title, content, create_time as createTime,
+        create_name as createName,user_id as userId,system_time as systemTime
+        FROM pms_announcement
+        WHERE 1=1
+        <if test="content != null and content != ''">
+            AND content like '%${content}%'
+        </if>
+        order by serial_number desc
+    </select>
+    <delete id="delete">
+        DELETE FROM pms_announcement
+        WHERE ID = #{id}
+    </delete>
+    <select id="get" resultType="com.yy.young.pms.model.PmsAnnouncement">
+        SELECT
+            id, serial_number as serialNumber, point, title, content, create_time as createTime,
+        create_name as createName,user_id as userId,system_time as systemTime
+        FROM pms_announcement
+        WHERE ID = #{id}
+    </select>
+</mapper>
