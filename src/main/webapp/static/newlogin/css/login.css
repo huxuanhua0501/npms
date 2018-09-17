@@ -160,3 +160,32 @@ textarea:-ms-input-placeholder {
     color: #3693FF;
     letter-spacing: 0;
 }
+
+.forget-box {
+    position: relative;
+    background: #FFFBCB;
+    border: 1px solid #DCDCDC;
+    width: 290px;
+    /* height: 70px; */
+    padding: 7px 14px;
+    left: -40px;
+    /* top: -20px; */
+    opacity: 0;
+}
+
+.bdnuarrow {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    position: absolute;
+    top: -6px;
+    left: 48%;
+    background-color: #FFFBCB;
+    border-top: 1px solid #DCDCDC;
+    border-left: 1px solid #DCDCDC;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+}

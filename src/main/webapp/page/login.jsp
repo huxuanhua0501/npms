@@ -136,7 +136,15 @@
                 </div>
                 <div class="form-group">
                     <div class="col-lg-offset-3 col-lg-7 forget">
-                        <a href="javascript:;">忘记密码?</a>
+                        <a href="javascript:;"class="forgetBtn">忘记密码?</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="forget-box col-lg-offset-3 col-lg-7" style="opacity: 0;">
+                        <i class="bdnuarrow"></i>
+                        <div class="forget-box-wrap">
+                            本系统为内部系统，用户登录账号信息由管理员设定开通，如果登录信息遗忘，请联系**部 王某某，电话***。暂不支持自主注册用户，感谢您的支持和谅解。
+                        </div>
                     </div>
                 </div>
             </form>
@@ -147,6 +155,15 @@
         <p>Copyright @ 2018-2020 中国环境科学研究院人事档案管理系统</p>
     </div>
 </div>
+<script>
+    $(".forgetBtn").click(function(event) {
+        event.stopPropagation();
+        $(".forget-box").css("opacity", 1);
+    })
+    $(document.body).click(function() {
+        $(".forget-box").css("opacity", 0);
+    })
+</script>
 </body>
 
 </html>
