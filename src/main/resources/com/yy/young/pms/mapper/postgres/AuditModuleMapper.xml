@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yy.young.pms.mapper.auditModule">
+    <sql id="searchnewCol">
+          O.id AS "id"
+        , O.user_id AS "userId"
+        , O.user_name AS "userName"
+        , O.old_name AS "oldName"
+        , O.sex AS "sex"
+        , O.birth AS "birth"
+        , O.nation AS "nation"
+        , O.place_of_origin AS "placeOfOrigin"
+        , O.place_of_birth AS "placeOfBirth"
+        , O.work_start_time AS "workStartTime"
+        , O.political_outlook AS "politicalOutlook"
+        , O.join_party_time AS "joinPartyTime"
+        , O.technical_position AS "technicalPosition"
+        , O.get_time AS "getTime"
+        , O.appointment_time AS "appointmentTime"
+        , O.technical_level AS "technicalLevel"
+        , O.administrative_duty AS "administrativeDuty"
+        , O.tenure_time AS "tenureTime"
+        , O.administrative_level AS "administrativeLevel"
+        , O.research_field AS "researchField"
+        , O.specialty AS "specialty"
+        , O.highest_education AS "highestEducation"
+        , O.highest_degree AS "highestDegree"
+        , O.id_card AS "idCard"
+        , O.overseas_study_experience AS "overseasStudyExperience"
+        , O.english_level AS "englishLevel"
+        , O.photo_address AS "photoAddress"
+        , O.remark AS "remark"
+        , O.first_education AS "firstEducation"
+        , O.job_education AS "jobEducation"
+        , O.person_type AS "personType"
+        , O.num AS "num"
+        , O.trash_flag AS "trashFlag"
+        , O.first_degree AS "firstDegree"
+        , O.station AS "station"
+        , O.take_work AS "takeWork"
+        , O.research_field_detail AS "researchFieldDetail"
+        , O.job_degree AS "jobDegree"
+        , O.temp_work_experience AS "tempWorkExperience"
+        , O.to_there_time AS "toThereTime"
+        , O.remark_modify_time AS "remarkModifyTime"
+        , ( SELECT string_agg(DE.NAME, ',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
+        , tuu.state AS "state"
+        , O.remark AS "dicName"
+    </sql>
+    <select id="getnewPmsUserList" parameterType="com.yy.young.pms.model.PmsUser"
+            resultType="com.yy.young.pms.model.PmsUser">
+        SELECT
+        <include refid="searchnewCol"></include>
+        FROM pms_user O
+        LEFT JOIN tb_ums_user tuu ON tuu.account = O.user_id
+     <where>
+        <if test="userName != null and userName != ''">
+            AND O.user_name like '%${userName}%'
+        </if>
+        <if test="remarkList != null and remarkList != ''">
+            AND O.id in
+            <foreach collection="remarkList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+    </where>
+        <choose>
+            <when test="orderBy != null and orderBy != ''">
+                ORDER BY O.${orderBy} ${orderType}
+            </when>
+            <otherwise>
+                ORDER BY O.num ASC,O.id ASC
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

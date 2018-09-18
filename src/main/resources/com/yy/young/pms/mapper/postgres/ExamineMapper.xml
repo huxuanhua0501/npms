@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yy.young.pms.mapper.examine">
+    <select id="getBashinfoUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_record_baseinfo
+        WHERE
+            audit_status = 5
+    </select>
+    <select id="getCommunicationoUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_record_communication
+        WHERE
+            audit_status = 5
+    </select>
+    <select id="getRelationshipUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_relations
+        WHERE
+            status = 5
+    </select>
+    <select id="getEducationUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_education
+        WHERE
+            status = 5
+    </select>
+    <select id="getWorkUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_work
+        WHERE
+            status = 5
+    </select>
+    <select id="getAssociationkUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_main_tech_group
+        WHERE
+            status = 5
+    </select>
+    <select id="getHonorUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_honor_title
+        WHERE
+            status = 5
+    </select>
+    <select id="getAwardUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_tech_awards
+        WHERE
+            status = 5
+    </select>
+    <select id="getPaperUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_paper
+        WHERE
+            status = 5
+    </select>
+    <select id="getPublishUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_publish
+        WHERE
+            status = 5
+    </select>
+    <select id="getPatentUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_patent
+        WHERE
+            status = 5
+    </select>
+    <select id="getProjectUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_join_project
+        WHERE
+            status = 5
+    </select>
+    <select id="getTechnologyUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_technology_brace
+        WHERE
+        status = 5
+    </select>
+    <select id="getPersonnelUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_support_project
+        WHERE
+        status = 5
+    </select>
+    <select id="getAssessmentUserIdList"
+            resultType="java.lang.String">
+        SELECT DISTINCT user_id
+        FROM
+            audit_pms_year_check
+        WHERE
+        status = 5
+    </select>
+</mapper>
