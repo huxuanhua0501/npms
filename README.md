@@ -70,4 +70,4 @@ COMMENT ON COLUMN "public"."pms_announcement"."create_name" IS '创建人姓名'
 COMMENT ON COLUMN "public"."pms_announcement"."user_id" IS '操作人（自动记录）';
 
 COMMENT ON COLUMN "public"."pms_announcement"."system_time" IS '系统记录创建时间';
-6.按新命名调整菜单，涉及到tb_portal_scheme_menu表内容
+6.按新命名调整菜单，涉及到tb_ums_navigate表内容
