@@ -35,7 +35,7 @@ COMMENT ON TABLE "public"."pms_website" IS '常用网站';
    2.2原先的人员审核，禁止用的人员是不显示的，现在做成显示了。<Br/>
    2.3按人员审核原先的界面openPageOnMain('page/pms/auditPersonnel.jsp')
    2.4按人员审核新界面 openPageOnMain('page/personal/personnel-review_no.jsp')
-
+   2.5按照模块审核openPageOnMain('page/personal/information-audit_no.jsp')
 3.pms_user中添加字段，COMMENT ON COLUMN "public"."pms_user"."marital_status" IS '婚姻状况';
 4.目前按人员搜索，工作经历，教育经历按照2018-11（数据库是这种格式，修改数据库后，修改页面格式）
 5.增加公告表
