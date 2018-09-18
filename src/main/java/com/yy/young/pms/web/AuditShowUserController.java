@@ -313,7 +313,7 @@ public class AuditShowUserController {
         if (obj.getRemark() != ""&&obj.getRemark()!=null) {
             obj.setRemarkList(this.getList(obj.getRemark()));
         }
-        List<PmsUser> ofPmsUserList = pmsUserService2.getList(obj);
+        List<PmsUser> ofPmsUserList = pmsUserService2.getPage(obj,page);
         AuditShowUser auditShowUser = new AuditShowUser();
         auditShowUser.setPersonalShow(1);
         String allUserId = "";
@@ -348,7 +348,7 @@ public class AuditShowUserController {
                     }
                 }
             }
-            page.setData(pmsUserList);
+            page.setData(ofPmsUserList);
         }
 
 
