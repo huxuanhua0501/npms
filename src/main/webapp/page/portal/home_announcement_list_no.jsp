@@ -14,12 +14,10 @@
     <%--jQuery--%>
     <%@ include file="/common/jqueryHead.jsp"%>
     <%--公共--%>
-    <%@ include file="/common/commonHead.jsp"%>
+    <%@ include file="/common/commonHead_no.jsp"%>
     <%--jo--%>
     <%@ include file="/common/joHead.jsp"%>
      <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
-    <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/font/font2/iconfont.css">
-    <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/common.css">
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/announcement-list.css">
    <script src="<%=URL_STATIC%>static/prototype/js/layui.js"></script>
     <script src="<%=URL_STATIC%>static/prototype/js/jquery.min.js"></script>

@@ -152,7 +152,6 @@ public class PmsAnnouncementController {
     @ResponseBody
     public Object getPage(PmsAnnouncement obj, HttpServletRequest request) throws Exception{
         Page page = CommonUtil.getPageFromRequest(request);
-        System.out.println("###############################"+page.getPageSize());
 
         List<PmsAnnouncement> list = service.getPage(obj, page);
         page.setData(list);

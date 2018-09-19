@@ -3,7 +3,6 @@
  */
 var URL_MENU = "portal/getMenu.action";//菜单地址
 $(function () {
-
     //获取菜单
     jo.postAjax(URL_MENU,{},function(json){
         if(json && json.code == 0){
@@ -28,7 +27,7 @@ $(function () {
                                 if (m2.name == "员工花名册") {
                                     c = "nav-child-list2";
                                 }
-                                if (m2.name  == "人事统计") {
+                                if (m2.name  == "统计报表") {
                                     c = "nav-child-list3";
                                 }
                                 if (m2.name  == "角色权限") {
@@ -40,8 +39,10 @@ $(function () {
                                 var th_html = '';
                                 th_html += '         <div class="'+c+' nav-child-list" style="position: fixed;z-index: 999999;left: 220px;">\n' +
                                     '            <i class="bdnuarrow"></i>\n' +
-                                    '            <div class="nav-child-list-wrap">\n' +
-                                    '                <div>';
+                                    '            <div class="nav-child-list-wrap">\n'
+                                    '            <div>';
+                                //将右侧导航功能栏内容内置display：none
+                                // var selectContent_html = '<div id="'+m2.id+'" style="display: none;">';
 
                                 for (var k=0;k<m2.children.length;k++) {
                                     var m3 = m2.children[k];
@@ -49,11 +50,31 @@ $(function () {
                                     console.log("打印3级：" + m3.name + m3.href);
                                     console.log("打印3级：" + m3.href.substring(16,m3.href.length-2));
                                     th_html += '<a lay-href="'+jspStr+'">'+m3.name+'</a>';*/
-                                    th_html += '<a lay-href="javascript:;" onclick="'+m3.href+'">'+m3.name+'</a>';
+                                    //处理左侧功能栏追加menuParentId字段，用于后续三级功能在子页面的权限控制
+                                    var clickHref = m3.href;
+                                    /*var linkHref;
+                                    if(clickHref && clickHref.indexOf("openPageOnMain('") > -1){
+                                        linkHref = clickHref.substring("openPageOnMain('".length,clickHref.length-2);
+                                        if(linkHref.indexOf('?')>-1){
+                                            linkHref +='&';
+                                        }else{
+                                            linkHref += '?';
+                                        }
+                                        linkHref += 'menuParentId='+m3.parentId;
+                                        clickHref = "openPageOnMain('"+linkHref+"')";
+                                    }*/
+                                    th_html += '<a lay-href="javascript:;"  onclick="'+clickHref+'">'+m3.name+'</a>';
+                                    // selectContent_html += '<li>\n' +
+                                    //     '                  <a href="'+linkHref+'">\n' +
+                                    //     '                  <span class="left opt" style="margin-left: 40%;">'+m3.name+'</span>\n' +
+                                    //     '                  </a>\n' +
+                                    //     '                  </li>';
                                 }
+                                // selectContent_html += '</div>';
                                 th_html += '                </div>\n' +
-                                    '            </div>\n' +
-                                    '        </div>';
+                                    '            </div>\n';
+                                // th_html += selectContent_html;
+                                th_html += '        </div>';
                                 all3 += th_html;
                             }
                         }
@@ -120,7 +141,6 @@ function getNavUnitHtml(menu){
 function getChid(menu) {
     var _html = '';
     if(jo.isValid(menu)){
-
         //生成2级a特殊类
         var a_class = "";
         if (menu.name == "信息审核") {
@@ -129,7 +149,7 @@ function getChid(menu) {
         if (menu.name == "员工花名册") {
             a_class = "flower";
         }
-        if (menu.name  == "人事统计") {
+        if (menu.name  == "统计报表") {
             a_class = "tongji";
         }
         if (menu.name  == "角色权限") {
@@ -172,7 +192,7 @@ function getThree(menu) {
         if (menu.parentName == "员工花名册") {
             c = "nav-child-list2";
         }
-        if (menu.parentName == "人事统计") {
+        if (menu.parentName == "统计报表") {
             c = "nav-child-list3";
         }
         _html += '        <div class="'+c+' nav-child-list" style="position: fixed;z-index: 999999;left: 220px;">\n' +
