@@ -72,4 +72,9 @@ COMMENT ON COLUMN "public"."pms_announcement"."create_name" IS '创建人姓名'
 COMMENT ON COLUMN "public"."pms_announcement"."user_id" IS '操作人（自动记录）';
 
 COMMENT ON COLUMN "public"."pms_announcement"."system_time" IS '系统记录创建时间';
-6.按新命名调整菜单，涉及到tb_ums_navigate表内容
+6.按新命名调整菜单（人事管理-统计报表），涉及到tb_ums_navigate表内容，对应涉及到
+admin用户的资源链接池
+    1）编制分析：openPageOnMain('page/statistic/bianzhiStatistics_no.jsp?edit=true')
+    2）结构统计：openPageOnMain('page/statistic/jiegouStatistics_no.jsp?edit=true')	
+    3）奖励分析：openPageOnMain('page/statistic/jiangliStatistics_no.jsp?edit=true')
+    其它原有作废
