@@ -110,9 +110,9 @@
 
             <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin: 0;">
                 <ul class="layui-tab-title">
-                    <li class="layui-this">奖励数量</li>
-                    <li>出版著作数量</li>
-                    <li>年度考核</li>
+                    <li onclick="loadAwardLevel()" class="layui-this">奖励数量</li>
+                    <li onclick="loadPublish()">出版著作数量</li>
+                    <li onclick="loadYearCheck()">年度考核</li>
                 </ul>
             </div>
 
@@ -197,276 +197,8 @@
             getAllUserCount();
             //获取系统录入所有科技奖数量
             getAllTechAwardsCount();
-            //加载图表
+            //加载奖励层次图表
             loadAwardLevel();
-            chart3();
-            chart4();
-            chart5();
-            chart6();
-
-            function chart3() {
-                var dom = document.getElementById("chart3");
-                var myChart = echarts.init(dom);
-                var app = {};
-                option = null;
-                var labelOption = {
-                    normal: {
-                        show: true,
-                        formatter: '{c}',
-                        fontSize: 12,
-                        rich: {
-                            name: {
-                                textBorderColor: '#fff'
-                            }
-                        }
-                    }
-                };
-                option = {
-                    tooltip: {},
-                    radar: {
-                        name: {
-                            textStyle: {
-                                color: '#333',
-                                borderRadius: 3,
-                                padding: [3, 5]
-                            }
-                        },
-                        radius: '60%',
-                        center: ['50%', '44%'],
-                        indicator: [{
-                            text: '著作',
-                            max: 100
-                        }, {
-                            text: '编著',
-                            max: 100
-                        }, {
-                            text: '译著',
-                            max: 100
-                        }, {
-                            text: '独著',
-                            max: 100
-                        }, {
-                            text: '合著',
-                            max: 100
-                        }, {
-                            text: '其他',
-                            max: 100
-                        }],
-                        splitArea: {
-
-                            show: true,
-
-                            areaStyle: {
-
-                                color: ["#fff"] // 图表背景网格的颜色
-
-                            }
-
-                        },
-                    },
-                    series: [{
-                        name: '出版著作',
-                        type: 'radar',
-                        areaStyle: {
-                            normal: {
-                                color: "#ffb2c2",
-                            }
-                        },
-                        data: [{
-                            value: [85, 90, 90, 95, 95, 50],
-                            name: '出版著作数量'
-                        },
-
-                        ]
-                    }]
-                };
-                if (option && typeof option === "object") {
-                    myChart.setOption(option, true);
-                }
-            }
-            function chart4() {
-                var dom = document.getElementById("chart4");
-                var myChart = echarts.init(dom);
-                var app = {};
-                option = null;
-
-                var labelOption = {
-                    normal: {
-                        show: true,
-                        formatter: '{c}',
-                        fontSize: 12,
-                        rich: {
-                            name: {
-                                textBorderColor: '#fff'
-                            }
-                        }
-                    }
-                };
-
-                option = {
-                    color: ['#3398DB'],
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: [{
-                        type: 'category',
-                        data: ['著作', '编著', '译著', '独著', '合著', '其他'],
-                        axisTick: {
-                            alignWithLabel: true
-                        }
-                    }],
-                    yAxis: [{
-                        type: 'value'
-                    }],
-                    series: [{
-                        name: '数量',
-                        type: 'bar',
-                        barWidth: '40%',
-                        data: [85, 90, 90, 95, 95, 50],
-                        label: labelOption,
-                    }]
-                };
-                if (option && typeof option === "object") {
-                    myChart.setOption(option, true);
-                }
-            }
-
-
-            function chart5() {
-                var dom = document.getElementById("chart5");
-                var myChart = echarts.init(dom);
-                var app = {};
-                option = null;
-                option = {
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
-                    },
-                    legend: {
-                        icon: 'circle',
-                        x: 'center',
-                        y: 'bottom',
-                        data: ['年度考核等级', '第一季度等级', '第二季度等级', '第三季度等级', '第四季度等级'],
-                        itemGap: 10,
-                    },
-                    calculable: true,
-                    color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3"],
-                    series: [{
-                        name: '',
-                        type: 'pie',
-                        radius: [20, 70],
-                        center: ['50%', '50%'],
-                        roseType: 'radius',
-                        data: [{
-                            value: 248,
-                            name: '年度考核等级'
-                        }, {
-                            value: 201,
-                            name: '第一季度等级'
-                        }, {
-                            value: 145,
-                            name: '第二季度等级'
-                        }, {
-                            value: 74,
-                            name: '第三季度等级'
-                        }, {
-                            value: 26,
-                            name: '第四季度等级'
-                        }],
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    formatter: "{b} : {c} ({d}%)",
-                                    color: "#4a4a4a"
-
-                                },
-                                labelLine: {
-                                    show: true
-                                }
-                            },
-                            emphasis: {
-                                label: {
-                                    show: true
-                                },
-                                labelLine: {
-                                    show: true
-                                }
-                            }
-                        }
-                    }]
-                };
-                if (option && typeof option === "object") {
-                    myChart.setOption(option, true);
-                }
-            }
-
-            function chart6() {
-                var dom = document.getElementById("chart6");
-                var myChart = echarts.init(dom);
-                var app = {};
-                option = null;
-
-                var labelOption = {
-                    normal: {
-                        show: true,
-                        formatter: '{c}',
-                        fontSize: 12,
-                        rich: {
-                            name: {
-                                textBorderColor: '#fff'
-                            }
-                        }
-                    }
-                };
-
-                option = {
-                    color: ['#3398DB'],
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: [{
-                        type: 'category',
-                        data: ['年度考核', '第一季度', '第二季度', '第三季度', '第四季度'],
-                        axisTick: {
-                            alignWithLabel: true
-                        }
-                    }],
-                    yAxis: [{
-                        type: 'value'
-                    }],
-                    series: [{
-                        name: '数量',
-                        type: 'bar',
-                        barWidth: '40%',
-                        data: [248, 201, 145, 74, 26, 2, 323],
-                        label: labelOption,
-                    }]
-                };
-                if (option && typeof option === "object") {
-                    myChart.setOption(option, true);
-                }
-            }
-
-
             // tab点击事件
             $(".layui-tab-title li").click(function() {
                 $(".layui-tab-title li").removeClass("layui-this");
@@ -475,6 +207,7 @@
                 var name = "chart" + index;
                 $(".chart").css("opacity", "0");
                 document.getElementsByClassName(name)[0].style.opacity = "1";
+
             })
         });
         function loadStatisLayui(){
@@ -521,9 +254,17 @@
         function selectDept(idInp, nameInp, bMore){
             jo.selectTree('{URL_UMS}ums/tree/getDeptTree.action',jo.getDefVal(idInp, 'PARENT_ID'),jo.getDefVal(nameInp, 'PARENT_NAME'),'ID','NAME', 'PARENT_ID', bMore);
         }
+        //获取查询条件内容
+        function getQueryData() {
+            var obj = new Object();
+            //todo
+            return obj;
+        }
         //加载奖励层次数据
         function loadAwardLevel(){
-            jo.postAjax("pms/statistic/getAwardLevel",{}, function(json){
+            //获取查询条件信息
+            var selectObj = getQueryData();
+            jo.postAjax("pms/statistic/getAwardLevel",{data:selectObj}, function(json){
                 if(json && json.code == 0){
                     var data = json.data;
                     var info = data[0];
@@ -702,6 +443,338 @@
                     type: 'bar',
                     label: labelOption,
                     data: ['','','',data.awardL4]
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //加载出版著作数据
+        function loadPublish(){
+            //这个后台数据需要开发
+            // 获取查询条件信息
+            var selectObj = getQueryData();
+            jo.postAjax("pms/statistic/getAwardLevel",{data:selectObj}, function(json){
+                if(json && json.code == 0){
+                    var data = json.data;
+                    var info = data[0];
+                    //国家级
+                    awardLevel = info["attr1"];
+                    //省部级
+                    awardLeve2 = info["attr2"];
+                    //厅级及以下
+                    awardLeve3 = info["attr3"];
+
+                    //尚无资料
+                    noInfo = allTechAwardCount - awardLevel - awardLeve2 - awardLeve3;
+                    if(noInfo<0){
+                        noInfo = 0;
+                    }
+
+                    var obj = new Object();
+                    //85, 90, 90, 95, 95, 50
+                    //'著作', '编著', '译著', '独著', '合著', '其他'
+                    obj.publish1 = 85;//'著作'
+                    obj.publish2 = 90;// '编著'
+                    obj.publish3 = 90;//'译著'
+                    obj.publish4 = 95;//'独著'
+                    obj.publish5 = 95;//'合著'
+                    obj.publish6 = 50;//'其他'
+                    obj.max = obj.publish4+5;//max是6个数值最大的+5
+                    chart3(obj);//生成出版著作数量饼图
+                    chart4(obj);//生成出版著作数量分布线图
+                }
+            });
+        }
+        //出版著作数量饼图
+        function chart3(data) {
+            var dom = document.getElementById("chart3");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            var labelOption = {
+                normal: {
+                    show: true,
+                    formatter: '{c}',
+                    fontSize: 12,
+                    rich: {
+                        name: {
+                            textBorderColor: '#fff'
+                        }
+                    }
+                }
+            };
+            option = {
+                tooltip: {},
+                radar: {
+                    name: {
+                        textStyle: {
+                            color: '#333',
+                            borderRadius: 3,
+                            padding: [3, 5]
+                        }
+                    },
+                    radius: '60%',
+                    center: ['50%', '44%'],
+                    indicator: [{
+                        text: '著作',
+                        max: data.max
+                    }, {
+                        text: '编著',
+                        max: data.max
+                    }, {
+                        text: '译著',
+                        max: data.max
+                    }, {
+                        text: '独著',
+                        max: data.max
+                    }, {
+                        text: '合著',
+                        max: data.max
+                    }, {
+                        text: '其他',
+                        max: data.max
+                    }],
+                    splitArea: {
+
+                        show: true,
+
+                        areaStyle: {
+
+                            color: ["#fff"] // 图表背景网格的颜色
+
+                        }
+
+                    }
+                },
+                series: [{
+                    name: '出版著作',
+                    type: 'radar',
+                    areaStyle: {
+                        normal: {
+                            color: "#ffb2c2",
+                        }
+                    },
+                    data: [{
+                        value: [data.publish1, data.publish2, data.publish3, data.publish4, data.publish5, data.publish6],
+                        name: '出版著作数量'
+                    }]
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //出版著作数量分布线图
+        function chart4(data) {
+            var dom = document.getElementById("chart4");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+
+            var labelOption = {
+                normal: {
+                    show: true,
+                    formatter: '{c}',
+                    fontSize: 12,
+                    rich: {
+                        name: {
+                            textBorderColor: '#fff'
+                        }
+                    }
+                }
+            };
+
+            option = {
+                color: ['#3398DB'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: ['著作', '编著', '译著', '独著', '合著', '其他'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: '数量',
+                    type: 'bar',
+                    barWidth: '40%',
+                    data: [data.publish1, data.publish2, data.publish3, data.publish4, data.publish5, data.publish6],
+                    label: labelOption,
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //加载年度考核数据
+        function loadYearCheck(){
+            //这个后台数据需要开发
+            // 获取查询条件信息
+            var selectObj = getQueryData();
+            jo.postAjax("pms/statistic/getAwardLevel",{data:selectObj}, function(json){
+                if(json && json.code == 0){
+                    var data = json.data;
+                    var info = data[0];
+                    //国家级
+                    awardLevel = info["attr1"];
+                    //省部级
+                    awardLeve2 = info["attr2"];
+                    //厅级及以下
+                    awardLeve3 = info["attr3"];
+
+                    //尚无资料
+                    noInfo = allTechAwardCount - awardLevel - awardLeve2 - awardLeve3;
+                    if(noInfo<0){
+                        noInfo = 0;
+                    }
+
+                    var obj = new Object();
+                    //'年度考核等级', '第一季度等级', '第二季度等级', '第三季度等级', '第四季度等级'
+                    //248, 201, 145, 74, 26
+                    obj.yearCheck1 = 248;//'年度考核等级'
+                    obj.yearCheck2 = 201;//'第一季度等级'
+                    obj.yearCheck3 = 145;//'第二季度等级'
+                    obj.yearCheck4 = 74;// '第三季度等级'
+                    obj.yearCheck5 = 26;//'第四季度等级'
+                    chart5(obj);//生成年度考核饼图
+                    chart6(obj);//生成年度考核柱状图
+                }
+            });
+        }
+        //年度考核饼图
+        function chart5(data) {
+            var dom = document.getElementById("chart5");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    icon: 'circle',
+                    x: 'center',
+                    y: 'bottom',
+                    data: ['年度考核等级', '第一季度等级', '第二季度等级', '第三季度等级', '第四季度等级'],
+                    itemGap: 10,
+                },
+                calculable: true,
+                color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3"],
+                series: [{
+                    name: '',
+                    type: 'pie',
+                    radius: [20, 70],
+                    center: ['50%', '50%'],
+                    roseType: 'radius',
+                    data: [{
+                        value: data.yearCheck1,
+                        name: '年度考核等级'
+                    }, {
+                        value: data.yearCheck2,
+                        name: '第一季度等级'
+                    }, {
+                        value: data.yearCheck3,
+                        name: '第二季度等级'
+                    }, {
+                        value: data.yearCheck4,
+                        name: '第三季度等级'
+                    }, {
+                        value: data.yearCheck5,
+                        name: '第四季度等级'
+                    }],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                formatter: "{b} : {c} ({d}%)",
+                                color: "#4a4a4a"
+
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //年度考核柱状图
+        function chart6(data) {
+            var dom = document.getElementById("chart6");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+
+            var labelOption = {
+                normal: {
+                    show: true,
+                    formatter: '{c}',
+                    fontSize: 12,
+                    rich: {
+                        name: {
+                            textBorderColor: '#fff'
+                        }
+                    }
+                }
+            };
+
+            option = {
+                color: ['#3398DB'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: ['年度考核', '第一季度', '第二季度', '第三季度', '第四季度'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: '数量',
+                    type: 'bar',
+                    barWidth: '40%',
+                    data: [data.yearCheck1, data.yearCheck2, data.yearCheck3, data.yearCheck4, data.yearCheck5],
+                    label: labelOption,
                 }]
             };
             if (option && typeof option === "object") {

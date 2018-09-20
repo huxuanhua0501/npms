@@ -34,7 +34,9 @@
 .chart #chart3,
 .chart #chart4,
 .chart #chart5,
-.chart #chart6 {
+.chart #chart6,
+.chart #chart7,
+.chart #chart8{
     height: 298px;
     width: 100%;
     padding-bottom: 20px;
@@ -142,7 +144,9 @@
 }
 
 .chart1,
-.chart2 {
+.chart2,
+.chart3,
+.chart4{
     opacity: 0;
     position: absolute;
     width: 100%;

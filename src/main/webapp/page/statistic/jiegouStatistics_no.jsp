@@ -125,17 +125,16 @@
 
             <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin: 0;">
                 <ul class="layui-tab-title">
-                    <li class="layui-this"><a href="structure-analysis.html?edit=true">人才建设</a></li>
-                    <li><a href="sex-analysis.html?edit=true">男女比例</a></li>
-                    <li><a href="xueli-analysis.html?edit=true">学历分布</a></li>
-                    <li><a href="year-analysis.html?edit=true">工作年限</a></li>
-                    <!-- <li>奖励情况</li> -->
+                    <li onclick="loadTalentEchelon()" class="layui-this">人才建设</li>
+                    <li onclick="loadMenAndWomen()">男女比例</li>
+                    <li onclick="loadEducation()">学历分布</li>
+                    <li onclick="loadWorkYear()">工作年限</li>
                 </ul>
             </div>
 
             <div class="gray"></div>
 
-            <div class="chart">
+            <div class="chart chart1" style="opacity: 1;">
                 <div class="layui-row">
                     <div class="layui-col-md12 tab-item">
                         <div class="tit clear">
@@ -150,15 +149,67 @@
                             <i class="iconfont icon-smenu right"></i>
                         </div>
                         <div id="chart1"></div>
-                        <div class="txt">
-                            <h2>年龄结构</h2>
-                            <p>&lt;30岁: 12 人 （2.22%）</p>
-                            <p>30-35岁：21人 （38.89%）</p>
-                            <p>35-40岁：16人 （29.63%）</p>
-                            <p>40-45岁：11人 （20.37%）</p>
-                            <p>45-50岁：4人 （7.41%）</p>
-                            <p>50+岁：4人 （0.74%）</p>
-                            <p>尚无填写：4人 （0.74%）</p>
+                        <div class="txt" id="lalentEchelonHtml">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart chart2" style="opacity: 0;">
+                <div class="layui-row">
+                    <div class="layui-col-md12 tab-item">
+                        <div class="tit clear">
+                            <span class="left">男女比例柱状图分析</span>
+                            <i class="iconfont icon-smenu right"></i>
+                        </div>
+                        <div id="chart4"></div>
+                    </div>
+                    <div class="layui-col-md12 tab-item">
+                        <div class="tit clear">
+                            <span class="left">男女比例饼状图分析</span>
+                            <i class="iconfont icon-smenu right"></i>
+                        </div>
+                        <div id="chart3"></div>
+                        <div class="txt" id="menAndWomenHtml">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart chart3" style="opacity: 0;">
+                <div class="layui-row">
+                    <div class="layui-col-md12 tab-item">
+                        <div class="tit clear">
+                            <span class="left">学历分布柱状图分析</span>
+                            <i class="iconfont icon-smenu right"></i>
+                        </div>
+                        <div id="chart6"></div>
+                    </div>
+                    <div class="layui-col-md12 tab-item">
+                        <div class="tit clear">
+                            <span class="left">学历分布饼状图分析</span>
+                            <i class="iconfont icon-smenu right"></i>
+                        </div>
+                        <div id="chart5"></div>
+                        <div class="txt" id="educationHtml">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart chart4" style="opacity: 0;">
+                <div class="layui-row">
+                    <div class="layui-col-md12 tab-item">
+                        <div class="tit clear">
+                            <span class="left">工作年限柱状图分析</span>
+                            <i class="iconfont icon-smenu right"></i>
+                        </div>
+                        <div id="chart8"></div>
+                    </div>
+                    <div class="layui-col-md12 tab-item">
+                        <div class="tit clear">
+                            <span class="left">工作年限饼状图分析</span>
+                            <i class="iconfont icon-smenu right"></i>
+                        </div>
+                        <div id="chart7"></div>
+                        <div class="txt" id="workYearHtml">
                         </div>
                     </div>
                 </div>
@@ -167,160 +218,26 @@
     </div>
 </div>
     <script>
+        //系统录入所有人员数量
+        var allUserCount;
         $(function() {
             //加载样式
             loadStatisLayui();
             //加载查询条件
             loadStatisQuery();
-            //生成图表
-            chart1();
-            chart2();
-
-
-            function chart1() {
-                var dom = document.getElementById("chart1");
-                var myChart = echarts.init(dom);
-                var app = {};
-                option = null;
-                option = {
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
-                    },
-                    legend: {
-                        icon: 'circle',
-                        x: 'center',
-                        y: 'bottom',
-                        data: ['<30岁', '30-35岁', '35-40岁', '40-45岁', '45-50岁', '50+岁', '尚无填写'],
-                        itemGap: 10,
-                    },
-                    calculable: true,
-                    color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3", "orange", "green", ],
-                    series: [{
-                        name: '',
-                        type: 'pie',
-                        radius: [30, 100],
-                        center: ['62%', '50%'],
-                        roseType: 'radius',
-                        data: [{
-                            value: 12,
-                            name: '<30岁'
-                        }, {
-                            value: 210,
-                            name: '30-35岁'
-                        }, {
-                            value: 160,
-                            name: '35-40岁'
-                        }, {
-                            value: 110,
-                            name: '40-45岁'
-                        }, {
-                            value: 40,
-                            name: '45-50岁'
-                        }, {
-                            value: 4,
-                            name: '50+岁'
-                        }, {
-                            value: 4,
-                            name: '尚无填写'
-                        }],
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    formatter: "{b} : {c}人 ({d}%)",
-                                    color: "#4a4a4a"
-
-                                },
-                                labelLine: {
-                                    show: true
-                                }
-                            },
-                            emphasis: {
-                                label: {
-                                    show: true
-                                },
-                                labelLine: {
-                                    show: true
-                                }
-                            }
-                        }
-                    }]
-                };
-                if (option && typeof option === "object") {
-                    myChart.setOption(option, true);
-                }
-            }
-
-            function chart2() {
-                var dom = document.getElementById("chart2");
-                var myChart = echarts.init(dom);
-                var app = {};
-                option = null;
-
-                var labelOption = {
-                    normal: {
-                        show: true,
-                        formatter: '{c}',
-                        fontSize: 12,
-                        rich: {
-                            name: {
-                                textBorderColor: '#fff'
-                            }
-                        }
-                    }
-                };
-
-                option = {
-                    color: ['#3398DB'],
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: [{
-                        type: 'category',
-                        data: ['<30岁', '30-35岁', '35-40岁', '40-45岁', '45-50岁', '50+岁', '尚无填写'],
-                        axisTick: {
-                            alignWithLabel: true
-                        }
-                    }],
-                    yAxis: [{
-                        type: 'value'
-                    }],
-                    series: [{
-                        name: '人数',
-                        type: 'bar',
-                        barWidth: '50%',
-                        data: [12, 210, 160, 110, 40, 4, 4],
-                        label: labelOption,
-                    }]
-                };
-                if (option && typeof option === "object") {
-                    myChart.setOption(option, true);
-                }
-            }
-
-
-
+            //获取系统录入所有人员数量
+            getAllUserCount();
+            //加载人才建设数据
+            loadTalentEchelon();
 
             // tab点击事件
             $(".layui-tab-title li").click(function() {
                 $(".layui-tab-title li").removeClass("layui-this");
                 $(this).addClass("layui-this");
-                // var index = $(this).index() + 1;
-                // var name = "chart" + index;
-                // $(".chart").css("opacity", "0");
-                // console.log(name)
-                // document.getElementsByClassName(name)[0].style.opacity = "1";
-
+                var index = $(this).index() + 1;
+                var name = "chart" + index;
+                $(".chart").css("opacity", "0");
+                document.getElementsByClassName(name)[0].style.opacity = "1";
             })
         });
         function loadStatisLayui(){
@@ -393,6 +310,742 @@
          */
         function selectDept(idInp, nameInp, bMore){
             jo.selectTree('{URL_UMS}ums/tree/getDeptTree.action',jo.getDefVal(idInp, 'PARENT_ID'),jo.getDefVal(nameInp, 'PARENT_NAME'),'ID','NAME', 'PARENT_ID', bMore);
+        }
+        //查询系统内所有用户数量
+        function getAllUserCount(){
+            jo.postAjax("pms/statistic/getAllUserCount",{}, function(json){
+                if(json && json.code == 0){
+                    var data = json.data;
+                    var info = data[0];
+                    allUserCount = info["attr1"];
+                }
+            });
+        }
+        //获取查询条件内容
+        function getQueryData() {
+            var obj = new Object();
+            //todo
+            return obj;
+        }
+        //加载人才建设数据
+        function loadTalentEchelon(){
+            //获取查询条件信息
+            var selectObj = getQueryData();
+            jo.postAjax("pms/statistic/getTalentEchelon",{data:selectObj}, function(json){
+                if(json && json.code == 0){
+                    var data = json.data;
+                    var info = data[0];
+                    //小于30岁
+                    var age30 = info["attr1"];
+                    //大于30岁，小于等于35岁
+                    var age30_35 = info["attr2"];
+                    //大于35岁，小于等于40岁
+                    var age35_40 = info["attr3"];
+                    //大于40岁，小于等于45岁
+                    var age40_45 = info["attr4"];
+                    //大于45岁，小于等于50岁
+                    var age45_50 = info["attr5"];
+                    //大于50岁
+                    var age50 = info["attr6"];
+                    //尚无填写
+
+                    var noInfo = allUserCount - age30 - age30_35 - age35_40 - age40_45 - age45_50 - age50;
+                    if(noInfo<0){
+                        noInfo = 0;
+                    }
+                    var obj = new Object();
+                    obj.talentEchelon1 = age30;
+                    obj.talentEchelon2 = age30_35;
+                    obj.talentEchelon3 = age35_40;
+                    obj.talentEchelon4 = age40_45;
+                    obj.talentEchelon5 = age45_50;
+                    obj.talentEchelon6 = age50;
+                    obj.talentEchelon7 = noInfo;
+                    obj.total = allUserCount;
+                    talentEchelonHtml(obj);//生成人才建设html
+                    chart1(obj);//生成人才建设饼图
+                    chart2(obj);//生成人才建设柱状图
+                }
+            });
+        }
+        //生成人才建设Html
+        function talentEchelonHtml(data){
+            var html = '<h2>年龄结构</h2>\n' +
+                '        <p>&lt;30岁: '+data.talentEchelon1+' 人 （'+Number(data.talentEchelon1/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>30-35岁: '+data.talentEchelon2+' 人 （'+Number(data.talentEchelon2/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>35-40岁：'+data.talentEchelon3+' 人 （'+Number(data.talentEchelon3/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>40-45岁：'+data.talentEchelon4+' 人 （'+Number(data.talentEchelon4/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>45-50岁：'+data.talentEchelon5+' 人 （'+Number(data.talentEchelon5/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>50+岁：'+data.talentEchelon6+' 人 （'+Number(data.talentEchelon6/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>尚无填写：'+data.talentEchelon7+' 人 （'+Number(data.talentEchelon7/data.total*100).toFixed(2)+'%）</p>';
+            $("#lalentEchelonHtml").html(html);
+        }
+        //生成人才建设饼图
+        function chart1(data) {
+            var dom = document.getElementById("chart1");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    icon: 'circle',
+                    x: 'center',
+                    y: 'bottom',
+                    data: ['<30岁', '30-35岁', '35-40岁', '40-45岁', '45-50岁', '50+岁', '尚无填写'],
+                    itemGap: 10,
+                },
+                calculable: true,
+                color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3", "orange", "green", ],
+                series: [{
+                    name: '',
+                    type: 'pie',
+                    radius: [30, 100],
+                    center: ['62%', '50%'],
+                    roseType: 'radius',
+                    data: [{
+                        value: data.talentEchelon1,
+                        name: '<30岁'
+                    }, {
+                        value: data.talentEchelon2,
+                        name: '30-35岁'
+                    }, {
+                        value: data.talentEchelon3,
+                        name: '35-40岁'
+                    }, {
+                        value: data.talentEchelon4,
+                        name: '40-45岁'
+                    }, {
+                        value: data.talentEchelon5,
+                        name: '45-50岁'
+                    }, {
+                        value: data.talentEchelon6,
+                        name: '50+岁'
+                    }, {
+                        value: data.talentEchelon7,
+                        name: '尚无填写'
+                    }],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                formatter: "{b} : {c}人 ({d}%)",
+                                color: "#4a4a4a"
+
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //生成人才建设柱状图
+        function chart2(data) {
+            var dom = document.getElementById("chart2");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+
+            var labelOption = {
+                normal: {
+                    show: true,
+                    formatter: '{c}',
+                    fontSize: 12,
+                    rich: {
+                        name: {
+                            textBorderColor: '#fff'
+                        }
+                    }
+                }
+            };
+
+            option = {
+                color: ['#3398DB'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: ['<30岁', '30-35岁', '35-40岁', '40-45岁', '45-50岁', '50+岁', '尚无填写'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: '人数',
+                    type: 'bar',
+                    barWidth: '50%',
+                    data: [data.talentEchelon1, data.talentEchelon2, data.talentEchelon3, data.talentEchelon4,
+                        data.talentEchelon5, data.talentEchelon6, data.talentEchelon7],
+                    label: labelOption,
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //加载男女比例情况数据
+        function loadMenAndWomen(){
+            //获取查询条件信息
+            var selectObj = getQueryData();
+            jo.postAjax("pms/statistic/getMenAndWomen",{data:selectObj}, function(json){
+                if(json && json.code == 0){
+                    var data = json.data;
+                    var info = data[0];
+                    //男
+                    var man = parseInt(info["attr1"]);
+                    //女
+                    var women = parseInt(info["attr2"]);
+                    //尚无资料
+                    var noInfo = allUserCount - man - women;
+                    if(noInfo<0){
+                        noInfo = 0;
+                    }
+                    var obj = new Object();
+                    obj.menAndWomen1 = man;
+                    obj.menAndWomen2 = women;
+                    obj.menAndWomen3 = noInfo;
+                    obj.total = allUserCount;
+                    menAndWomenHtml(obj);//生成男女比例html
+                    chart3(obj);//生成男女比例饼图
+                    chart4(obj);//生成男女比例柱状图
+                }
+            });
+        }
+        //生成男女比例html
+        function menAndWomenHtml(data){
+            var html = '<h2>男女比例结构</h2>\n' +
+                '        <p>男: '+data.menAndWomen1+' 人 （'+Number(data.menAndWomen1/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>女: '+data.menAndWomen2+' 人 （'+Number(data.menAndWomen2/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>尚无填写：'+data.menAndWomen3+' 人 （'+Number(data.menAndWomen3/data.total*100).toFixed(2)+'%）</p>';
+            $("#menAndWomenHtml").html(html);
+        }
+        //生成男女比例饼图
+        function chart3(data) {
+            var dom = document.getElementById("chart3");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    icon: 'circle',
+                    x: 'center',
+                    y: 'bottom',
+                    data: ['男', '女', '尚无填写'],
+                    itemGap: 10,
+                },
+                calculable: true,
+                color: ["#ffc760", "#6fe621", "#4fccff"],
+                series: [{
+                    name: '',
+                    type: 'pie',
+                    radius: [30, 100],
+                    center: ['62%', '50%'],
+                    roseType: 'radius',
+                    data: [{
+                        value: data.menAndWomen1,
+                        name: '男'
+                    }, {
+                        value: data.menAndWomen2,
+                        name: '女'
+                    }, {
+                        value: data.menAndWomen3,
+                        name: '尚无填写'
+                    }],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                formatter: "{b} : {c}人 ({d}%)",
+                                color: "#4a4a4a"
+
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //生成男女比例柱状图
+        function chart4(data){
+            var dom = document.getElementById("chart4");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+
+            var labelOption = {
+                normal: {
+                    show: true,
+                    formatter: '{c}',
+                    fontSize: 12,
+                    rich: {
+                        name: {
+                            textBorderColor: '#fff'
+                        }
+                    }
+                }
+            };
+
+            option = {
+                color: ['#3398DB'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: ['男', '女', '尚无填写'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: '人数',
+                    type: 'bar',
+                    barWidth: '30%',
+                    data: [data.menAndWomen1, data.menAndWomen2, data.menAndWomen3],
+                    label: labelOption,
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //加载学历分布数据
+        function loadEducation(){
+            //获取查询条件信息
+            var selectObj = getQueryData();
+            jo.postAjax("pms/statistic/getEducationSpread",{data:selectObj}, function(json){
+                if(json && json.code == 0){
+                    var data = json.data;
+                    var info = data[0];
+
+                    //小学
+                    var educationSpread1 = info["attr1"];
+                    //初中
+                    var educationSpread2 = info["attr2"];
+                    //中专/高中
+                    var educationSpread3 = info["attr3"];
+                    //专科
+                    var educationSpread4 = info["attr4"];
+                    //专科/本科
+                    var educationSpread5 = info["attr5"];
+                    //硕士研究生
+                    var educationSpread6 = info["attr6"];
+                    //博士研究生
+                    var educationSpread7 = info["attr7"];
+
+                    //尚无填写
+                    var noInfo = allUserCount - educationSpread1 - educationSpread2 - educationSpread3 - educationSpread4 - educationSpread5 - educationSpread6 - educationSpread6;
+                    if(noInfo<0){
+                        noInfo = 0;
+                    }
+                    var obj = new Object();
+                    obj.education1 = educationSpread1;
+                    obj.education2 = educationSpread2;
+                    obj.education3 = educationSpread3;
+                    obj.education4 = educationSpread4;
+                    obj.education5 = educationSpread5;
+                    obj.education6 = educationSpread6;
+                    obj.education7 = educationSpread7;
+                    obj.education8 = noInfo;
+                    obj.total = allUserCount;
+                    educationHtml(obj);//生成学历分布html
+                    chart5(obj);//生成学历分布饼图
+                    chart6(obj);//生成学历分布柱状图
+                }
+            });
+        }
+        //生成学历分布html
+        function educationHtml(data){
+            var html = '<h2>学历分布结构</h2>\n' +
+                '        <p>小学: '+data.education1+' 人 （'+Number(data.education1/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>初中: '+data.education2+' 人 （'+Number(data.education2/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>中专/高中：'+data.education3+' 人 （'+Number(data.education3/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>大专：'+data.education4+' 人 （'+Number(data.education4/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>大学：'+data.education5+' 人 （'+Number(data.education5/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>硕士研究生：'+data.education6+' 人 （'+Number(data.education6/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>博士研究生：'+data.education7+' 人 （'+Number(data.education7/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>尚无填写：'+data.education8+' 人 （'+Number(data.education8/data.total*100).toFixed(2)+'%）</p>';
+            $("#educationHtml").html(html);
+        }
+        //生成学历分布饼图
+        function chart5(data){
+            var dom = document.getElementById("chart5");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    icon: 'circle',
+                    x: 'center',
+                    y: 'bottom',
+                    data: ['小学', '初中', '中专/高中', '大专', '大学', '硕士研究生', '博士研究生', '尚未填写'],
+                    itemGap: 10,
+                },
+                calculable: true,
+                color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3", "orange", "green", "pink", ],
+                series: [{
+                    name: '',
+                    type: 'pie',
+                    radius: [20, 60],
+                    center: ['62%', '50%'],
+                    roseType: 'radius',
+                    data: [{
+                        value: data.education1,
+                        name: '小学'
+                    }, {
+                        value: data.education2,
+                        name: '初中'
+                    }, {
+                        value: data.education3,
+                        name: '中专/高中'
+                    }, {
+                        value: data.education4,
+                        name: '大专'
+                    }, {
+                        value: data.education5,
+                        name: '大学'
+                    }, {
+                        value: data.education6,
+                        name: '硕士研究生'
+                    }, {
+                        value: data.education7,
+                        name: '博士研究生'
+                    }, {
+                        value: data.education8,
+                        name: '尚未填写'
+                    }],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                formatter: "{b} : {c}人 ({d}%)",
+                                color: "#4a4a4a"
+
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //生成学历分布柱状图
+        function chart6(data){
+            var dom = document.getElementById("chart6");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+
+            var labelOption = {
+                normal: {
+                    show: true,
+                    formatter: '{c}',
+                    fontSize: 12,
+                    rich: {
+                        name: {
+                            textBorderColor: '#fff'
+                        }
+                    }
+                }
+            };
+
+            option = {
+                color: ['#3398DB'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: ['小学', '初中', '中专/高中', '大专', '大学', '硕士研究生', '博士研究生', '尚未填写'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: '人数',
+                    type: 'bar',
+                    barWidth: '30%',
+                    data: [data.education1, data.education2, data.education3, data.education4, data.education5,
+                        data.education6, data.education7, data.education8],
+                    label: labelOption,
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //加载工作年限数据
+        function loadWorkYear(){
+            //获取查询条件信息
+            var selectObj = getQueryData();
+            jo.postAjax("pms/statistic/getWorkYear",{data:selectObj}, function(json){
+                if(json && json.code == 0){
+                    var data = json.data;
+                    var info = data[0];
+
+                    //小于等于5年
+                    var work_year_5 = info["attr1"];
+                    //大于5年，小于等于10年
+                    var work_year_5_10 = info["attr2"];
+                    //大于10年，小于等于20年
+                    var work_year_10_20 = info["attr3"];
+                    //大于20年，小于等于30年
+                    var work_year_20_30 = info["attr4"];
+                    //大于30年，小于等于40年
+                    var work_year_30_40 = info["attr5"];
+                    //大于40年
+                    var work_year_40 = info["attr6"];
+
+
+                    //尚无填写
+                    var noInfo = allUserCount - work_year_5 - work_year_5_10 - work_year_10_20 - work_year_20_30 - work_year_30_40 - work_year_40;
+                    if(noInfo<0){
+                        noInfo = 0;
+                    }
+                    var obj = new Object();
+                    obj.workYear1 = work_year_5;
+                    obj.workYear2 = work_year_5_10;
+                    obj.workYear3 = work_year_10_20;
+                    obj.workYear4 = work_year_20_30;
+                    obj.workYear5 = work_year_30_40;
+                    obj.workYear6 = work_year_40;
+                    obj.workYear7 = noInfo;
+                    obj.total = allUserCount;
+                    workYearHtml(obj);//生成工作年限html
+                    chart7(obj);//生成工作年限饼图
+                    chart8(obj);//生成工作年限柱状图
+                }
+            });
+        }
+        //生成工作年限html
+        function workYearHtml(data){
+            var html = '<h2>工作年限结构</h2>\n' +
+                '        <p>&lt;5年: '+data.workYear1+' 人 （'+Number(data.workYear1/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>5-10年: '+data.workYear2+' 人 （'+Number(data.workYear2/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>10-20年：'+data.workYear3+' 人 （'+Number(data.workYear3/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>20-30年：'+data.workYear4+' 人 （'+Number(data.workYear4/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>30-40年：'+data.workYear5+' 人 （'+Number(data.workYear5/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>40+年：'+data.workYear6+' 人 （'+Number(data.workYear6/data.total*100).toFixed(2)+'%）</p>\n'+
+                '        <p>尚无填写：'+data.workYear7+' 人 （'+Number(data.workYear7/data.total*100).toFixed(2)+'%）</p>';
+            $("#workYearHtml").html(html);
+        }
+        //生成工作年限饼图
+        function chart7(data){
+            var dom = document.getElementById("chart7");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    icon: 'circle',
+                    x: 'center',
+                    y: 'bottom',
+                    data: ['<5年', '5-10年', '10-20年', '20-30年', '30-40年', '40+年', '尚未填写'],
+                    itemGap: 10,
+                },
+                calculable: true,
+                color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3", "orange", "green"],
+                series: [{
+                    name: '',
+                    type: 'pie',
+                    radius: [20, 60],
+                    center: ['62%', '50%'],
+                    roseType: 'radius',
+                    data: [{
+                        value: data.workYear1,
+                        name: '<5年'
+                    }, {
+                        value: data.workYear2,
+                        name: '5-10年'
+                    }, {
+                        value: data.workYear3,
+                        name: '10-20年'
+                    }, {
+                        value: data.workYear4,
+                        name: '20-30年'
+                    }, {
+                        value: data.workYear5,
+                        name: '30-40年'
+                    }, {
+                        value: data.workYear6,
+                        name: '40+年'
+                    }, {
+                        value: data.workYear7,
+                        name: '尚未填写'
+                    }],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                formatter: "{b} : {c}人 ({d}%)",
+                                color: "#4a4a4a"
+
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+        //生成工作年限柱状图
+        function chart8(data) {
+            var dom = document.getElementById("chart8");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+
+            var labelOption = {
+                normal: {
+                    show: true,
+                    formatter: '{c}',
+                    fontSize: 12,
+                    rich: {
+                        name: {
+                            textBorderColor: '#fff'
+                        }
+                    }
+                }
+            };
+
+            option = {
+                color: ['#3398DB'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: ['<5年', '5-10年', '10-20年', '20-30年', '30-40年', '40+年', '尚未填写'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: '人数',
+                    type: 'bar',
+                    barWidth: '40%',
+                    data: [data.workYear1, data.workYear2, data.workYear3, data.workYear4, data.workYear5,
+                        data.workYear6, data.workYear7],
+                    label: labelOption,
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
         }
     </script>
 </body>

@@ -131,17 +131,7 @@
                             <i class="iconfont icon-smenu right"></i>
                         </div>
                         <div id="chart1"></div>
-                        <div class="txt">
-                            <h2>编制比例结构</h2>
-                            <p>在编: 500 人 （64.1%）</p>
-                            <p>院聘: 35 人 （4.49%）</p>
-                            <p>劳务派遣：35 人 （4.49%）</p>
-                            <p>劳务协议：35 人 （4.49%）</p>
-                            <p>离职：35 人 （4.49%）</p>
-                            <p>退休：35 人 （4.49%）</p>
-                            <p>离休：35 人 （4.49%）</p>
-                            <p>博士后：35 人 （4.48%）</p>
-                            <p>其他：35 人 （4.48%）</p>
+                        <div class="txt" id="chartHtml">
                         </div>
                     </div>
                 </div>
@@ -156,90 +146,10 @@
             //加载查询条件
             loadStatisQuery();
 
-            chart1();
-            // chart2();
+            //加载编制分析数据
+            loadBianzhi();
 
-            function chart1() {
-                var dom = document.getElementById("chart1");
-                var myChart = echarts.init(dom);
-                var app = {};
-                option = null;
-                option = {
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
-                    },
-                    legend: {
-                        icon: 'circle',
-                        x: 'center',
-                        y: 'bottom',
-                        data: ['在编', '院聘', '劳务派遣', '劳务协议', '离职', '退休', '离休', '博士后', '其他'],
-                        itemGap: 10,
-                    },
-                    calculable: true,
-                    // color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3"],
-                    color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3", "orange", "green", "pink", "yellow"],
-                    series: [{
-                        name: '',
-                        type: 'pie',
-                        radius: [30, 100],
-                        center: ['62%', '50%'],
-                        roseType: 'radius',
-                        data: [{
-                            value: 500,
-                            name: '在编'
-                        }, {
-                            value: 35,
-                            name: '院聘'
-                        }, {
-                            value: 35,
-                            name: '劳务派遣'
-                        }, {
-                            value: 35,
-                            name: '劳务协议'
-                        }, {
-                            value: 35,
-                            name: '离职'
-                        }, {
-                            value: 35,
-                            name: '退休'
-                        }, {
-                            value: 35,
-                            name: '离休'
-                        }, {
-                            value: 35,
-                            name: '博士后'
-                        }, {
-                            value: 35,
-                            name: '其他'
-                        }],
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    formatter: "{b} : {c}人 ({d}%)",
-                                    color: "#4a4a4a"
 
-                                },
-                                labelLine: {
-                                    show: true
-                                }
-                            },
-                            emphasis: {
-                                label: {
-                                    show: true
-                                },
-                                labelLine: {
-                                    show: true
-                                }
-                            }
-                        }
-                    }]
-                };
-                if (option && typeof option === "object") {
-                    myChart.setOption(option, true);
-                }
-            }
         });
         function loadStatisLayui(){
             layui.use(['layer', 'form', 'laydate'], function() {
@@ -311,6 +221,137 @@
          */
         function selectDept(idInp, nameInp, bMore){
             jo.selectTree('{URL_UMS}ums/tree/getDeptTree.action',jo.getDefVal(idInp, 'PARENT_ID'),jo.getDefVal(nameInp, 'PARENT_NAME'),'ID','NAME', 'PARENT_ID', bMore);
+        }
+        //获取查询数据
+        function getQueryData() {
+            var obj = new Object();
+            //todo
+            return obj;
+        }
+        //加载编制信息
+        function loadBianzhi(){
+            //这个后台数据需要开发
+            // 获取查询条件信息
+            var selectObj = getQueryData();
+            jo.postAjax("pms/statistic/getAwardLevel",{data:selectObj}, function(json){
+                if(json && json.code == 0){
+                    //实现成动态数据
+
+                    var obj = new Object();
+                    //'在编', '院聘', '劳务派遣', '劳务协议', '离职', '退休', '离休', '博士后', '其他'
+                    //500, 35, 35, 35, 35,35,35,35,35
+                    obj.bianzhi1 = 500;//'在编'
+                    obj.bianzhi2 = 35;//'院聘'
+                    obj.bianzhi3 = 35;//'劳务派遣'
+                    obj.bianzhi4 = 35;// '劳务协议'
+                    obj.bianzhi5 = 35;//'离职'
+                    obj.bianzhi6 = 35;//'退休'
+                    obj.bianzhi7 = 35;// '离休'
+                    obj.bianzhi8 = 35;//'博士后'
+                    obj.bianzhi9 = 35;//'其他'
+                    obj.total = obj.bianzhi1+ obj.bianzhi2+ obj.bianzhi3+ obj.bianzhi4+ obj.bianzhi5+ obj.bianzhi6+
+                        obj.bianzhi7+ obj.bianzhi8+ obj.bianzhi9;
+                    chartHtml(obj);//生成编制比例结构HTML
+                    chart1(obj);//生成年度考核柱状图
+                }
+            });
+        }
+        //生成编制比例结构HTML
+        function chartHtml(data) {
+
+            var html = '<h2>编制比例结构</h2>\n' +
+                '        <p>在编: '+data.bianzhi1+' 人 （'+Number(data.bianzhi1/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>院聘: '+data.bianzhi2+' 人 （'+Number(data.bianzhi2/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>劳务派遣：'+data.bianzhi3+' 人 （'+Number(data.bianzhi3/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>劳务协议：'+data.bianzhi4+' 人 （'+Number(data.bianzhi4/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>离职：'+data.bianzhi5+' 人 （'+Number(data.bianzhi5/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>退休：'+data.bianzhi6+' 人 （'+Number(data.bianzhi6/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>离休：'+data.bianzhi7+' 人 （'+Number(data.bianzhi7/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>博士后：'+data.bianzhi8+' 人 （'+Number(data.bianzhi8/data.total*100).toFixed(2)+'%）</p>\n' +
+                '        <p>其他：'+data.bianzhi9+' 人 （'+Number(data.bianzhi9/data.total*100).toFixed(2)+'%）</p>';
+            $("#chartHtml").html(html);
+        }
+        //生成编制饼图
+        function chart1(data) {
+            var dom = document.getElementById("chart1");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    icon: 'circle',
+                    x: 'center',
+                    y: 'bottom',
+                    data: ['在编', '院聘', '劳务派遣', '劳务协议', '离职', '退休', '离休', '博士后', '其他'],
+                    itemGap: 10,
+                },
+                calculable: true,
+                // color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3"],
+                color: ["#ffc760", "#6fe621", "#4fccff", "#fb497c", "#4d7bf3", "orange", "green", "pink", "yellow"],
+                series: [{
+                    name: '',
+                    type: 'pie',
+                    radius: [30, 100],
+                    center: ['62%', '50%'],
+                    roseType: 'radius',
+                    data: [{
+                        value: data.bianzhi1,
+                        name: '在编'
+                    }, {
+                        value: data.bianzhi2,
+                        name: '院聘'
+                    }, {
+                        value: data.bianzhi3,
+                        name: '劳务派遣'
+                    }, {
+                        value: data.bianzhi4,
+                        name: '劳务协议'
+                    }, {
+                        value: data.bianzhi5,
+                        name: '离职'
+                    }, {
+                        value: data.bianzhi6,
+                        name: '退休'
+                    }, {
+                        value: data.bianzhi7,
+                        name: '离休'
+                    }, {
+                        value: data.bianzhi8,
+                        name: '博士后'
+                    }, {
+                        value: data.bianzhi9,
+                        name: '其他'
+                    }],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                formatter: "{b} : {c}人 ({d}%)",
+                                color: "#4a4a4a"
+
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
         }
     </script>
 </body>
