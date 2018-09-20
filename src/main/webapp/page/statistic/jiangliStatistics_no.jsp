@@ -60,12 +60,12 @@
                         <div class="select-content">
                             <ul id="selectContent" style="height: auto;">
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="page/statistic/bianzhiStatistics_no.jsp?edit=true">
                                         <span class="left opt" style="margin-left: 40%;">编制分析</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="'page/statistic/jiegouStatistics_no.jsp?edit=true">
+                                    <a href="page/statistic/jiegouStatistics_no.jsp?edit=true">
                                         <span class="left opt" style="margin-left: 40%;">结构统计</span>
                                     </a>
                                 </li>
