@@ -78,3 +78,8 @@ admin用户的资源链接池
     2）结构统计：openPageOnMain('page/statistic/jiegouStatistics_no.jsp?edit=true')	
     3）奖励分析：openPageOnMain('page/statistic/jiangliStatistics_no.jsp?edit=true')
     其它原有作废
+完成情况：
+    1）编制分析：缺少后台部分、角色控制、部门选择、查询条件生效，其它ok
+    2）结构统计：缺少角色控制、部门选择、查询条件生效
+    3）奖励分析：奖励层次已有后台部分，出版著作、年度考核缺少后台部分
+                角色控制、部门选择、查询条件生效
