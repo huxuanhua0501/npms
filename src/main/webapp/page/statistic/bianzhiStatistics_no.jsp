@@ -252,7 +252,7 @@
                     obj.total = obj.bianzhi1+ obj.bianzhi2+ obj.bianzhi3+ obj.bianzhi4+ obj.bianzhi5+ obj.bianzhi6+
                         obj.bianzhi7+ obj.bianzhi8+ obj.bianzhi9;
                     chartHtml(obj);//生成编制比例结构HTML
-                    chart1(obj);//生成年度考核柱状图
+                    chart1(obj);//生成编制比例饼图
                 }
             });
         }

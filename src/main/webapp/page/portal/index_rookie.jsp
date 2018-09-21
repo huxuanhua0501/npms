@@ -11,10 +11,10 @@
 	<%--常量--%>
 	<%@ include file="/common/constHead.jsp"%>
 	<%--<title>中国环境科学研究院人事档案管理系统</title>--%>
-	<link rel="stylesheet" href="<%=URL_STATIC%>static/final/font/font2/iconfont.css">
-	<link rel="stylesheet" href="<%=URL_STATIC%>static/final/css/layui.css">
+	<link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/font/font2/iconfont.css">
+	<link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
 	<link rel="stylesheet" href="<%=URL_STATIC%>static/final/css/admin.css">
-	<link rel="stylesheet" href="<%=URL_STATIC%>static/final/css/style.css">
+	<link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/style.css">
 
 
 	<link rel="shortcut icon" href="<%=URL_STATIC%>static/images/favicon.ico">
@@ -30,7 +30,7 @@
 	<%--layer--%>
 	<%@ include file="/common/layerHead.jsp"%>
 	<%--公共--%>
-	<%@ include file="/common/commonHead.jsp"%>
+	<%@ include file="/common/commonHead_no.jsp"%>
 	<script>
         var pData = {};
         pData["id"] = "${loginUser.id }";
