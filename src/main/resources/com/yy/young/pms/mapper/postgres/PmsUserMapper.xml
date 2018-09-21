@@ -7,6 +7,7 @@
     <sql id="searchCol">
         O.id AS "id"
         , O.user_id AS "userId"
+        , O.marital_status AS "maritalStatus"
         , O.user_name AS "userName"
         , O.old_name AS "oldName"
         , O.sex AS "sex"

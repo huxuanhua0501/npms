@@ -64,17 +64,8 @@
         $(function () {
             sfSet();//在初始化表格之前
             joViewInitAboutDoc();//joView初始化处理
+            loadAjax();
 
-            jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
-                var list = "", listline = "";
-                listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
-                for (var i = 0; i < obj.data.length; i++) {
-                    listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
-                }
-                $("#checkbox_0").html("");
-                $("#checkbox_0").html(listline);
-
-            }, true);
 
             // $.ajax({
             //     type: "get",
@@ -92,6 +83,18 @@
             //
             // });
         });
+        function loadAjax() {
+            jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
+                var list = "", listline = "";
+                listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                for (var i = 0; i < obj.data.length; i++) {
+                    listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                }
+                $("#checkbox_0").append("");
+                $("#checkbox_0").append(listline);
+
+            }, true);
+        }
         //行处理
         // joView.handleItem = function(oItem,iIndex){
         //
@@ -262,9 +265,9 @@
                         <a class="layui-btn layui-btn-radius layui-btn-primary annual-check">年度考核</a>
                     </div>
 
-                    <div class="edit-item layui-row">
-                        <label class="layui-col-md2 layui-col-xs2" style="float:left;padding:5px 15px;width: 130px;">工作性质及状态</label>
-                        <div class="layui-col-md10 layui-col-xs10" style="padding: 10px 15px;" id="checkbox_0">
+                    <div class="edit-item layui-col-md12 layui-col-xs12">
+                        <label class="layui-form-label">工作性质及状态</label>
+                        <div style="padding: 10px 15px;" id="checkbox_0">
                         </div>
                     </div>
                     <div class="edit-item layui-row">

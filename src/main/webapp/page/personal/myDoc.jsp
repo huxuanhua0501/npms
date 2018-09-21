@@ -1287,6 +1287,18 @@
                     elem: '#toThereTime'
                     ,type: 'month'//new
                 });*/
+                // 信息预览
+                $(".preview").click(function() {
+                    layer.open({ /*弹出框*/
+                        type: 2,
+                        title: '信息预览',
+                        // maxmin: true,//大小窗口切换
+                        shadeClose: true, //点击遮罩关闭层
+                        area: ['100%', '100%'],
+                        content: ['page/personal/information-preview.jsp?id='+userId]
+                    });
+                })
+
             });
         })
     </script>

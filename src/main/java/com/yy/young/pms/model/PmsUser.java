@@ -229,8 +229,17 @@ public class PmsUser {
 
 
 
+    private  Communication communication;//通讯对象
     /*拼装返回id*/
     private List<String> list;
+
+    public Communication getCommunication() {
+        return communication;
+    }
+
+    public void setCommunication(Communication communication) {
+        this.communication = communication;
+    }
 
     public String getCheckYears() {
         return checkYears;
