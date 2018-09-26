@@ -230,8 +230,125 @@ public class PmsUser {
 
 
     private  Communication communication;//通讯对象
+   private List<AuditPmsRelations> relationsList;  //家庭成员和社会关系
+   private List<AuditPmsEducation> auditPmsEducationList;   //教育经历
+   private List<AuditPmsWork> auditPmsWorkList;   //工作经历
+   private List<AuditPmsMainTechGroup> mainTechGroupList;   //社团兼职
+   private List<AuditPmsHonorTitle> auditPmsHonorTitleList;//荣誉称号
+   private List<AuditPmsTechAwards> auditPmsTechAwardsList; //获奖情况
+   private List<AuditPmsPaper> auditPmsPaperList; //论文情况
+   private List<AuditPmsPublish> auditPmsPublishList;   //出版情况
+   private List<AuditPmsPatent> auditPmsPatentList; //专利
+   private List<AuditPmsJoinProject> auditPmsJoinProjectList;  //项目经历
+   private List<AuditPmsTechnologyBrace> auditPmsTechnologyBraceList; //技术支撑
+   private List<AuditPmsSupportProject> auditPmsSupportProjectList; //人力培养计划/资助项目
+   private List<AuditPmsYearCheck> auditPmsYearCheckList;     //年度考核
     /*拼装返回id*/
     private List<String> list;
+
+    public List<AuditPmsRelations> getRelationsList() {
+        return relationsList;
+    }
+
+    public void setRelationsList(List<AuditPmsRelations> relationsList) {
+        this.relationsList = relationsList;
+    }
+
+    public List<AuditPmsEducation> getAuditPmsEducationList() {
+        return auditPmsEducationList;
+    }
+
+    public void setAuditPmsEducationList(List<AuditPmsEducation> auditPmsEducationList) {
+        this.auditPmsEducationList = auditPmsEducationList;
+    }
+
+    public List<AuditPmsWork> getAuditPmsWorkList() {
+        return auditPmsWorkList;
+    }
+
+    public void setAuditPmsWorkList(List<AuditPmsWork> auditPmsWorkList) {
+        this.auditPmsWorkList = auditPmsWorkList;
+    }
+
+    public List<AuditPmsMainTechGroup> getMainTechGroupList() {
+        return mainTechGroupList;
+    }
+
+    public void setMainTechGroupList(List<AuditPmsMainTechGroup> mainTechGroupList) {
+        this.mainTechGroupList = mainTechGroupList;
+    }
+
+    public List<AuditPmsHonorTitle> getAuditPmsHonorTitleList() {
+        return auditPmsHonorTitleList;
+    }
+
+    public void setAuditPmsHonorTitleList(List<AuditPmsHonorTitle> auditPmsHonorTitleList) {
+        this.auditPmsHonorTitleList = auditPmsHonorTitleList;
+    }
+
+    public List<AuditPmsTechAwards> getAuditPmsTechAwardsList() {
+        return auditPmsTechAwardsList;
+    }
+
+    public void setAuditPmsTechAwardsList(List<AuditPmsTechAwards> auditPmsTechAwardsList) {
+        this.auditPmsTechAwardsList = auditPmsTechAwardsList;
+    }
+
+    public List<AuditPmsPaper> getAuditPmsPaperList() {
+        return auditPmsPaperList;
+    }
+
+    public void setAuditPmsPaperList(List<AuditPmsPaper> auditPmsPaperList) {
+        this.auditPmsPaperList = auditPmsPaperList;
+    }
+
+    public List<AuditPmsPublish> getAuditPmsPublishList() {
+        return auditPmsPublishList;
+    }
+
+    public void setAuditPmsPublishList(List<AuditPmsPublish> auditPmsPublishList) {
+        this.auditPmsPublishList = auditPmsPublishList;
+    }
+
+    public List<AuditPmsPatent> getAuditPmsPatentList() {
+        return auditPmsPatentList;
+    }
+
+    public void setAuditPmsPatentList(List<AuditPmsPatent> auditPmsPatentList) {
+        this.auditPmsPatentList = auditPmsPatentList;
+    }
+
+    public List<AuditPmsJoinProject> getAuditPmsJoinProjectList() {
+        return auditPmsJoinProjectList;
+    }
+
+    public void setAuditPmsJoinProjectList(List<AuditPmsJoinProject> auditPmsJoinProjectList) {
+        this.auditPmsJoinProjectList = auditPmsJoinProjectList;
+    }
+
+    public List<AuditPmsTechnologyBrace> getAuditPmsTechnologyBraceList() {
+        return auditPmsTechnologyBraceList;
+    }
+
+    public void setAuditPmsTechnologyBraceList(List<AuditPmsTechnologyBrace> auditPmsTechnologyBraceList) {
+        this.auditPmsTechnologyBraceList = auditPmsTechnologyBraceList;
+    }
+
+    public List<AuditPmsSupportProject> getAuditPmsSupportProjectList() {
+        return auditPmsSupportProjectList;
+    }
+
+    public void setAuditPmsSupportProjectList(List<AuditPmsSupportProject> auditPmsSupportProjectList) {
+        this.auditPmsSupportProjectList = auditPmsSupportProjectList;
+    }
+
+    public List<AuditPmsYearCheck> getAuditPmsYearCheckList() {
+        return auditPmsYearCheckList;
+    }
+
+    public void setAuditPmsYearCheckList(List<AuditPmsYearCheck> auditPmsYearCheckList) {
+        this.auditPmsYearCheckList = auditPmsYearCheckList;
+    }
 
     public Communication getCommunication() {
         return communication;

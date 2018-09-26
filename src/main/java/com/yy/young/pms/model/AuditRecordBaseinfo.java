@@ -203,6 +203,132 @@ public class AuditRecordBaseinfo{
         return obj;
     }
 
+    public PmsUser toPmsUser( PmsUser obj) {
+        if (("userName").equals(this.fieldKey)) {
+            obj.setUserName(this.fieldVal);
+        }
+        if (("oldName").equals(this.fieldKey)) {
+            obj.setOldName(this.fieldVal);
+        }
+        if (("sex").equals(this.fieldKey)) {
+            obj.setSex(this.fieldVal);
+        }
+        if (("birth").equals(this.fieldKey)) {
+            obj.setBirth(this.fieldVal);
+        }
+        if (("nation").equals(this.fieldKey)) {
+            obj.setNation(this.fieldVal);
+        }
+        if (("placeOfOrigin").equals(this.fieldKey)) {
+            obj.setPlaceOfOrigin(this.fieldVal);
+        }
+        if (("placeOfBirth").equals(this.fieldKey)) {
+            obj.setPlaceOfBirth(this.fieldVal);
+        }
+        if (("workStartTime").equals(this.fieldKey)) {
+            obj.setWorkStartTime(this.fieldVal);
+        }
+        if (("politicalOutlook").equals(this.fieldKey)) {
+            obj.setPoliticalOutlook(this.fieldVal);
+        }
+        if (("joinPartyTime").equals(this.fieldKey)) {
+            obj.setJoinPartyTime(this.fieldVal);
+        }
+        if (("technicalPosition").equals(this.fieldKey)) {
+            obj.setTechnicalPosition(this.fieldVal);
+        }
+        if (("getTime").equals(this.fieldKey)) {
+            obj.setGetTime(this.fieldVal);
+        }
+        if (("appointmentTime").equals(this.fieldKey)) {
+            obj.setAppointmentTime(this.fieldVal);
+        }
+        if (("technicalLevel").equals(this.fieldKey)) {
+            obj.setTechnicalLevel(this.fieldVal);
+        }
+        if (("administrativeDuty").equals(this.fieldKey)) {
+            obj.setAdministrativeDuty(this.fieldVal);
+        }
+        if (("tenureTime").equals(this.fieldKey)) {
+            obj.setTenureTime(this.fieldVal);
+        }
+        if (("administrativeLevel").equals(this.fieldKey)) {
+            obj.setAdministrativeLevel(this.fieldVal);
+        }
+        if (("researchField").equals(this.fieldKey)) {
+            obj.setResearchField(this.fieldVal);
+        }
+        if (("specialty").equals(this.fieldKey)) {
+            obj.setSpecialty(this.fieldVal);
+        }
+        if (("highestEducation").equals(this.fieldKey)) {
+            obj.setHighestEducation(this.fieldVal);
+        }
+        if (("highestDegree").equals(this.fieldKey)) {
+            obj.setHighestDegree(this.fieldVal);
+        }
+        if (("idCard").equals(this.fieldKey)) {
+            obj.setIdCard(this.fieldVal);
+        }
+        if (("overseasStudyExperience").equals(this.fieldKey)) {
+            obj.setOverseasStudyExperience(this.fieldVal);
+        }
+        if (("englishLevel").equals(this.fieldKey)) {
+            obj.setEnglishLevel(this.fieldVal);
+        }
+        if (("photoAddress").equals(this.fieldKey)) {
+            obj.setPhotoAddress(this.fieldVal);
+        }
+        if (("remark").equals(this.fieldKey)) {
+            obj.setRemark(this.fieldVal);
+        }
+        if (("firstEducation").equals(this.fieldKey)) {
+            obj.setFirstEducation(this.fieldVal);
+        }
+        if (("jobEducation").equals(this.fieldKey)) {
+            obj.setJobEducation(this.fieldVal);
+        }
+        if (("personType").equals(this.fieldKey)) {
+            obj.setPersonType(this.fieldVal);
+        }
+        if (("trashFlag").equals(this.fieldKey)) {
+            obj.setTrashFlag(this.fieldVal);
+        }
+        if (("firstDegree").equals(this.fieldKey)) {
+            obj.setFirstDegree(this.fieldVal);
+        }
+        if (("station").equals(this.fieldKey)) {
+            obj.setStation(this.fieldVal);
+        }
+        if (("takeWork").equals(this.fieldKey)) {
+            obj.setTakeWork(this.fieldVal);
+        }
+        if (("researchFieldDetail").equals(this.fieldKey)) {
+            obj.setResearchFieldDetail(this.fieldVal);
+        }
+        if (("jobDegree").equals(this.fieldKey)) {
+            obj.setJobDegree(this.fieldVal);
+        }
+        if (("tempWorkExperience").equals(this.fieldKey)) {
+            obj.setTempWorkExperience(this.fieldVal);
+        }
+        if (("toThereTime").equals(this.fieldKey)) {
+            obj.setToThereTime(this.fieldVal);
+        }
+        if (("remarkModifyTime").equals(this.fieldKey)) {
+            obj.setRemarkModifyTime(this.fieldVal);
+        }
+//        部门暂且不考虑，用户自己无法更改部门
+/*        if (("deptIds").equals(this.field)) {
+            obj.setDeptIds(this.fieldVal);
+        }*/
+/*        if (("deptNames").equals(this.fieldKey)) {
+            obj.setDeptNames(this.fieldVal);
+        }*/
+
+        return obj;
+    }
+
     public PmsUser noOkItem() {
         PmsUser obj = new PmsUser();
         if (("userName").equals(this.fieldKey)) {

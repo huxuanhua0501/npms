@@ -114,7 +114,43 @@ public class AuditRecordCommunication{
         }
         return obj;
     }
+    public Communication toCommunication( Communication obj) {
+        if (("officePhone").equals(this.fieldKey)) {
+            obj.setOfficePhone(this.fieldVal);
+        }
+        if (("mobilePhone").equals(this.fieldKey)) {
+            obj.setMobilePhone(this.fieldVal);
+        }
 
+        if (("faxNumber").equals(this.fieldKey)) {
+            obj.setFaxNumber(this.fieldVal);
+        }
+        if (("emailAddress").equals(this.fieldKey)) {
+            obj.setEmailAddress(this.fieldVal);
+        }
+        if (("postalAddress").equals(this.fieldKey)) {
+            obj.setPostalAddress(this.fieldVal);
+        }
+        if (("relationshipOne").equals(this.fieldKey)) {
+            obj.setRelationshipOne(this.fieldVal);
+        }
+        if (("nameOne").equals(this.fieldKey)) {
+            obj.setNameOne(this.fieldVal);
+        }
+        if (("emergencyContactOne").equals(this.fieldKey)) {
+            obj.setEmergencyContactOne(this.fieldVal);
+        }
+        if (("relationshipTwo").equals(this.fieldKey)) {
+            obj.setRelationshipTwo(this.fieldVal);
+        }
+        if (("nameTwo").equals(this.fieldKey)) {
+            obj.setNameTwo(this.fieldVal);
+        }
+        if (("emergencyContactTwo").equals(this.fieldKey)) {
+            obj.setEmergencyContactTwo(this.fieldVal);
+        }
+        return obj;
+    }
     public Communication noOkItem() {
         Communication obj = new Communication();
         if (("officePhone").equals(this.fieldKey)) {
