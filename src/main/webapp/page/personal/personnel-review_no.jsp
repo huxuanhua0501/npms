@@ -62,8 +62,7 @@
 
     <script type="text/javascript">
         $(function () {
-            sfSet();//在初始化表格之前
-            joViewInitAboutDoc();//joView初始化处理
+
             loadAjax();
 
 
@@ -94,6 +93,8 @@
                 $("#checkbox_0").append(listline);
 
             }, true);
+            sfSet();//在初始化表格之前
+            joViewInitAboutDoc();//joView初始化处理
         }
         //行处理
         // joView.handleItem = function(oItem,iIndex){
