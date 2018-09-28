@@ -3,10 +3,12 @@ package com.yy.young.pms.web;
 import com.yy.young.cms.service.ICmsDBService;
 import com.yy.young.common.service.ICommonService;
 import com.yy.young.common.util.CommonUtil;
+import com.yy.young.common.util.DateUtil;
 import com.yy.young.common.util.Result;
 import com.yy.young.common.util.StringUtils;
 import com.yy.young.dal.util.Page;
 import com.yy.young.interfaces.log.annotation.Log;
+import com.yy.young.interfaces.model.User;
 import com.yy.young.pms.model.PmsAnnouncement;
 import com.yy.young.pms.model.PmsUser;
 import com.yy.young.pms.service.*;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -110,15 +113,67 @@ public class PmsAnnouncementController {
 
     @RequestMapping("/insert")
     public Object insert(PmsAnnouncement pmsAnnouncement, HttpServletRequest request) throws Exception {
-        pmsAnnouncement.setUserId(pmsAnnouncement.getUserId().replaceAll(",",""));
+        Result rs = new Result();
+        if(pmsAnnouncement == null){
+            rs.setInfo("参数不正确！");
+            rs.setCode(-1);
+            rs.setData_id("createName");
+            return rs;
+        }
+        User user = CommonUtil.getLoginUser(request);
+        pmsAnnouncement.setUserId(user.getId());
+        pmsAnnouncement.setSystemTime(new Date());
+        String createName = pmsAnnouncement.getCreateName();
+        String createTime = pmsAnnouncement.getCreateTime();
+        if(StringUtils.isBlank(createName)){
+            pmsAnnouncement.setCreateName(user.getName());
+        }
+        if(StringUtils.isBlank(createTime)){
+            pmsAnnouncement.setCreateTime(DateUtil.getCurrentTime());
+        }else{
+            Date tmp = DateUtil.toDate(createTime,"yyyy-MM-dd HH:mm:ss");
+            Date tmp1 = DateUtil.toDate(createTime,"yyyy-MM-dd");
+            if(tmp == null && tmp1 == null){
+                rs.setInfo("时间格式不正确！正确格式：2018-09-09");
+                rs.setCode(-1);
+                rs.setData_id("createTime");
+                return rs;
+            }
+        }
         service.insert(pmsAnnouncement);
         return new Result();
     }
     @RequestMapping("/update")
     public Object update(PmsAnnouncement pmsAnnouncement, HttpServletRequest request) throws Exception {
-        pmsAnnouncement.setUserId(pmsAnnouncement.getUserId().replaceAll(",",""));
+        Result rs = new Result();
+        if(pmsAnnouncement == null){
+            rs.setInfo("参数不正确！");
+            rs.setCode(-1);
+            rs.setData_id("createName");
+            return rs;
+        }
+        User user = CommonUtil.getLoginUser(request);
+        pmsAnnouncement.setUserId(user.getId());
+        pmsAnnouncement.setSystemTime(new Date());
+        String createName = pmsAnnouncement.getCreateName();
+        String createTime = pmsAnnouncement.getCreateTime();
+        if(StringUtils.isBlank(createName)){
+            pmsAnnouncement.setCreateName(user.getName());
+        }
+        if(StringUtils.isBlank(createTime)){
+            pmsAnnouncement.setCreateTime(DateUtil.getCurrentTime());
+        }else{
+            Date tmp = DateUtil.toDate(createTime,"yyyy-MM-dd HH:mm:ss");
+            Date tmp1 = DateUtil.toDate(createTime,"yyyy-MM-dd");
+            if(tmp == null && tmp1 == null){
+                rs.setInfo("时间格式不正确！正确格式：2018-09-09");
+                rs.setCode(-1);
+                rs.setData_id("createTime");
+                return rs;
+            }
+        }
         service.update(pmsAnnouncement);
-        return new Result();
+        return rs;
     }
     @RequestMapping("/delete")
     public Object delete(String ids, String id, HttpServletRequest request) throws Exception {
@@ -140,6 +195,12 @@ public class PmsAnnouncementController {
         PmsAnnouncement obj =  service.get(id);
         return new Result(obj);
     }
+    @RequestMapping("/getMax")
+    public Object getMaxNum(HttpServletRequest request) throws  Exception{
+
+            PmsAnnouncement obj = service.getMaxNum();
+            return new Result(obj);
+    }
     /**
      * 获取分页数据
      * @param obj
@@ -152,7 +213,12 @@ public class PmsAnnouncementController {
     @ResponseBody
     public Object getPage(PmsAnnouncement obj, HttpServletRequest request) throws Exception{
         Page page = CommonUtil.getPageFromRequest(request);
-
+        //关键字搜索
+        String content = request.getParameter("content");
+        if(StringUtils.isNotBlank(content)){
+            obj = new PmsAnnouncement();
+            obj.setContent(content);
+        }
         List<PmsAnnouncement> list = service.getPage(obj, page);
         page.setData(list);
         return page;

@@ -13,10 +13,10 @@
     <%@ include file="/common/constHead.jsp"%>
     <%--jQuery--%>
     <%@ include file="/common/jqueryHead.jsp"%>
-    <%--公共--%>
-    <%@ include file="/common/commonHead_no.jsp"%>
     <%--jo--%>
     <%@ include file="/common/joHead.jsp"%>
+    <%--公共--%>
+    <%@ include file="/common/commonHead_no.jsp"%>
      <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/announcement-list.css">
    <script src="<%=URL_STATIC%>static/prototype/js/layui.js"></script>
@@ -31,17 +31,20 @@
                 var currentPage = page.pageNumber;
                 var total = page.total;
                 var size = page.pageSize;
+                var lastPage = Math.ceil(total/size);//尾页
                 var gotoPage;
                 if(type == 'first'){
                     gotoPage = 1;
                 }else if (type == 'last'){
-                    gotoPage = Math.ceil(total/size);//尾页
+                    gotoPage = lastPage;
                 }else  if(type == 'prev'){
                     gotoPage = currentPage -1;
                     if(gotoPage < 1)
                         gotoPage = 1;
                 }else if(type == 'next'){
                     gotoPage = currentPage +1;
+                    if(gotoPage > lastPage)
+                        gotoPage = lastPage;
                 }
                 loadAnnouncementList(gotoPage);
             }else{
@@ -53,7 +56,7 @@
             if(!gotoPage)
                 gotoPage =1;
 
-            var sUrl = '{URL_PORTAL}pms/announcement/getPage.action?pageNumber='+gotoPage;
+            var sUrl = 'pms/announcement/getPage.action?pageNumber='+gotoPage;
             jo.postAjax(sUrl, {}, function(json){
                 if(json && json.code == "0"){
                     if(json.data && json.data[0]){

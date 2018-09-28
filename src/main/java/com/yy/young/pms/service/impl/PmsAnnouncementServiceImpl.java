@@ -39,6 +39,10 @@ public class PmsAnnouncementServiceImpl implements IPmsAnnouncementService {
     public PmsAnnouncement get(String  obj) throws Exception {
         return (PmsAnnouncement)dataAccessService.getObject(PmsConstants.MAPPER.PMS_ANNOUNCEMENT + ".get", obj);
     }
+    @Override
+    public PmsAnnouncement getMaxNum() throws Exception {
+        return (PmsAnnouncement)dataAccessService.getObject(PmsConstants.MAPPER.PMS_ANNOUNCEMENT + ".getMax", null);
+    }
 
     @Override
     public int update(PmsAnnouncement pmsAnnouncement) throws Exception {

@@ -13,10 +13,10 @@
     <%@ include file="/common/constHead.jsp"%>
     <%--jQuery--%>
     <%@ include file="/common/jqueryHead.jsp"%>
-    <%--公共--%>
-    <%@ include file="/common/commonHead.jsp"%>
     <%--jo--%>
     <%@ include file="/common/joHead.jsp"%>
+    <%--公共--%>
+    <%@ include file="/common/commonHead.jsp"%>
      <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/font/font2/iconfont.css">
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/announcement-list.css">

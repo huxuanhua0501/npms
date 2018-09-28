@@ -19,6 +19,7 @@ public interface IPmsAnnouncementService {
     public List<PmsAnnouncement> getPage(PmsAnnouncement pmsAnnouncement, Page page)throws Exception;
 
     public PmsAnnouncement get(String  id) throws Exception;
+    public PmsAnnouncement getMaxNum() throws Exception;
 
     public int update(PmsAnnouncement pmsAnnouncement)throws Exception;
 

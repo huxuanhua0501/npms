@@ -86,3 +86,7 @@ admin用户的资源链接池
 7.人事管理--统计汇总，调整了菜单及显示顺序，分别为员工花名册->人事管理
     ->统计汇总->信息审核->统计报表
     统计汇总功能地址：openPageOnMain('page/statistic/pmStatistics_no.jsp?edit=true')
+8.admin-资源池管理，增加菜单：
+    1）系统管理，包括子菜单：公告设置、日志管理
+    2）系统帮助：包括子菜单：普通人员使用指南、人事及管理员使用指南
+9.系统管理-公告设置，链接：openPageOnMain('page/portal/announcement_no.jsp')

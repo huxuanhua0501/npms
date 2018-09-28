@@ -29,8 +29,9 @@
         FROM pms_announcement
         WHERE 1=1
         <if test="content != null and content != ''">
-            AND content like '%${content}%'
+            AND (content like '%${content}%' OR title like '%{content}%' OR point like '%{content}%')
         </if>
+
         order by serial_number desc
     </select>
     <delete id="delete">
@@ -43,5 +44,11 @@
         create_name as createName,user_id as userId,system_time as systemTime
         FROM pms_announcement
         WHERE ID = #{id}
+    </select>
+    <select id="getMax" resultType="com.yy.young.pms.model.PmsAnnouncement">
+        SELECT
+            id, serial_number as serialNumber, point, title, content, create_time as createTime,
+        create_name as createName,user_id as userId,system_time as systemTime
+        FROM pms_announcement ORDER BY serial_number DESC LIMIT 1
     </select>
 </mapper>
