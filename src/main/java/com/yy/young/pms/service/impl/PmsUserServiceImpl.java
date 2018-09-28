@@ -282,4 +282,14 @@ public class PmsUserServiceImpl implements ICommonService<PmsUser>,IPmsUserExtSe
     public PmsUser getByAccount(String account) throws Exception {
         return (PmsUser)dataAccessService.getObject(PmsConstants.MAPPER.PMS_USER + ".getByAccount", account);
     }
+
+    @Override
+    public List<String> getUserId(List<String> list) throws Exception {
+        return (List<String>) dataAccessService.getList(PmsConstants.MAPPER.PMS_USER + ".getUserId", list);
+    }
+
+    @Override
+    public List<String> getRoleId(String userId) throws Exception {
+        return (List<String>) dataAccessService.getList(PmsConstants.MAPPER.PMS_USER + ".getRoleId", userId);
+    }
 }

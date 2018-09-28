@@ -226,6 +226,7 @@ public class PmsUser {
     private  List<String>jobDegreeList;//在职学位
     private  List<String>remarkList;//工作性质及状态
     private  List<String>trashFlagList;//当前状态
+    private  List<String> leaderList;//领导id
 
 
 
@@ -245,6 +246,14 @@ public class PmsUser {
    private List<AuditPmsYearCheck> auditPmsYearCheckList;     //年度考核
     /*拼装返回id*/
     private List<String> list;
+
+    public List<String> getLeaderList() {
+        return leaderList;
+    }
+
+    public void setLeaderList(List<String> leaderList) {
+        this.leaderList = leaderList;
+    }
 
     public List<AuditPmsRelations> getRelationsList() {
         return relationsList;

@@ -40,4 +40,8 @@ public interface IPmsUserExtService {
      */
     PmsUser getByAccount(String account) throws Exception;
 
+
+    List<String> getUserId(List<String> list)throws Exception;
+    List<String> getRoleId(String userId)throws Exception;
+
 }

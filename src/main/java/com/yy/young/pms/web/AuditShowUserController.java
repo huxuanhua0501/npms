@@ -109,6 +109,8 @@ public class AuditShowUserController {
 
     @Resource(name = "pmsRelatedService")
     IPmsRelatedService pmsRelatedService;
+    @Resource(name = "userDeptService")
+    IUserDeptService userDeptService;
 
     /**
      * 获取数据列表
@@ -313,43 +315,91 @@ public class AuditShowUserController {
         if (obj.getRemark() != ""&&obj.getRemark()!=null) {
             obj.setRemarkList(this.getList(obj.getRemark()));
         }
-        List<PmsUser> ofPmsUserList = pmsUserService2.getPage(obj,page);
-        AuditShowUser auditShowUser = new AuditShowUser();
-        auditShowUser.setPersonalShow(1);
-        String allUserId = "";
-        for (int i = 0; i < ofPmsUserList.size(); i++) {
-            PmsUser pmsUser = ofPmsUserList.get(i);
-            allUserId += "," + pmsUser.getId();
-        }
-        if (ofPmsUserList.size() > 0) {
-            if (StringUtils.isNotBlank(allUserId)) {
-                allUserId = allUserId.substring(1);
-            }
-            String[] userIdArr = null;
-            if (StringUtils.isNotBlank(allUserId)) {
-                userIdArr = allUserId.split(",");
-            }
-/*        String aaa = "";
-        for (int i=0;i<userIdArr.length;i++) {
-            aaa +=",'"+userIdArr[i] + "'";
-        }
-        System.out.println("用户ID：" + aaa.substring(1));*/
-            auditShowUser.setUserIdArr(userIdArr);
-            List<AuditShowUser> auList = service.getPage(auditShowUser, page);
-            if (userIdArr != null) {
-                System.out.println("审核库用户显示total：" + page.getTotal() + "长度：" + userIdArr.length);
-            }
-            System.out.println("正式库人员数据：" + ofPmsUserList.size() + auList.size());
-            List<PmsUser> pmsUserList = new ArrayList<PmsUser>();
-            for (int i = 0; i < auList.size(); i++) {
-                for (int j = 0; j < ofPmsUserList.size(); j++) {
-                    if ((auList.get(i).getUserId()).equals(ofPmsUserList.get(j).getId())) {
-                        pmsUserList.add(ofPmsUserList.get(j));
-                    }
+        List<String> idist = new ArrayList<String>();
+        List<String> ids = new ArrayList<String>();
+        if (obj.getUserId() != null &&obj.getUserId() != "") {
+            obj.setDeptList(userDeptService.getUserDeptByUserId(obj.getUserId()));
+            if (obj.getDeptList() != null && obj.getDeptList().size() > 0) {
+                if (obj.getDeptList().get(0).getDeptName().equals("院领导")) {
+                    obj.setDeptList(null);
+                }else if(obj.getDeptIds() != null && obj.getDeptIds() != "") {
+
+
+                    obj.setDeptIds("");
                 }
             }
-            page.setData(ofPmsUserList);
+            //查询该用户是否为三级领导，
+            List<String> roleIdList =  pmsUserService.getRoleId(obj.getUserId());
+            String id = obj.getUserId();
+            obj.setUserId("");
+            if(roleIdList!=null&&roleIdList.size()>0){
+                for(String roleId:roleIdList) {
+                    if("bc3fcc9a05754016afd6a76195b82bfa".equals(roleId)){
+
+                        List<PmsUser> ofPmsUserList = pmsUserService2.getList(obj);
+                        if(ofPmsUserList!=null&&ofPmsUserList.size()>0){
+                            for (PmsUser pmsUser : ofPmsUserList) {//得到所有的用户id
+                                idist.add(pmsUser.getId());
+                            }
+                             ids =  pmsUserService.getUserId(idist);//获取所有二三级领导
+                            ids.remove(id);
+                            for (String str : ids) {//移除所有平级和高一级的用户
+                                idist.remove(str);
+                            }
+                        }
+
+                    }
+                }
+
+
+            }
+            obj.setUserId("");
         }
+
+        if (idist != null && idist.size() > 0) {
+            obj.setList(idist);
+        }
+        if (ids != null && ids.size() > 0) {
+            obj.setLeaderList(ids);
+        }
+        List<PmsUser> ofPmsUserList = pmsUserService2.getPage(obj,page);
+
+        //        AuditShowUser auditShowUser = new AuditShowUser();
+//        auditShowUser.setPersonalShow(1);
+//        String allUserId = "";
+//        for (int i = 0; i < ofPmsUserList.size(); i++) {
+//            PmsUser pmsUser = ofPmsUserList.get(i);
+//            allUserId += "," + pmsUser.getId();
+//        }
+//        if (ofPmsUserList.size() > 0) {
+//            if (StringUtils.isNotBlank(allUserId)) {
+//                allUserId = allUserId.substring(1);
+//            }
+//            String[] userIdArr = null;
+//            if (StringUtils.isNotBlank(allUserId)) {
+//                userIdArr = allUserId.split(",");
+//            }
+///*        String aaa = "";
+//        for (int i=0;i<userIdArr.length;i++) {
+//            aaa +=",'"+userIdArr[i] + "'";
+//        }
+//        System.out.println("用户ID：" + aaa.substring(1));*/
+//            auditShowUser.setUserIdArr(userIdArr);
+//            List<AuditShowUser> auList = service.getPage(auditShowUser, page);
+//            if (userIdArr != null) {
+//                System.out.println("审核库用户显示total：" + page.getTotal() + "长度：" + userIdArr.length);
+//            }
+//            System.out.println("正式库人员数据：" + ofPmsUserList.size() + auList.size());
+//            List<PmsUser> pmsUserList = new ArrayList<PmsUser>();
+//            for (int i = 0; i < auList.size(); i++) {
+//                for (int j = 0; j < ofPmsUserList.size(); j++) {
+//                    if ((auList.get(i).getUserId()).equals(ofPmsUserList.get(j).getId())) {
+//                        pmsUserList.add(ofPmsUserList.get(j));
+//                    }
+//                }
+//            }
+            page.setData(ofPmsUserList);
+//        }
 
 
         return page;

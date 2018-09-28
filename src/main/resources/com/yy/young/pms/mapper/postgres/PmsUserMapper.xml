@@ -379,6 +379,12 @@
                     #{item}
                 </foreach>
             </if>
+            <if test="leaderList != null and leaderList != ''">
+                and O.id  not in
+                <foreach collection="leaderList" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </if>
             <if test="remarkList != null and remarkList != ''">
                 and O.remark in
                 <foreach collection="remarkList" item="item" separator="," open="(" close=")">
@@ -397,6 +403,7 @@
             <if test="idCard != null and idCard != ''">
                 AND O.id_card =#{idCard}
             </if>
+
           <!--  <choose>
                 <when test="trashFlag != null and trashFlag != ''">
                     AND O.trash_flag = #{trashFlag}
@@ -414,6 +421,30 @@
                 ORDER BY O.num ASC,O.id ASC
             </otherwise>
         </choose>
+    </select>
+
+    <select id="getUserId" resultType="java.lang.String">
+        SELECT
+            user_id
+        FROM
+            tb_ums_role_user
+        WHERE
+            user_id IN
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+        #{item}
+       </foreach>
+        and user_id not in ('')
+            AND role_id  IN (
+                'HKY_1002',
+                'bc3fcc9a05754016afd6a76195b82bfa')
+    </select>
+    <select id="getRoleId" resultType="java.lang.String">
+        SELECT
+            role_id
+        FROM
+            tb_ums_role_user
+        WHERE
+            user_id = #{userId}
     </select>
 
     <!--管辖内的人员查询-->
