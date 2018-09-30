@@ -46,25 +46,6 @@
                     <label class="control-label" for="NAME">部门名称&nbsp;</label>
                     <input class="form-control input-sm" id="NAME" name="NAME" placeholder="部门名称" autocomplete="off" type="text">
                 </div>
-               <%-- <div class="form-group">
-                    <label class="control-label" for="DEPT_LEVEL">部门层级&nbsp;</label>
-                    <select class="form-control input-sm" id="DEPT_LEVEL" name="DEPT_LEVEL">
-                        <option value=""></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>--%>
-                <%--<div class="form-group">
-                    <label class="control-label" for="TYPE">类型&nbsp;</label>
-                    <select class="form-control input-sm" id="TYPE" name="TYPE">
-                        <option value=""></option>
-                        <option value="DEPT">部门</option>
-                        <option value="COMPANY">单位</option>
-                        <option value="OTHER">其他</option>
-                    </select>
-                </div>--%>
                 <button type="button" class="btn btn-primary btn-sm" onclick="joView.select()"> <i class="fa fa-search" aria-hidden="true"></i>&nbsp;查询</button>
             </form>
             <%--/检索栏--%>
