@@ -138,11 +138,18 @@
 
 
                 //加载部门列表
-                loadOrgList(1);
+                loadOrgList(1,'');
             });
         });
+        //重新加载页面
+        function refreshDeptList(){
+            createTree(tree);
+            if(page)
+                loadOrgList(page.pageNumber,lastParentId);
+        }
         //创建树
         function createTree(tree){
+            $("#classtree").html('');
             tree({
                 elem: "#classtree",
                 nodes: loadOrgTree() ,
@@ -294,7 +301,7 @@
                 // maxmin: true,//大小窗口切换
                 shadeClose: true, //点击遮罩关闭层
                 area: ['650px', '390px'],
-                content: 'organizational-edit.html'
+                content: 'page/ums/deptForm_no.jsp?ID='+deptId+'&t='+(new Date()).getTime()
             });
         }
         //新增部门
@@ -306,7 +313,7 @@
                     // maxmin: true,//大小窗口切换
                     shadeClose: true, //点击遮罩关闭层
                     area: ['650px', '390px'],
-                    content: 'organizational-add.html'
+                    content: 'page/ums/deptForm_no.jsp?t='+(new Date()).getTime()
                 });
             }
         }
