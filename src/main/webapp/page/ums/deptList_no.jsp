@@ -241,7 +241,7 @@
                             var parentName = list[i].PARENT_NAME;
                             liHtml += '<tr>\n' +
                                 '      <td><input type="checkbox" name="deptCheck" value="'+deptId+'" lay-skin="primary"></td>\n' +
-                                '      <td style="cursor:pointer" onclick="deptEdit(\''+deptId+'\')">'+name+'</td>\n' +
+                                '      <td onclick="deptEdit(\''+deptId+'\')"><a href="javascript:;">'+name+'</a></td>\n' +
                                 '      <td>'+parentName+'</td>\n' +
                                 '      <td>'+deptLevel+'</td>\n' +
                                 '      <td>'+type+'</td>\n' +
