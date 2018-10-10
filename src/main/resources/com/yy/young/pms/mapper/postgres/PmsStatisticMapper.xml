@@ -161,6 +161,72 @@
          </if>
     </select>
 
+
+    <!--在职员工-->
+    <select id="getNumberOfPeople" resultType="com.yy.young.pms.model.Statistic">
+        SELECT COUNT
+               ( * ) as attr1
+        FROM
+            pms_user
+        WHERE
+        <if test="attr10 == '其他'">
+            remark not in('在编','院聘','劳务派遣','劳务协议','离职','退休','离休','博士后')
+        </if>
+        <if test="attr10 != '其他'">
+            remark = #{attr10}
+        </if>
+        AND (trash_flag != '1'  or trash_flag is null)
+        and  user_name NOT IN ('环科院管理员','超级管理员')
+
+    </select>
+    <!--当月入职-->
+    <select id="getDutyInTHeMonth" resultType="com.yy.young.pms.model.Statistic">
+        SELECT COUNT
+               ( * ) AS attr2
+        FROM
+            pms_user
+        WHERE
+            to_there_time = to_char( now(), 'YYYY-MM' )
+            AND ( trash_flag != '1' OR trash_flag IS NULL )
+            and  user_name NOT IN ('环科院管理员','超级管理员')
+
+    </select>
+    <!--当月入职-->
+    <select id="getMaritalStatus" resultType="com.yy.young.pms.model.Statistic">
+        SELECT COUNT
+        ( * ) AS attr1
+        FROM
+        pms_user
+        WHERE
+            marital_status =#{attr10}
+        AND ( trash_flag != '1' OR trash_flag IS NULL )
+        and  user_name NOT IN ('环科院管理员','超级管理员')
+
+    </select>
+    <!--当月离职-->
+    <select id="getQuitInTHeMonth" resultType="com.yy.young.pms.model.Statistic">
+        SELECT COUNT
+               ( * ) AS attr3
+        FROM
+            pms_user
+        WHERE
+            remark_modify_time = to_char(now(), 'YYYY-MM')
+            AND ( trash_flag != '1' OR trash_flag IS NULL )
+            and  user_name NOT IN ('环科院管理员','超级管理员')
+
+    </select>
+    <!--离职员工-->
+    <select id="getQuit" resultType="com.yy.young.pms.model.Statistic">
+        SELECT COUNT
+        ( * ) as attr4
+        FROM
+        pms_user
+        WHERE
+        remark = '离职'
+        AND (trash_flag != '1'  or trash_flag is null)
+        and  user_name NOT IN ('环科院管理员','超级管理员')
+
+    </select>
     <!--查询国外经历情况-->
     <select id="getForeignExperience" resultType="com.yy.young.pms.model.Statistic">
         select count(*)as attr1 from pms_user pp

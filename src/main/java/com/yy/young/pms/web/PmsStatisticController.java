@@ -351,7 +351,35 @@ public class PmsStatisticController{
         return new Result(statisticService.getDicValue(dic));
     }
 
+/**
+ * 在职员工  当月入职，当月离职，已离职
+ */
+    @Log("在职员工  当月入职，当月离职，已离职")
+    @RequestMapping({"/getNumberOfPeople"})
+    @ResponseBody
+    public Object getNumberOfPeople(HttpServletRequest request) throws Exception {
+        return new Result(statisticService.getNumberOfPeople());
+    }
 
+
+    /**
+     * 员工统计
+     */
+    @Log("在在编 院聘，劳务派遣 劳务协议 离职 退休 离休 博士后 其他")
+    @RequestMapping({"/getEmployeeStatistics"})
+    @ResponseBody
+    public Object getEmployeeStatistics(HttpServletRequest request) throws Exception {
+        return new Result(statisticService.getEmployeeStatistics());
+    }
+    /**
+     * 婚姻比例
+     */
+    @Log("已婚 未婚 离异")
+    @RequestMapping({"/getMaritalStatus"})
+    @ResponseBody
+    public Object getMaritalStatus(HttpServletRequest request) throws Exception {
+        return new Result(statisticService.getMaritalStatus());
+    }
     /**
      * 根据deptId查询到whole_name
      * @param request

@@ -713,6 +713,100 @@ public class PmsStatisticServiceImpl  implements IStatisticService {
     public Statistic getSystemInputCount(Statistic statistic) throws Exception {
         return (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getSystemInputCount", statistic);
     }
+    /**
+     * 在职员工  当月入职，当月离职，已离职
+     */
+    @Override
+    public Statistic getNumberOfPeople() throws Exception {
+        Statistic returnStatistic = new Statistic();
+        returnStatistic.setAttr10("在编");
+        Statistic statistic = new Statistic();
+        //在职员工
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr1(statistic.getAttr1());
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getDutyInTHeMonth", returnStatistic);
+        returnStatistic.setAttr2(statistic.getAttr2());
+
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getQuitInTHeMonth", returnStatistic);
+        returnStatistic.setAttr3(statistic.getAttr3());
+
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getQuit", returnStatistic);
+        returnStatistic.setAttr4(statistic.getAttr4());
+
+        return returnStatistic;
+    }
+
+    /**
+     * 员工统计
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Statistic getEmployeeStatistics() throws Exception {
+        Statistic returnStatistic = new Statistic();
+        Statistic statistic = new Statistic();
+
+        //在编
+        returnStatistic.setAttr10("在编");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr1(statistic.getAttr1());
+        //院聘
+        returnStatistic.setAttr10("院聘");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr2(statistic.getAttr1());
+        //劳务派遣
+        returnStatistic.setAttr10("劳务派遣");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr3(statistic.getAttr1());
+        //劳务协议
+        returnStatistic.setAttr10("劳务协议");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr4(statistic.getAttr1());
+        //离职
+        returnStatistic.setAttr10("离职");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr5(statistic.getAttr1());
+        //退休
+        returnStatistic.setAttr10("退休");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr6(statistic.getAttr1());
+        //离休
+        returnStatistic.setAttr10("离休");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr7(statistic.getAttr1());
+        //博士后
+        returnStatistic.setAttr10("博士后");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr8(statistic.getAttr1());
+        //其他
+        returnStatistic.setAttr10("其他");
+         statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getNumberOfPeople", returnStatistic);
+        returnStatistic.setAttr9(statistic.getAttr1());
+
+
+        return returnStatistic;
+    }
+    /**
+     * 婚姻比例
+     */
+    @Override
+    public Statistic getMaritalStatus() throws Exception {
+        Statistic returnStatistic = new Statistic();
+        Statistic statistic = new Statistic();
+        //已婚
+        returnStatistic.setAttr10("已婚");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getMaritalStatus", returnStatistic);
+        returnStatistic.setAttr1(statistic.getAttr1());
+        //未婚
+        returnStatistic.setAttr10("未婚");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getMaritalStatus", returnStatistic);
+        returnStatistic.setAttr2(statistic.getAttr1());
+        //离异
+        returnStatistic.setAttr10("离异");
+        statistic =  (Statistic)dataAccessService.getObject(PmsConstants.MAPPER.PMS_STATISTIC + ".getMaritalStatus", returnStatistic);
+        returnStatistic.setAttr3(statistic.getAttr1());
+        return returnStatistic;
+    }
 
     /**
      * 查询系统内所有科技奖数量

@@ -133,7 +133,7 @@
     //加载员工当月在职、离职信息
     function loadPersonStatis(){
         //这个需要后台数据
-        jo.postAjax("pms/statistic/getAwardLevel",{}, function(json){
+        jo.postAjax("pms/statistic/getNumberOfPeople",{}, function(json){
             if(json && json.code == 0){
                 //实现成动态数据
 
@@ -141,13 +141,19 @@
                 //'在职员工', '当月入职', '当月离职', '已离职'
                 //1376, 32, 0, 2
                 obj.statis1 = 1376;//'在职员工'
-                obj.statis2 = 32;//'当月入职'
+                obj.statis2 = 111;//'当月入职'
                 obj.statis3 = 0;//'当月离职'
                 obj.statis4 = 2;// '已离职'
                 $("#onJobs").html(obj.statis1);
                 $("#entryMonth").html(obj.statis2);
                 $("#quitMonth").html(obj.statis3);
                 $("#quited").html(obj.statis4);
+                var data = json.data;
+                var info = data[0];
+                $("#onJobs").html(info["attr1"]);
+                $("#entryMonth").html(info["attr2"]);
+                $("#quitMonth").html(info["attr3"]);
+                $("#quited").html(info["attr4"]);
             }
         });
     }
@@ -155,22 +161,23 @@
     function loadBianzhi() {
         //这个后台数据需要开发
         //这里需要做权限控制
-        jo.postAjax("pms/statistic/getAwardLevel",{}, function(json){
+        jo.postAjax("pms/statistic/getEmployeeStatistics",{}, function(json){
             if(json && json.code == 0){
                 //实现成动态数据
-
+                var data = json.data;
+                var info = data[0];
                 var obj = new Object();
                 //'在编', '院聘', '劳务派遣', '劳务协议', '离职', '退休', '离休', '博士后', '其他'
                 //500, 35, 35, 35, 35,35,35,35,35
-                obj.bianzhi1 = 500;//'在编'
-                obj.bianzhi2 = 35;//'院聘'
-                obj.bianzhi3 = 35;//'劳务派遣'
-                obj.bianzhi4 = 35;// '劳务协议'
-                obj.bianzhi5 = 35;//'离职'
-                obj.bianzhi6 = 35;//'退休'
-                obj.bianzhi7 = 35;// '离休'
-                obj.bianzhi8 = 35;//'博士后'
-                obj.bianzhi9 = 35;//'其他'
+                obj.bianzhi1 = info["attr1"];//'在编'
+                obj.bianzhi2 = info["attr2"];//'院聘'
+                obj.bianzhi3 = info["attr3"];//'劳务派遣'
+                obj.bianzhi4 = info["attr4"];// '劳务协议'
+                obj.bianzhi5 = info["attr5"];//'离职'
+                obj.bianzhi6 = info["attr6"];//'退休'
+                obj.bianzhi7 = info["attr7"];// '离休'
+                obj.bianzhi8 = info["attr8"];//'博士后'
+                obj.bianzhi9 = info["attr9"];//'其他'
                 obj.total = obj.bianzhi1+ obj.bianzhi2+ obj.bianzhi3+ obj.bianzhi4+ obj.bianzhi5+ obj.bianzhi6+
                     obj.bianzhi7+ obj.bianzhi8+ obj.bianzhi9;
                 chart1(obj);//生成编制比例饼图
@@ -390,18 +397,19 @@
     function loadMarriage(){
         //这个后台数据需要开发
         //这里需要做权限控制
-        jo.postAjax("pms/statistic/getAwardLevel",{}, function(json){
+        jo.postAjax("pms/statistic/getMaritalStatus",{}, function(json){
             if(json && json.code == 0){
                 //实现成动态数据
-
+                var data = json.data;
+                var info = data[0];
                 var obj = new Object();
                 //'已婚', '未婚', '离异','尚未填写'
                 //68, 80, 80,
-                obj.marriage1 = 300;//'已婚'
+                obj.marriage1 = info["attr1"];//'已婚'
                 obj.marriage2 = allUserCount - obj.marriage1;//'已婚以外'
-                obj.marriage3 = 800;//'未婚'
+                obj.marriage3 = info["attr2"];//'未婚'
                 obj.marriage4 = allUserCount - obj.marriage3;//'未婚以外'
-                obj.marriage5 = 276;//'离异'
+                obj.marriage5 = info["attr3"];//'离异'
                 obj.marriage6 = allUserCount - obj.marriage5;//'离异以外'
                 chart3(obj);//生成婚姻比例饼图
             }

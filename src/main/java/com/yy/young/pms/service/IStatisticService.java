@@ -14,6 +14,7 @@ import java.util.List;
 public interface IStatisticService {
     /**
      * 查询人才梯队建设
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -22,6 +23,7 @@ public interface IStatisticService {
 
     /**
      * 查询研究领域情况
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -30,6 +32,7 @@ public interface IStatisticService {
 
     /**
      * 查询男女比例情况
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -38,6 +41,7 @@ public interface IStatisticService {
 
     /**
      * 查询学历分布情况
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -46,6 +50,7 @@ public interface IStatisticService {
 
     /**
      * 查询国外经历情况
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -55,6 +60,7 @@ public interface IStatisticService {
 
     /**
      * 查询工作年限情况
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -63,6 +69,7 @@ public interface IStatisticService {
 
     /**
      * 查询奖励层次情况
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -71,6 +78,7 @@ public interface IStatisticService {
 
     /**
      * 查询系统内所有用户数量
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -79,15 +87,22 @@ public interface IStatisticService {
 
     /**
      * 查询系统内录入的所有人数
+     *
      * @param statistic
      * @return
      * @throws Exception
      */
     public Statistic getSystemInputCount(Statistic statistic) throws Exception;
 
+    Statistic getNumberOfPeople() throws Exception;
+    Statistic getEmployeeStatistics() throws Exception;
+    Statistic getMaritalStatus() throws Exception;
+
+
 
     /**
      * 查询系统内所有科技奖数量
+     *
      * @param statistic
      * @return
      * @throws Exception
@@ -97,20 +112,23 @@ public interface IStatisticService {
 
     /**
      * 查询所有一级单位列表
+     *
      * @return
      * @throws Exception
      */
-    public List<UserDept> getDeptList(String roleName,String deptName) throws Exception;
+    public List<UserDept> getDeptList(String roleName, String deptName) throws Exception;
 
     /**
      * 获取数据字典值
+     *
      * @return
      * @throws Exception
      */
-    public List<PmsDictionary> getDicValue(PmsDictionary  dic) throws Exception;
+    public List<PmsDictionary> getDicValue(PmsDictionary dic) throws Exception;
 
     /**
      * 获取到部门完整名称
+     *
      * @return
      * @throws Exception
      */
@@ -118,9 +136,11 @@ public interface IStatisticService {
 
     /**
      * 获取到部门完整编号
+     *
      * @return
      * @throws Exception
      */
     public UserDept getWholeId(UserDept dept) throws Exception;
+
 
 }
