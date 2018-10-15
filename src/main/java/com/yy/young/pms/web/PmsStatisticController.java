@@ -7,6 +7,7 @@ import com.yy.young.common.util.StringUtils;
 import com.yy.young.interfaces.log.annotation.Log;
 import com.yy.young.interfaces.model.User;
 import com.yy.young.pms.model.PmsDictionary;
+import com.yy.young.pms.model.PmsUser;
 import com.yy.young.pms.model.Statistic;
 import com.yy.young.pms.model.UserDept;
 import com.yy.young.pms.service.IStatisticService;
@@ -27,13 +28,14 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/pms/statistic")
-public class PmsStatisticController{
+public class PmsStatisticController {
 
     @Resource(name = "pmsStatisticService")
     IStatisticService statisticService;
 
     /**
      * 查询人才梯队信息
+     *
      * @param request
      * @return
      * @throws Exception
@@ -41,23 +43,56 @@ public class PmsStatisticController{
     @Log("查询人才梯队信息")
     @RequestMapping({"/getTalentEchelon"})
     @ResponseBody
-    public Object getTalentEchelon(HttpServletRequest request) throws Exception {
-        Statistic statistic = new Statistic();
-        //获取部门编号
-        statistic.setAttr10(request.getParameter("deptId"));
-        //获取职称
-        statistic.setAttr9(request.getParameter("zc"));
-        //获取职务
-        statistic.setAttr8(request.getParameter("zw"));
-        System.out.println("烛之武：" + request.getParameter("zw"));
-        //获取人员类型
-        statistic.setPersonType(request.getParameter("personType"));
-        statistic = statisticService.getTalentEchelon(statistic);
-        return new Result(statistic);
+    public Object getTalentEchelon(String deptIds, String start_time, String end_time, String administrativeLevel, String technicalPosition, HttpServletRequest request) throws Exception {
+
+        PmsUser pmsUser = getPmsUser(deptIds, start_time, end_time, administrativeLevel, technicalPosition);
+        return new Result(statisticService.getTalentEchelon(pmsUser));
+
+
     }
+
+    private PmsUser getPmsUser(String deptIds, String start_time, String end_time, String administrativeLevel, String technicalPosition) {
+
+        PmsUser pmsUser = new PmsUser();
+        pmsUser.setStart_time(start_time);
+        pmsUser.setEnd_time(end_time);
+        if (deptIds != "" && deptIds != null) {
+            List<UserDept> list = new ArrayList<UserDept>();
+
+            String[] dept = deptIds.split(",");
+            for (String str : dept) {
+                UserDept userDept = new UserDept();
+                userDept.setDeptId(str);
+                list.add(userDept);
+            }
+            pmsUser.setDeptList(list);
+        }
+        if (administrativeLevel != "" && administrativeLevel != null) {
+            List<String> list = new ArrayList<String>();
+
+            String[] admin = administrativeLevel.split(",");
+            for (String str : admin) {
+                list.add(str);
+            }
+            pmsUser.setAdministrativeLevelList(list);
+        }
+        if (technicalPosition != "" && technicalPosition != null) {
+            List<String> list = new ArrayList<String>();
+
+            String[] admin = technicalPosition.split(",");
+            for (String str : admin) {
+                list.add(str);
+            }
+            pmsUser.setTechnicalPositionList(list);
+        }
+        return pmsUser;
+    }
+
+
 
     /**
      * 查询研究领域情况
+     *
      * @param request
      * @return
      * @throws Exception
@@ -81,6 +116,7 @@ public class PmsStatisticController{
 
     /**
      * 查询男女比例情况
+     *
      * @param request
      * @return
      * @throws Exception
@@ -88,22 +124,17 @@ public class PmsStatisticController{
     @Log("查询男女比例情况")
     @RequestMapping({"/getMenAndWomen"})
     @ResponseBody
-    public Object getMenAndWomen(HttpServletRequest request) throws Exception {
-        Statistic statistic = new Statistic();
-        //获取部门编号
-        statistic.setAttr10(request.getParameter("deptId"));
-        //获取职称
-        statistic.setAttr9(request.getParameter("zc"));
-        //获取职务
-        statistic.setAttr8(request.getParameter("zw"));
-        //获取人员类型
-        statistic.setPersonType(request.getParameter("personType"));
-        statistic = statisticService.getMenAndWomen(statistic);
-        return new Result(statistic);
+        public Object getMenAndWomen(String deptIds, String start_time, String end_time, String administrativeLevel, String technicalPosition,HttpServletRequest request) throws Exception {
+
+        PmsUser pmsUser = getPmsUser(deptIds,start_time,end_time,administrativeLevel,technicalPosition);
+        return new Result(statisticService.getMenAndWomen(pmsUser));
+
+
     }
 
     /**
      * 查询学历分布情况
+     *
      * @param request
      * @return
      * @throws Exception
@@ -111,22 +142,16 @@ public class PmsStatisticController{
     @Log("查询学历分布情况")
     @RequestMapping({"/getEducationSpread"})
     @ResponseBody
-    public Object getEducationSpread(HttpServletRequest request) throws Exception {
-        Statistic statistic = new Statistic();
-        //获取部门编号
-        statistic.setAttr10(request.getParameter("deptId"));
-        //获取职称
-        statistic.setAttr9(request.getParameter("zc"));
-        //获取职务
-        statistic.setAttr8(request.getParameter("zw"));
-        //获取人员类型
-        statistic.setPersonType(request.getParameter("personType"));
-        statistic = statisticService.getEducationSpread(statistic);
-        return new Result(statistic);
+    public Object getEducationSpread(String deptIds, String start_time, String end_time, String administrativeLevel, String technicalPosition, HttpServletRequest request) throws Exception {
+
+        PmsUser pmsUser = getPmsUser(deptIds, start_time, end_time, administrativeLevel, technicalPosition);
+        return new Result(statisticService.getEducationSpread(pmsUser));
+
     }
 
     /**
      * 查询国外经历情况
+     *
      * @param request
      * @return
      * @throws Exception
@@ -150,6 +175,7 @@ public class PmsStatisticController{
 
     /**
      * 查询工作年限情况
+     *
      * @param request
      * @return
      * @throws Exception
@@ -157,22 +183,14 @@ public class PmsStatisticController{
     @Log("查询工作年限情况")
     @RequestMapping({"/getWorkYear"})
     @ResponseBody
-    public Object getWorkYear(HttpServletRequest request) throws Exception {
-        Statistic statistic = new Statistic();
-        //获取部门编号
-        statistic.setAttr10(request.getParameter("deptId"));
-        //获取职称
-        statistic.setAttr9(request.getParameter("zc"));
-        //获取职务
-        statistic.setAttr8(request.getParameter("zw"));
-        //获取人员类型
-        statistic.setPersonType(request.getParameter("personType"));
-        statistic = statisticService.getWorkYear(statistic);
-        return new Result(statistic);
+    public Object getWorkYear(String deptIds, String start_time, String end_time, String administrativeLevel, String technicalPosition, HttpServletRequest request) throws Exception {
+        PmsUser pmsUser = getPmsUser(deptIds, start_time, end_time, administrativeLevel, technicalPosition);
+        return new Result(statisticService.getWorkYear(pmsUser));
     }
 
     /**
      * 查询奖励层次情况
+     *
      * @param request
      * @return
      * @throws Exception
@@ -180,15 +198,51 @@ public class PmsStatisticController{
     @Log("查询奖励层次情况")
     @RequestMapping({"/getAwardLevel"})
     @ResponseBody
-    public Object getAwardLevel(HttpServletRequest request) throws Exception {
-        Statistic statistic = new Statistic();
+        public Object getAwardLevel(String deptIds, String start_time, String end_time, HttpServletRequest request) throws Exception {
 
-        statistic = statisticService.getAwardLevel(statistic);
-        return new Result(statistic);
+
+
+        PmsUser pmsUser = getPmsUser(deptIds, start_time, end_time,null,null);
+        return new Result(statisticService.getAwardLevel(pmsUser));
+    }
+    /**
+     * 出版情况
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @Log("出版情况")
+    @RequestMapping({"/getWorkType"})
+    @ResponseBody
+    public Object getWorkType(String deptIds, String start_time, String end_time, HttpServletRequest request) throws Exception {
+
+
+
+        PmsUser pmsUser = getPmsUser(deptIds, start_time, end_time,null,null);
+        return new Result(statisticService.getWorkType(pmsUser));
+    }
+    /**
+     * 考核
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @Log("考核")
+    @RequestMapping({"/getAssessment"})
+    @ResponseBody
+    public Object getAssessment(String deptIds, String start_time, String end_time, HttpServletRequest request) throws Exception {
+
+
+
+        PmsUser pmsUser = getPmsUser(deptIds, start_time, end_time,null,null);
+        return new Result(statisticService.getAssessment(pmsUser));
     }
 
     /**
      * 查询系统内所有用户数量
+     *
      * @param request
      * @return
      * @throws Exception
@@ -199,18 +253,18 @@ public class PmsStatisticController{
     public Object getAllUserCount(HttpServletRequest request) throws Exception {
         Statistic statistic = new Statistic();
         //获取部门编号
-        if("undefined".equals(request.getParameter("deptId"))){
+        if ("undefined".equals(request.getParameter("deptId"))) {
             statistic.setAttr10(null);
-        }else{
+        } else {
             statistic.setAttr10(request.getParameter("deptId"));
         }
-        System.out.println("[查询系统内所有用户数量，条件deptId="+request.getParameter("deptId")+"]");
+        System.out.println("[查询系统内所有用户数量，条件deptId=" + request.getParameter("deptId") + "]");
         //获取职称
         statistic.setAttr9(request.getParameter("zc"));
         //获取职务
         statistic.setAttr8(request.getParameter("zw"));
-        System.out.println("[查询系统内所有用户数量，条件职称="+statistic.getAttr9()+"]");
-        System.out.println("[查询系统内所有用户数量，条件职务="+statistic.getAttr8()+"]");
+        System.out.println("[查询系统内所有用户数量，条件职称=" + statistic.getAttr9() + "]");
+        System.out.println("[查询系统内所有用户数量，条件职务=" + statistic.getAttr8() + "]");
         statistic = statisticService.getAllUserCount(statistic);
         return new Result(statistic);
     }
@@ -218,6 +272,7 @@ public class PmsStatisticController{
 
     /**
      * 查询系统内录入的所有人数
+     *
      * @param request
      * @return
      * @throws Exception
@@ -232,9 +287,9 @@ public class PmsStatisticController{
     }
 
 
-
     /**
      * 查询系统内所有科技奖数量
+     *
      * @param request
      * @return
      * @throws Exception
@@ -249,7 +304,6 @@ public class PmsStatisticController{
     }
 
     /**
-     *
      * @param request
      * @return
      * @throws Exception
@@ -262,36 +316,36 @@ public class PmsStatisticController{
         User user = CommonUtil.getLoginUser(request);
         String deptName = user.getDeptName();
         String roleName = user.getRoleName();
-        if(roleName.contains(PmsConstants.ROLENAME.RSC_ROLE)){
+        if (roleName.contains(PmsConstants.ROLENAME.RSC_ROLE)) {
             roleName = PmsConstants.ROLENAME.RSC_ROLE;
-        }else if(roleName.contains(PmsConstants.ROLENAME.EJDWLD_ROLE)){
+        } else if (roleName.contains(PmsConstants.ROLENAME.EJDWLD_ROLE)) {
             roleName = PmsConstants.ROLENAME.EJDWLD_ROLE;
-        }else{
+        } else {
             roleName = PmsConstants.ROLENAME.PTYG_ROLE;
         }
 
         //得到deptId
         String deptId = user.getDeptId();
-        if(StringUtils.isBlank(deptId)){
+        if (StringUtils.isBlank(deptId)) {
             result.setCode(-1);
             result.setInfo("请先给用户填写部门信息！");
-        }else{
+        } else {
             //根据deptId查询到wholeId
             UserDept dept = new UserDept();
-            System.out.println("原始deptId:"+deptId);
+            System.out.println("原始deptId:" + deptId);
             //解决第一个部门编号
-            dept.setDeptId(deptId.substring(0,32));
-            System.out.println("切割后的deptId:"+dept.getDeptId());
+            dept.setDeptId(deptId.substring(0, 32));
+            System.out.println("切割后的deptId:" + dept.getDeptId());
 
-            dept =  statisticService.getWholeId(dept);
-            System.out.println("查询后的wholeId:"+dept.getWholeId());
+            dept = statisticService.getWholeId(dept);
+            System.out.println("查询后的wholeId:" + dept.getWholeId());
             //根据wholeId查询到wholeName
-            dept.setWholeId(dept.getWholeId().substring(0,71));
-            System.out.println("分割后的wholeId:"+dept.getWholeId());
-            dept =  statisticService.getWholeName(dept);
-            System.out.println("查询后的wholeName:"+dept.getWholeName());
-            System.out.println("查询后的deptId:"+dept.getDeptId());
-            System.out.println("查询后的deptName:"+dept.getDeptName());
+            dept.setWholeId(dept.getWholeId().substring(0, 71));
+            System.out.println("分割后的wholeId:" + dept.getWholeId());
+            dept = statisticService.getWholeName(dept);
+            System.out.println("查询后的wholeName:" + dept.getWholeName());
+            System.out.println("查询后的deptId:" + dept.getDeptId());
+            System.out.println("查询后的deptName:" + dept.getDeptName());
 
             List list = new ArrayList();
             list.add(deptName);
@@ -308,6 +362,7 @@ public class PmsStatisticController{
 
     /**
      * 查询所有一级单位列表
+     *
      * @param request
      * @return
      * @throws Exception
@@ -320,12 +375,13 @@ public class PmsStatisticController{
         User user = CommonUtil.getLoginUser(request);
         String roleName = user.getRoleName();
         String deptName = user.getDeptName();
-        return new Result(statisticService.getDeptList(roleName,deptName));
+        return new Result(statisticService.getDeptList(roleName, deptName));
     }
 
 
     /**
      * 查询数据字典值
+     *
      * @param request
      * @return
      * @throws Exception
@@ -333,27 +389,27 @@ public class PmsStatisticController{
     @Log("获取数据字典值")
     @RequestMapping({"/getDicValue/{bedic_id}"})
     @ResponseBody
-    public Object getDicValue(HttpServletRequest request,@PathVariable("bedic_id")String bedic_id) throws Exception {
+    public Object getDicValue(HttpServletRequest request, @PathVariable("bedic_id") String bedic_id) throws Exception {
         PmsDictionary dic = new PmsDictionary();
         Result result = new Result();
-        System.out.println("获取数据字典编号"+bedic_id);
+        System.out.println("获取数据字典编号" + bedic_id);
 
-        if("ADMINISTRATIVE_LEVEL".equals(bedic_id)){//行政级别
+        if ("ADMINISTRATIVE_LEVEL".equals(bedic_id)) {//行政级别
             dic.setBedicId("ADMINISTRATIVE_LEVEL");
-        }else if("TECHNICAL_POSITION".equals(bedic_id)){
+        } else if ("TECHNICAL_POSITION".equals(bedic_id)) {
             dic.setBedicId("TECHNICAL_POSITION");//专业技术职务
-        }else if("PERSON_TYPE".equals(bedic_id)){
+        } else if ("PERSON_TYPE".equals(bedic_id)) {
             dic.setBedicId("PERSON_TYPE");//人员类型
-        }else{
+        } else {
             result.setCode(-1);
             result.setInfo("操作失败:无法解析字典编号!");
         }
         return new Result(statisticService.getDicValue(dic));
     }
 
-/**
- * 在职员工  当月入职，当月离职，已离职
- */
+    /**
+     * 在职员工  当月入职，当月离职，已离职
+     */
     @Log("在职员工  当月入职，当月离职，已离职")
     @RequestMapping({"/getNumberOfPeople"})
     @ResponseBody
@@ -368,9 +424,42 @@ public class PmsStatisticController{
     @Log("在在编 院聘，劳务派遣 劳务协议 离职 退休 离休 博士后 其他")
     @RequestMapping({"/getEmployeeStatistics"})
     @ResponseBody
-    public Object getEmployeeStatistics(HttpServletRequest request) throws Exception {
-        return new Result(statisticService.getEmployeeStatistics());
+    public Object getEmployeeStatistics(String deptIds, String start_time, String end_time, String administrativeLevel, String technicalPosition, HttpServletRequest request) throws Exception {
+        PmsUser pmsUser = new PmsUser();
+        pmsUser.setStart_time(start_time);
+        pmsUser.setEnd_time(end_time);
+        if (deptIds != "" && deptIds != null) {
+            List<UserDept> list = new ArrayList<UserDept>();
+
+            String[] dept = deptIds.split(",");
+            for (String str : dept) {
+                UserDept userDept = new UserDept();
+                userDept.setDeptId(str);
+                list.add(userDept);
+            }
+            pmsUser.setDeptList(list);
+        }
+        if (administrativeLevel != "" && administrativeLevel != null) {
+            List<String> list = new ArrayList<String>();
+
+            String[] admin = administrativeLevel.split(",");
+            for (String str : admin) {
+                list.add(str);
+            }
+            pmsUser.setAdministrativeLevelList(list);
+        }
+        if (technicalPosition != "" && technicalPosition != null) {
+            List<String> list = new ArrayList<String>();
+
+            String[] admin = technicalPosition.split(",");
+            for (String str : admin) {
+                list.add(str);
+            }
+            pmsUser.setTechnicalPositionList(list);
+        }
+        return new Result(statisticService.getEmployeeStatistics(pmsUser));
     }
+
     /**
      * 婚姻比例
      */

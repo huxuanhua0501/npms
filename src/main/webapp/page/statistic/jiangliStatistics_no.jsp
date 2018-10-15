@@ -85,26 +85,34 @@
                 <div class="layui-form-item layui-col-md12">
                     <label class="layui-form-label">所属部门</label>
                     <div class="layui-input-inline big">
-                        <input type="text" id="branch" name="PARENT_NAME" class="layui-input">
-                        <span class="input-group-btn">
-                            <button class="layui-btn layui-btn-primary choose-btn" type="button">
-                                <i class="iconfont icon-menu" aria-hidden="true"></i>&nbsp;选择
-                            </button>
+                        <input id="showType" name="showType" type="hidden">
+                        <input type="hidden" id="deptIds" name="deptIds" class="form-control input-sm" value="">
+                        <input type="text" id="names" name="names" required lay-verify="required" placeholder=""
+                               autocomplete="off" class="layui-input list-input"
+                               style="width: 100px;display: inline-block;"> <span class="input-group-btn">
+                             <button class="layui-btn layui-btn-primary choose-btn" type="button"
+                                     onclick="choiceDept('deptIds','names',true)">
+                                            <i class="iconfont icon-menu" aria-hidden="true"></i>&nbsp;选择
+                                        </button>
                          </span>
                     </div>
                 </div>
                 <div class="edit-item layui-col-md12 layui-col-xs12">
                     <label class="layui-form-label">时间段</label>
-                    <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="startY" style="width: 100px;display: inline-block;">至
-                    <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="endY" style="width: 100px;display: inline-block;">
+                    <input type="text" idname="start_time" required lay-verify="required" placeholder="2018-08"
+                           autocomplete="off"
+                           class="layui-input list-input" id="start_time" style="width: 100px;display: inline-block;">至
+                    <input type="text" name="end_time" required lay-verify="required" placeholder="2018-10"
+                           autocomplete="off"
+                           class="layui-input list-input" id="end_time" style="width: 100px;display: inline-block;">
                 </div>
-
                 <div class="layui-form-item button-item">
                     <div class="layui-input-inline button-inline">
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry">查询</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry" onclick="loadBianzhi()">查询</button>
                     </div>
                 </div>
             </div>
+
 
             <div class="gray"></div>
 
@@ -147,9 +155,10 @@
                         <div class="legend">
                             <ul>
                                 <li><span></span>著作</li>
-                                <li><span></span>译著</li>
                                 <li><span></span>编著</li>
+                                <li><span></span>译著</li>
                                 <li><span></span>独著</li>
+                                <li><span></span>合著</li>
                                 <li><span></span>其他</li>
                             </ul>
                         </div>
@@ -185,7 +194,22 @@
     </div>
 </div>
     <script>
+        function loadBianzhi(){
+            var num = $("#showType").val();
+            if(num==="1") {
+                loadAwardLevel();
 
+            }
+            if(num==="2") {
+                loadPublish();
+
+            }
+            if(num==="3") {
+                loadYearCheck();
+
+            }
+
+        }
         //系统录入所有人员数量
         var allUserCount;
         //系统录入所有科技奖数量
@@ -262,10 +286,15 @@
         }
         //加载奖励层次数据
         function loadAwardLevel(){
+            $("#showType").val("1");
+            var deptIds = $("#deptIds").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
             //获取查询条件信息
             var selectObj = getQueryData();
-            jo.postAjax("pms/statistic/getAwardLevel",{data:selectObj}, function(json){
-                if(json && json.code == 0){
+                jo.postAjax("pms/statistic/getAwardLevel",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time}, function(json){
+
+                    if(json && json.code == 0){
                     var data = json.data;
                     var info = data[0];
                     //国家级
@@ -276,7 +305,7 @@
                     awardLeve3 = info["attr3"];
 
                     //尚无资料
-                    noInfo = allTechAwardCount - awardLevel - awardLeve2 - awardLeve3;
+                    noInfo = info["attr4"] - awardLevel - awardLeve2 - awardLeve3;
                     if(noInfo<0){
                         noInfo = 0;
                     }
@@ -453,34 +482,50 @@
         function loadPublish(){
             //这个后台数据需要开发
             // 获取查询条件信息
+            $("#showType").val("2");
+            var deptIds = $("#deptIds").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
             var selectObj = getQueryData();
-            jo.postAjax("pms/statistic/getAwardLevel",{data:selectObj}, function(json){
+            jo.postAjax("pms/statistic/getWorkType",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time}, function(json){
                 if(json && json.code == 0){
                     var data = json.data;
                     var info = data[0];
-                    //国家级
+                    //著作
                     awardLevel = info["attr1"];
-                    //省部级
+                    //编著
                     awardLeve2 = info["attr2"];
-                    //厅级及以下
+                    //译著
                     awardLeve3 = info["attr3"];
+                    //独著
+                    awardLeve4 = info["attr4"];
+                    //合著
+                    awardLeve5 = info["attr5"];
+                    //全部
+                    awardLeve6 = info["attr6"];
 
                     //尚无资料
-                    noInfo = allTechAwardCount - awardLevel - awardLeve2 - awardLeve3;
+                    noInfo = awardLeve6 - awardLevel - awardLeve2 - awardLeve3-awardLeve4-awardLeve5;
                     if(noInfo<0){
                         noInfo = 0;
                     }
+                    var arr = [noInfo,awardLevel,awardLeve2,awardLeve3,awardLeve4,awardLeve5];
 
+
+                    arr.sort(function (a, b) {
+                        return a-b;
+                    });
+                    var max = arr[arr.length - 1];  // 56
                     var obj = new Object();
                     //85, 90, 90, 95, 95, 50
                     //'著作', '编著', '译著', '独著', '合著', '其他'
-                    obj.publish1 = 85;//'著作'
-                    obj.publish2 = 90;// '编著'
-                    obj.publish3 = 90;//'译著'
-                    obj.publish4 = 95;//'独著'
-                    obj.publish5 = 95;//'合著'
-                    obj.publish6 = 50;//'其他'
-                    obj.max = obj.publish4+5;//max是6个数值最大的+5
+                    obj.publish1 = awardLevel;//'著作'
+                    obj.publish2 = awardLeve2;// '编著'
+                    obj.publish3 = awardLeve3;//'译著'
+                    obj.publish4 = awardLeve4;//'独著'
+                    obj.publish5 = awardLeve5;//'合著'
+                    obj.publish6 = noInfo;//'其他'
+                    obj.max =parseInt(max)+5;//max是6个数值最大的+5
                     chart3(obj);//生成出版著作数量饼图
                     chart4(obj);//生成出版著作数量分布线图
                 }
@@ -623,34 +668,38 @@
         }
         //加载年度考核数据
         function loadYearCheck(){
+            $("#showType").val("3");
+            var deptIds = $("#deptIds").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
             //这个后台数据需要开发
             // 获取查询条件信息
             var selectObj = getQueryData();
-            jo.postAjax("pms/statistic/getAwardLevel",{data:selectObj}, function(json){
-                if(json && json.code == 0){
+                jo.postAjax("pms/statistic/getAssessment",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time}, function(json){
+
+                    if(json && json.code == 0){
                     var data = json.data;
                     var info = data[0];
-                    //国家级
+                    //年度考核等级
                     awardLevel = info["attr1"];
-                    //省部级
+                    //第一季度等级
                     awardLeve2 = info["attr2"];
-                    //厅级及以下
+                    //第二季度等级
                     awardLeve3 = info["attr3"];
+                    //第三季度等级
+                    awardLeve4 = info["attr4"];
+                        //第四季度等级
+                    awardLeve5 = info["attr5"];
 
-                    //尚无资料
-                    noInfo = allTechAwardCount - awardLevel - awardLeve2 - awardLeve3;
-                    if(noInfo<0){
-                        noInfo = 0;
-                    }
 
                     var obj = new Object();
                     //'年度考核等级', '第一季度等级', '第二季度等级', '第三季度等级', '第四季度等级'
                     //248, 201, 145, 74, 26
-                    obj.yearCheck1 = 248;//'年度考核等级'
-                    obj.yearCheck2 = 201;//'第一季度等级'
-                    obj.yearCheck3 = 145;//'第二季度等级'
-                    obj.yearCheck4 = 74;// '第三季度等级'
-                    obj.yearCheck5 = 26;//'第四季度等级'
+                    obj.yearCheck1 = awardLevel;//'年度考核等级'
+                    obj.yearCheck2 = awardLeve2;//'第一季度等级'
+                    obj.yearCheck3 = awardLeve3;//'第二季度等级'
+                    obj.yearCheck4 = awardLeve4;// '第三季度等级'
+                    obj.yearCheck5 = awardLeve5;//'第四季度等级'
                     chart5(obj);//生成年度考核饼图
                     chart6(obj);//生成年度考核柱状图
                 }

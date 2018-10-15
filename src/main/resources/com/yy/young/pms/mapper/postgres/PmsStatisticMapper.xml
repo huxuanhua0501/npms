@@ -5,43 +5,48 @@
 <mapper namespace="com.yy.young.pms.mapper.statistic">
     <!--查询人才梯队建设-->
     <select id="getTalentEchelon" resultType="com.yy.young.pms.model.Statistic">
-        select count(*)as attr1 from pms_user pp
-        left join (
-        SELECT * FROM
-        (SELECT t2.id,string_agg(whole_name,',')deptNames FROM tb_ums_dept_user t1
-        LEFT JOIN pms_user t2 ON t1.user_id = t2.id
-        LEFT JOIN tb_ums_dept t3  ON  t3.id = t1.dept_id
-        group by t2.id)O ) ppo
-        on ppo.id = pp.id
-        where (pp.trash_flag != '1'  or pp.trash_flag is null)
-        and  pp.user_name NOT IN ('环科院管理员','超级管理员')
-        and  pp.birth &gt;#{attr1} AND pp.birth &lt;=#{attr2}
-        <if test="attr10 != null and attr10 != ''">
-            AND  ppo.deptNames LIKE '%${attr10}%'
-        </if>
-        <if test="zc != null and zc != ''">
-            AND  pp.administrative_level IN
-            <foreach collection="zc" item="zcItem" index="index" open="(" separator="," close=")">
-                #{zcItem}
+        SELECT COUNT
+        ( * ) as attr1
+        FROM
+        pms_user
+        WHERE
+          1=1
+        <if test="deptList != null and deptList != ''">
+            AND id IN (
+            SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+            <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                #{item.deptId}
             </foreach>
-
+            )
         </if>
-
-        <if test="zw != null and zw != ''">
-            AND  pp.technical_position IN
-            <foreach collection="zw" item="zwItem" index="index" open="(" separator="," close=")">
-                #{zwItem}
+        <if test="administrativeLevelList != null and administrativeLevelList != ''">
+            AND administrative_level in
+            <foreach collection="administrativeLevelList" item="item" separator="," open="(" close=")">
+                #{item}
             </foreach>
         </if>
-
-        <if test="personTypeArr != null and personTypeArr != ''">
-            AND  pp.person_type IN
-            <foreach collection="personTypeArr" item="personTypeItem" index="index" open="(" separator="," close=")">
-                #{personTypeItem}
+        <if test="technicalPositionList != null and technicalPositionList != ''">
+            AND technical_position in
+            <foreach collection="technicalPositionList" item="item" separator="," open="(" close=")">
+                #{item}
             </foreach>
         </if>
+        <if test="start_time != null and start_time != ''">
+            AND to_there_time  &gt;=#{start_time}
+        </if>
+        <if test="end_time != null and end_time != ''">
+            AND to_there_time  &lt;=#{end_time}
+        </if>
+        AND (trash_flag != '1'  or trash_flag is null)
+        and  user_name NOT IN ('环科院管理员','超级管理员')
+        <if test="startWorkTime != null and startWorkTime != ''">
+            and  birth &gt;=#{startWorkTime}
 
+        </if>
+        <if test="endWorkTime != null and endWorkTime != ''">
+            AND birth &lt;=#{endWorkTime}
 
+        </if>
     </select>
 
     <!--查询研究领域情况-->
@@ -86,79 +91,89 @@
 
     <!--查询男女比例情况-->
     <select id="getMenAndWomen" resultType="com.yy.young.pms.model.Statistic">
-        select count(*)as attr1 from pms_user pp
-        left join (
-        SELECT * FROM
-        (SELECT t2.id,string_agg(whole_name,',')deptNames FROM tb_ums_dept_user t1
-        LEFT JOIN pms_user t2 ON t1.user_id = t2.id
-        LEFT JOIN tb_ums_dept t3  ON  t3.id = t1.dept_id
-        group by t2.id)O ) ppo
-        on ppo.id = pp.id
-        where ( pp.trash_flag != '1'  or pp.trash_flag is null)
-        and  pp.user_name NOT IN ('环科院管理员','超级管理员')
-        and pp.sex =#{attr2}
-         <if test="attr10 != null and attr10 != ''">
-             AND   ppo.deptNames  LIKE '%${attr10}%'
-         </if>
-         <if test="zc != null and zc != ''">
-             AND  pp.administrative_level IN
-             <foreach collection="zc" item="zcItem" index="index" open="(" separator="," close=")">
-                 #{zcItem}
-             </foreach>
+        SELECT COUNT
+        ( * ) as attr1
+        FROM
+        pms_user
+        WHERE
+        1=1
+        <if test="deptList != null and deptList != ''">
+            AND id IN (
+            SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+            <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                #{item.deptId}
+            </foreach>
+            )
+        </if>
+        <if test="administrativeLevelList != null and administrativeLevelList != ''">
+            AND administrative_level in
+            <foreach collection="administrativeLevelList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="technicalPositionList != null and technicalPositionList != ''">
+            AND technical_position in
+            <foreach collection="technicalPositionList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="start_time != null and start_time != ''">
+            AND to_there_time  &gt;=#{start_time}
+        </if>
+        <if test="end_time != null and end_time != ''">
+            AND to_there_time  &lt;=#{end_time}
+        </if>
+        AND (trash_flag != '1'  or trash_flag is null)
+        and  user_name NOT IN ('环科院管理员','超级管理员')
+        <if test="sex != null and sex != ''">
+            and  sex=#{sex}
 
-         </if>
+        </if>
 
-         <if test="zw != null and zw != ''">
-             AND  pp.technical_position IN
-             <foreach collection="zw" item="zwItem" index="index" open="(" separator="," close=")">
-                 #{zwItem}
-             </foreach>
-         </if>
-         <if test="personTypeArr != null and personTypeArr != ''">
-             AND  pp.person_type IN
-             <foreach collection="personTypeArr" item="personTypeItem" index="index" open="(" separator="," close=")">
-                 #{personTypeItem}
-             </foreach>
-         </if>
 
     </select>
 
     <!--查询学历分布情况-->
     <select id="getEducationSpread" resultType="com.yy.young.pms.model.Statistic">
-        select count(*)as attr1 from pms_user pp
-        left join (
-        SELECT * FROM
-        (SELECT t2.id,string_agg(whole_name,',')deptNames FROM tb_ums_dept_user t1
-        LEFT JOIN pms_user t2 ON t1.user_id = t2.id
-        LEFT JOIN tb_ums_dept t3  ON  t3.id = t1.dept_id
-        group by t2.id)O ) ppo
-        on ppo.id = pp.id
-        where (pp.trash_flag != '1'  or pp.trash_flag is null)
-        and  pp.user_name NOT IN ('环科院管理员','超级管理员')
-        and pp.highest_education =#{attr2}
-        <if test="attr10 != null and attr10 != ''">
-             AND  ppo.deptNames  LIKE '%${attr10}%'
-         </if>
-         <if test="zc != null and zc != ''">
-             AND  pp.administrative_level IN
-             <foreach collection="zc" item="zcItem" index="index" open="(" separator="," close=")">
-                 #{zcItem}
-             </foreach>
+        SELECT COUNT
+        ( * ) as attr1
+        FROM
+        pms_user
+        WHERE
+        1=1
+        <if test="deptList != null and deptList != ''">
+            AND id IN (
+            SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+            <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                #{item.deptId}
+            </foreach>
+            )
+        </if>
+        <if test="administrativeLevelList != null and administrativeLevelList != ''">
+            AND administrative_level in
+            <foreach collection="administrativeLevelList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="technicalPositionList != null and technicalPositionList != ''">
+            AND technical_position in
+            <foreach collection="technicalPositionList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="start_time != null and start_time != ''">
+            AND to_there_time  &gt;=#{start_time}
+        </if>
+        <if test="end_time != null and end_time != ''">
+            AND to_there_time  &lt;=#{end_time}
+        </if>
+        AND (trash_flag != '1'  or trash_flag is null)
+        and  user_name NOT IN ('环科院管理员','超级管理员')
+        <if test="highestEducation != null and highestEducation != ''">
+            and  highest_education =#{highestEducation}
 
-         </if>
+        </if>
 
-         <if test="zw != null and zw != ''">
-             AND  pp.technical_position IN
-             <foreach collection="zw" item="zwItem" index="index" open="(" separator="," close=")">
-                 #{zwItem}
-             </foreach>
-         </if>
-         <if test="personTypeArr != null and personTypeArr != ''">
-             AND  pp.person_type IN
-             <foreach collection="personTypeArr" item="personTypeItem" index="index" open="(" separator="," close=")">
-                 #{personTypeItem}
-             </foreach>
-         </if>
     </select>
 
 
@@ -169,11 +184,37 @@
         FROM
             pms_user
         WHERE
-        <if test="attr10 == '其他'">
+        <if test="remark == '其他'">
             remark not in('在编','院聘','劳务派遣','劳务协议','离职','退休','离休','博士后')
         </if>
-        <if test="attr10 != '其他'">
-            remark = #{attr10}
+        <if test="remark != '其他'">
+            remark = #{remark}
+        </if>
+        <if test="deptList != null and deptList != ''">
+           AND id IN (
+            SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+            <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                #{item.deptId}
+            </foreach>
+            )
+        </if>
+        <if test="administrativeLevelList != null and administrativeLevelList != ''">
+            AND administrative_level in
+            <foreach collection="administrativeLevelList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="technicalPositionList != null and technicalPositionList != ''">
+            AND technical_position in
+            <foreach collection="technicalPositionList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="start_time != null and start_time != ''">
+            AND to_there_time  &gt;=#{start_time}
+        </if>
+        <if test="end_time != null and end_time != ''">
+            AND to_there_time  &lt;=#{end_time}
         </if>
         AND (trash_flag != '1'  or trash_flag is null)
         and  user_name NOT IN ('环科院管理员','超级管理员')
@@ -267,46 +308,197 @@
 
     <!--查询工作年限情况-->
     <select id="getWorkYear" resultType="com.yy.young.pms.model.Statistic">
-        select count(*)as attr1 from pms_user pp
-        left join (
-        SELECT * FROM
-        (SELECT t2.id,string_agg(whole_name,',')deptNames FROM tb_ums_dept_user t1
-        LEFT JOIN pms_user t2 ON t1.user_id = t2.id
-        LEFT JOIN tb_ums_dept t3  ON  t3.id = t1.dept_id
-        group by t2.id)O ) ppo
-        on ppo.id = pp.id
-        where (pp.trash_flag != '1'  or pp.trash_flag is null)
-        and  pp.user_name NOT IN ('环科院管理员','超级管理员')
-        and pp.work_start_time &gt;#{attr1} AND pp.work_start_time &lt;=#{attr2}
-         <if test="attr10 != null and attr10 != ''">
-             AND ppo.deptNames  LIKE '%${attr10}%'
-         </if>
-         <if test="zc != null and zc != ''">
-             AND  pp.administrative_level IN
-             <foreach collection="zc" item="zcItem" index="index" open="(" separator="," close=")">
-                 #{zcItem}
-             </foreach>
+        SELECT COUNT
+        ( * ) as attr1
+        FROM
+        pms_user
+        WHERE
+        1=1
+        <if test="deptList != null and deptList != ''">
+            AND id IN (
+            SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+            <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                #{item.deptId}
+            </foreach>
+            )
+        </if>
+        <if test="administrativeLevelList != null and administrativeLevelList != ''">
+            AND administrative_level in
+            <foreach collection="administrativeLevelList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="technicalPositionList != null and technicalPositionList != ''">
+            AND technical_position in
+            <foreach collection="technicalPositionList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="start_time != null and start_time != ''">
+            AND to_there_time  &gt;=#{start_time}
+        </if>
+        <if test="end_time != null and end_time != ''">
+            AND to_there_time  &lt;=#{end_time}
+        </if>
+        AND (trash_flag != '1'  or trash_flag is null)
+        and  user_name NOT IN ('环科院管理员','超级管理员')
+        <if test="startWorkTime != null and startWorkTime != ''">
+            and  work_start_time &gt;=#{startWorkTime}
 
-         </if>
+        </if>
+        <if test="endWorkTime != null and endWorkTime != ''">
+            AND work_start_time &lt;=#{endWorkTime}
 
-         <if test="zw != null and zw != ''">
-             AND  pp.technical_position IN
-             <foreach collection="zw" item="zwItem" index="index" open="(" separator="," close=")">
-                 #{zwItem}
-             </foreach>
-         </if>
-         <if test="personTypeArr != null and personTypeArr != ''">
-             AND  pp.person_type IN
-             <foreach collection="personTypeArr" item="personTypeItem" index="index" open="(" separator="," close=")">
-                 #{personTypeItem}
-             </foreach>
-         </if>
-
+        </if>
     </select>
 
     <!--查询奖励层次情况-->
     <select id="getAwardLevel" resultType="com.yy.young.pms.model.Statistic">
-        SELECT COUNT(*) AS attr1 FROM PMS_TECH_AWARDS O WHERE O.AWARD_LEVEL =#{attr2}
+        SELECT COUNT(*) AS attr1
+        FROM PMS_TECH_AWARDS O
+        WHERE 1=1
+        <if test="awardLevel != null and awardLevel != ''">
+            AND AWARD_LEVEL =#{awardLevel}
+
+        </if>
+       AND O.user_id in(
+        SELECT id
+        FROM
+        pms_user
+        WHERE
+        1=1
+        <if test="deptList != null and deptList != ''">
+            AND id IN (
+            SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+            <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                #{item.deptId}
+            </foreach>
+            )
+        </if>
+        <if test="start_time != null and start_time != ''">
+            AND to_there_time &gt;=#{start_time}
+        </if>
+        <if test="end_time != null and end_time != ''">
+            AND to_there_time &lt;=#{end_time}
+        </if>
+        AND (trash_flag != '1' or trash_flag is null)
+        and user_name NOT IN ('环科院管理员','超级管理员')
+
+        )
+    </select>
+
+
+    <!--出版著作情况-->
+    <select id="getWorkType" resultType="com.yy.young.pms.model.Statistic">
+        SELECT COUNT(*) AS attr1
+        FROM pms_publish
+        WHERE 1=1
+        <if test="workType != null and workType != ''">
+            AND work_type =#{workType}
+
+        </if>
+        AND user_id in(
+        SELECT id
+        FROM
+        pms_user
+        WHERE
+        1=1
+        <if test="deptList != null and deptList != ''">
+            AND id IN (
+            SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+            <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                #{item.deptId}
+            </foreach>
+            )
+        </if>
+        <if test="start_time != null and start_time != ''">
+            AND to_there_time &gt;=#{start_time}
+        </if>
+        <if test="end_time != null and end_time != ''">
+            AND to_there_time &lt;=#{end_time}
+        </if>
+        AND (trash_flag != '1' or trash_flag is null)
+        and user_name NOT IN ('环科院管理员','超级管理员')
+
+        )
+    </select>
+
+    <!--考核-->
+    <select id="getAssessment" resultType="com.yy.young.pms.model.Statistic">
+        SELECT
+
+        <if test="checkScore =='checkScore'">
+            COUNT(check_score) AS attr1
+        </if>
+            <if test="checkScore =='one'">
+                COUNT(quarter_one) AS attr1
+
+            </if>
+            <if test="checkScore =='two'">
+                COUNT(quarter_one) AS attr1
+
+
+            </if>
+            <if test="checkScore =='three'">
+                COUNT(quarter_three) AS attr1
+
+
+            </if>
+            <if test="checkScore =='four'">
+                COUNT(quarter_four) AS attr1
+
+
+            </if>
+
+        FROM pms_year_check
+        WHERE 1=1
+
+        <if test="checkScore =='checkScore'">
+            and check_score!=''
+        </if>
+        <if test="checkScore =='one'">
+            and quarter_one!=''
+
+        </if>
+        <if test="checkScore =='two'">
+            and quarter_one!=''
+
+
+        </if>
+        <if test="checkScore =='three'">
+            and quarter_three!=''
+
+
+        </if>
+        <if test="checkScore =='four'">
+            and quarter_four!=''
+
+        </if>
+
+        AND user_id in(
+        SELECT id
+        FROM
+        pms_user
+        WHERE
+        1=1
+        <if test="deptList != null and deptList != ''">
+            AND id IN (
+            SELECT DISTINCT DU.USER_ID FROM tb_ums_dept_user DU WHERE DU.DEPT_ID IN
+            <foreach collection="deptList" item="item" separator="," open="(" close=")">
+                #{item.deptId}
+            </foreach>
+            )
+        </if>
+        <if test="start_time != null and start_time != ''">
+            AND to_there_time &gt;=#{start_time}
+        </if>
+        <if test="end_time != null and end_time != ''">
+            AND to_there_time &lt;=#{end_time}
+        </if>
+        AND (trash_flag != '1' or trash_flag is null)
+        and user_name NOT IN ('环科院管理员','超级管理员')
+
+        )
     </select>
 
     <!--查询系统内所有用户数量-->

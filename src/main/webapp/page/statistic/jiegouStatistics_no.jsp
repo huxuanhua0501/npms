@@ -90,18 +90,26 @@
                 <div class="layui-form-item layui-col-md12">
                     <label class="layui-form-label">所属部门</label>
                     <div class="layui-input-inline big">
-                        <input type="text" id="branch" name="PARENT_NAME" class="layui-input">
-                        <span class="input-group-btn">
-                            <button class="layui-btn layui-btn-primary choose-btn" type="button">
-                                <i class="iconfont icon-menu" aria-hidden="true"></i>&nbsp;选择
-                            </button>
+                        <input id="showType" name="showType" type="hidden">
+                        <input type="hidden" id="deptIds" name="deptIds" class="form-control input-sm" value="">
+                        <input type="text" id="names" name="names" required lay-verify="required" placeholder=""
+                               autocomplete="off" class="layui-input list-input"
+                               style="width: 100px;display: inline-block;"> <span class="input-group-btn">
+                             <button class="layui-btn layui-btn-primary choose-btn" type="button"
+                                     onclick="choiceDept('deptIds','names',true)">
+                                            <i class="iconfont icon-menu" aria-hidden="true"></i>&nbsp;选择
+                                        </button>
                          </span>
                     </div>
                 </div>
                 <div class="edit-item layui-col-md12 layui-col-xs12">
                     <label class="layui-form-label">时间段</label>
-                    <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="startY" style="width: 100px;display: inline-block;">至
-                    <input type="text" name="" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="endY" style="width: 100px;display: inline-block;">
+                    <input type="text" idname="start_time" required lay-verify="required" placeholder="2018-08"
+                           autocomplete="off"
+                           class="layui-input list-input" id="start_time" style="width: 100px;display: inline-block;">至
+                    <input type="text" name="end_time" required lay-verify="required" placeholder="2018-10"
+                           autocomplete="off"
+                           class="layui-input list-input" id="end_time" style="width: 100px;display: inline-block;">
                 </div>
                 <div class="edit-item layui-col-md12 layui-col-xs12">
                     <label class="layui-form-label">行政级别</label>
@@ -116,7 +124,7 @@
 
                 <div class="layui-form-item button-item">
                     <div class="layui-input-inline button-inline">
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry">查询</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry" onclick="loadBianzhi()">查询</button>
                     </div>
                 </div>
             </div>
@@ -218,6 +226,26 @@
     </div>
 </div>
     <script>
+
+        function loadBianzhi(){
+            var num = $("#showType").val();
+            if(num==="1") {
+                loadTalentEchelon();
+
+            }
+            if(num==="2") {
+                loadMenAndWomen();
+
+            }
+            if(num==="3") {
+                loadEducation();
+
+            }
+            if(num==="4") {
+                loadWorkYear();
+
+            }
+        }
         //系统录入所有人员数量
         var allUserCount;
         $(function() {
@@ -281,7 +309,7 @@
                 if(json) {
                     var obj = json;
                     var listline = "";
-                    listline += '<input type=\"checkbox\" name=\"administrativeLevel\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                    listline += '<input type=\"checkbox\" name=\"administrativeLevel\" class=\"col-item\" lay-skin=\"primary\" value= "" title="所有">';
                     for (var i = 0; i < obj.data.length; i++) {
                         listline += '<input type=\"checkbox\" name=\"administrativeLevel\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
                     }
@@ -294,7 +322,7 @@
                 if(json) {
                     var obj = json;
                     var listline = "";
-                    listline += '<input type=\"checkbox\" name=\"technicalPosition\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                    listline += '<input type=\"checkbox\" name=\"technicalPosition\" class=\"col-item\" lay-skin=\"primary\" value= "" title="所有">';
                     for (var i = 0; i < obj.data.length; i++) {
                         listline += '<input type=\"checkbox\" name=\"technicalPosition\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
                     }
@@ -329,9 +357,25 @@
         }
         //加载人才建设数据
         function loadTalentEchelon(){
+            $("#showType").val("1");
+            var deptIds = $("#deptIds").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
+            trashFlagArray = document.getElementsByName("administrativeLevel");
+            var  administrativeLevel=new Array();
+            for(b in trashFlagArray){
+                if(trashFlagArray[b].checked)
+                    administrativeLevel.push(trashFlagArray[b].value);
+            }
+            trashFlagArray = document.getElementsByName("technicalPosition");
+            var  technicalPosition=new Array();
+            for(b in trashFlagArray){
+                if(trashFlagArray[b].checked)
+                    technicalPosition.push(trashFlagArray[b].value);
+            }
             //获取查询条件信息
             var selectObj = getQueryData();
-            jo.postAjax("pms/statistic/getTalentEchelon",{data:selectObj}, function(json){
+            jo.postAjax("pms/statistic/getTalentEchelon",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time,"administrativeLevel":administrativeLevel,"technicalPosition":technicalPosition}, function(json){
                 if(json && json.code == 0){
                     var data = json.data;
                     var info = data[0];
@@ -349,7 +393,7 @@
                     var age50 = info["attr6"];
                     //尚无填写
 
-                    var noInfo = allUserCount - age30 - age30_35 - age35_40 - age40_45 - age45_50 - age50;
+                    var noInfo =  info["attr7"] - age30 - age30_35 - age35_40 - age40_45 - age45_50 - age50;
                     if(noInfo<0){
                         noInfo = 0;
                     }
@@ -361,7 +405,7 @@
                     obj.talentEchelon5 = age45_50;
                     obj.talentEchelon6 = age50;
                     obj.talentEchelon7 = noInfo;
-                    obj.total = allUserCount;
+                    obj.total = info["attr7"];
                     talentEchelonHtml(obj);//生成人才建设html
                     chart1(obj);//生成人才建设饼图
                     chart2(obj);//生成人才建设柱状图
@@ -514,10 +558,26 @@
         }
         //加载男女比例情况数据
         function loadMenAndWomen(){
+            $("#showType").val("2");
+            var deptIds = $("#deptIds").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
+            trashFlagArray = document.getElementsByName("administrativeLevel");
+            var  administrativeLevel=new Array();
+            for(b in trashFlagArray){
+                if(trashFlagArray[b].checked)
+                    administrativeLevel.push(trashFlagArray[b].value);
+            }
+            trashFlagArray = document.getElementsByName("technicalPosition");
+            var  technicalPosition=new Array();
+            for(b in trashFlagArray){
+                if(trashFlagArray[b].checked)
+                    technicalPosition.push(trashFlagArray[b].value);
+            }
             //获取查询条件信息
             var selectObj = getQueryData();
-            jo.postAjax("pms/statistic/getMenAndWomen",{data:selectObj}, function(json){
-                if(json && json.code == 0){
+                jo.postAjax("pms/statistic/getMenAndWomen",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time,"administrativeLevel":administrativeLevel,"technicalPosition":technicalPosition}, function(json){
+                    if(json && json.code == 0){
                     var data = json.data;
                     var info = data[0];
                     //男
@@ -525,7 +585,7 @@
                     //女
                     var women = parseInt(info["attr2"]);
                     //尚无资料
-                    var noInfo = allUserCount - man - women;
+                    var noInfo = info["attr3"] - man - women;
                     if(noInfo<0){
                         noInfo = 0;
                     }
@@ -533,7 +593,7 @@
                     obj.menAndWomen1 = man;
                     obj.menAndWomen2 = women;
                     obj.menAndWomen3 = noInfo;
-                    obj.total = allUserCount;
+                    obj.total = info["attr3"];
                     menAndWomenHtml(obj);//生成男女比例html
                     chart3(obj);//生成男女比例饼图
                     chart4(obj);//生成男女比例柱状图
@@ -669,10 +729,27 @@
         }
         //加载学历分布数据
         function loadEducation(){
+            $("#showType").val("3");
+            var deptIds = $("#deptIds").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
+            trashFlagArray = document.getElementsByName("administrativeLevel");
+            var  administrativeLevel=new Array();
+            for(b in trashFlagArray){
+                if(trashFlagArray[b].checked)
+                    administrativeLevel.push(trashFlagArray[b].value);
+            }
+            trashFlagArray = document.getElementsByName("technicalPosition");
+            var  technicalPosition=new Array();
+            for(b in trashFlagArray){
+                if(trashFlagArray[b].checked)
+                    technicalPosition.push(trashFlagArray[b].value);
+            }
             //获取查询条件信息
             var selectObj = getQueryData();
-            jo.postAjax("pms/statistic/getEducationSpread",{data:selectObj}, function(json){
-                if(json && json.code == 0){
+                jo.postAjax("pms/statistic/getEducationSpread",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time,"administrativeLevel":administrativeLevel,"technicalPosition":technicalPosition}, function(json){
+
+                    if(json && json.code == 0){
                     var data = json.data;
                     var info = data[0];
 
@@ -692,7 +769,7 @@
                     var educationSpread7 = info["attr7"];
 
                     //尚无填写
-                    var noInfo = allUserCount - educationSpread1 - educationSpread2 - educationSpread3 - educationSpread4 - educationSpread5 - educationSpread6 - educationSpread6;
+                    var noInfo = info["attr8"] - educationSpread1 - educationSpread2 - educationSpread3 - educationSpread4 - educationSpread5 - educationSpread6 - educationSpread6;
                     if(noInfo<0){
                         noInfo = 0;
                     }
@@ -705,7 +782,7 @@
                     obj.education6 = educationSpread6;
                     obj.education7 = educationSpread7;
                     obj.education8 = noInfo;
-                    obj.total = allUserCount;
+                    obj.total = info["attr8"] ;
                     educationHtml(obj);//生成学历分布html
                     chart5(obj);//生成学历分布饼图
                     chart6(obj);//生成学历分布柱状图
@@ -862,10 +939,27 @@
         }
         //加载工作年限数据
         function loadWorkYear(){
+            $("#showType").val("4");
+            var deptIds = $("#deptIds").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
+            trashFlagArray = document.getElementsByName("administrativeLevel");
+            var  administrativeLevel=new Array();
+            for(b in trashFlagArray){
+                if(trashFlagArray[b].checked)
+                    administrativeLevel.push(trashFlagArray[b].value);
+            }
+            trashFlagArray = document.getElementsByName("technicalPosition");
+            var  technicalPosition=new Array();
+            for(b in trashFlagArray){
+                if(trashFlagArray[b].checked)
+                    technicalPosition.push(trashFlagArray[b].value);
+            }
             //获取查询条件信息
             var selectObj = getQueryData();
-            jo.postAjax("pms/statistic/getWorkYear",{data:selectObj}, function(json){
-                if(json && json.code == 0){
+                jo.postAjax("pms/statistic/getWorkYear",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time,"administrativeLevel":administrativeLevel,"technicalPosition":technicalPosition}, function(json){
+
+                    if(json && json.code == 0){
                     var data = json.data;
                     var info = data[0];
 
@@ -884,7 +978,7 @@
 
 
                     //尚无填写
-                    var noInfo = allUserCount - work_year_5 - work_year_5_10 - work_year_10_20 - work_year_20_30 - work_year_30_40 - work_year_40;
+                    var noInfo = info["attr7"] - work_year_5 - work_year_5_10 - work_year_10_20 - work_year_20_30 - work_year_30_40 - work_year_40;
                     if(noInfo<0){
                         noInfo = 0;
                     }
@@ -896,7 +990,7 @@
                     obj.workYear5 = work_year_30_40;
                     obj.workYear6 = work_year_40;
                     obj.workYear7 = noInfo;
-                    obj.total = allUserCount;
+                    obj.total = info["attr7"];
                     workYearHtml(obj);//生成工作年限html
                     chart7(obj);//生成工作年限饼图
                     chart8(obj);//生成工作年限柱状图

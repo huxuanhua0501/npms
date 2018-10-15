@@ -2,6 +2,7 @@ package com.yy.young.pms.service;
 
 import com.yy.young.interfaces.ums.model.Dept;
 import com.yy.young.pms.model.PmsDictionary;
+import com.yy.young.pms.model.PmsUser;
 import com.yy.young.pms.model.Statistic;
 import com.yy.young.pms.model.UserDept;
 
@@ -15,11 +16,11 @@ public interface IStatisticService {
     /**
      * 查询人才梯队建设
      *
-     * @param statistic
+     * @param
      * @return
      * @throws Exception
      */
-    public Statistic getTalentEchelon(Statistic statistic) throws Exception;
+    public Statistic getTalentEchelon(PmsUser pmsUser) throws Exception;
 
     /**
      * 查询研究领域情况
@@ -33,20 +34,20 @@ public interface IStatisticService {
     /**
      * 查询男女比例情况
      *
-     * @param statistic
+     * @param
      * @return
      * @throws Exception
      */
-    public Statistic getMenAndWomen(Statistic statistic) throws Exception;
+    public Statistic getMenAndWomen(PmsUser pmsUser) throws Exception;
 
     /**
      * 查询学历分布情况
      *
-     * @param statistic
+     * @param
      * @return
      * @throws Exception
      */
-    public Statistic getEducationSpread(Statistic statistic) throws Exception;
+    public Statistic getEducationSpread(PmsUser pmsUser) throws Exception;
 
     /**
      * 查询国外经历情况
@@ -61,20 +62,28 @@ public interface IStatisticService {
     /**
      * 查询工作年限情况
      *
-     * @param statistic
+     * @param
      * @return
      * @throws Exception
      */
-    public Statistic getWorkYear(Statistic statistic) throws Exception;
+    public Statistic getWorkYear(PmsUser pmsUser) throws Exception;
 
     /**
      * 查询奖励层次情况
      *
-     * @param statistic
+     * @param
      * @return
      * @throws Exception
      */
-    public Statistic getAwardLevel(Statistic statistic) throws Exception;
+    public Statistic getAwardLevel(PmsUser pmsUser) throws Exception;
+
+    /**
+     * 出版情况
+     * @param pmsUser
+     * @return
+     * @throws Exception
+     */
+    public Statistic getWorkType(PmsUser pmsUser) throws Exception;
 
     /**
      * 查询系统内所有用户数量
@@ -88,15 +97,16 @@ public interface IStatisticService {
     /**
      * 查询系统内录入的所有人数
      *
-     * @param statistic
+     * @param
      * @return
      * @throws Exception
      */
     public Statistic getSystemInputCount(Statistic statistic) throws Exception;
 
     Statistic getNumberOfPeople() throws Exception;
-    Statistic getEmployeeStatistics() throws Exception;
+    Statistic getEmployeeStatistics(PmsUser pmsUser) throws Exception;
     Statistic getMaritalStatus() throws Exception;
+    Statistic getAssessment(PmsUser pmsUse) throws Exception;
 
 
 
