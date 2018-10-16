@@ -213,14 +213,13 @@
         function loadOrgList(gotoPage,deptParentId){
             if(!gotoPage)
                 gotoPage =1;
-            var searchVal = $("#searchName").val();
-            if(searchVal){}else{
-                searchVal = '';
-            }
-            if(deptParentId){}else{
-                deptParentId=loginUser.companyId;
-            }
+            deptParentId = jo.getDefVal(deptParentId,loginUser.companyId);
+
             lastParentId =deptParentId;
+            var searchVal = jo.getDefVal($("#searchName").val(),'');
+            if(searchVal && deptParentId==loginUser.companyId){
+                deptParentId = '';
+            }
             var sUrl = 'ums/dept/getDeptPage.action';
             jo.postAjax(sUrl, {pageNumber:gotoPage,pageSize:25,NAME:searchVal,PARENT_ID:deptParentId}, function(json){
                 if(json && json.code == "0"){
@@ -241,7 +240,7 @@
                             var parentName = list[i].PARENT_NAME;
                             liHtml += '<tr>\n' +
                                 '      <td><input type="checkbox" name="deptCheck" value="'+deptId+'" lay-skin="primary"></td>\n' +
-                                '      <td onclick="deptEdit(\''+deptId+'\')"><a href="javascript:;">'+name+'</a></td>\n' +
+                                '      <td onclick="deptEdit(\''+deptId+'\')"><a href="javascript:;" class="edit">'+name+'</a></td>\n' +
                                 '      <td>'+parentName+'</td>\n' +
                                 '      <td>'+deptLevel+'</td>\n' +
                                 '      <td>'+type+'</td>\n' +

@@ -93,4 +93,5 @@ admin用户的资源链接池
 10.组织机构大模块按要求调整菜单，显示顺序分别为 部门用户-机构管理-角色权限
     角色权限下三级菜单包括角色管理、角色用户
 11.组织机构-机构管理 新地址openPageOnMain('page/ums/deptList_no.jsp')
-   组织机构-部门用户 新地址	openPageOnMain('page/ums/deptUser_no.jsp')	
+   组织机构-部门用户 新地址	openPageOnMain('page/ums/deptUser_no.jsp')
+12.组织机构-角色权限-角色管理 新地址 openPageOnMain('page/ums/roleList_no.jsp')	
