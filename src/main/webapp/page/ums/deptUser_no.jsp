@@ -318,7 +318,7 @@
                             liHtml += '<tr class="'+stateClass+'">\n' +
                                 '      <td><input type="checkbox" name="deptUserCheck" lay-skin="primary"></td>\n' +
                                 '      <td>'+(i+1)+'</td>\n' +
-                                '      <td>'+USER_NAME+'</td>\n' +
+                                '      <td onclick="userEdit(\''+USER_ID+'\')"><a href="javascript:;" class="edit">'+USER_NAME+'</a></td>\n' +
                                 '      <td>'+BIRTHDAY+'</td>\n' +
                                 '      <td>'+SEX+'</td>\n' +
                                 '      <td>'+TEL+'</td>\n' +
@@ -382,7 +382,29 @@
         }
         //查看员工档案（宣化引用）
         function lookUserDoc(userId){
+            layer.open({ /*弹出框*/
+                type: 2,
+                title: '员工查看',
+                // maxmin: true,//大小窗口切换
+                shadeClose: true, //点击遮罩关闭层
+                area: ['85%', '85%'],
+                content: 'page/personal/myDoc.jsp?id='+userId+'&_t='+(new Date()).getTime()
+            });
 
+        }
+        //编辑员工
+        function userEdit(userId){
+            layer.open({ /*弹出框*/
+                type: 2,
+                title: '员工编辑',
+                // maxmin: true,//大小窗口切换
+                shadeClose: true, //点击遮罩关闭层
+                area: ['85%', '85%'],
+                content: 'page/personal/myDoc.jsp?edit=true&id='+userId+'&_t='+(new Date()).getTime(),
+                end:function () {
+                    loadDeptUser(page.pageNumber);
+                }
+            });
         }
     </script>
 </body>
