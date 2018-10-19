@@ -61,15 +61,7 @@
             opacity: 0.8;
         }
     </style>
-    <%-- <script>
-         $(function () {
-             var userId = jo.getDefVal(jo.getUrlParam("id"), loginUser.id);
-             var auditData = jo.postAjax("/pms/pmspreview/getPmsUserById",{"userId":userId});
 
-
-         });
-
-     </script>--%>
 </head>
 
 <body>
@@ -90,7 +82,9 @@
             <form action="" class="person-content layui-form layui-form-box">
                 <div class="clear">
                     <div class="left image">
-                        <img src="../images/person.jpg" alt="">
+                        <%--<img src="../images/person.jpg" alt="">--%>
+                        <img id="header"  src="<%=URL_STATIC%>static/images/def_head.jpg" alt="" width="128px" height="158px">
+
                     </div>
                     <div class="layui-row left row-one">
                         <div class="layui-col-md6">
@@ -668,6 +662,11 @@
         $("#workStartTime").val(auditData.data[0].workStartTime);
         $("#joinPartyTime").val(auditData.data[0].joinPartyTime);
         $("#toThereTime").val(auditData.data[0].toThereTime);
+        var photoAddress = auditData.data[0].photoAddress;
+        if (jo.isValid(photoAddress)) {
+            $("#header").attr("src", URL_FS + "fs/file/image.action?id=" + photoAddress);//使用审核库中的信息
+        }
+
         //工作信息
         $("#technicalPosition").val(auditData.data[0].technicalPosition);
         $("#technicalLevel").val(auditData.data[0].technicalLevel);
