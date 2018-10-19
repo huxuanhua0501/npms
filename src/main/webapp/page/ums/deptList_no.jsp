@@ -76,8 +76,8 @@
                 </div>
             </div>
             <div class="person-list-content layui-row" style="padding: 0;">
-                <ul id="classtree" class="layui-col-md2"></ul>
-                <div class="layui-form layui-col-md10">
+                <ul id="classtree" class="layui-col-md4"></ul>
+                <div class="layui-form layui-col-md8">
                     <table class="layui-table" style="width: 80%;float: right; margin-right: 10px" lay-odd lay-skin="line row nob">
                         <thead>
                         <tr style="background: #fff;">
@@ -87,7 +87,7 @@
                             <th>部门层级</th>
                             <th>部门类型</th>
                             <th>创建时间</th>
-                            <th>排序<i class="iconfont icon-jiantou-down"></i><i class="iconfont icon-jiantou-up"></i></th>
+                            <th>排序<i class="iconfont icon-jiantou-down" style="cursor: pointer;"></i><i class="iconfont icon-jiantou-up" style="cursor: pointer"></i></th>
                         </tr>
                         </thead>
                         <tbody id="dept_list">
@@ -110,6 +110,7 @@
         var tree;
         var form;
         var lastParentId;//常量用于重载数据
+        var num_stor = '';//排序 Oder by asc desc
         $(function() {
             layui.use(['element', 'tree', 'layer', 'form', 'upload'], function() {
                 tree = layui.tree,
@@ -135,8 +136,23 @@
                 $(document).on("click", function(e) {
                     $(".layui-form-select").removeClass("layui-form-selected");
                 });
-
-
+                //tree 鼠标选中样式切换
+                $("body").on("mousedown",".layui-tree a",function(){
+                    // if(!$(this).siblings('ul').length){
+                    $(".layui-tree a").css('background-color','');
+                    $(this).css('background-color','#e5e5e5');
+                    // }
+                });
+                //点击排序 倒序
+                $(".icon-jiantou-down").on("click",function(e){
+                    num_stor = 'desc';
+                    loadOrgList(1,lastParentId);
+                });
+                //升序
+                $(".icon-jiantou-up").on("click",function(e){
+                    num_stor = 'asc';
+                    loadOrgList(1,lastParentId);
+                });
                 //加载部门列表
                 loadOrgList(1,'');
             });
@@ -154,6 +170,7 @@
                 elem: "#classtree",
                 nodes: loadOrgTree() ,
                 click: function(node) {
+                    num_stor = '';
                     var $select = $($(this)[0].elem).parents(".layui-form-select");
                     $select.removeClass("layui-form-selected").find(".layui-select-title span").html(node.name).end().find("input:hidden[name='selectID']").val(node.id);
                 }
@@ -221,7 +238,7 @@
                 deptParentId = '';
             }
             var sUrl = 'ums/dept/getDeptPage.action';
-            jo.postAjax(sUrl, {pageNumber:gotoPage,pageSize:25,NAME:searchVal,PARENT_ID:deptParentId}, function(json){
+            jo.postAjax(sUrl, {pageNumber:gotoPage,pageSize:25,NAME:searchVal,PARENT_ID:deptParentId,NUM_STOR:num_stor}, function(json){
                 if(json && json.code == "0"){
                     if(json.data && json.data[0]){
                         page = json;
@@ -245,10 +262,9 @@
                                 '      <td>'+deptLevel+'</td>\n' +
                                 '      <td>'+type+'</td>\n' +
                                 '      <td>'+createTime+'</td>\n' +
-                                /*'      <td class="sort">\n' +
-                                '           <input type="text" class="layui-input" value="'+num+'">\n' +
-                                '      </td>\n' +*/
-                                '      <td>'+num+'</td>\n' +
+                                '      <td class="sort">\n' +
+                                '           <input type="text" class="layui-input" value="'+num+'" onblur="changeDeptNum(this.value,\''+deptId+'\')">\n' +
+                                '      </td>\n' +
                                 '      </tr>';
                         }
                         $("#dept_total").html(page.total);
@@ -347,6 +363,28 @@
                     }, true);
                 }
             });
+        }
+        //当部门排序文本框失去焦点时，更新排序并刷新
+        function changeDeptNum(num,deptId) {
+            if(num){
+                var t = /(^[1-9]\d*$)/;
+                if(!t.test(num)){
+                    layer.msg("排序必须为数字");
+                    return false;
+                }
+            }else{
+                layer.msg("排序不可以为空");
+                return false;
+            }
+            var sUrl = 'ums/dept/updateDept.action';
+            jo.postAjax(sUrl, {ID:deptId,NUM:num}, function(json){
+                if(json && json.code == "0"){
+                    loadOrgList(page.pageNumber,lastParentId);//刷新页面
+                    layer.msg(json.info);
+                }else{
+                    layer.msg(json.info);
+                }
+            }, true);
         }
     </script>
 </body>
