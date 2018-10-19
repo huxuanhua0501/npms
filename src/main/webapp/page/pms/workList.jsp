@@ -191,6 +191,17 @@ if (jo.isValid(_edit)){
             width: 92%;
         }
         /*分页条样式end*/
+
+        pre {
+            white-space: pre-wrap; /*css-3*/
+            white-space: -moz-pre-wrap; /*Mozilla,since1999*/
+            white-space: -pre-wrap; /*Opera4-6*/
+            white-space: -o-pre-wrap; /*Opera7*/
+            word-wrap: break-word; /*InternetExplorer5.5+*/
+            text-align:left;
+        }
+
+
     </style>
 </head>
 
@@ -346,12 +357,12 @@ if (jo.isValid(_edit)){
                 <div class="layui-form-item">
                     <label class="layui-form-label">工作单位</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="content" placeholder="" autocomplete="off" class="layui-input list-input">
+                        <input type="text" id="contentColor" name="content" placeholder="" autocomplete="off" class="layui-input list-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-inline button-inline">
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry" onclick="joView.select()">查询</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry" onclick="changeColor()">查询</button>
                     </div>
                 </div>
             </div>
@@ -370,6 +381,7 @@ if (jo.isValid(_edit)){
                         <div class="layui-input-inline" style="width: calc(100% - 140px);">
                             <input type="hidden" id="userId" name="userId" />
                             <textarea class="layui-textarea" name="content" placeholder="格式：起始时间--结束时间 详细内容。例如：2018.09--2019.06 北京大学。说明：时间之间用两个减号分割，内容与时间之间用空格即可，多条记录请按Enter!" id="content" autoHeight="true" cols="50" style="height:auto;margin-top:10px;border: none;background: #fff;"></textarea>
+                        <div id="contentShow" class="layui-textarea"  autoHeight="true" cols="50" style="height:auto;margin-top:10px;border: none;background: #fff;" > </div>
                         </div>
                     </div>
                     <%--汇总end--%>
@@ -402,6 +414,59 @@ if (jo.isValid(_edit)){
     </div>
 </div>
     <script>
+        function  changeColor() {
+
+             var key = $("#contentColor").val();
+             var str = null;
+              /*汇总内容渲染*/
+             str =  $("#content").val();
+             if(str==undefined) {
+                 str = $("#contentShow").html();
+             }
+            str =  str.replace(/<font color=\"red\">/g, '');
+            str =  str.replace(/<\/font>/g, '');
+            str =  str.replace(/<pre>/g, '');
+            str =  str.replace(/<\/pre>/g, '');
+            function HightLight1(e){
+                var reg = new RegExp(e, 'g');
+                str = str.replace(reg, function(v){
+                    return v.fontcolor('red')
+                });
+            }
+            HightLight1(key);
+            str = "<pre>"+str+"</pre>";
+            $("#content").remove();
+            $("#contentShow").html(str);
+
+
+
+             /*列表的渲染*/
+            $("#mainList").find("tbody").find("tr").each(function(){
+                var tdArr = $(this).children();
+                  str = tdArr.eq(1).find('a').html();//收入类别
+                  str =  str.replace(/<font color=\"red\">/g, '');
+                  str =  str.replace(/<\/font>/g, '');
+                function HightLight(e){
+                    var reg = new RegExp(e, 'g');
+                    str = str.replace(reg, function(v){
+                        return v.fontcolor('red')
+                    });
+                }
+                HightLight(key)
+                tdArr.eq(1).find('a').html(str);//收入类别
+
+
+            });
+
+
+
+
+
+
+
+
+
+        }
         $(function() {
             layui.use(['layer', 'form', 'laydate'], function() {
                 var form = layui.form;
