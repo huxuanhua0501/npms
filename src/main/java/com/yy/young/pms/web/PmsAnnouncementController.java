@@ -199,6 +199,7 @@ public class PmsAnnouncementController {
     public Object getMaxNum(HttpServletRequest request) throws  Exception{
 
             PmsAnnouncement obj = service.getMaxNum();
+            obj.setCreateTime(DateUtil.getCurrentTime());
             return new Result(obj);
     }
     /**

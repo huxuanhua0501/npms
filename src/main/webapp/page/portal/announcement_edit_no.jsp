@@ -100,7 +100,7 @@
         <label class="layui-form-label">内容</label>
         <input type="text" name="content" id="content" style="display: none;" value=""/>
         <div class="layui-input-inline" style="width: 79%;">
-            <%--<script id="editor" type="text/plain" style="width:100%;height:200px;" ></script>--%>
+            <script id="editor" type="text/plain" style="width:100%;height:200px;" ></script>
         </div>
     </div>
     <button type="button" class="layui-btn layui-btn-primary save">保存</button>
@@ -186,6 +186,7 @@
                     var announ = json.data[0];
                     var defNum =parseInt(announ.serialNumber)+1;
                     $("#serialNumber").val(defNum);
+                    $("#createTime").val(announ.createTime);
                 }
             }
         }, true);
