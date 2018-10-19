@@ -38,7 +38,18 @@
         });
         //行处理
         joView.handleItem = function(oItem,iIndex){
+            if(oItem.website){
+                var thirdUrl = oItem.website;
+                if(thirdUrl){
+                    if(thirdUrl.substr(0,7).toLowerCase() == "http://" ||
+                        thirdUrl.substr(0,7).toLowerCase() == "https://"){
+                    }else{
+                        thirdUrl = "http://"+thirdUrl;
+                    }
+                    oItem.website = '<a href="'+thirdUrl+'" target="blank" class="edit">'+oItem.website+'</a>';
 
+                }
+            }
         };
     </script>
     <script type="text/javascript">

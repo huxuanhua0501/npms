@@ -46,6 +46,7 @@
             }
 
             joForm.initFormPage(jParams);//初始化
+            dealTime();
         });
         joForm.spliceStatus = function(formAuditData){
             console.log("JSP打印参数；" + JSON.stringify(formAuditData));
@@ -66,6 +67,28 @@
         //新增页面的初始化,当传入userId时,对userId参数进行赋值处理
         joForm.initFormPageOfAdd = function(){
             userIdHandleInAddForm();//userId字段处理
+        }
+        //处理添加时间
+        function dealTime(){
+            var time = $("#addTime").val();
+            if(!time){
+                var date = new Date();
+                var seperator1 = "-";
+                // var seperator2 = ":";
+                var month = date.getMonth() + 1;
+                // var strDate = date.getDate();
+                if (month >= 1 && month <= 9) {
+                    month = "0" + month;
+                }
+                // if (strDate >= 0 && strDate <= 9) {
+                //     strDate = "0" + strDate;
+                // }
+                // var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                //     + " " + date.getHours() + seperator2 + date.getMinutes()
+                //     + seperator2 + date.getSeconds();
+                var current = date.getFullYear()+seperator1+month
+                $("#addTime").val(current);
+            }
         }
     </script>
     <style>
@@ -119,7 +142,7 @@
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">网址</label>
         <div class="layui-input-inline">
-            <input type="text" name="website"    autocomplete="off" class="layui-input"  >
+            <input type="text" name="website"    autocomplete="off" class="layui-input" >
         </div>
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
@@ -131,7 +154,7 @@
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">添加时间</label>
         <div class="layui-input-inline">
-            <input type="text" name="add_time"  placeholder="格式：2018-08" autocomplete="off" class="layui-input" ErrBirthBad4>
+            <input type="text" id="addTime" name="add_time"  placeholder="格式：2018-08" autocomplete="off" class="layui-input" ErrBirthBad4>
         </div>
     </div>
 
