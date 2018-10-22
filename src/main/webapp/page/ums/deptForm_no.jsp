@@ -167,6 +167,7 @@
                 }
             };
         });
+        dealTime();
     });
 
     //部门名称发生变化时设置部门简称
@@ -199,6 +200,28 @@
             joForm.save();
         }
         window.parent.refreshDeptList();
+    }
+    //处理添加时间
+    function dealTime(){
+        var time = $("#CREATE_TIME").val();
+        if(!time){
+            var date = new Date();
+            var seperator1 = "-";
+            // var seperator2 = ":";
+            var month = date.getMonth() + 1;
+             var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            // var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            //     + " " + date.getHours() + seperator2 + date.getMinutes()
+            //     + seperator2 + date.getSeconds();
+            var current = date.getFullYear()+seperator1+month+seperator1+strDate;
+            $("#CREATE_TIME").val(current);
+        }
     }
 </script>
 </body>
