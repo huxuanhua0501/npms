@@ -72,17 +72,19 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/PERSON_TYPE",
                 dataType: "text",
+                async:false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
-                      listline += '<select name=\"sex\" lay-verify=\"\">';
-                      listline += '<option value=\"\">请选择</option>';
+                      listline += '<select name=\"remark\" lay-verify=\"\">';
+                      listline += '<option value=\"\"></option>';
                     for (var i = 0; i < obj.data.length; i++) {
                         // listline += '<input type=\"checkbox\" name=\"workType\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
-                          listline += '<option value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '></option>';
+                          listline += '<option value=' + obj.data[i].dicValue + '>'+obj.data[i].dicValue+'</option>';
 
                     }
-                    $("#selectGo").append(listline);
+                    $("#selectGo").html(listline);
+
                 }
 
             });
@@ -143,7 +145,7 @@
     <div  class="edit-item layui-col-md4 layui-col-xs4">
         <label class="layui-form-label">类别</label>
         <div class="layui-input-inline" id="selectGo">
-          <%--  <select name="sex" lay-verify="">
+           <%-- <select name="remark" lay-verify="">
                 <option value=""></option>
                 <option value="在编">在编</option>
                 <option value="院聘">院聘</option>
