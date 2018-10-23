@@ -84,8 +84,8 @@
     <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
     <button class="layui-btn layui-btn-primary save">确认添加</button> -->
     <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;">
-        <button class="layui-btn layui-btn-primary reset">重置</button>
-        <button class="layui-btn layui-btn-primary save">确认添加</button>
+        <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
+        <button type="button" class="layui-btn layui-btn-primary save">确认添加</button>
     </div>
 </form>
 
@@ -95,6 +95,9 @@
         layui.use(['form', 'laydate'], function () {
             var form = layui.form;
             var laydate = layui.laydate;
+            $(".reset").click(function () {
+                window.location.reload();
+            });
             $(".save").click(function () {
                 var startEducation = $('#startEducation').val();
                 var endEducation = $('#endEducation').val();
@@ -102,42 +105,42 @@
                 parent.$('#startEducation').val(startEducation);
                 parent.$('#endEducation').val(endEducation);
                 parent.$('#educationContent').val(educationContent);
-                var kaishi;
-                var jieshu;
-                var neirong;
-
-                if (startEducation !== '') {
-                      kaishi = "&nbsp;&nbsp;&nbsp;"+"起始时间"+"&nbsp;"+startEducation;
-
-                }else{
-                    kaishi=" ";
+                //清除父页面当前搜索条件中对应的数据
+                var parentCurrentSelect = window.parent.$("#currentSelect");
+                var tmpClass = 'jyjl_class',
+                    model = '：';
+                parentCurrentSelect.find("."+tmpClass).remove();
+                if (startEducation) {
+                    var name = '教育起始时间'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+startEducation+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (endEducation!=='') {
-                      jieshu = "&nbsp;&nbsp;&nbsp;"+"终止时间 "+"&nbsp;"+endEducation;
-
-                }else{
-                    jieshu=" ";
+                if (endEducation) {
+                    var name = '教育终止时间'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+endEducation+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (educationContent!=='') {
-                    neirong =  "&nbsp;&nbsp;&nbsp;"+"内容 "+"&nbsp;"+educationContent;
-
-                }else{
-                    neirong=" ";
+                if (educationContent) {
+                    var name = '教育经历内容'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+educationContent+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (kaishi!==" "||jieshu!==" "||neirong!==" ") {
-                    parent.$('#jiaoyujingli').html("教育经历"+"&nbsp;"+kaishi+jieshu+neirong);
-
-                }
-
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                 parent.layer.close(index); //再执行关闭
-
-
             })
-
         });
-
-
     })
 </script>
 </body>

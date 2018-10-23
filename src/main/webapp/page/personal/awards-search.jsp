@@ -20,6 +20,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/AWARD_LEVEL",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -113,8 +114,8 @@
 
 
         <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;margin-top: 30px;">
-            <button class="layui-btn layui-btn-primary reset">重置</button>
-            <button class="layui-btn layui-btn-primary save">确认添加</button>
+            <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-primary save">确认添加</button>
         </div>
     </form>
 
@@ -129,18 +130,37 @@
                 //     elem: '#time',
                 //     type: 'month'
                 // });
-
+                // 全选
+                form.on('checkbox', function (data) {
+                    var obj = data.elem;
+                    if(obj.title == '所有'){
+                        var child = $(obj).parent('div').find('input[type="checkbox"]');
+                        child.each(function(index,item){
+                            item.checked = obj.checked;
+                        });
+                    }else{
+                        var allChecked = true;
+                        $(obj).parent('div').find('input[type="checkbox"][title != "所有"]').each(function(index,item){
+                            if(!item.checked){
+                                allChecked = false;
+                            };
+                        });
+                        $(obj).parent('div').find('input[type="checkbox"][title = "所有"]').prop("checked",allChecked);
+                    }
+                    form.render('checkbox');
+                });
+                $(".reset").click(function () {
+                    window.location.reload();
+                });
                 $(".save").click(function () {
 
 
-                    obj = document.getElementsByName("awardLevel");
-                    var check_val=new Array();
-                    for(k in obj){
+                    var obj = document.getElementsByName("awardLevel");
+                    var check_val=[];
+                    for(var k in obj){
                         if(obj[k].checked)
                             check_val.push(obj[k].value);
                     }
-
-
                     var awardWinProjectName = $('#awardWinProjectName').val();
                     var awardType = $('#awardType').val();
                     var awardWinProjectLevel = $('#awardWinProjectLevel').val();
@@ -152,68 +172,74 @@
                     parent.$('#awardLevel').val(check_val);
                     parent.$('#awardsStartYears').val(awardsStartYears);
                     parent.$('#awardsEndYears').val(awardsEndYears);
-                    var yi;
-                    var er;
-                    var san;
-                    var si;
-                    var wu;
-                    var liu;
-
-
-                    if (awardWinProjectName !== '') {
-                        yi = "&nbsp;&nbsp;&nbsp;"+"名称"+"&nbsp;"+awardWinProjectName;
-
-                    }else{
-                        yi=" ";
+                    //清除父页面当前搜索条件中对应的数据
+                    var parentCurrentSelect = window.parent.$("#currentSelect");
+                    var tmpClass = 'hjqk_class',
+                        model = '：';
+                    parentCurrentSelect.find("."+tmpClass).remove();
+                    if (awardWinProjectName) {
+                        var name = '获奖名称'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+awardWinProjectName+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (awardType!=='') {
-                        er = "&nbsp;&nbsp;&nbsp;"+"类别 "+"&nbsp;"+awardType;
-
-                    }else{
-                        er=" ";
+                    if (awardType) {
+                        var name = '获奖类别'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+awardType+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (awardWinProjectLevel!=='') {
-                        san =  "&nbsp;&nbsp;&nbsp;"+"等级 "+"&nbsp;"+awardWinProjectLevel;
-
-                    }else{
-                        san=" ";
+                    if (awardWinProjectLevel) {
+                        var name = '获奖等级'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+awardWinProjectLevel+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (check_val!=='') {
-                        si =  "&nbsp;&nbsp;&nbsp;"+"奖励层次 "+"&nbsp;"+check_val;
-
-                    }else{
-                        si=" ";
+                    if (check_val && check_val.length > 0) {
+                        var name = '奖励层次'+model;
+                        var checkStr = check_val.join("、");
+                        if(checkStr.indexOf('所有') != -1){
+                            checkStr = '所有';
+                        }
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+checkStr+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (awardsStartYears!=='') {
-                        wu =  "&nbsp;&nbsp;&nbsp;"+"起始时间  "+"&nbsp;"+awardsStartYears;
-
-                    }else{
-                        wu=" ";
+                    if (awardsStartYears) {
+                        var name = '奖励起始时间'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+awardsStartYears+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (awardsEndYears!=='') {
-                        liu =  "&nbsp;&nbsp;&nbsp;"+"终止时间  "+"&nbsp;"+awardsEndYears;
+                    if (awardsEndYears) {
+                        var name = '奖励终止时间'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+awardsEndYears+'</div>\n' +
+                            '</div>'
+                        );
 
-                    }else{
-                        liu=" ";
                     }
-                    if (yi!==" "||er!==" "||san!==" "||si!==" "||wu!=" "||liu!=" ") {
-                        parent.$('#huojiang').html("获奖情况"+"&nbsp;"+yi+er+san+si+wu+liu);
-
-                    }
-
-
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
-
-
                 })
-
-
-
-
             });
-
-
         })
     </script>
 </body>

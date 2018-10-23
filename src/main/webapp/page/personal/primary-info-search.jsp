@@ -21,6 +21,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/NATION",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -37,6 +38,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/POLITICAL_OUTLOOK",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -53,6 +55,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/TECHNICAL_POSITION",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -69,6 +72,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/TECHNICAL_LEVEL",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -85,6 +89,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/ADMINISTRATIVE_LEVEL",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -101,6 +106,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/RESEARCH_FIELD",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -117,6 +123,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/HIGHEST_EDUCATION",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -133,6 +140,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/HIGHEST_DEGREE",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -149,6 +157,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/HIGHEST_EDUCATION",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -165,6 +174,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/HIGHEST_DEGREE",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -429,8 +439,8 @@
     <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
     <button class="layui-btn layui-btn-primary save">确认添加</button> -->
     <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;">
-        <button class="layui-btn layui-btn-primary reset">重置</button>
-        <button class="layui-btn layui-btn-primary save">确认添加</button>
+        <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
+        <button type="button" class="layui-btn layui-btn-primary save">确认添加</button>
     </div>
 </form>
 
@@ -440,11 +450,30 @@
         layui.use(['form', 'laydate'], function () {
             var form = layui.form;
             var laydate = layui.laydate;
-
+            //全选
+            form.on('checkbox', function (data) {
+                var obj = data.elem;
+                if(obj.title == '所有'){
+                    var child = $(obj).parent('div').find('input[type="checkbox"]');
+                    child.each(function(index,item){
+                        item.checked = obj.checked;
+                    });
+                }else{
+                    var allChecked = true;
+                    $(obj).parent('div').find('input[type="checkbox"][title != "所有"]').each(function(index,item){
+                        if(!item.checked){
+                            allChecked = false;
+                        };
+                    });
+                    $(obj).parent('div').find('input[type="checkbox"][title = "所有"]').prop("checked",allChecked);
+                }
+                form.render('checkbox');
+            });
+            $(".reset").click(function () {
+                window.location.reload();
+            });
             $(".save").click(function () {
-
                 var sex = $("#sex option:selected").val();
-
                 var overseasStudyExperience = $("#overseasStudyExperience option:selected").val();
 
                 nation_obj = document.getElementsByName("nation");
@@ -460,69 +489,55 @@
                     if(politicalOutlook_obj[b].checked)
                         politicalOutlook.push(politicalOutlook_obj[b].value);
                 }
-
                 technicalPosition_obj = document.getElementsByName("technicalPosition");
                 var technicalPosition=new Array();
                 for(b in technicalPosition_obj){
                     if(technicalPosition_obj[b].checked)
                         technicalPosition.push(technicalPosition_obj[b].value);
                 }
-
-
-
                 technicalLevel_obj = document.getElementsByName("technicalLevel");
                 var technicalLevel=new Array();
                 for(b in technicalLevel_obj){
                     if(technicalLevel_obj[b].checked)
                         technicalLevel.push(technicalLevel_obj[b].value);
                 }
-
                 administrativeLevel_obj = document.getElementsByName("administrativeLevel");
                 var administrativeLevel=new Array();
                 for(b in administrativeLevel_obj){
                     if(administrativeLevel_obj[b].checked)
                         administrativeLevel.push(administrativeLevel_obj[b].value);
                 }
-
                 researchField_obj = document.getElementsByName("researchField");
                 var researchField=new Array();
                 for(b in researchField_obj){
                     if(researchField_obj[b].checked)
                         researchField.push(researchField_obj[b].value);
                 }
-
                 highestEducation_obj = document.getElementsByName("highestEducation");
                 var highestEducation=new Array();
                 for(b in highestEducation_obj){
                     if(highestEducation_obj[b].checked)
                         highestEducation.push(highestEducation_obj[b].value);
                 }
-
                 highestDegree_obj = document.getElementsByName("highestDegree");
                 var highestDegree=new Array();
                 for(b in highestDegree_obj){
                     if(highestDegree_obj[b].checked)
                         highestDegree.push(highestDegree_obj[b].value);
                 }
-
                 jobEducation_obj = document.getElementsByName("jobEducation");
                 var jobEducation=new Array();
                 for(b in jobEducation_obj){
                     if(jobEducation_obj[b].checked)
                         jobEducation.push(jobEducation_obj[b].value);
                 }
-
                 jobDegree_obj = document.getElementsByName("jobDegree");
                 var jobDegree=new Array();
                 for(b in jobDegree_obj){
                     if(jobDegree_obj[b].checked)
                         jobDegree.push(jobDegree_obj[b].value);
                 }
-
-
                 var tempWorkExperience = $("#tempWorkExperience option:selected").val();
-
-
 
                 var idCard = $('#idCard').val();
                 var station = $('#station').val();
@@ -538,9 +553,6 @@
                 var endTechnicalGetTime = $('#endTechnicalGetTime').val();
                 var startAppointmentTime = $('#startAppointmentTime').val();
                 var endAppointmentTime = $('#endAppointmentTime').val();
-
-
-
 
                 parent.$('#sex').val(sex);
                 parent.$('#nation').val(nation);
@@ -569,179 +581,259 @@
                 parent.$('#endTechnicalGetTime').val(endTechnicalGetTime);
                 parent.$('#startAppointmentTime').val(startAppointmentTime);
                 parent.$('#endAppointmentTime').val(endAppointmentTime);
-                var yi;
-                var er;
-                var san;
-                var si;
-                var wu;
-                var qi;
-                var ba;
-                var jiu;
-                var shi;
-                var shiyi;
-                var shier;
-                var shisan;
-                var shisi;
-                var shiwu;
-                var shiliu;
-                var shiqi;
-                var shiba;
-                var shijiu;
-                var ershi;
-                var ershiyi;
-                var ershier;
 
-                if (sex !== '') {
-                    yi = "&nbsp;&nbsp;&nbsp;"+"性别"+"&nbsp;"+sex;
+                //清除父页面当前搜索条件中对应的数据
+                var parentCurrentSelect = window.parent.$("#currentSelect");
+                var tmpClass = 'jcxx_class',
+                    model = '：';
+                parentCurrentSelect.find("."+tmpClass).remove();
 
-                }else{
-                    yi=" ";
+                if (sex) {
+                    var name = '性别'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+sex+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (nation!=='') {
-                    er = "&nbsp;&nbsp;&nbsp;"+"民族 "+"&nbsp;"+nation;
-
-                }else{
-                    er=" ";
+                if (nation && nation.length > 0) {
+                    var name = '民族'+model;
+                    var checkStr = nation.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (politicalOutlook!=='') {
-                    san =  "&nbsp;&nbsp;&nbsp;"+"政治面貌 "+"&nbsp;"+politicalOutlook;
-
-                }else{
-                    san=" ";
+                if (politicalOutlook && politicalOutlook.length > 0) {
+                    var name = '政治面貌'+model;
+                    var checkStr = politicalOutlook.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (technicalPosition!=='') {
-                    si =  "&nbsp;&nbsp;&nbsp;"+"专业技术职务 "+"&nbsp;"+technicalPosition;
-
-                }else{
-                    si=" ";
+                if (technicalPosition && technicalPosition.length > 0) {
+                    var name = '专业技术职务'+model;
+                    var checkStr = technicalPosition.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (technicalLevel!=='') {
-                    wu =  "&nbsp;&nbsp;&nbsp;"+"专业技术等级  "+"&nbsp;"+technicalLevel;
-
-                }else{
-                    wu=" ";
+                if (technicalLevel && technicalLevel.length > 0) {
+                    var name = '专业技术等级'+model;
+                    var checkStr = technicalLevel.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (administrativeLevel!=='') {
-                    liu =  "&nbsp;&nbsp;&nbsp;"+"行政级别  "+"&nbsp;"+administrativeLevel;
-
-                }else{
-                    liu=" ";
+                if (administrativeLevel && administrativeLevel.length > 0) {
+                    var name = '行政级别'+model;
+                    var checkStr = administrativeLevel.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (researchField!=='') {
-                    qi =  "&nbsp;&nbsp;&nbsp;"+"研究领域  "+"&nbsp;"+researchField;
-
-                }else{
-                    qi=" ";
+                if (researchField && researchField.length > 0) {
+                    var name = '研究领域'+model;
+                    var checkStr = researchField.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (highestEducation!=='') {
-                    ba =  "&nbsp;&nbsp;&nbsp;"+"全日制学历  "+"&nbsp;"+highestEducation;
-
-                }else{
-                    ba=" ";
+                if (highestEducation && highestEducation.length > 0) {
+                    var name = '全日制学历'+model;
+                    var checkStr = highestEducation.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (highestDegree!=='') {
-                    jiu =  "&nbsp;&nbsp;&nbsp;"+"全日制学位  "+"&nbsp;"+highestDegree;
-
-                }else{
-                    jiu=" ";
+                if (highestDegree && highestDegree.length > 0) {
+                    var name = '全日制学位'+model;
+                    var checkStr = highestDegree.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (jobEducation!=='') {
-                    shi =  "&nbsp;&nbsp;&nbsp;"+"在职学历  "+"&nbsp;"+jobEducation;
-
-                }else{
-                    shi=" ";
+                if (jobEducation && jobEducation.length > 0) {
+                    var name = '在职学历'+model;
+                    var checkStr = jobEducation.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (jobDegree!=='') {
-                    shiyi =  "&nbsp;&nbsp;&nbsp;"+"在职学位  "+"&nbsp;"+jobDegree;
-
-                }else{
-                    shiyi=" ";
+                if (jobDegree && jobDegree.length > 0) {
+                    var name = '在职学位'+model;
+                    var checkStr = jobDegree.join("、");
+                    if(checkStr.indexOf('所有') != -1){
+                        checkStr = '所有';
+                    }
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+checkStr+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (tempWorkExperience!=='') {
-                    shier =  "&nbsp;&nbsp;&nbsp;"+"是否有挂职经历  "+"&nbsp;"+tempWorkExperience;
-
-                }else{
-                    shier=" ";
+                if (tempWorkExperience) {
+                    var name = '是否有挂职经历'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+tempWorkExperience+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (overseasStudyExperience!=='') {
-                    shisan =  "&nbsp;&nbsp;&nbsp;"+"国外一年以上留学经历  "+"&nbsp;"+overseasStudyExperience;
-
-                }else{
-                    shisan=" ";
+                if (overseasStudyExperience) {
+                    var name = '国外一年以上留学经历'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+overseasStudyExperience+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (idCard!=='') {
-                    shisi =  "&nbsp;&nbsp;&nbsp;"+"身份证号  "+"&nbsp;"+idCard;
-
-                }else{
-                    shisi=" ";
+                if (idCard) {
+                    var name = '身份证号'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+idCard+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (station!=='') {
-                    shiwu =  "&nbsp;&nbsp;&nbsp;"+"岗位  "+"&nbsp;"+station;
-
-                }else{
-                    shiwu=" ";
+                if (station) {
+                    var name = '岗位'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+station+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (administrativeDuty!=='') {
-                    shiliu =  "&nbsp;&nbsp;&nbsp;"+"行政职务  "+"&nbsp;"+administrativeDuty;
-
-                }else{
-                    shiliu=" ";
+                if (administrativeDuty) {
+                    var name = '行政职务'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+administrativeDuty+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (maritalStatus!=='') {
-                    shiqi =  "&nbsp;&nbsp;&nbsp;"+"婚姻状况  "+"&nbsp;"+maritalStatus;
-
-                }else{
-                    shiqi=" ";
+                if (maritalStatus) {
+                    var name = '婚姻状况'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+maritalStatus+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (startBirth!==''||endBirth!=='') {
-                    shiba =  "&nbsp;&nbsp;&nbsp;"+"出生日期  "+"&nbsp;"+startBirth+"--"+endBirth;
-
-                }else{
-                    shiba=" ";
+                if (startBirth ||endBirth) {
+                    var dy = startBirth+"--"+endBirth;
+                    var name = '出生日期'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+dy+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (startWorkTime!==''||endWorkTime!=='') {
-                    shijiu =  "&nbsp;&nbsp;&nbsp;"+"参加工作时间  "+"&nbsp;"+startWorkTime+"--"+endWorkTime;
-
-                }else{
-                    shijiu=" ";
+                if (startWorkTime || endWorkTime) {
+                    var dy = startWorkTime+"--"+endWorkTime;
+                    var name = '参加工作时间'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+dy+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (startTenureTime!==''||endTenureTime!=='') {
-                    ershi =  "&nbsp;&nbsp;&nbsp;"+"来院时间  "+"&nbsp;"+startTenureTime+"--"+endTenureTime;
-
-                }else{
-                    ershi=" ";
+                if (startTenureTime || endTenureTime) {
+                    var dy = startTenureTime+"--"+endTenureTime;
+                    var name = '来院时间'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+dy+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (startTechnicalGetTime!==''||endTechnicalGetTime!=='') {
-                    ershiyi =  "&nbsp;&nbsp;&nbsp;"+"技术职务取得时间  "+"&nbsp;"+startTechnicalGetTime+"--"+endTechnicalGetTime;
-
-                }else{
-                    ershiyi=" ";
+                if (startTechnicalGetTime || endTechnicalGetTime) {
+                    var dy = startTechnicalGetTime+"--"+endTechnicalGetTime;
+                    var name = '技术职务取得时间'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+dy+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (startAppointmentTime!==''||startAppointmentTime!=='') {
-                    ershier =  "&nbsp;&nbsp;&nbsp;"+"技术等级聘任时间  "+"&nbsp;"+startAppointmentTime+"--"+startAppointmentTime;
-
-                }else{
-                    ershier=" ";
-                }
-
-
-                if (yi!==" "||er!==" "||san!==" "||si!==" "||wu!=" "||liu!=" "
-                    ||qi!==" "||ba!==" "||jiu!==" "||shi!==" "||shiyi!=" "||shier!=" "
-                ||shisan!==" "||shisi!==" "||shiwu!==" "||shiliu!==" "||shiqi!=" "||shiba!=" "
-                ||shijiu!==" "||ershi!==" "||ershiyi!==" "||ershier!==" ") {
-                    parent.$('#jibenxinxi').html("基本信息"+"&nbsp;"
-                        +yi+er+san+si+wu+liu+qi+ba+jiu+shi+shiyi
-                        +shier+shisan+shisi+shiwu+shiliu+shiqi
-                        +shiba+shijiu+ershi+ershiyi+ershier);
-
+                if (startAppointmentTime || endAppointmentTime) {
+                    var dy = startAppointmentTime+"--"+endAppointmentTime;
+                    var name = '技术等级聘任时间'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+dy+'</div>\n' +
+                        '</div>'
+                    );
                 }
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                 parent.layer.close(index); //再执行关闭
-
-
             })
-
-
         });
 
 

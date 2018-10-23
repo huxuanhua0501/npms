@@ -83,8 +83,8 @@
     <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
     <button class="layui-btn layui-btn-primary save">确认添加</button> -->
     <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;">
-        <button class="layui-btn layui-btn-primary reset">重置</button>
-        <button class="layui-btn layui-btn-primary save">确认添加</button>
+        <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
+        <button type="button" class="layui-btn layui-btn-primary save">确认添加</button>
     </div>
 </form>
 
@@ -95,7 +95,9 @@
             var form = layui.form;
             var laydate = layui.laydate;
 
-
+            $(".reset").click(function () {
+                window.location.reload();
+            });
             $(".save").click(function () {
                 var workContent = $('#workContent').val();
                 var work_StartTime = $('#workStartTime').val();
@@ -106,36 +108,40 @@
                 parent.$('#workStopTime').val(workStopTime);
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
-                var kaishi;
-                var jieshu;
-                var neirong;
+                //清除父页面当前搜索条件中对应的数据
+                var parentCurrentSelect = window.parent.$("#currentSelect");
+                var tmpClass = 'gzjl_class',
+                    model = '：';
+                parentCurrentSelect.find("."+tmpClass).remove();
 
-                if (work_StartTime !== '') {
-                    kaishi = "&nbsp;&nbsp;&nbsp;"+"起始时间"+"&nbsp;"+work_StartTime;
-
-                }else{
-                    kaishi=" ";
+                if (work_StartTime) {
+                    var name = '工作起始时间'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+work_StartTime+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (workStopTime!=='') {
-                    jieshu = "&nbsp;&nbsp;&nbsp;"+"终止时间 "+"&nbsp;"+workStopTime;
-
-                }else{
-                    jieshu=" ";
+                if (workStopTime) {
+                    var name = '工作截止时间'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+workStopTime+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (workContent!=='') {
-                    neirong =  "&nbsp;&nbsp;&nbsp;"+"内容 "+"&nbsp;"+workContent;
-
-                }else{
-                    neirong=" ";
+                if (workContent) {
+                    var name = '工作内容'+model;
+                    parentCurrentSelect.append(
+                        '<div class="now-item clear '+tmpClass+'" >\n' +
+                        '<label class="layui-form-label">'+name+'</label>\n' +
+                        '<div class="info">'+workContent+'</div>\n' +
+                        '</div>'
+                    );
                 }
-                if (kaishi!==" "||jieshu!==" "||neirong!==" ") {
-                    parent.$('#gongzuojingli').html("工作经历"+"&nbsp;"+kaishi+jieshu+neirong);
-
-                }
-
                 parent.layer.close(index); //再执行关闭
-
-
             })
 
         });

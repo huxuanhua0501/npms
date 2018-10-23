@@ -20,6 +20,7 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/PERIODICAL_TYPE",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
@@ -122,8 +123,8 @@
         <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
         <button class="layui-btn layui-btn-primary save">确认添加</button> -->
         <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;">
-            <button class="layui-btn layui-btn-primary reset">重置</button>
-            <button class="layui-btn layui-btn-primary save">确认添加</button>
+            <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-primary save">确认添加</button>
         </div>
     </form>
 
@@ -138,18 +139,35 @@
                 //     elem: '#time',
                 //     type: 'month'
                 // });
-
+                //全选
+                form.on('checkbox', function (data) {
+                    var obj = data.elem;
+                    if(obj.title == '所有'){
+                        var child = $(obj).parent('div').find('input[type="checkbox"]');
+                        child.each(function(index,item){
+                            item.checked = obj.checked;
+                        });
+                    }else{
+                        var allChecked = true;
+                        $(obj).parent('div').find('input[type="checkbox"][title != "所有"]').each(function(index,item){
+                            if(!item.checked){
+                                allChecked = false;
+                            };
+                        });
+                        $(obj).parent('div').find('input[type="checkbox"][title = "所有"]').prop("checked",allChecked);
+                    }
+                    form.render('checkbox');
+                });
+                $(".reset").click(function () {
+                    window.location.reload();
+                });
                 $(".save").click(function () {
-
-
                     obj = document.getElementsByName("periodicalType");
                     var check_val=new Array();
                     for(k in obj){
                         if(obj[k].checked)
                             check_val.push(obj[k].value);
                     }
-
-
                     var periodicalTitle = $('#periodicalTitle').val();
                     var periodicalName = $('#periodicalName').val();
                     var periodicalStartYears = $('#periodicalStartYears').val();
@@ -160,56 +178,66 @@
                     parent.$('#periodicalStartYears').val(periodicalStartYears);
                     parent.$('#periodicalEndYears').val(periodicalEndYears);
 
-                    var shouji;
-                    var yidong;
-                    var email;
-                    var xingming;
-                    var jieshunianyue;
+                    //清除父页面当前搜索条件中对应的数据
+                    var parentCurrentSelect = window.parent.$("#currentSelect");
+                    var tmpClass = 'lwqk_class',
+                        model = '：';
+                    parentCurrentSelect.find("."+tmpClass).remove();
 
-                    if (periodicalTitle !== '') {
-                        shouji = "&nbsp;&nbsp;&nbsp;"+"题目"+"&nbsp;"+periodicalTitle;
-
-                    }else{
-                        shouji=" ";
+                    if (periodicalTitle) {
+                        var name = '论文题目'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+periodicalTitle+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (periodicalName!=='') {
-                        yidong = "&nbsp;&nbsp;&nbsp;"+"期刊名称 "+"&nbsp;"+periodicalName;
-
-                    }else{
-                        yidong=" ";
+                    if (periodicalName) {
+                        var name = '期刊名称'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+periodicalName+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (check_val!=='') {
-                        email =  "&nbsp;&nbsp;&nbsp;"+"期刊类型 "+"&nbsp;"+check_val;
-
-                    }else{
-                        email=" ";
+                    if (check_val && check_val.length > 0) {
+                        var name = '期刊类型'+model;
+                        var checkStr = check_val.join("、");
+                        if(checkStr.indexOf('所有') != -1){
+                            checkStr = '所有';
+                        }
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+checkStr+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (periodicalStartYears!=='') {
-                        xingming =  "&nbsp;&nbsp;&nbsp;"+"起始时间 "+"&nbsp;"+periodicalStartYears;
-
-                    }else{
-                        xingming=" ";
+                    if (periodicalStartYears) {
+                        var name = '论文起始时间'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+periodicalStartYears+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (periodicalEndYears!=='') {
-                        jieshunianyue =  "&nbsp;&nbsp;&nbsp;"+"终止时间  "+"&nbsp;"+periodicalEndYears;
-
-                    }else{
-                        jieshunianyue=" ";
+                    if (periodicalEndYears) {
+                        var name = '论文终止时间'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+periodicalEndYears+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (shouji!==" "||yidong!==" "||email!==" "||xingming!==" "||jieshunianyue!=" ") {
-                        parent.$('#lunwen').html("论文情况"+"&nbsp;"+shouji+yidong+email+xingming+jieshunianyue);
-
-                    }
-
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
-
-
                 })
             });
-
-
-        })
+       })
     </script>
 </body>
 

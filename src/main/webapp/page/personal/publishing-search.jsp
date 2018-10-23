@@ -23,9 +23,11 @@
                 type: "get",
                 url: "pms/pmsDictionary/getListByDictionary/WORK_TYPE",
                 dataType: "text",
+                async: false,
                 success: function (jsonStr) {
                     var obj = JSON.parse(jsonStr);
                     var listline = "";
+                    listline += '<input type=\"checkbox\" name=\"workType\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
                     for (var i = 0; i < obj.data.length; i++) {
                         listline += '<input type=\"checkbox\" name=\"workType\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
                     }
@@ -95,7 +97,7 @@
             </div>
         </div>
         <div class="edit-item layui-col-md12 layui-col-xs12">
-            <label class="layui-form-label layui-col-md3 layui-col-xs3">著作类型</label>
+            <label class="layui-form-label">著作类型</label>
             <div class="layui-col-md9 layui-col-xs9" style="padding: 10px 15px;" id="work">
             </div>
         </div>
@@ -114,8 +116,8 @@
         <!-- <button class="layui-btn layui-btn-primary reset">重置</button>
         <button class="layui-btn layui-btn-primary save">确认添加</button> -->
         <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;margin-top: 30px;">
-            <button class="layui-btn layui-btn-primary reset">重置</button>
-            <button class="layui-btn layui-btn-primary save">确认添加</button>
+            <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-primary save">确认添加</button>
         </div>
     </form>
 
@@ -127,19 +129,35 @@
                 var form = layui.form;
                 var laydate = layui.laydate;
 
-
-
+                //全选
+                form.on('checkbox', function (data) {
+                    var obj = data.elem;
+                    if(obj.title == '所有'){
+                        var child = $(obj).parent('div').find('input[type="checkbox"]');
+                        child.each(function(index,item){
+                            item.checked = obj.checked;
+                        });
+                    }else{
+                        var allChecked = true;
+                        $(obj).parent('div').find('input[type="checkbox"][title != "所有"]').each(function(index,item){
+                            if(!item.checked){
+                                allChecked = false;
+                            };
+                        });
+                        $(obj).parent('div').find('input[type="checkbox"][title = "所有"]').prop("checked",allChecked);
+                    }
+                    form.render('checkbox');
+                });
+                $(".reset").click(function () {
+                    window.location.reload();
+                });
                 $(".save").click(function () {
-
-
                     obj = document.getElementsByName("workType");
                     var check_val=new Array();
                     for(k in obj){
                         if(obj[k].checked)
                             check_val.push(obj[k].value);
                     }
-
-
                     var bookName = $('#bookName').val();
                     var press = $('#press').val();
                     // var workType = $('#workType').val();
@@ -150,57 +168,66 @@
                     parent.$('#workType').val(check_val);
                     parent.$('#startYears').val(startYears);
                     parent.$('#endYears').val(endYears);
-                    var shouji;
-                    var yidong;
-                    var email;
-                    var xingming;
-                    var jieshunianyue;
+                    //清除父页面当前搜索条件中对应的数据
+                    var parentCurrentSelect = window.parent.$("#currentSelect");
+                    var tmpClass = 'cbzzyz_class',
+                        model = '：';
+                    parentCurrentSelect.find("."+tmpClass).remove();
 
-                    if (bookName !== '') {
-                        shouji = "&nbsp;&nbsp;&nbsp;"+"书名"+"&nbsp;"+bookName;
-
-                    }else{
-                        shouji=" ";
+                    if (bookName) {
+                        var name = '著作/译著书名'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+bookName+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (press!=='') {
-                        yidong = "&nbsp;&nbsp;&nbsp;"+"出版社 "+"&nbsp;"+press;
-
-                    }else{
-                        yidong=" ";
+                    if (press) {
+                        var name = '出版社'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+press+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (check_val!=='') {
-                        email =  "&nbsp;&nbsp;&nbsp;"+"著作类型 "+"&nbsp;"+check_val;
-
-                    }else{
-                        email=" ";
-                    }
-                    if (startYears!=='') {
-                        xingming =  "&nbsp;&nbsp;&nbsp;"+"起始时间 "+"&nbsp;"+startYears;
-
-                    }else{
-                        xingming=" ";
-                    }
-                    if (endYears!=='') {
-                        jieshunianyue =  "&nbsp;&nbsp;&nbsp;"+"终止时间  "+"&nbsp;"+endYears;
-
-                    }else{
-                        jieshunianyue=" ";
-                    }
-                    if (shouji!==" "||yidong!==" "||email!==" "||xingming!==" "||jieshunianyue!=" ") {
-                        parent.$('#zhuzuo').html("出版著作/译著"+"&nbsp;"+shouji+yidong+email+xingming+jieshunianyue);
+                    if (check_val && check_val.length>0) {
+                        var name = '著作类型'+model;
+                        var checkStr = check_val.join("、");
+                        if(checkStr.indexOf('所有') != -1){
+                            checkStr = '所有';
+                        }
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+checkStr+'</div>\n' +
+                            '</div>'
+                        );
 
                     }
-
-
+                    if (startYears) {
+                        var name = '出版起始时间'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+startYears+'</div>\n' +
+                            '</div>'
+                        );
+                    }
+                    if (endYears) {
+                        var name = '出版终止时间'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+endYears+'</div>\n' +
+                            '</div>'
+                        );
+                    }
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
-
-
                 })
-
             });
-
-
         })
     </script>
 </body>

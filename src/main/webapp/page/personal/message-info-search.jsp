@@ -86,8 +86,8 @@
 
 
         <div class="layui-layer-btn layui-layer-btn- layui-col-md12 layui-col-xs12" style="text-align: center;">
-            <button class="layui-btn layui-btn-primary reset">重置</button>
-            <button class="layui-btn layui-btn-primary save">确认添加</button>
+            <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-primary save">确认添加</button>
         </div>
     </form>
 
@@ -101,6 +101,9 @@
                 // laydate.render({
                 //     elem: '#time',
                 // });
+                $(".reset").click(function () {
+                    window.location.reload();
+                });
                 $(".save").click(function () {
 
                     var officePhone = $('#officePhone').val();
@@ -111,50 +114,52 @@
                     parent.$('#mobilePhone').val(mobilePhone);
                     parent.$('#emailAddress').val(emailAddress);
                     parent.$('#userName').val(userName);
-                    var shouji;
-                    var yidong;
-                    var email;
-                    var xingming;
+                    //清除父页面当前搜索条件中对应的数据
+                    var parentCurrentSelect = window.parent.$("#currentSelect");
+                    var tmpClass = 'txxx_class',
+                        model = '：';
+                    parentCurrentSelect.find("."+tmpClass).remove();
 
-                    if (officePhone !== '') {
-                        shouji = "&nbsp;&nbsp;&nbsp;"+"办公电话"+"&nbsp;"+officePhone;
-
-                    }else{
-                        shouji=" ";
+                    if (officePhone) {
+                        var name = '办公电话'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+officePhone+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (mobilePhone!=='') {
-                        yidong = "&nbsp;&nbsp;&nbsp;"+"手机号 "+"&nbsp;"+mobilePhone;
-
-                    }else{
-                        yidong=" ";
+                    if (mobilePhone) {
+                        var name = '手机号'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+mobilePhone+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (emailAddress!=='') {
-                        email =  "&nbsp;&nbsp;&nbsp;"+"邮箱地址 "+"&nbsp;"+emailAddress;
-
-                    }else{
-                        email=" ";
+                    if (emailAddress) {
+                        var name = '邮箱地址'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+emailAddress+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (userName!=='') {
-                        xingming =  "&nbsp;&nbsp;&nbsp;"+"联系人姓名 "+"&nbsp;"+userName;
-
-                    }else{
-                        xingming=" ";
+                    if (userName) {
+                        var name = '联系人姓名'+model;
+                        parentCurrentSelect.append(
+                            '<div class="now-item clear '+tmpClass+'" >\n' +
+                            '<label class="layui-form-label">'+name+'</label>\n' +
+                            '<div class="info">'+userName+'</div>\n' +
+                            '</div>'
+                        );
                     }
-                    if (shouji!==" "||yidong!==" "||email!==" "||xingming!==" ") {
-                        parent.$('#tongxun').html("通讯信息"+"&nbsp;"+shouji+yidong+email+xingming);
-
-                    }
-
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
-
-
                 })
-
-
             });
-
-
         })
     </script>
 </body>
