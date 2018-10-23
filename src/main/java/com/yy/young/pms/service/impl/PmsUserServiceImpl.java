@@ -117,7 +117,9 @@ public class PmsUserServiceImpl implements ICommonService<PmsUser>,IPmsUserExtSe
         if (StringUtils.isNotBlank(pmsUser.getId()) && pmsUser.getId().indexOf("%") > -1){
             pmsUser.setId(URLDecoder.decode(pmsUser.getId(), "UTF-8"));
         }
-        return (PmsUser)dataAccessService.getObject(PmsConstants.MAPPER.PMS_USER + ".getPmsUserById", pmsUser);
+        PmsUser pmsUser1 = (PmsUser)dataAccessService.getObject(PmsConstants.MAPPER.PMS_USER + ".getPmsUserById", pmsUser);
+//        return (PmsUser)dataAccessService.getObject(PmsConstants.MAPPER.PMS_USER + ".getPmsUserById", pmsUser);
+        return pmsUser1;
     }
 
     //修改

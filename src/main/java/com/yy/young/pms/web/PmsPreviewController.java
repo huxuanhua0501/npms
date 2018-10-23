@@ -1,7 +1,9 @@
 package com.yy.young.pms.web;
 
+import com.yy.young.common.util.CommonUtil;
 import com.yy.young.common.util.Result;
 import com.yy.young.interfaces.log.annotation.Log;
+import com.yy.young.interfaces.model.User;
 import com.yy.young.pms.model.*;
 import com.yy.young.pms.service.IAuditPmsPreviewService;
 import com.yy.young.pms.service.IPmsPreviewService;
@@ -42,8 +44,19 @@ public class PmsPreviewController {
                 pmsUser = info.toPmsUser(pmsUser);
             }
         }
+        User user = CommonUtil.getLoginUser(request);
+        if (!(user.getRoleId().equals("1") || user.getRoleId().equals("79a80080f55740f1a1b146af57dfcf27")
+                || user.getRoleId().equals("HKY_ADMIN") || user.getRoleId().equals("ROLE_HKY_LEADER"))) {
+           pmsUser.setRemark("");
+        }
+        System.err.println(user);
+
+
         //通讯
         Communication communication = pmsPreviewService.getCommunicationById(id);
+        if (communication == null) {
+            communication = new Communication();
+        }
         AuditRecordCommunication auditRecordCommunication = new AuditRecordCommunication();
         auditRecordCommunication.setUserId(id);
         List<AuditRecordCommunication> recordCommunicationList = auditPmsPreviewService.getCommunicationList(auditRecordCommunication);

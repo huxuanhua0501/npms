@@ -902,6 +902,9 @@
                             <div class="label">行政级别</div>
                         </div>
                         <div>
+                            <div class="label">研究领域</div>
+                        </div>
+                        <div>
                             <div class="label">研究领域细分</div>
                         </div>
 
@@ -946,12 +949,17 @@
                                     firstitem='{"dicValue":"","dicValue":""}'></select>
                         </div>
 
-                        <!-- 行政级别end -->
-<%--                        研究领域细分start
-                        <div class="col-item lang">
-                            <input type="text" name="researchFieldDetail" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                        </div>
-                        研究领域细分end--%>
+                            <%--研究领域start--%>
+                            <div class="col-item save">
+                                <input type="text" name="researchField" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="col-item edit">
+                                <select async="true" name="researchField" lay-verify="" disabled class="joSelect" data=""
+                                        dataurl="pms/pmsDictionary/getListByDictionary/RESEARCH_FIELD" keyfield="dicValue"
+                                        valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}'></select>
+                            </div>
+
+                            <%--研究领域end--%>
                         <%--研究领域细分start--%>
                         <div class="col-item">
                             <input type="text" name="researchFieldDetail" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
@@ -969,7 +977,7 @@
                             <div class="label">任职时间</div>
                         </div>
                         <div>
-                            <div class="label">研究领域</div>
+                            <div class="label">任现级别时间</div>
                         </div>
                         <div>
                             <div class="label">是否有挂职经历</div>
@@ -1003,12 +1011,10 @@
                         <!-- 任职时间end -->
                         <%--研究领域start--%>
                         <div class="col-item save">
-                            <input type="text" name="researchField" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                            <input type="text" name="levelOfAppointment" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                            <select async="true" name="researchField" lay-verify="" disabled class="joSelect" data=""
-                                    dataurl="pms/pmsDictionary/getListByDictionary/RESEARCH_FIELD" keyfield="dicValue"
-                                    valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}'></select>
+                            <input type="text" name="levelOfAppointment" disabled ErrBirthBad4 placeholder="" autocomplete="off" class="layui-input" id="levelOfAppointment">
                         </div>
 
                         <%--研究领域end--%>

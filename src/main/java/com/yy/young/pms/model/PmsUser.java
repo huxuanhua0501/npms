@@ -25,7 +25,8 @@ public class PmsUser {
 
     @ExcelColumn(value = "曾用名", order = 4)
     private String oldName;//曾用名
-
+    @ExcelColumn(value = "任现级别时间", order = 4)
+    private String levelOfAppointment;//任现级别时间
 
     @ExcelColumn(value = "出生年月", order = 6)
     private String birth;//出生年月
@@ -246,6 +247,14 @@ public class PmsUser {
    private List<AuditPmsYearCheck> auditPmsYearCheckList;     //年度考核
     /*拼装返回id*/
     private List<String> list;
+
+    public String getLevelOfAppointment() {
+        return levelOfAppointment;
+    }
+
+    public void setLevelOfAppointment(String levelOfAppointment) {
+        this.levelOfAppointment = levelOfAppointment;
+    }
 
     public List<String> getLeaderList() {
         return leaderList;

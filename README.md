@@ -36,7 +36,9 @@ COMMENT ON TABLE "public"."pms_website" IS '常用网站';
    2.3按人员审核原先的界面openPageOnMain('page/pms/auditPersonnel.jsp')
    2.4按人员审核新界面 openPageOnMain('page/personal/personnel-review_no.jsp')
    2.5按照模块审核openPageOnMain('page/personal/information-audit_no.jsp')
-3.pms_user中添加字段，COMMENT ON COLUMN "public"."pms_user"."marital_status" IS '婚姻状况';
+3.
+  3.1pms_user中添加字段，  "marital_status" varchar(32) COLLATE "pg_catalog"."default",----'婚姻状况';
+  3.2pms_user中添加字段，  "level_of_appointment" varchar(32) COLLATE "pg_catalog"."default"----任现级别时间
 4.目前按人员搜索，工作经历，教育经历按照2018-11（数据库是这种格式，修改数据库后，修改页面格式）
 5.增加公告表
 CREATE TABLE "public"."pms_announcement" (

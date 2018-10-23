@@ -60,6 +60,7 @@
         }
         //赋值start
         function initFormValue(json) {
+
             json = formAuditData;
             var inp = $("#pageForm").find("input[type!='button'][type!='radio'][type!='checkbox'][type!='file']");//文本框
             for(var i=0;i<inp.length;i++){
@@ -67,6 +68,9 @@
                 var element = $(inp[i]);
                 var key = jo.getDefVal(element.attr("name"),element.attr("id"));
                 for (var f=0;f<json.length;f++) {
+                    if ('levelOfAppointment' == json[f]["fieldKey"]) {//找到同name
+                    }
+
                     if (key == json[f]["fieldKey"]){//找到同name
                         element.val(json[f]["fieldVal"]);//赋值
                         if (key == "photoAddress") {
@@ -76,6 +80,9 @@
                         }
                     }
                 }
+
+
+
                 //新改：重新赋值一遍，新用户提交时审核库汇中不包含ID和userid start
                 if (key == "id" || key == "userId") {
                     element.val(officialData[key]);//赋值
@@ -984,6 +991,9 @@
                             <div class="label">行政级别</div>
                         </div>
                         <div>
+                            <div class="label">研究领域</div>
+                        </div>
+                        <div>
                             <div class="label">研究领域细分</div>
                         </div>
                     </div>
@@ -1026,7 +1036,10 @@
                                     keyfield="dicValue" valuefield="dicValue"
                                     firstitem='{"dicValue":"","dicValue":""}'></select>
                         </div>
-
+                            <div class="col-item save">
+                                <input type="text" id="researchField" name="researchField" required
+                                       lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
                         <!-- 行政级别end -->
 <%--                        研究领域细分start
                         <div class="col-item lang">
@@ -1051,7 +1064,7 @@
                             <div class="label">任职时间</div>
                         </div>
                         <div>
-                            <div class="label">研究领域</div>
+                            <div class="label">任现级别时间</div>
                         </div>
                         <div>
                             <div class="label">是否有挂职经历</div>
@@ -1085,15 +1098,19 @@
                         <!-- 任职时间end -->
                         <%--研究领域start--%>
                         <div class="col-item save">
-                            <input type="text" name="researchField" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                            <input type="text" name="levelOfAppointment" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                            <select async="true" name="researchField" lay-verify="" disabled class="joSelect" data=""
+                            <input type="text" name="levelOfAppointment" ErrBirthBad4 disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" id="levelOfAppointment">
+                        </div>
+                     <%--   <div class="col-item edit">
+                            <select async="true" name="levelOfAppointment" lay-verify="" disabled class="joSelect" data=""
                                     dataurl="pms/pmsDictionary/getListByDictionary/RESEARCH_FIELD" keyfield="dicValue"
                                     valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}'></select>
-                        </div>
+                        </div>--%>
 
                         <%--研究领域end--%>
+
                         <%--是否有挂职经历start--%>
                         <div class="col-item save">
                             <input type="text" name="tempWorkExperience" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">

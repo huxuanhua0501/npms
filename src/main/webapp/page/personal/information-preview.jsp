@@ -274,6 +274,9 @@
                             <div class="label">行政级别</div>
                         </div>
                         <div>
+                            <div class="label">研究领域</div>
+                        </div>
+                        <div>
                             <div class="label">研究领域细分</div>
                         </div>
                     </div>
@@ -309,6 +312,10 @@
                                    lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item lang">
+                            <input type="text" id="researchField" name="researchField" required
+                                   lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="col-item lang">
                             <input type="text" id="researchFieldDetail" name="researchFieldDetail" required
                                    lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
@@ -324,7 +331,7 @@
                             <div class="label">任职时间</div>
                         </div>
                         <div>
-                            <div class="label">研究领域</div>
+                            <div class="label">任现级别时间</div>
                         </div>
                         <div>
                             <div class="label">是否有挂职经历</div>
@@ -363,7 +370,7 @@
                             </select>
                         </div>
                         <div class="col-item save">
-                            <input type="text" id="researchField" name="researchField" required lay-verify="required"
+                            <input type="text" id="levelOfAppointment" name="levelOfAppointment" required lay-verify="required"
                                    placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
@@ -678,6 +685,7 @@
         $("#tenureTime").val(auditData.data[0].tenureTime);
         $("#researchField").val(auditData.data[0].researchField);
         $("#tempWorkExperience").val(auditData.data[0].tempWorkExperience);
+        $("#levelOfAppointment").val(auditData.data[0].levelOfAppointment);
 
 
         //学历信息

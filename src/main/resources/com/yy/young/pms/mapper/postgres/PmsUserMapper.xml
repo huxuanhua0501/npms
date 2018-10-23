@@ -47,6 +47,7 @@
         , O.temp_work_experience AS "tempWorkExperience"
         , O.to_there_time AS "toThereTime"
         , O.remark_modify_time AS "remarkModifyTime"
+        , O.level_of_appointment AS "levelOfAppointment"
         , ( SELECT string_agg(DE.NAME, ',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) AS "deptNames"
     </sql>
     <sql id="searchnewCol">
