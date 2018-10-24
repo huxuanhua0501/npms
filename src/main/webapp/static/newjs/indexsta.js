@@ -110,7 +110,6 @@ $(function () {
     //测试
 
 
-
 });
 //生成菜单单元的html
 function getNavUnitHtml(menu){
@@ -158,12 +157,18 @@ function getChid(menu) {
         if (menu.name  == "单点登录服务") {
             a_class = "sso";
         }
+        var aTmpStyle = '',iTmpStyle='';
+        if(menu.name == "普通人员使用指南" ||
+            menu.name == "人事及管理员使用指南"){
+            aTmpStyle = "padding-left: 40px;";
+            iTmpStyle = "left:20px;";
+        }
         //a 特殊end
 
         _html += '<dd data-name="grid">';
         //生成菜单标题
-        _html += '<a class="two-level '+a_class+'" href="javascript:;" onclick="' + menu.href + ''+(jo.isValid(menu.href) ? ';refreshCrumbs(\''+menu.name+'\')' : '')+'">'
-            + '<i class="iconfont icon-quan"></i>'
+        _html += '<a class="two-level '+a_class+'" style="'+aTmpStyle+'" href="javascript:;" onclick="' + menu.href + ''+(jo.isValid(menu.href) ? ';refreshCrumbs(\''+menu.name+'\')' : '')+'">'
+            + '<i class="iconfont icon-quan" style="'+iTmpStyle+'"></i>'
             + '' + menu.name + ''+ '</a>'
             + '';
         //生成子菜单
