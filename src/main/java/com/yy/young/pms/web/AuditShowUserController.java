@@ -226,7 +226,9 @@ public class AuditShowUserController {
         if (obj.getPeriodicalTitle() != "" || obj.getPeriodicalName() != "" || obj.getPeriodicalType() != ""
                 || obj.getPeriodicalStartYears() != "" || obj.getPeriodicalEndYears() != "") {
             if (obj.getPeriodicalType() != "") {
-                obj.setPeriodical_typeList(this.getList(obj.getPeriodicalType()));
+                if (!obj.getPeriodicalType().contains("所有")) {
+                    obj.setPeriodical_typeList(this.getList(obj.getPeriodicalType()));
+                }
             }
             paperList = pmsRelatedService.selectPaper(obj);
 
@@ -236,7 +238,9 @@ public class AuditShowUserController {
         if (obj.getBookName() != "" || obj.getPress() != "" || obj.getWorkType() != ""
                 || obj.getStartYears() != "" || obj.getEndYears() != "") {
             if (obj.getWorkType() != null) {
-                obj.setWorkTypeList(this.getList(obj.getWorkType()));
+                if (!obj.getWorkType().contains("所有")) {
+                    obj.setWorkTypeList(this.getList(obj.getWorkType()));
+                }
             }
             publishList = pmsRelatedService.selectPublish(obj);
 
@@ -246,7 +250,9 @@ public class AuditShowUserController {
         if (obj.getAwardWinProjectName() != "" || obj.getAwardType() != "" || obj.getAwardWinProjectLevel() != ""
                 || obj.getAwardLevel() != "" || obj.getAwardsStartYears() != "" || obj.getAwardsEndYears() != "") {
             if (obj.getAwardLevel() != "") {
-                obj.setAwardLevelList(this.getList(obj.getAwardLevel()));
+                if (!obj.getAwardLevel().contains("所有")) {
+                    obj.setAwardLevelList(this.getList(obj.getAwardLevel()));
+                }
             }
             awardList = pmsRelatedService.selectAward(obj);
 
@@ -313,7 +319,9 @@ public class AuditShowUserController {
             }
         }
         if (obj.getRemark() != ""&&obj.getRemark()!=null) {
-            obj.setRemarkList(this.getList(obj.getRemark()));
+            if (!obj.getRemark().contains("所有")) {
+                obj.setRemarkList(this.getList(obj.getRemark()));
+            }
         }
         List<String> idist = new ArrayList<String>();
         List<String> ids = new ArrayList<String>();
@@ -361,6 +369,56 @@ public class AuditShowUserController {
         }
         if (ids != null && ids.size() > 0) {
             obj.setLeaderList(ids);
+        }
+        if (obj.getNation() != "" ) {
+            if (!obj.getNation().contains("所有")) {
+                obj.setNationList(this.getList(obj.getNation()));
+            }
+        }
+        if (obj.getPoliticalOutlook() != "" ) {
+            if (!obj.getPoliticalOutlook().contains("所有")) {
+                obj.setPoliticalOutlookList(this.getList(obj.getPoliticalOutlook()));
+            }
+        }
+        if (obj.getTechnicalPosition() != "" ) {
+            if (!obj.getTechnicalPosition().contains("所有")) {
+                obj.setTechnicalPositionList(this.getList(obj.getTechnicalPosition()));
+            }
+        }
+        if (obj.getTechnicalLevel() != "" ) {
+            if (!obj.getTechnicalLevel().contains("所有")) {
+                obj.setTechnicalLevelList(this.getList(obj.getTechnicalLevel()));
+            }
+        }
+        if (obj.getAdministrativeLevel() != "" ) {
+            if (!obj.getAdministrativeLevel().contains("所有")) {
+                obj.setAdministrativeLevelList(this.getList(obj.getAdministrativeLevel()));
+            }
+        }
+        if (obj.getResearchField() != "" ) {
+            if (!obj.getResearchField().contains("所有")) {
+                obj.setResearchFieldDetailList(this.getList(obj.getResearchField()));
+            }
+        }
+        if (obj.getHighestEducation() != "" ) {
+            if (!obj.getHighestEducation().contains("所有")) {
+                obj.setHighestEducationList(this.getList(obj.getHighestEducation()));
+            }
+        }
+        if (obj.getHighestDegree() != "" ) {
+            if (!obj.getHighestDegree().contains("所有")) {
+                obj.setHighestDegreeList(this.getList(obj.getHighestDegree()));
+            }
+        }
+        if (obj.getJobEducation() != "" ) {
+            if (!obj.getJobEducation().contains("所有")) {
+                obj.setJobEducationList(this.getList(obj.getJobEducation()));
+            }
+        }
+        if (obj.getJobDegree() != "" ) {
+            if (!obj.getJobDegree().contains("所有")) {
+                obj.setJobDegreeList(this.getList(obj.getJobDegree()));
+            }
         }
         List<PmsUser> ofPmsUserList = pmsUserService2.getPage(obj,page);
 

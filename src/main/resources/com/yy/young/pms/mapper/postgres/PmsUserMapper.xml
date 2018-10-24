@@ -217,33 +217,33 @@
             <if test="sex != null and sex != ''">
                 AND O.sex = #{sex}
             </if>
-            <if test="nation != null and nation != ''">
+           <!-- <if test="nation != null and nation != ''">
                 AND O.nation = #{nation}
-            </if>
-            <if test="highestEducation != null and highestEducation != ''">
+            </if>-->
+          <!--  <if test="highestEducation != null and highestEducation != ''">
                 AND O.highest_education = #{highestEducation}
-            </if>
-            <if test="highestDegree != null and highestDegree != ''">
+            </if>-->
+          <!--  <if test="highestDegree != null and highestDegree != ''">
                 AND O.highest_degree = #{highestDegree}
-            </if>
-            <if test="technicalPosition != null and technicalPosition != ''">
+            </if>-->
+          <!--  <if test="technicalPosition != null and technicalPosition != ''">
                 AND O.technical_position = #{technicalPosition}
-            </if>
-            <if test="administrativeLevel != null and administrativeLevel != ''">
+            </if>-->
+           <!-- <if test="administrativeLevel != null and administrativeLevel != ''">
                 AND O.administrative_level IN (${administrativeLevel})
-            </if>
+            </if>-->
             <if test="firstEducation != null and firstEducation != ''">
                 AND O.first_education = #{firstEducation}
             </if>
             <if test="firstDegree != null and firstDegree != ''">
                 AND O.first_degree = #{firstDegree}
             </if>
-            <if test="jobEducation != null and jobEducation != ''">
+       <!--     <if test="jobEducation != null and jobEducation != ''">
                 AND O.job_education = #{jobEducation}
-            </if>
-            <if test="jobDegree != null and jobDegree != ''">
+            </if>-->
+           <!-- <if test="jobDegree != null and jobDegree != ''">
                 AND O.job_degree = #{jobDegree}
-            </if>
+            </if>-->
             <if test="tempWorkExperience != null and tempWorkExperience != ''">
                 AND O.temp_work_experience = #{tempWorkExperience}
             </if>
@@ -296,12 +296,7 @@
                     #{item}
                 </foreach>
             </if>
-            <if test="highestDegreeList != null and highestDegreeList != ''">
-                AND O.highest_degree in
-                <foreach collection="highestDegreeList" item="item" separator="," open="(" close=")">
-                    #{item}
-                </foreach>
-            </if>
+
 
             <if test="highestDegreeList != null and highestDegreeList != ''">
                 AND O.highest_degree in

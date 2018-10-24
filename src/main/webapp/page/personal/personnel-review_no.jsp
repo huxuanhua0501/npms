@@ -12,9 +12,13 @@
     <%--常量--%>
     <%@ include file="/common/constHead.jsp" %>
     <%--jQuery--%>
-    <%@ include file="/common/jqueryHead.jsp" %>
+    <%--
+        <%@ include file="/common/jqueryHead.jsp"%>
+    --%>
     <%--jo--%>
-    <%@ include file="/common/joHead.jsp" %>
+    <%--
+        <%@ include file="/common/joHead.jsp"%>
+    --%>
     <%--bootstrap和字体--%>
     <%--
         <%@ include file="/common/bootstrapHead.jsp"%>
@@ -55,6 +59,100 @@
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/employee.css">
     <script src="<%=URL_STATIC%>static/prototype/js/common_no.js"></script>
 
+
+    <script type="text/javascript">
+        $(function () {
+
+            loadAjax();
+
+            // $.ajax({
+            //     type: "get",
+            //     url: "pms/pmsDictionary/getListByDictionary/PERSON_TYPE",
+            //     dataType: "text",
+            //     success: function (jsonStr) {
+            //         var obj = JSON.parse(jsonStr);
+            //         var list = "", listline = "";
+            //         listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+            //         for (var i = 0; i < obj.data.length; i++) {
+            //             listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+            //         }
+            //         $("#checkbox_0").append(listline);
+            //     }
+            //
+            // });
+        });
+        function loadAjax() {
+            jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
+                var list = "", listline = "";
+                listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                for (var i = 0; i < obj.data.length; i++) {
+                    listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                }
+                $("#checkbox_0").append("");
+                $("#checkbox_0").append(listline);
+
+            }, false);
+            sfSet();//在初始化表格之前
+            joViewInitAboutDoc();//joView初始化处理
+        }
+
+        function updateUserDoc(uid){
+            if(uid){
+                top.jo.showWin("page/personal/myDoc.jsp?edit=true&id="+(uid), "90%", "90%", "员工档案", "WIN_USER_DOC");
+            }
+        }
+        //行处理
+        // joView.handleItem = function(oItem,iIndex){
+        //
+        // };
+
+        joView.handleItem = function (oItem, iIndex) {
+            oItem._name = '<span  onclick="updateUserDoc(\'' + oItem.id + '\')">' +oItem.userName+'</span>';
+            oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
+            oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
+            oItem._opt = (oItem.state == 0 ? '<span   onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
+            //  oItem._opt  += (oItem.state == 0 ? '<span onclick="lookUserDoc(\''  + oItem.id + '\')">&nbsp;查看</span>' : '<span onclick="lookUserDoc(\'' + oItem.id + '\')">&nbsp;查看</span>');
+            // oItem._opt  += (oItem.state == 0 ? '<span  onclick="joView.edit(\''  + oItem.id + '\')">&nbsp;查看</span>' : '<span onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;查看</span>');
+
+            oItem._opt += '<span    onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
+            oItem._opt += '<span   onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;审核</span>';
+        };
+    </script>
+    <script type="text/javascript">
+        var userId = jo.getDefVal(jo.getUrlParam("userId"), loginUser.id);
+        var sf = jo.getDefVal(jo.getUrlParam("sf"), "");
+        var _edit = jo.getDefVal(jo.getUrlParam("edit"), "");
+        $(function () {
+            goto();
+        });
+
+        function goto() {
+            if (jo.isValid(sf)) {
+                $("ul a").each(function () {
+                    $(this).attr("lay-href", $(this).attr("lay-href") + userId + "&sf=rs");
+                });
+            } else {
+                $("ul a").each(function () {
+                    $(this).attr("lay-href", $(this).attr("lay-href") + userId);
+                });
+            }
+            if (jo.isValid(_edit)) {
+                $("ul a").each(function () {
+                    $(this).attr("lay-href", $(this).attr("lay-href") + "&edit=true");
+                });
+            }
+
+        }
+
+        function sfSet() {
+            console.log("打印表格属性sf：" + sf);
+            if (jo.isValid(sf)) {
+                $("#mainList").attr("formUrl", $("#mainList").attr("formUrl") + "?sf=rs");
+                console.log("打印表格属性：" + $("#mainList").attr("formUrl"));
+            }
+        }
+
+    </script>
     <style>
         .layui-table a.look {
             margin: 0;
@@ -169,6 +267,12 @@
             color: #378CEF;
         }
 
+        redColor{
+            background-color: red;
+        }
+        blueColor{
+            background-color: #0B70BD;
+        }
         /*分页条样式end*/
     </style>
 </head>
@@ -280,7 +384,7 @@
                 <input id="startEducation" name="startEducation" type="hidden"/>
                 <input id="endEducation" name="endEducation" type="hidden"/>
                 <input id="educationContent" name="educationContent" type="hidden"/>
-            <%-- 著作--%>
+                <%-- 著作--%>
 
                 <input id="bookName" name="bookName" type="hidden"/>
                 <input id="press" name="press" type="hidden"/>
@@ -288,7 +392,7 @@
                 <input id="startYears" name="startYears" type="hidden"/>
                 <input id="endYears" name="endYears" type="hidden"/>
 
-            <%-- 获奖--%>
+                <%-- 获奖--%>
 
                 <input id="awardWinProjectName" name="awardWinProjectName" type="hidden"/>
                 <input id="awardType" name="awardType" type="hidden"/>
@@ -297,7 +401,7 @@
                 <input id="awardsStartYears" name="awardsStartYears" type="hidden"/>
                 <input id="awardsEndYears" name="awardsEndYears" type="hidden"/>
 
-            <%-- 论文--%>
+                <%-- 论文--%>
 
                 <input id="periodicalTitle" name="periodicalTitle" type="hidden"/>
                 <input id="periodicalName" name="periodicalName" type="hidden"/>
@@ -305,13 +409,13 @@
                 <input id="periodicalStartYears" name="periodicalStartYears" type="hidden"/>
                 <input id="periodicalEndYears" name="periodicalEndYears" type="hidden"/>
 
-            <%-- 工作--%>
+                <%-- 工作--%>
 
                 <input id="workContent" name="workContent" type="hidden"/>
                 <input id="work_StartTime" name="work_StartTime" type="hidden"/>
                 <input id="workStopTime" name="workStopTime" type="hidden"/>
 
-            <%-- 通讯--%>
+                <%-- 通讯--%>
 
                 <input id="officePhone" name="officePhone" type="hidden"/>
                 <input id="mobilePhone" name="mobilePhone" type="hidden"/>
@@ -319,14 +423,14 @@
 
                 <%-- 年度考核--%>
 
-                    <input id="checkYears" name="checkYears" type="hidden"/>
-                    <input id="checkScore" name="checkScore" type="hidden"/>
-                    <input id="quarterOne" name="quarterOne" type="hidden"/>
-                    <input id="quarterTwo" name="quarterTwo" type="hidden"/>
-                    <input id="quarterThree" name="quarterThree" type="hidden"/>
-                    <input id="quarterFour" name="quarterFour" type="hidden"/>
+                <input id="checkYears" name="checkYears" type="hidden"/>
+                <input id="checkScore" name="checkScore" type="hidden"/>
+                <input id="quarterOne" name="quarterOne" type="hidden"/>
+                <input id="quarterTwo" name="quarterTwo" type="hidden"/>
+                <input id="quarterThree" name="quarterThree" type="hidden"/>
+                <input id="quarterFour" name="quarterFour" type="hidden"/>
 
-            <%-- 基本信息--%>
+                <%-- 基本信息--%>
 
                 <input id="sex" name="sex" type="hidden"/>
                 <input id="nation" name="nation" type="hidden"/>
@@ -379,8 +483,8 @@
 
             <div class="person-list-content">
                 <table class="layui-table layui-form" id="mainList" dataUrl="pms/auditShowUser/getPage.action"
-                       deleteUrl="" formUrl="page/pms/auditUserDoc.jsp">
-                    <col field="userName" title="姓名" width="15%" align="" event="" order="user_Name"/>
+                       updateUrl="page/personal/myDoc.jsp" formUrl="page/pms/auditUserDoc.jsp">
+                    <col field="_name" title="姓名" width="15%" align="" event="" />
                     <col field="sex" title="性别" width="15%" align="" order="sex"/>
                     <col field="deptNames" title="部门" width="20%" align="left"/>
                     <col field="technicalPosition" title="职称" width="15%" align="" order="technical_Level"/>
@@ -397,26 +501,42 @@
 
     </div>
 </div>
-
 <script>
-    var userId = jo.getDefVal(jo.getUrlParam("userId"), loginUser.id);
-    var sf = jo.getDefVal(jo.getUrlParam("sf"), "");
-    var _edit = jo.getDefVal(jo.getUrlParam("edit"), "");
+    function  Color() {
+        $("#mainList").find("tbody").find("tr").each(function () {
+            $(this).children('td').each(function(j) {  // 遍历 tr 的各个 td
+                if(j===7) {
+                    var status = $(this).text();
+                    var title = status.split(" ");
+                    if(title[0]==='启用') {
+                        // $(this).addClass('redColor');
+                        $(this).siblings().attr("style","color: red");
+                        $(this).prevAll().children('span').attr("style","color: red;cursor:pointer;");
+                        $(this).children('span').siblings().attr("style","color: red;cursor:pointer;");
+
+                    }else{
+                        // $(this).addClass('blueColor');
+                        $(this).siblings().attr("style","color: #1AAD19");
+                        $(this).prevAll().children('span').attr("style","color: #1AAD19;cursor:pointer;");
+                        $(this).children('span').siblings().attr("style","color: #1AAD19;cursor:pointer;");
+
+                    }
+                }
+
+            });
+        })
+    }
+
     $(function () {
+
+        Color();
+
+
         layui.use(['layer', 'form', 'laydate'], function () {
             var form = layui.form;
             var layer = layui.layer;
             var laydate = layui.laydate;
-            loadAjax();
-            joView.handleItem = function (oItem, iIndex) {
 
-                oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
-                oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
-                oItem._opt = (oItem.state == 0 ? '<span style="color:green ;cursor:pointer;"  onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span style="color:red ;cursor:pointer;" onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
-                oItem._opt += '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
-                oItem._opt += '<span style="color: #62abff;  cursor:pointer;" onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;审核</span>';
-            };
-            goto();
             //全选
             form.on('checkbox', function (data) {
                 var obj = data.elem;
@@ -546,47 +666,7 @@
             })
 
         });
-    });
-    function loadAjax() {
-        jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
-            var list = "", listline = "";
-            listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
-            for (var i = 0; i < obj.data.length; i++) {
-                listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
-            }
-            $("#checkbox_0").append("");
-            $("#checkbox_0").append(listline);
-
-        }, false);
-        sfSet();//在初始化表格之前
-        joViewInitAboutDoc();//joView初始化处理
-    }
-    function goto() {
-        if (jo.isValid(sf)) {
-            $("ul a").each(function () {
-                $(this).attr("lay-href", $(this).attr("lay-href") + userId + "&sf=rs");
-            });
-        } else {
-            $("ul a").each(function () {
-                $(this).attr("lay-href", $(this).attr("lay-href") + userId);
-            });
-        }
-        if (jo.isValid(_edit)) {
-            $("ul a").each(function () {
-                $(this).attr("lay-href", $(this).attr("lay-href") + "&edit=true");
-            });
-        }
-
-    }
-
-    function sfSet() {
-        console.log("打印表格属性sf：" + sf);
-        if (jo.isValid(sf)) {
-            $("#mainList").attr("formUrl", $("#mainList").attr("formUrl") + "?sf=rs");
-            console.log("打印表格属性：" + $("#mainList").attr("formUrl"));
-        }
-    }
-
+    })
 </script>
 <script type="text/javascript">
     jo.formatUI();//格式化jo组件
@@ -601,6 +681,7 @@
                 jo.showMsg(jo.getDefVal(json.info, "切换失败"));
             }
         });
+        Color();
     }
     function xxselect(){
 
@@ -610,7 +691,7 @@
             if(trashFlagArray[b].checked)
                 trashFlag.push(trashFlagArray[b].value);
         }
-       $("#trashFlag").val(trashFlag);
+        $("#trashFlag").val(trashFlag);
         remarkArray = document.getElementsByName("remarkxxx");
         var  remark=new Array();
         for(b in remarkArray){
@@ -619,13 +700,22 @@
         }
         $("#remark").val(remark);
         joView.select();
+        Color();
+        ;
     }
     //重置查询条件
     function resetSelect(){
         $("#currentSelect").html('');
         $("#selectHidden").find('input[type="hidden"]').val('');
     }
+    joView.goPage = function(goPage){
+        if (joView.params["shouldPage"] == "noPageSize") {
+            joView.params["pageSize"] = 999;
+        }
 
+        joView.loadData(joView.params["url"], joView.params["formData"], goPage, joView.params["pageSize"]);
+        Color();
+    };
 </script>
 </body>
 
