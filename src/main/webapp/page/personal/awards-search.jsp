@@ -153,14 +153,10 @@
                     window.location.reload();
                 });
                 $(".save").click(function () {
-
-
-                    var obj = document.getElementsByName("awardLevel");
                     var check_val=[];
-                    for(var k in obj){
-                        if(obj[k].checked)
-                            check_val.push(obj[k].value);
-                    }
+                    $('input[name="awardLevel"]:checked').each(function(){
+                        check_val.push($(this).val());
+                    });
                     var awardWinProjectName = $('#awardWinProjectName').val();
                     var awardType = $('#awardType').val();
                     var awardWinProjectLevel = $('#awardWinProjectLevel').val();
@@ -169,7 +165,7 @@
                     parent.$('#awardWinProjectName').val(awardWinProjectName);
                     parent.$('#awardType').val(awardType);
                     parent.$('#awardWinProjectLevel').val(awardWinProjectLevel);
-                    parent.$('#awardLevel').val(check_val);
+                    parent.$('#awardLevel').val(check_val.join(","));
                     parent.$('#awardsStartYears').val(awardsStartYears);
                     parent.$('#awardsEndYears').val(awardsEndYears);
                     //清除父页面当前搜索条件中对应的数据

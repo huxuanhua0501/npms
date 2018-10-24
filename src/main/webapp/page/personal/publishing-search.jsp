@@ -152,12 +152,11 @@
                     window.location.reload();
                 });
                 $(".save").click(function () {
-                    obj = document.getElementsByName("workType");
-                    var check_val=new Array();
-                    for(k in obj){
-                        if(obj[k].checked)
-                            check_val.push(obj[k].value);
-                    }
+                    var check_val=[];
+
+                    $('input[name="workType"]:checked').each(function(){
+                        check_val.push($(this).val());
+                    })
                     var bookName = $('#bookName').val();
                     var press = $('#press').val();
                     // var workType = $('#workType').val();
@@ -192,7 +191,7 @@
                             '</div>'
                         );
                     }
-                    if (check_val && check_val.length>0) {
+                    if (check_val && check_val.length > 0) {
                         var name = '著作类型'+model;
                         var checkStr = check_val.join("、");
                         if(checkStr.indexOf('所有') != -1){

@@ -8,17 +8,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>家庭关系列表页</title>
+    <title>按人员审核</title>
     <%--常量--%>
     <%@ include file="/common/constHead.jsp" %>
     <%--jQuery--%>
-    <%--
         <%@ include file="/common/jqueryHead.jsp"%>
-    --%>
     <%--jo--%>
-    <%--
         <%@ include file="/common/joHead.jsp"%>
-    --%>
     <%--bootstrap和字体--%>
     <%--
         <%@ include file="/common/bootstrapHead.jsp"%>
@@ -64,22 +60,6 @@
         $(function () {
 
             loadAjax();
-
-            // $.ajax({
-            //     type: "get",
-            //     url: "pms/pmsDictionary/getListByDictionary/PERSON_TYPE",
-            //     dataType: "text",
-            //     success: function (jsonStr) {
-            //         var obj = JSON.parse(jsonStr);
-            //         var list = "", listline = "";
-            //         listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
-            //         for (var i = 0; i < obj.data.length; i++) {
-            //             listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
-            //         }
-            //         $("#checkbox_0").append(listline);
-            //     }
-            //
-            // });
         });
         function loadAjax() {
             jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
@@ -101,10 +81,6 @@
                 top.jo.showWin("page/personal/myDoc.jsp?edit=true&id="+(uid), "90%", "90%", "员工档案", "WIN_USER_DOC");
             }
         }
-        //行处理
-        // joView.handleItem = function(oItem,iIndex){
-        //
-        // };
 
         joView.handleItem = function (oItem, iIndex) {
             oItem._name = '<span  onclick="updateUserDoc(\'' + oItem.id + '\')">' +oItem.userName+'</span>';
@@ -685,23 +661,20 @@
     }
     function xxselect(){
 
-        trashFlagArray = document.getElementsByName("trashFlagxxx");
-        var  trashFlag=new Array();
-        for(b in trashFlagArray){
-            if(trashFlagArray[b].checked)
-                trashFlag.push(trashFlagArray[b].value);
-        }
+        var  trashFlag= [];
+        $('input[name="trashFlagxxx"]:checked').each(function(){
+            trashFlag.push($(this).val());
+        });
         $("#trashFlag").val(trashFlag);
-        remarkArray = document.getElementsByName("remarkxxx");
-        var  remark=new Array();
-        for(b in remarkArray){
-            if(remarkArray[b].checked)
-                remark.push(remarkArray[b].value);
-        }
+        var  remark= [];
+        $('input[name="remarkxxx"]:checked').each(function(){
+            remark.push($(this).val());
+        });
+
         $("#remark").val(remark);
         joView.select();
         Color();
-        ;
+
     }
     //重置查询条件
     function resetSelect(){

@@ -476,67 +476,49 @@
                 var sex = $("#sex option:selected").val();
                 var overseasStudyExperience = $("#overseasStudyExperience option:selected").val();
 
-                nation_obj = document.getElementsByName("nation");
-                var nation=new Array();
-                for(b in nation_obj){
-                    if(nation_obj[b].checked)
-                        nation.push(nation_obj[b].value);
-                }
+                var nation=[];
+                $('input[name="nation"]:checked').each(function(){
+                    nation.push($(this).val());
+                });
 
-                politicalOutlook_obj = document.getElementsByName("politicalOutlook");
-                var politicalOutlook=new Array();
-                for(b in politicalOutlook_obj){
-                    if(politicalOutlook_obj[b].checked)
-                        politicalOutlook.push(politicalOutlook_obj[b].value);
-                }
-                technicalPosition_obj = document.getElementsByName("technicalPosition");
-                var technicalPosition=new Array();
-                for(b in technicalPosition_obj){
-                    if(technicalPosition_obj[b].checked)
-                        technicalPosition.push(technicalPosition_obj[b].value);
-                }
-                technicalLevel_obj = document.getElementsByName("technicalLevel");
-                var technicalLevel=new Array();
-                for(b in technicalLevel_obj){
-                    if(technicalLevel_obj[b].checked)
-                        technicalLevel.push(technicalLevel_obj[b].value);
-                }
-                administrativeLevel_obj = document.getElementsByName("administrativeLevel");
-                var administrativeLevel=new Array();
-                for(b in administrativeLevel_obj){
-                    if(administrativeLevel_obj[b].checked)
-                        administrativeLevel.push(administrativeLevel_obj[b].value);
-                }
-                researchField_obj = document.getElementsByName("researchField");
-                var researchField=new Array();
-                for(b in researchField_obj){
-                    if(researchField_obj[b].checked)
-                        researchField.push(researchField_obj[b].value);
-                }
-                highestEducation_obj = document.getElementsByName("highestEducation");
-                var highestEducation=new Array();
-                for(b in highestEducation_obj){
-                    if(highestEducation_obj[b].checked)
-                        highestEducation.push(highestEducation_obj[b].value);
-                }
-                highestDegree_obj = document.getElementsByName("highestDegree");
-                var highestDegree=new Array();
-                for(b in highestDegree_obj){
-                    if(highestDegree_obj[b].checked)
-                        highestDegree.push(highestDegree_obj[b].value);
-                }
-                jobEducation_obj = document.getElementsByName("jobEducation");
-                var jobEducation=new Array();
-                for(b in jobEducation_obj){
-                    if(jobEducation_obj[b].checked)
-                        jobEducation.push(jobEducation_obj[b].value);
-                }
-                jobDegree_obj = document.getElementsByName("jobDegree");
-                var jobDegree=new Array();
-                for(b in jobDegree_obj){
-                    if(jobDegree_obj[b].checked)
-                        jobDegree.push(jobDegree_obj[b].value);
-                }
+                var politicalOutlook=[];
+                $('input[name="politicalOutlook"]:checked').each(function(){
+                    politicalOutlook.push($(this).val());
+                });
+                var technicalPosition= [];
+                $('input[name="technicalPosition"]:checked').each(function(){
+                    technicalPosition.push($(this).val());
+                });
+                var technicalLevel= [];
+                $('input[name="technicalLevel"]:checked').each(function(){
+                    technicalLevel.push($(this).val());
+                });
+                var administrativeLevel= [];
+                $('input[name="administrativeLevel"]:checked').each(function(){
+                    administrativeLevel.push($(this).val());
+                });
+
+                var researchField= [];
+                $('input[name="researchField"]:checked').each(function(){
+                    researchField.push($(this).val());
+                });
+                var highestEducation= [];
+                $('input[name="highestEducation"]:checked').each(function(){
+                    highestEducation.push($(this).val());
+                });
+                var highestDegree= [];
+                $('input[name="highestDegree"]:checked').each(function(){
+                    highestDegree.push($(this).val());
+                });
+                var jobEducation= [];
+                $('input[name="jobEducation"]:checked').each(function(){
+                    jobEducation.push($(this).val());
+                });
+
+                var jobDegree= [];
+                $('input[name="jobDegree"]:checked').each(function(){
+                    jobDegree.push($(this).val());
+                });
                 var tempWorkExperience = $("#tempWorkExperience option:selected").val();
 
                 var idCard = $('#idCard').val();

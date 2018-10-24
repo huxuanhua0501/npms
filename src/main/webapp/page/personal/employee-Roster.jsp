@@ -53,7 +53,66 @@
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/person-document.css">
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/employee.css">
     <script src="<%=URL_STATIC%>static/prototype/js/common_no.js"></script>
+    <script type="text/javascript">
+        $(function () {
 
+            loadAjax();
+        });
+        function loadAjax() {
+            jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
+                var list = "", listline = "";
+                listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                for (var i = 0; i < obj.data.length; i++) {
+                    listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                }
+                $("#checkbox_0").append("");
+                $("#checkbox_0").append(listline);
+
+            }, false);
+            sfSet();//在初始化表格之前
+            joViewInitAboutDoc();//joView初始化处理
+        }
+        joView.handleItem = function (oItem, iIndex) {
+
+            oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
+            oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
+
+            oItem._opt = '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
+        };
+    </script>
+    <script type="text/javascript">
+        var userId = jo.getDefVal(jo.getUrlParam("userId"), loginUser.id);
+        var sf = jo.getDefVal(jo.getUrlParam("sf"), "");
+        var _edit = jo.getDefVal(jo.getUrlParam("edit"), "");
+        $(function () {
+            goto();
+        });
+
+        function goto() {
+            if (jo.isValid(sf)) {
+                $("ul a").each(function () {
+                    $(this).attr("lay-href", $(this).attr("lay-href") + userId + "&sf=rs");
+                });
+            } else {
+                $("ul a").each(function () {
+                    $(this).attr("lay-href", $(this).attr("lay-href") + userId);
+                });
+            }
+            if (jo.isValid(_edit)) {
+                $("ul a").each(function () {
+                    $(this).attr("lay-href", $(this).attr("lay-href") + "&edit=true");
+                });
+            }
+
+        }
+        function sfSet() {
+            console.log("打印表格属性sf：" + sf);
+            if (jo.isValid(sf)) {
+                $("#mainList").attr("formUrl", $("#mainList").attr("formUrl") + "?sf=rs");
+                console.log("打印表格属性：" + $("#mainList").attr("formUrl"));
+            }
+        }
+    </script>
     <style>
         .layui-table a.look {
             margin: 0;
@@ -376,16 +435,11 @@
 </div>
 
 <script>
-    var userId = jo.getDefVal(jo.getUrlParam("userId"), loginUser.id);
-    var sf = jo.getDefVal(jo.getUrlParam("sf"), "");
-    var _edit = jo.getDefVal(jo.getUrlParam("edit"), "");
     $(function () {
         layui.use(['layer', 'form', 'laydate'], function () {
             var form = layui.form;
             var layer = layui.layer;
             var laydate = layui.laydate;
-            loadAjax();
-            goto();
             //全选
             form.on('checkbox', function (data) {
                 var obj = data.elem;
@@ -516,52 +570,6 @@
 
         });
     })
-    function loadAjax() {
-        jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
-            var list = "", listline = "";
-            listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
-            for (var i = 0; i < obj.data.length; i++) {
-                listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
-            }
-            $("#checkbox_0").append("");
-            $("#checkbox_0").append(listline);
-
-        }, false);
-        sfSet();//在初始化表格之前
-        joViewInitAboutDoc();//joView初始化处理
-    }
-    function goto() {
-        if (jo.isValid(sf)) {
-            $("ul a").each(function () {
-                $(this).attr("lay-href", $(this).attr("lay-href") + userId + "&sf=rs");
-            });
-        } else {
-            $("ul a").each(function () {
-                $(this).attr("lay-href", $(this).attr("lay-href") + userId);
-            });
-        }
-        if (jo.isValid(_edit)) {
-            $("ul a").each(function () {
-                $(this).attr("lay-href", $(this).attr("lay-href") + "&edit=true");
-            });
-        }
-
-    }
-
-    function sfSet() {
-        console.log("打印表格属性sf：" + sf);
-        if (jo.isValid(sf)) {
-            $("#mainList").attr("formUrl", $("#mainList").attr("formUrl") + "?sf=rs");
-            console.log("打印表格属性：" + $("#mainList").attr("formUrl"));
-        }
-    }
-    joView.handleItem = function (oItem, iIndex) {
-
-        oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
-        oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
-
-        oItem._opt = '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
-    };
 </script>
 <script type="text/javascript">
     jo.formatUI();//格式化jo组件
@@ -579,19 +587,16 @@
     }
     function xxselect(){
 
-        trashFlagArray = document.getElementsByName("trashFlagxxx");
-        var  trashFlag=new Array();
-        for(b in trashFlagArray){
-            if(trashFlagArray[b].checked)
-                trashFlag.push(trashFlagArray[b].value);
-        }
+        var  trashFlag= [];
+        $('input[name="trashFlagxxx"]:checked').each(function(){
+            trashFlag.push($(this).val());
+        });
+
         $("#trashFlag").val(trashFlag);
-        remarkArray = document.getElementsByName("remarkxxx");
-        var  remark=new Array();
-        for(b in remarkArray){
-            if(remarkArray[b].checked)
-                remark.push(remarkArray[b].value);
-        }
+        var  remark= [];
+        $('input[name="remarkxxx"]:checked').each(function(){
+            remark.push($(this).val());
+        });
         $("#remark").val(remark);
         joView.select();
     }

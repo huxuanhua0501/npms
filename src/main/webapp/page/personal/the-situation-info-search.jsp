@@ -162,12 +162,10 @@
                     window.location.reload();
                 });
                 $(".save").click(function () {
-                    obj = document.getElementsByName("periodicalType");
-                    var check_val=new Array();
-                    for(k in obj){
-                        if(obj[k].checked)
-                            check_val.push(obj[k].value);
-                    }
+                    var check_val=[];
+                    $('input[name="periodicalType"]:checked').each(function(){
+                        check_val.push($(this).val());
+                    });
                     var periodicalTitle = $('#periodicalTitle').val();
                     var periodicalName = $('#periodicalName').val();
                     var periodicalStartYears = $('#periodicalStartYears').val();
