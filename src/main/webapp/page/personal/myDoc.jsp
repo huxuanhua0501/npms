@@ -650,7 +650,7 @@
     <div class="layui-row">
         <td class="layui-col-md12 person">
             <div class="person-tit clear">
-                <span class="left title">信息编辑</span>
+                <span class="left title">个人档案</span>
                 <div class="layui-form right">
                     <div class="layui-inline button-group">
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export">导出Excel</button>
