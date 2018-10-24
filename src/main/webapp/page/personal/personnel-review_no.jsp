@@ -12,13 +12,9 @@
     <%--常量--%>
     <%@ include file="/common/constHead.jsp" %>
     <%--jQuery--%>
-    <%--
-        <%@ include file="/common/jqueryHead.jsp"%>
-    --%>
+    <%@ include file="/common/jqueryHead.jsp" %>
     <%--jo--%>
-    <%--
-        <%@ include file="/common/joHead.jsp"%>
-    --%>
+    <%@ include file="/common/joHead.jsp" %>
     <%--bootstrap和字体--%>
     <%--
         <%@ include file="/common/bootstrapHead.jsp"%>
@@ -63,23 +59,6 @@
     <script type="text/javascript">
         $(function () {
             loadAjax();
-
-
-            // $.ajax({
-            //     type: "get",
-            //     url: "pms/pmsDictionary/getListByDictionary/PERSON_TYPE",
-            //     dataType: "text",
-            //     success: function (jsonStr) {
-            //         var obj = JSON.parse(jsonStr);
-            //         var list = "", listline = "";
-            //         listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
-            //         for (var i = 0; i < obj.data.length; i++) {
-            //             listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
-            //         }
-            //         $("#checkbox_0").append(listline);
-            //     }
-            //
-            // });
         });
         function loadAjax() {
             jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
@@ -95,10 +74,6 @@
             sfSet();//在初始化表格之前
             joViewInitAboutDoc();//joView初始化处理
         }
-        //行处理
-        // joView.handleItem = function(oItem,iIndex){
-        //
-        // };
 
         joView.handleItem = function (oItem, iIndex) {
 
@@ -486,13 +461,26 @@
 
     </div>
 </div>
+
 <script>
+    var userId = jo.getDefVal(jo.getUrlParam("userId"), loginUser.id);
+    var sf = jo.getDefVal(jo.getUrlParam("sf"), "");
+    var _edit = jo.getDefVal(jo.getUrlParam("edit"), "");
     $(function () {
         layui.use(['layer', 'form', 'laydate'], function () {
             var form = layui.form;
             var layer = layui.layer;
             var laydate = layui.laydate;
+            loadAjax();
+            joView.handleItem = function (oItem, iIndex) {
 
+                oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
+                oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
+                oItem._opt = (oItem.state == 0 ? '<span style="color:green ;cursor:pointer;"  onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span style="color:red ;cursor:pointer;" onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
+                oItem._opt += '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
+                oItem._opt += '<span style="color: #62abff;  cursor:pointer;" onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;审核</span>';
+            };
+            goto();
             //全选
             form.on('checkbox', function (data) {
                 var obj = data.elem;
@@ -622,7 +610,47 @@
             })
 
         });
-    })
+    });
+    function loadAjax() {
+        jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
+            var list = "", listline = "";
+            listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+            for (var i = 0; i < obj.data.length; i++) {
+                listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+            }
+            $("#checkbox_0").append("");
+            $("#checkbox_0").append(listline);
+
+        }, false);
+        sfSet();//在初始化表格之前
+        joViewInitAboutDoc();//joView初始化处理
+    }
+    function goto() {
+        if (jo.isValid(sf)) {
+            $("ul a").each(function () {
+                $(this).attr("lay-href", $(this).attr("lay-href") + userId + "&sf=rs");
+            });
+        } else {
+            $("ul a").each(function () {
+                $(this).attr("lay-href", $(this).attr("lay-href") + userId);
+            });
+        }
+        if (jo.isValid(_edit)) {
+            $("ul a").each(function () {
+                $(this).attr("lay-href", $(this).attr("lay-href") + "&edit=true");
+            });
+        }
+
+    }
+
+    function sfSet() {
+        console.log("打印表格属性sf：" + sf);
+        if (jo.isValid(sf)) {
+            $("#mainList").attr("formUrl", $("#mainList").attr("formUrl") + "?sf=rs");
+            console.log("打印表格属性：" + $("#mainList").attr("formUrl"));
+        }
+    }
+
 </script>
 <script type="text/javascript">
     jo.formatUI();//格式化jo组件
