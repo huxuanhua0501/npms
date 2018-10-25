@@ -400,7 +400,33 @@
     </div>
 </div>
 <script>
+    function  Color() {
+        $("#mainList").find("tbody").find("tr").each(function () {
+            $(this).children('td').each(function(j) {  // 遍历 tr 的各个 td
+                if(j===7) {
+                    var status = $(this).text();
+                    var title = status.split(" ");
+                    if(title[0]==='启用') {
+                        // $(this).addClass('redColor');
+                        $(this).siblings().attr("style","color: red");
+                        $(this).prevAll().children('span').attr("style","color: red;cursor:pointer;");
+                        $(this).children('span').siblings().attr("style","color: red;cursor:pointer;");
+
+                    }else{
+                        // $(this).addClass('blueColor');
+                        $(this).siblings().attr("style","color: #1AAD19");
+                        $(this).prevAll().children('span').attr("style","color: #1AAD19;cursor:pointer;");
+                        $(this).children('span').siblings().attr("style","color: #1AAD19;cursor:pointer;");
+
+                    }
+                }
+
+            });
+        })
+    }
     $(function () {
+        Color();
+
         layui.use(['layer', 'form', 'laydate'], function () {
             var form = layui.form;
             var layer = layui.layer;
@@ -539,6 +565,8 @@
                 jo.showMsg(jo.getDefVal(json.info, "切换失败"));
             }
         });
+        Color();
+
     }
     function xxselect(){
         $("#state").val("");
@@ -558,15 +586,24 @@
         }
         $("#remark").val(remark);
         joView.select();
+        Color();
+
     }
 
     function selectState(state) {
         $("#state").val(state);
         joView.select();
 
-
+        Color();
     }
+    joView.goPage = function(goPage){
+        if (joView.params["shouldPage"] == "noPageSize") {
+            joView.params["pageSize"] = 999;
+        }
 
+        joView.loadData(joView.params["url"], joView.params["formData"], goPage, joView.params["pageSize"]);
+        Color();
+    };
 </script>
 </body>
 

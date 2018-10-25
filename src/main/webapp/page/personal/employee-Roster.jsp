@@ -77,7 +77,7 @@
             oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
             oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
 
-            oItem._opt = '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
+            oItem._opt = '<span  onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
         };
     </script>
     <script type="text/javascript">
@@ -572,6 +572,34 @@
     })
 </script>
 <script type="text/javascript">
+    $(function () {
+
+        Color();
+    });
+        function  Color() {
+        $("#mainList").find("tbody").find("tr").each(function () {
+            $(this).children('td').each(function(j) {  // 遍历 tr 的各个 td
+                if(j===6) {
+                    var status = $(this).text();
+                    if(status.indexOf('启用')>=0) {
+                        // $(this).addClass('blueColor');
+                        $(this).attr("style","color: #1AAD19");
+                        $(this).siblings().attr("style","color: #1AAD19");
+                        $(this).siblings().children('span').attr("style","color: #1AAD19;cursor:pointer;");
+                        // $(this).children('span').siblings().attr("style","color: #1AAD19;cursor:pointer;");
+
+                    }else{
+                        // $(this).addClass('redColor');
+                        $(this).attr("style","color: red");
+                        $(this).siblings().attr("style","color: red");
+                        $(this).siblings().children('span').attr("style","color: red;cursor:pointer;");
+                        // $(this).children('span').siblings().attr("style","color: red;cursor:pointer;");
+                    }
+                }
+
+            });
+        })
+    }
     jo.formatUI();//格式化jo组件
     function changeState(oldState, id) {
         var state = oldState == 1 ? 0 : 1;
@@ -599,12 +627,21 @@
         });
         $("#remark").val(remark);
         joView.select();
+        Color();
     }
     //重置查询条件
     function resetSelect(){
         $("#currentSelect").html('');
         $("#selectHidden").find('input[type="hidden"]').val('');
     }
+    joView.goPage = function(goPage){
+        if (joView.params["shouldPage"] == "noPageSize") {
+            joView.params["pageSize"] = 999;
+        }
+
+        joView.loadData(joView.params["url"], joView.params["formData"], goPage, joView.params["pageSize"]);
+        Color();
+    };
 </script>
 </body>
 

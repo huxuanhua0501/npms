@@ -76,9 +76,10 @@
 
             oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
             oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
-            oItem._opt = (oItem.state == 0 ? '<span style="color:green ;cursor:pointer;"  onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span style="color:red ;cursor:pointer;" onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
-            oItem._opt += '<span style="color: #62abff; cursor:pointer; "   onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
-            oItem._opt += '<span style="color: #62abff;  cursor:pointer;" onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;编辑</span>';
+            oItem._opt = (oItem.state == 0 ? '<span   onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
+
+            oItem._opt += '<span    onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
+            oItem._opt += '<span  onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;编辑</span>';
         };
     </script>
     <script type="text/javascript">
@@ -572,6 +573,34 @@
     });
 </script>
 <script type="text/javascript">
+    $(function () {
+
+        Color();
+    });
+        function  Color() {
+        $("#mainList").find("tbody").find("tr").each(function () {
+            $(this).children('td').each(function(j) {  // 遍历 tr 的各个 td
+                if(j===7) {
+                    var status = $(this).text();
+                    var title = status.split(" ");
+                    if(title[0]==='启用') {
+                        // $(this).addClass('redColor');
+                        $(this).siblings().attr("style","color: red");
+                        $(this).prevAll().children('span').attr("style","color: red;cursor:pointer;");
+                        $(this).children('span').siblings().attr("style","color: red;cursor:pointer;");
+
+                    }else{
+                        // $(this).addClass('blueColor');
+                        $(this).siblings().attr("style","color: #1AAD19");
+                        $(this).prevAll().children('span').attr("style","color: #1AAD19;cursor:pointer;");
+                        $(this).children('span').siblings().attr("style","color: #1AAD19;cursor:pointer;");
+
+                    }
+                }
+
+            });
+        })
+    }
     jo.formatUI();//格式化jo组件
     function changeState(oldState, id) {
         var state = oldState == 1 ? 0 : 1;
@@ -584,8 +613,16 @@
                 jo.showMsg(jo.getDefVal(json.info, "切换失败"));
             }
         });
+        Color();
     }
+    joView.goPage = function(goPage){
+        if (joView.params["shouldPage"] == "noPageSize") {
+            joView.params["pageSize"] = 999;
+        }
 
+        joView.loadData(joView.params["url"], joView.params["formData"], goPage, joView.params["pageSize"]);
+        Color();
+    };
     function resetPassword() {
         trashFlagArray = document.getElementsByName("id");
         var  trashFlag=new Array();
@@ -617,6 +654,7 @@
         });
         $("#remark").val(remark);
         joView.select();
+        Color();
     }
     //重置查询条件
     function resetSelect(){
