@@ -326,7 +326,20 @@ public class AuditShowUserController {
         List<String> idist = new ArrayList<String>();
         List<String> ids = new ArrayList<String>();
         if (obj.getUserId() != null &&obj.getUserId() != "") {
-            obj.setDeptList(userDeptService.getUserDeptByUserId(obj.getUserId()));
+
+            List<UserDept> list = new ArrayList<UserDept>();
+            list = userDeptService.getUserDeptByUserId(obj.getUserId());
+            if (list != null && list.size() > 0) {
+                obj.setDeptList(list);
+
+            }else{
+                UserDept userDept = new UserDept();
+                userDept.setId("1234567890");
+                userDept.setDeptName("1234567890");
+                list.add(userDept);
+                obj.setDeptList(list);
+            }
+
             if (obj.getDeptList() != null && obj.getDeptList().size() > 0) {
                 if (obj.getDeptList().get(0).getDeptName().equals("院领导")) {
                     obj.setDeptList(null);
