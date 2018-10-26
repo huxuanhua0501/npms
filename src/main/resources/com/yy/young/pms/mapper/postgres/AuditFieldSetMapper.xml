@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yy.young.pms.mapper.AuditFieldSet">
+    <!--查询字段信息-->
+    <insert id="insert" parameterType="com.yy.young.pms.model.AuditFieldSet">
+        INSERT INTO audit_field_set
+        (id, field_name, status)
+        VALUES
+            (
+                #{id}, #{field_name}, #{status}
+            )
+    </insert>
+    <update id="update" parameterType="com.yy.young.pms.model.AuditFieldSet">
+        UPDATE audit_field_set
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
+    <select id="getList" parameterType="com.yy.young.pms.model.AuditFieldSet"
+            resultType="com.yy.young.pms.model.AuditFieldSet">
+        SELECT
+        id, field_name as fieldName, status
+        FROM audit_field_set
+    </select>
+</mapper>

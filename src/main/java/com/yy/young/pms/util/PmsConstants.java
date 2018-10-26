@@ -36,6 +36,7 @@ public class PmsConstants {
         String PMS_RELATIONS = "com.yy.young.pms.mapper.relation";
 
         //审核新增start
+        String AUDIT_FIELD_SET = "com.yy.young.pms.mapper.AuditFieldSet";
         String AUDIT_PMS_USER = "com.yy.young.pms.mapper.auditPmsUser";
         String AUDIT_PMS_COMMUNICATION = "com.yy.young.pms.mapper.auditPmsCommunication";
         String AUDIT_PMS_EDUCATION = "com.yy.young.pms.mapper.auditPmsEducation";
