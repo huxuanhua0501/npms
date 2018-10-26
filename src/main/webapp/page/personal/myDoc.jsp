@@ -653,7 +653,7 @@
                 <span class="left title">个人档案</span>
                 <div class="layui-form right">
                     <div class="layui-inline button-group">
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export">导出Excel</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export"  onclick="exportExcel()">导出Excel</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary preview">信息预览</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary edit">编辑</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary save" id="save" onclick="save()">保存</button>
@@ -1271,6 +1271,13 @@
 </div>
 
     <script>
+        function exportExcel(){
+            var userId = jo.getDefVal(jo.getUrlParam("id"), loginUser.id);
+            jo.newWindow("pms/pmspreview/exportExcel?id="+ userId);
+            // jo.newWindow("pms/pmsUser/exportWord/"+(userId));
+
+        }
+
         $(function() {
             // 初始化展示页面不显示输入框样式
             layui.use(['layer', 'form', 'laydate'], function() {

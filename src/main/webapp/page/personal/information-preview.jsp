@@ -72,7 +72,7 @@
                 <span class="left title" style="padding: 0;"></span>
                 <div class="layui-form right">
                     <div class="layui-inline button-group">
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export">导出Excel
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export" onclick="exportExcel()">导出Excel
                         </button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary dayin">打印</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary back">返回</button>
@@ -636,6 +636,15 @@
 </div>
 
 <script>
+
+
+    function exportExcel(){
+        var userId = jo.getDefVal(jo.getUrlParam("id"), loginUser.id);
+       jo.newWindow("pms/pmspreview/exportExcel?id="+ userId);
+        // jo.newWindow("pms/pmsUser/exportWord/"+(userId));
+
+    }
+
     $(function () {
 
         layui.use(['form', 'laydate'], function () {

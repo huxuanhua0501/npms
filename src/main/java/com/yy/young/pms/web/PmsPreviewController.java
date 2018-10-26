@@ -7,12 +7,14 @@ import com.yy.young.interfaces.model.User;
 import com.yy.young.pms.model.*;
 import com.yy.young.pms.service.IAuditPmsPreviewService;
 import com.yy.young.pms.service.IPmsPreviewService;
+import com.yy.young.pms.util.ExportExcelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -29,6 +31,66 @@ public class PmsPreviewController {
     IPmsPreviewService pmsPreviewService;//数据层服务
     @Resource(name = "auditPmsPreviewService")
     IAuditPmsPreviewService auditPmsPreviewService;//数据层服务
+    @Log("导出xxx")
+    @RequestMapping("/exportExcel")
+    public void exportExcel(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        //基本
+        PmsUser pmsUser = pmsPreviewService.getPmsUserById(id);
+        AuditRecordBaseinfo auditRecordBaseinfo = new AuditRecordBaseinfo();
+        auditRecordBaseinfo.setUserId(id);
+        List<AuditRecordBaseinfo> bashinfoList = auditPmsPreviewService.getBashinfoList(auditRecordBaseinfo);
+        if (bashinfoList != null && bashinfoList.size() > 0) {
+            for (AuditRecordBaseinfo info : bashinfoList) {
+                pmsUser = info.toPmsUser(pmsUser);
+            }
+        }
+        User user = CommonUtil.getLoginUser(request);
+        if (!(user.getRoleId().equals("1") || user.getRoleId().equals("79a80080f55740f1a1b146af57dfcf27")
+                || user.getRoleId().equals("HKY_ADMIN") || user.getRoleId().equals("ROLE_HKY_LEADER"))) {
+            pmsUser.setRemark("");
+        }
+        //通讯
+        Communication communication = pmsPreviewService.getCommunicationById(id);
+        if (communication == null) {
+            communication = new Communication();
+        }
+        AuditRecordCommunication auditRecordCommunication = new AuditRecordCommunication();
+        auditRecordCommunication.setUserId(id);
+        List<AuditRecordCommunication> recordCommunicationList = auditPmsPreviewService.getCommunicationList(auditRecordCommunication);
+        if (recordCommunicationList != null && recordCommunicationList.size() > 0) {
+            for (AuditRecordCommunication info : recordCommunicationList) {
+                communication = info.toCommunication(communication);
+            }
+        }
+        //家庭成员和社会关系
+        AuditPmsRelations auditPmsRelations = new AuditPmsRelations();
+        auditPmsRelations.setUserId(id);
+        List<AuditPmsRelations> relationsList = auditPmsPreviewService.getRelationsList(auditPmsRelations);
+
+        //教育经历
+        AuditPmsEducation auditPmsEducation = new AuditPmsEducation();
+        auditPmsEducation.setUserId(id);
+        List<AuditPmsEducation> auditPmsEducationList = auditPmsPreviewService.getEducationList(auditPmsEducation);
+
+        //工作经历
+        AuditPmsWork auditPmsWork = new AuditPmsWork();
+        auditPmsWork.setUserId(id);
+        List<AuditPmsWork> auditPmsWorkList = auditPmsPreviewService.getWorksList(auditPmsWork);
+
+
+
+        ExportExcelUtil export = new ExportExcelUtil();
+
+		String srcFilePath = "E:/导出模板.xlsx";
+		String fileName =  System.currentTimeMillis() + ".xlsx";
+		String desFilePath =  fileName;
+
+		export.exportExcel(srcFilePath,desFilePath,response,pmsUser,auditPmsEducationList,auditPmsWorkList,communication,relationsList);
+    }
+
+
+
 
     @Log("查询单条")
     @RequestMapping({"/getPmsUserById"})
