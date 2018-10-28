@@ -9,7 +9,7 @@
         (id, field_name, status)
         VALUES
             (
-                #{id}, #{field_name}, #{status}
+                #{id}, #{fieldName}, #{status}
             )
     </insert>
     <update id="update" parameterType="com.yy.young.pms.model.AuditFieldSet">

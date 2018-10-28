@@ -85,7 +85,7 @@
                         <th><input type="checkbox" name="all" lay-skin="primary" lay-filter="allChoose"></th>
                         <th>排序</th>
                         <th>标题</th>
-                        <th>内容</th>
+                        <th>摘要</th>
                         <th>添加人</th>
                         <th>创建时间</th>
                         <th>操作</th>
@@ -164,7 +164,7 @@
                         title: '新增公告',
                         // maxmin: true,//大小窗口切换
                         shadeClose: true, //点击遮罩关闭层
-                        area: ['650px', '390px'],
+                        area: ['750px', '95%'],
                         content: 'page/portal/announcement_edit_no.jsp?edit=true&opt=add'
                     });
                 })
@@ -195,18 +195,23 @@
                             var orgTitle = title;
                             var content = list[i].content;
                             var orgContent = content;
+                            var point = list[i].point;
+                            var orgPoint = point;
                             var createTime = list[i].createTime;
                             var createName = list[i].createName;
                             if(title && title.length > 7)
                                 title = title.substr(0,7)+'…';
-                            if(content && content.length > 30){
-                                content = content.substr(0,30)+'…';
+                            if(point && point.length > 30){
+                                point = point.substr(0,30)+'…';
                             }
+                            // if(content && content.length > 30){
+                            //     content = content.substr(0,30)+'…';
+                            // }
                             liHtml += '<tr>\n' +
                                 '       <td><input type="checkbox" name="announCheck" value="'+announId+'" lay-skin="primary"></td>\n' +
                                 '       <td>'+serNum+'</td>\n' +
                                 '       <td title="'+orgTitle+'">'+title+'</td>\n' +
-                                '       <td title="'+orgContent+'">'+content+'</td>\n' +
+                                '       <td title="'+orgPoint+'">'+point+'</td>\n' +
                                 '       <td>'+createName+'</td>\n' +
                                 '       <td>'+createTime+'</td>\n' +
                                 '       <td>\n' +
@@ -259,11 +264,12 @@
             // layer.msg('Hello World');
             layer.open({ /*弹出框*/
                 type: 2,
-                title: '查看',
+                title: '公告详情',
                 // maxmin: true,//大小窗口切换
                 shadeClose: true, //点击遮罩关闭层
-                area: ['650px', '430px'],
-                content: 'page/portal/announcement_llook_no.jsp?announId='+id+'&opt=look'
+                area: ['80%', '85%'],
+                content: 'page/portal/home_announcement_detail_no.jsp?orgType=layerOpen&announId='+id
+                // content: 'page/portal/announcement_llook_no.jsp?announId='+id+'&opt=look'
             });
         }
         //单条编辑
@@ -274,20 +280,40 @@
                 title: '编辑',
                 // maxmin: true,//大小窗口切换
                 shadeClose: true, //点击遮罩关闭层
-                area: ['650px', '430px'],
+                area: ['700px', '85%'],
                 content: 'page/portal/announcement_edit_no.jsp?edit=true&announId='+id+'&opt=edit'
             });
         }
         //单挑删除
         function announDelete(id){
-            // layer.msg('Hello World');
-            layer.open({ /*弹出框*/
+            /*layer.open({ /!*弹出框*!/
                 type: 2,
                 title: '删除此条',
                 // maxmin: true,//大小窗口切换
                 shadeClose: true, //点击遮罩关闭层
                 area: ['650px', '430px'],
                 content: 'page/portal/announcement_llook_no.jsp?announId='+id+'&opt=del'
+            });*/
+            layer.confirm('确定要删除该公告吗？', {
+                btn: ['再考虑一下', '确认删除'],
+                skin: 'more-del',
+                area: ['650px', '180px'],
+                success: function(index) {
+                    $(document.body).find(".layui-layer-content").css("textAlign", "center");
+                }
+            }, function(index, layero) {
+                //按钮【按钮一】的回调
+                layer.close(index);
+            }, function(index) {
+                //按钮【按钮二】的回调
+                jo.postAjax('pms/announcement/delete.action', {id:id}, function(json){
+                    if(json && json.code == "0"){
+                        layer.msg(json.info);
+                        refreshAnnoun();//重新加载父页面
+                    }else{
+                        layer.msg(json.info);
+                    }
+                }, true);
             });
         }
         function refreshAnnoun(){

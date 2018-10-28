@@ -67,14 +67,11 @@
                             var title = list[i].title;
                             var createTime = list[i].createTime;
                             var id = list[i].id;
-                            var content = list[i].content;
-                            //if(content && content.length > 120){
-                           //     content = content.substr(0,120)+'......';
-                           // }
+                            var point = list[i].point;
                             liHtml += '<li class="clear">\n' +
-                                '                    <a href="<%=basePath%>page/portal/home_announcement_detail_no.jsp?announId='+id+'" class="left">\n' +
+                                '                    <a href="page/portal/home_announcement_detail_no.jsp?announId='+id+'" class="left">\n' +
                                 '                        <h2>'+title+'</h2>\n' +
-                                '                        <p>'+content+'\n' +
+                                '                        <p>'+point+'\n' +
                                 '                        </p>\n' +
                                 '                    </a>\n' +
                                 '                    <span class="date right">'+createTime+'</span><br />\n' +

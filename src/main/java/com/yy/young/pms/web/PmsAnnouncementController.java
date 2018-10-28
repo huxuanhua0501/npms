@@ -129,11 +129,10 @@ public class PmsAnnouncementController {
             pmsAnnouncement.setCreateName(user.getName());
         }
         if(StringUtils.isBlank(createTime)){
-            pmsAnnouncement.setCreateTime(DateUtil.getCurrentTime());
+            pmsAnnouncement.setCreateTime(DateUtil.getCurrentDay());
         }else{
-            Date tmp = DateUtil.toDate(createTime,"yyyy-MM-dd HH:mm:ss");
             Date tmp1 = DateUtil.toDate(createTime,"yyyy-MM-dd");
-            if(tmp == null && tmp1 == null){
+            if(tmp1 == null){
                 rs.setInfo("时间格式不正确！正确格式：2018-09-09");
                 rs.setCode(-1);
                 rs.setData_id("createTime");
@@ -161,11 +160,10 @@ public class PmsAnnouncementController {
             pmsAnnouncement.setCreateName(user.getName());
         }
         if(StringUtils.isBlank(createTime)){
-            pmsAnnouncement.setCreateTime(DateUtil.getCurrentTime());
+            pmsAnnouncement.setCreateTime(DateUtil.getCurrentDay());
         }else{
-            Date tmp = DateUtil.toDate(createTime,"yyyy-MM-dd HH:mm:ss");
             Date tmp1 = DateUtil.toDate(createTime,"yyyy-MM-dd");
-            if(tmp == null && tmp1 == null){
+            if(tmp1 == null){
                 rs.setInfo("时间格式不正确！正确格式：2018-09-09");
                 rs.setCode(-1);
                 rs.setData_id("createTime");
@@ -199,7 +197,8 @@ public class PmsAnnouncementController {
     public Object getMaxNum(HttpServletRequest request) throws  Exception{
 
             PmsAnnouncement obj = service.getMaxNum();
-            obj.setCreateTime(DateUtil.getCurrentTime());
+            obj.setCreateTime(DateUtil.getCurrentDay());
+            obj.setCreateName(CommonUtil.getLoginUser(request).getName());
             return new Result(obj);
     }
     /**

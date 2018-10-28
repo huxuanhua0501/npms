@@ -2,10 +2,7 @@ package com.yy.young.pms.web;
 
 import com.yy.young.cms.service.ICmsDBService;
 import com.yy.young.common.service.ICommonService;
-import com.yy.young.common.util.CommonUtil;
-import com.yy.young.common.util.DateUtil;
-import com.yy.young.common.util.Result;
-import com.yy.young.common.util.StringUtils;
+import com.yy.young.common.util.*;
 import com.yy.young.dal.util.Page;
 import com.yy.young.interfaces.log.annotation.Log;
 import com.yy.young.interfaces.model.User;
@@ -37,10 +34,15 @@ public class PmsAuditFieldSetController {
     IAuditFieldSetService auditFieldSetService;
 
     @RequestMapping("/update")
-    public Object update(List<AuditFieldSet> list, HttpServletRequest request) throws Exception {
+    public Object update(String list, HttpServletRequest request) throws Exception {
         Result rs = new Result();
-
-        auditFieldSetService.batchInsert(list);
+        if(StringUtils.isBlank(list)){
+            rs.setInfo("设置失败");
+            rs.setCode(-1);
+            return  rs;
+        }
+        List<AuditFieldSet> auditFieldSets = CommonJsonUtil.jsonStrArrToBeanList(list,AuditFieldSet.class);
+        auditFieldSetService.batchInsert(auditFieldSets);
         return rs;
     }
     /**

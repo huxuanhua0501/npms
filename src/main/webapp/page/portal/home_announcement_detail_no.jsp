@@ -23,10 +23,11 @@
    <script src="<%=URL_STATIC%>static/prototype/js/layui.js"></script>
     <script src="<%=URL_STATIC%>static/prototype/js/jquery.min.js"></script>
     <script type="text/javascript">
+        var announcementId = "<%=request.getParameter("announId")%>";
+        var type = "<%=request.getParameter("orgType")%>";
         $(function () {
-            var announcementId = <%=request.getParameter("announId")%>;
             if(announcementId) {
-                var sUrl = '{URL_PORTAL}pms/announcement/get.action?id=' + announcementId;
+                var sUrl = 'pms/announcement/get.action?id=' + announcementId;
                 jo.postAjax(sUrl, {}, function(json){
                     if(json && json.code == "0"){
                         if(json.data && json.data[0]){
@@ -40,6 +41,14 @@
                 }, true);
             }
         });
+        function goBack(){
+            if(type == "layerOpen"){//公告查看
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index); //再执行关闭
+            }else{
+                history.back(-1);
+            }
+        }
     </script>
 </head>
 
@@ -49,7 +58,7 @@
         <div class="layui-col-md12 announcement">
             <div class="announcement-tit clear">
                 <span class="left">详情</span>
-                <button class="layui-btn layui-btn-radius layui-btn-normal right" onclick="javascript :history.back(-1)">返回</button>
+                <button class="layui-btn layui-btn-radius layui-btn-normal right" onclick="goBack()">返回</button>
             </div>
             <div class="announcement-content" id="announcement_detail">
 

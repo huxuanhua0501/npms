@@ -69,19 +69,19 @@
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">添加人</label>
         <div class="layui-input-inline">
-            <input type="text" id="createName" name="createName"  placeholder="" autocomplete="off" class="layui-input">
+            <input type="text" id="createName" readonly name="createName"  placeholder="" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
         <label class="layui-form-label">添加时间</label>
         <div class="layui-input-inline">
-            <input type="text" id="createTime" name="createTime" placeholder="" autocomplete="off" class="layui-input">
+            <input type="text" id="createTime" readonly name="createTime" placeholder="" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
-        <label class="layui-form-label">摘要</label>
+        <label class="layui-form-label">标题</label>
         <div class="layui-input-inline">
-            <input type="text" id="point" name="point" placeholder="" autocomplete="off" class="layui-input">
+            <input type="text" id="title" name="title" ErrEmpty="公告标题" placeholder="" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="edit-item layui-col-md6 layui-col-xs6">
@@ -91,9 +91,13 @@
         </div>
     </div>
     <div class="edit-item layui-col-md12 layui-col-xs12">
-        <label class="layui-form-label">标题</label>
-        <div class="layui-input-inline lang">
-            <input type="text" id="title" name="title" ErrEmpty="公告标题" placeholder="" autocomplete="off" class="layui-input">
+        <label class="layui-form-label">摘要</label>
+        <%--<div class="layui-input-inline lang">--%>
+            <%--<input type="text" id="point" name="point" placeholder="" autocomplete="off" class="layui-input">--%>
+            <%--<input type="text" id="title" name="title" ErrEmpty="公告标题" placeholder="" autocomplete="off" class="layui-input">--%>
+        <%--</div>--%>
+        <div class="layui-input-inline" style="width: 79%;">
+            <textarea class="layui-textarea readonly " style="height: 100px;" name="point" id="point" cols="30" rows="3"></textarea>
         </div>
     </div>
     <div class="edit-item layui-col-md12 layui-col-xs12">
@@ -176,7 +180,7 @@
                     $('form')[0].reset();
                 }
             }
-        }, true);
+        }, false);
     }
     //新增时获取最大排序序号
     function getMaxNum(){
@@ -187,6 +191,7 @@
                     var defNum =parseInt(announ.serialNumber)+1;
                     $("#serialNumber").val(defNum);
                     $("#createTime").val(announ.createTime);
+                    $("#createName").val(announ.createName);
                 }
             }
         }, true);

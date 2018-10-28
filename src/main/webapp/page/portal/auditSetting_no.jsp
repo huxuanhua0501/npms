@@ -315,9 +315,10 @@
     </div>
 </div>
     <script>
+        var form;
         $(function() {
             layui.use(['layer', 'form', 'laydate'], function() {
-                var form = layui.form;
+                form = layui.form;
                 var layer = layui.layer;
                 var laydate = layui.laydate;
                 loadAuditFieldSet();
@@ -329,7 +330,6 @@
                     });
                     form.render('checkbox');
                 });
-                form.render();
             });
         })
         function loadAuditFieldSet(){
@@ -337,61 +337,55 @@
             jo.postAjax(sUrl, {}, function(json){
                 if(json && json.code == "0"){
                     if(json.data && json.data[0]){
-                        var inp = $("input[type='checkbox']");
                         var list = json.data;
-                        for(var i=0;i<inp.length;i++){
-                            var element = $(inp[i]);
-                            var key = element.attr("name");
+                        $("input[type='checkbox']").each(function (index,item) {
+                            var key = item.name;
                             for(var j =0;j<list.length;j++){
-                                var id = list[j].ID;
-                                var fieldName = list[j].FIELD_NAME;
-                                var status = list[j].STATUS;
+                                var id = list[j].id;
+                                var fieldName = list[j].fieldName;
+                                var status = list[j].status;
                                 if(key == fieldName){
-                                    element.val(status);
-                                    element.next().val(id);
-                                    if(status == 1){
-                                        element.checked = true;
+                                    item.value = status;
+                                    $("input[name='"+(key+"_id")+"']").val(id);
+                                    if(status == 2){//不需要审核的勾选
+                                        item.checked = true;
                                     }
                                 }
                             }
-                        }
+                        })
                     }
-                    form.render('checkbox');
                 }else{
                     layer.msg("加载审核字段数据失败！");
                 }
-            }, true);
+            }, false);
+            form.render('checkbox');
         }
         //提交
         function updateAll(){
-            var inp = $("input[type='checkbox']");
             var list = [];
-            for(var i=0;i<inp.length;i++){
-                var elem = $(inp[i]);
-                var obj = {};
-                //把全选按钮的checkbox去掉
-                if(elem.name != "all"){
-                    var id = jo.getDefVal(elem.next().value,'');
-                    var fieldName = elem.name;
+            $("input[type='checkbox']").each(function (index,item) {
+                if (item.name != "all") {//把全选按钮的checkbox去掉
+                    var id = jo.getDefVal($("input[name='" + (item.name + "_id") + "']").val(), '');
+                    var fieldName = item.name;
                     var status = 1;//默认需要审核
                     //选中的为不需要审核
-                    if(elem.checked){
+                    if (item.checked) {
                         status = 2;
                     }
-                    obj = {id:id,fieldName:fieldName,status:status};
+                    var obj = {id: id, fieldName: fieldName, status: status};
                     list.push(obj);
                 }
-            }
+            })
             if(list.length > 0){
                 var sUrl = 'pms/auditFieldSet/update.action';
-                jo.postAjax(sUrl, {}, function(json){
+                jo.postAjax(sUrl, {list:JSON.stringify(list)}, function(json){
                     if(json && json.code == "0"){
                         layer.msg("审核字段设置成功！");
-                        window.location.reload();
+                        loadAuditFieldSet();
                     }else{
                         layer.msg("审核字段设置失败！");
                     }
-                }, true);
+                }, false);
             }
         }
     </script>
