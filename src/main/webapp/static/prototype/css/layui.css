@@ -1,9 +1,9 @@
 /**
- 
+
  @Name: layui
  @Author: 贤心
  @Site: www.layui.com
- 
+
  */
 
 
@@ -1702,7 +1702,7 @@ a cite {
 /*
 
   面板
- 
+
 */
 
 
@@ -1814,10 +1814,10 @@ a cite {
 }
 
 
-/* 
+/*
 
-  默认主题 
-  
+  默认主题
+
 */
 
 
@@ -1963,8 +1963,8 @@ hr,
 
 
 /*
- 
-  按钮 
+
+  按钮
 
 */
 
@@ -3718,7 +3718,7 @@ body .layui-table-tips .layui-layer-content {
 .layui-tree li {
     text-overflow: ellipsis;
     overflow: hidden;
-    /* white-space: nowrap; */
+    white-space: nowrap;
 }
 
 .layui-tree li a,
@@ -3737,19 +3737,12 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-tree li a i {
     font-size: 16px;
-    position: relative;
-    top: -8px;
 }
 
 .layui-tree li a cite {
     padding: 0 6px;
     font-size: 14px;
     font-style: normal;
-    max-width: 70%;
-    display: inline-block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 .layui-tree li i {
@@ -4350,7 +4343,7 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-timeline-content {
     padding-left: 25px;
-    ;
+;
 }
 
 .layui-timeline-title {
