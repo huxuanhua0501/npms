@@ -81,6 +81,19 @@
         };
     </script>
     <script type="text/javascript">
+
+
+        /**
+         * 查看用户简历
+         * @param uid
+         */
+        function lookUserDoc(uid){
+            if(uid){
+                top.jo.showWin("page/personal/information-preview.jsp?id="+(uid), "90%", "90%", "员工档案", "WIN_USER_DOC");
+            }
+        }
+
+
         var userId = jo.getDefVal(jo.getUrlParam("userId"), loginUser.id);
         var sf = jo.getDefVal(jo.getUrlParam("sf"), "");
         var _edit = jo.getDefVal(jo.getUrlParam("edit"), "");
