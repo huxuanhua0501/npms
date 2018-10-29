@@ -141,7 +141,7 @@ $(function() {
             //按钮【按钮二】的回调
         });
     })
-    $(".del").click(function() {
+    /*$(".del").click(function() {
         layer.confirm('确定要删除勾选的条目吗？', {
             btn: ['再考虑一下', '确认删除'],
             skin: 'more-del',
@@ -155,7 +155,7 @@ $(function() {
         }, function(index) {
             //按钮【按钮二】的回调
         });
-    })
+    })*/
 
     // 信息预览
     $(".preview").click(function() {

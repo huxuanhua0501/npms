@@ -48,6 +48,9 @@
             right: 100px;
             top: 35%;
         }
+        .edit-item .layui-form-checkbox {
+            margin-bottom: 6px;
+        }
     </style>
 </head>
 <body>
@@ -113,12 +116,12 @@
                 </div>
                 <div class="edit-item layui-col-md12 layui-col-xs12">
                     <label class="layui-form-label">行政级别</label>
-                    <div style="padding: 9px 15px;" id="statis_administrativeLevel">
+                    <div style="padding: 9px 15px;width: calc(100% - 150px);float: left;" id="statis_administrativeLevel">
                     </div>
                 </div>
                 <div class="edit-item layui-col-md12 layui-col-xs12">
                     <label class="layui-form-label">专业技术职务</label>
-                    <div style="padding: 9px 15px;" id="statis_technicalPosition">
+                    <div style="padding: 9px 15px;width: calc(100% - 150px);float: left;" id="statis_technicalPosition">
                     </div>
                 </div>
 

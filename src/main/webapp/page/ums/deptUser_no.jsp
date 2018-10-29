@@ -382,15 +382,15 @@
         }
         //查看员工档案（宣化引用）
         function lookUserDoc(userId){
-            layer.open({ /*弹出框*/
+            /*layer.open({ /!*弹出框*!/
                 type: 2,
                 title: '员工查看',
                 // maxmin: true,//大小窗口切换
                 shadeClose: true, //点击遮罩关闭层
                 area: ['85%', '85%'],
                 content: 'page/personal/myDoc.jsp?id='+userId+'&_t='+(new Date()).getTime()
-            });
-
+            });*/
+            top.jo.showWin("page/personal/myDoc.jsp?id="+(userId), "90%", "90%", "员工档案", "WIN_USER_DOC");
         }
         //编辑员工
         function userEdit(userId){
