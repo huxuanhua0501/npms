@@ -437,9 +437,23 @@
             var form = layui.form;
             var layer = layui.layer;
             var laydate = layui.laydate;
+            //列表全选
+        //     $('input[type="checkbox"][title != "所有"]).click(function(){ }
+        // });
+
+
             //全选
             form.on('checkbox', function (data) {
+                // debugger;
                 var obj = data.elem;
+                if(obj.name === 'all'){
+
+                    // console.log(obj);
+                    var child =  $("input:checkbox[name=id]");
+                    child.each(function(index,item){
+                         item.checked = obj.checked;index
+                    });
+                }
                 if(obj.title == '所有'){
                     var child = $(obj).parent('div').find('input[type="checkbox"]');
                     child.each(function(index,item){
@@ -637,12 +651,11 @@
         Color();
     };
     function resetPassword() {
-        trashFlagArray = document.getElementsByName("id");
-        var  trashFlag=new Array();
-        for(b in trashFlagArray){
-            if(trashFlagArray[b].checked)
-                trashFlag.push(trashFlagArray[b].value);
-        }
+        var trashFlag= [];
+        $('input[name=id]:checked').each(function(){
+            trashFlag.push($(this).val());
+        });
+
         jo.postAjax("ums/user/resetPassword.action", {ids: trashFlag}, function (json) {
             if (json && json.code == 0) {
                 jo.showMsg("重置成功");

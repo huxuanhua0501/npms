@@ -83,6 +83,7 @@
         }
 
         joView.handleItem = function (oItem, iIndex) {
+            oItem._name = '<span  onclick="updateUserDoc(\'' + oItem.id + '\')">' +oItem.userName+'</span>';
             oItem._cvm = (oItem.trashFlag == 1 ? "禁用" : "启用");
             oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
             oItem._opt = (oItem.trashFlag == 1 ? '<span   onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
@@ -515,6 +516,12 @@
             //全选
             form.on('checkbox', function (data) {
                 var obj = data.elem;
+                if(obj.name === 'all'){
+                    var child =  $("input:checkbox[name=id]");
+                    child.each(function(index,item){
+                        item.checked = obj.checked;index
+                    });
+                }
                 if(obj.title == '所有'){
                     var child = $(obj).parent('div').find('input[type="checkbox"]');
                     child.each(function(index,item){

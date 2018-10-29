@@ -433,11 +433,29 @@
             var laydate = layui.laydate;
 
             //全选
-            form.on('checkbox(allChoose)', function (data) {
-                var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
-                child.each(function (index, item) {
-                    item.checked = data.elem.checked;
-                });
+            form.on('checkbox', function (data) {
+                var obj = data.elem;
+
+                if(obj.name === 'all'){
+                    var child =  $("input:checkbox[name=id]");
+                    child.each(function(index,item){
+                        item.checked = obj.checked;index
+                    });
+                }
+                if(obj.title == '所有'){
+                    var child = $(obj).parent('div').find('input[type="checkbox"]');
+                    child.each(function(index,item){
+                        item.checked = obj.checked;
+                    });
+                }else{
+                    var allChecked = true;
+                    $(obj).parent('div').find('input[type="checkbox"][title != "所有"]').each(function(index,item){
+                        if(!item.checked){
+                            allChecked = false;
+                        };
+                    });
+                    $(obj).parent('div').find('input[type="checkbox"][title = "所有"]').prop("checked",allChecked);
+                }
                 form.render('checkbox');
             });
             form.on('select(choicePageSize)', function (data) {

@@ -443,6 +443,12 @@
             //全选
             form.on('checkbox', function (data) {
                 var obj = data.elem;
+                if(obj.name === 'all'){
+                    var child =  $("input:checkbox[name=id]");
+                    child.each(function(index,item){
+                        item.checked = obj.checked;index
+                    });
+                }
                 if(obj.title == '所有'){
                     var child = $(obj).parent('div').find('input[type="checkbox"]');
                     child.each(function(index,item){
