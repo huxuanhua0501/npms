@@ -74,7 +74,7 @@
         }
         joView.handleItem = function (oItem, iIndex) {
 
-            oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
+            oItem._cvm = (oItem.trashFlag == 1 ? "禁用" : "启用");
             oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
 
             oItem._opt = '<span  onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';

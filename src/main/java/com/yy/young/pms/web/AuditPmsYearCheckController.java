@@ -163,144 +163,144 @@ public class AuditPmsYearCheckController {
         page.setData(list);
 
         //getpage change start
-        if (obj != null) {
-            String userId = obj.getUserId();
-            if (userId != null) {
-                AuditShowUser AuditShowUser = new AuditShowUser();
-                AuditShowUser.setUserId(userId);
-
-                if (auditShowUserService.getList(AuditShowUser).size() > 0) {
-
-                }else {
-                    auditShowUserService.insert(AuditShowUser);
-                }
-                AuditShowUser.setPersonalShow(0);
-
-                AuditRecordBaseinfo AuditRecordBaseinfo = new AuditRecordBaseinfo();
-                AuditRecordBaseinfo.setUserId(userId);
-                List<AuditRecordBaseinfo> listBaseRec = auditRecordBaseinfoService.getList(AuditRecordBaseinfo);
-                if (listBaseRec.size() > 0) {
-                    int comItemId = listBaseRec.get(0).getItemId();
-                    AuditRecordBaseinfo.setItemId(comItemId);
-                    AuditRecordBaseinfo.setAuditStatus(5);
-                    if (auditRecordBaseinfoService.getList(AuditRecordBaseinfo).size() > 0) {
-                        AuditShowUser.setPersonalShow(1);
-                    }
-                    System.out.println("用户"+userId+"有基本信息审核记录最后一次为" + comItemId);
-                }else {
-                    System.out.println("用户没有基本信息审核记录" + userId);
-                }
-
-                AuditRecordCommunication AuditRecordCommunication = new AuditRecordCommunication();
-                AuditRecordCommunication.setUserId(userId);
-                List<AuditRecordCommunication> listComRec = auditRecordCommunicationService.getList(AuditRecordCommunication);
-                if (listComRec.size() > 0) {
-                    int comItemId = listComRec.get(0).getItemId();
-                    AuditRecordCommunication.setItemId(comItemId);
-                    AuditRecordCommunication.setAuditStatus(5);
-                    if (auditRecordCommunicationService.getList(AuditRecordCommunication).size() > 0) {
-                        AuditShowUser.setPersonalShow(1);
-                    }
-                    System.out.println("用户"+userId+"有通讯审核记录最后一次为" + comItemId);
-                }else {
-                    System.out.println("用户没有通讯审核记录" + userId);
-                }
-
-                AuditPmsRelations AuditPmsRelations = new AuditPmsRelations();
-                AuditPmsRelations.setStatus(5);
-                AuditPmsRelations.setUserId(userId);
-                if (auditPmsRelationsService.getList(AuditPmsRelations).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsEducation AuditPmsEducation = new AuditPmsEducation();
-                AuditPmsEducation.setUserId(userId);
-                AuditPmsEducation.setStatus(5);
-                if (auditPmsEducationService.getList(AuditPmsEducation).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsWork AuditPmsWork = new AuditPmsWork();
-                AuditPmsWork.setUserId(userId);
-                AuditPmsWork.setStatus(5);
-                if (auditPmsWorkService.getList(AuditPmsWork).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsMainTechGroup AuditPmsMainTechGroup = new AuditPmsMainTechGroup();
-                AuditPmsMainTechGroup.setUserId(userId);
-                AuditPmsMainTechGroup.setStatus(5);
-                if (auditPmsMainTechGroupService.getList(AuditPmsMainTechGroup).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsHonorTitle AuditPmsHonorTitle = new AuditPmsHonorTitle();
-                AuditPmsHonorTitle.setUserId(userId);
-                AuditPmsHonorTitle.setStatus(5);
-                if (auditPmsHonorTitleService.getList(AuditPmsHonorTitle).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsTechAwards AuditPmsTechAwards = new AuditPmsTechAwards();
-                AuditPmsTechAwards.setUserId(userId);
-                AuditPmsTechAwards.setStatus(5);
-                if (auditPmsTechAwardsService.getList(AuditPmsTechAwards).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsPaper AuditPmsPaper = new AuditPmsPaper();
-                AuditPmsPaper.setUserId(userId);
-                AuditPmsPaper.setStatus(5);
-                if (auditPmsPaperService.getList(AuditPmsPaper).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsPublish AuditPmsPublish = new AuditPmsPublish();
-                AuditPmsPublish.setUserId(userId);
-                AuditPmsPublish.setStatus(5);
-                if (auditPmsPublishService.getList(AuditPmsPublish).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsPatent AuditPmsPatent = new AuditPmsPatent();
-                AuditPmsPatent.setUserId(userId);
-                AuditPmsPatent.setStatus(5);
-                if (auditPmsPatentService.getList(AuditPmsPatent).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsJoinProject AuditPmsJoinProject = new AuditPmsJoinProject();
-                AuditPmsJoinProject.setUserId(userId);
-                AuditPmsJoinProject.setStatus(5);
-                if (auditPmsJoinProjectService.getList(AuditPmsJoinProject).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsTechnologyBrace AuditPmsTechnologyBrace = new AuditPmsTechnologyBrace();
-                AuditPmsTechnologyBrace.setUserId(userId);
-                AuditPmsTechnologyBrace.setStatus(5);
-                if (auditPmsTechnologyBraceService.getList(AuditPmsTechnologyBrace).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsSupportProject AuditPmsSupportProject = new AuditPmsSupportProject();
-                AuditPmsSupportProject.setUserId(userId);
-                AuditPmsSupportProject.setStatus(5);
-                if (auditPmsSupportProjectService.getList(AuditPmsSupportProject).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-
-                AuditPmsYearCheck AuditPmsYearCheck = new AuditPmsYearCheck();
-                AuditPmsYearCheck.setUserId(userId);
-                AuditPmsYearCheck.setStatus(5);
-                if (auditPmsYearCheckService.getList(AuditPmsYearCheck).size() > 0) {
-                    AuditShowUser.setPersonalShow(1);
-                }
-                //outer
-                System.out.println("最后为：" + AuditShowUser.getPersonalShow());
-                auditShowUserService.update(AuditShowUser);
-            }
-        }
+//        if (obj != null) {
+//            String userId = obj.getUserId();
+//            if (userId != null) {
+//                AuditShowUser AuditShowUser = new AuditShowUser();
+//                AuditShowUser.setUserId(userId);
+//
+//                if (auditShowUserService.getList(AuditShowUser).size() > 0) {
+//
+//                }else {
+//                    auditShowUserService.insert(AuditShowUser);
+//                }
+//                AuditShowUser.setPersonalShow(0);
+//
+//                AuditRecordBaseinfo AuditRecordBaseinfo = new AuditRecordBaseinfo();
+//                AuditRecordBaseinfo.setUserId(userId);
+//                List<AuditRecordBaseinfo> listBaseRec = auditRecordBaseinfoService.getList(AuditRecordBaseinfo);
+//                if (listBaseRec.size() > 0) {
+//                    int comItemId = listBaseRec.get(0).getItemId();
+//                    AuditRecordBaseinfo.setItemId(comItemId);
+//                    AuditRecordBaseinfo.setAuditStatus(5);
+//                    if (auditRecordBaseinfoService.getList(AuditRecordBaseinfo).size() > 0) {
+//                        AuditShowUser.setPersonalShow(1);
+//                    }
+//                    System.out.println("用户"+userId+"有基本信息审核记录最后一次为" + comItemId);
+//                }else {
+//                    System.out.println("用户没有基本信息审核记录" + userId);
+//                }
+//
+//                AuditRecordCommunication AuditRecordCommunication = new AuditRecordCommunication();
+//                AuditRecordCommunication.setUserId(userId);
+//                List<AuditRecordCommunication> listComRec = auditRecordCommunicationService.getList(AuditRecordCommunication);
+//                if (listComRec.size() > 0) {
+//                    int comItemId = listComRec.get(0).getItemId();
+//                    AuditRecordCommunication.setItemId(comItemId);
+//                    AuditRecordCommunication.setAuditStatus(5);
+//                    if (auditRecordCommunicationService.getList(AuditRecordCommunication).size() > 0) {
+//                        AuditShowUser.setPersonalShow(1);
+//                    }
+//                    System.out.println("用户"+userId+"有通讯审核记录最后一次为" + comItemId);
+//                }else {
+//                    System.out.println("用户没有通讯审核记录" + userId);
+//                }
+//
+//                AuditPmsRelations AuditPmsRelations = new AuditPmsRelations();
+//                AuditPmsRelations.setStatus(5);
+//                AuditPmsRelations.setUserId(userId);
+//                if (auditPmsRelationsService.getList(AuditPmsRelations).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsEducation AuditPmsEducation = new AuditPmsEducation();
+//                AuditPmsEducation.setUserId(userId);
+//                AuditPmsEducation.setStatus(5);
+//                if (auditPmsEducationService.getList(AuditPmsEducation).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsWork AuditPmsWork = new AuditPmsWork();
+//                AuditPmsWork.setUserId(userId);
+//                AuditPmsWork.setStatus(5);
+//                if (auditPmsWorkService.getList(AuditPmsWork).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsMainTechGroup AuditPmsMainTechGroup = new AuditPmsMainTechGroup();
+//                AuditPmsMainTechGroup.setUserId(userId);
+//                AuditPmsMainTechGroup.setStatus(5);
+//                if (auditPmsMainTechGroupService.getList(AuditPmsMainTechGroup).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsHonorTitle AuditPmsHonorTitle = new AuditPmsHonorTitle();
+//                AuditPmsHonorTitle.setUserId(userId);
+//                AuditPmsHonorTitle.setStatus(5);
+//                if (auditPmsHonorTitleService.getList(AuditPmsHonorTitle).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsTechAwards AuditPmsTechAwards = new AuditPmsTechAwards();
+//                AuditPmsTechAwards.setUserId(userId);
+//                AuditPmsTechAwards.setStatus(5);
+//                if (auditPmsTechAwardsService.getList(AuditPmsTechAwards).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsPaper AuditPmsPaper = new AuditPmsPaper();
+//                AuditPmsPaper.setUserId(userId);
+//                AuditPmsPaper.setStatus(5);
+//                if (auditPmsPaperService.getList(AuditPmsPaper).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsPublish AuditPmsPublish = new AuditPmsPublish();
+//                AuditPmsPublish.setUserId(userId);
+//                AuditPmsPublish.setStatus(5);
+//                if (auditPmsPublishService.getList(AuditPmsPublish).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsPatent AuditPmsPatent = new AuditPmsPatent();
+//                AuditPmsPatent.setUserId(userId);
+//                AuditPmsPatent.setStatus(5);
+//                if (auditPmsPatentService.getList(AuditPmsPatent).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsJoinProject AuditPmsJoinProject = new AuditPmsJoinProject();
+//                AuditPmsJoinProject.setUserId(userId);
+//                AuditPmsJoinProject.setStatus(5);
+//                if (auditPmsJoinProjectService.getList(AuditPmsJoinProject).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsTechnologyBrace AuditPmsTechnologyBrace = new AuditPmsTechnologyBrace();
+//                AuditPmsTechnologyBrace.setUserId(userId);
+//                AuditPmsTechnologyBrace.setStatus(5);
+//                if (auditPmsTechnologyBraceService.getList(AuditPmsTechnologyBrace).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsSupportProject AuditPmsSupportProject = new AuditPmsSupportProject();
+//                AuditPmsSupportProject.setUserId(userId);
+//                AuditPmsSupportProject.setStatus(5);
+//                if (auditPmsSupportProjectService.getList(AuditPmsSupportProject).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//
+//                AuditPmsYearCheck AuditPmsYearCheck = new AuditPmsYearCheck();
+//                AuditPmsYearCheck.setUserId(userId);
+//                AuditPmsYearCheck.setStatus(5);
+//                if (auditPmsYearCheckService.getList(AuditPmsYearCheck).size() > 0) {
+//                    AuditShowUser.setPersonalShow(1);
+//                }
+//                //outer
+//                System.out.println("最后为：" + AuditShowUser.getPersonalShow());
+//                auditShowUserService.update(AuditShowUser);
+//            }
+//        }
         //end
         return page;
     }

@@ -74,9 +74,9 @@
         }
         joView.handleItem = function (oItem, iIndex) {
 
-            oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
+            oItem._cvm = (oItem.trashFlag == 1 ? "禁用" : "启用");
             oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
-            oItem._opt = (oItem.state == 0 ? '<span   onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
+            oItem._opt = (oItem.trashFlag == 1 ? '<span   onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
 
             oItem._opt += '<span    onclick="lookUserDoc(\'' + oItem.id + '\')"> &nbsp;查看</span>';
             oItem._opt += '<span  onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;编辑</span>';
@@ -243,7 +243,7 @@
                 <span class="left title">人事管理</span>
                 <div class="layui-form right">
                     <div class="layui-inline button-group">
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary add" onclick="joView.add('page/personal/leave-add-person.jsp?edit=true')">新增员工</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary add">新增员工</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary change-password"  onclick="resetPassword()" >密码重置</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary del" onclick="joView.del()">删除</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary reset" onclick="window.location.reload()"><i class="layui-icon layui-icon-refresh"></i> 刷新</button>
@@ -574,6 +574,19 @@
 </script>
 <script type="text/javascript">
     $(function () {
+
+        $(".add").click(function() {
+            // layer.msg('Hello World');
+            layer.open({ /*弹出框*/
+                type: 2,
+                title: '新增员工',
+                // maxmin: true,//大小窗口切换
+                shadeClose: true, //点击遮罩关闭层
+                area: ['90%', '500px'],
+                content: 'page/personal/leave-add-person.jsp?edit=true'
+            });
+        })
+
 
         Color();
     });

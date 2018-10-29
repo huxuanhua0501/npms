@@ -871,7 +871,7 @@
                             <input type="text" name="sex" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                                <select disabled async="true" name="sex" class="joSelect" data=""
+                                <select disabled async="false" name="sex" class="joSelect" data=""
                                         dataurl="pms/pmsDictionary/getListByDictionary/SEX" keyfield="dicValue"
                                         valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}' lay-verify=""></select>
                         </div>
@@ -881,7 +881,7 @@
                             <input type="text" name="nation" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                            <select async="true" name="nation" disabled lay-verify=""  class="joSelect" data=""
+                            <select async="false" name="nation" disabled lay-verify=""  class="joSelect" data=""
                                     dataurl="pms/pmsDictionary/getListByDictionary/NATION" keyfield="dicValue"
                                     valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}'></select>
                         </div>
@@ -897,7 +897,7 @@
                             <input type="text" name="politicalOutlook" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                            <select async="true" name="politicalOutlook" lay-verify="" disabled class="joSelect" data=""
+                            <select async="false" name="politicalOutlook" lay-verify="" disabled class="joSelect" data=""
                                     dataurl="pms/pmsDictionary/getListByDictionary/POLITICAL_OUTLOOK"
                                     keyfield="dicValue" valuefield="dicValue"
                                     firstitem='{"dicValue":"","dicValue":""}'></select>
@@ -1003,7 +1003,7 @@
                             <input type="text" name="technicalPosition" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                            <select async="true" name="technicalPosition" lay-verify="" disabled class="joSelect" data=""
+                            <select async="false" name="technicalPosition" lay-verify="" disabled class="joSelect" data=""
                                     dataurl="pms/pmsDictionary/getListByDictionary/TECHNICAL_POSITION"
                                     keyfield="dicValue" valuefield="dicValue"
                                     firstitem='{"dicValue":"","dicValue":""}'></select>
@@ -1015,7 +1015,7 @@
                             <input type="text" name="technicalLevel" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                            <select async="true" name="technicalLevel" lay-verify="" disabled class="joSelect" data=""
+                            <select async="false" name="technicalLevel" lay-verify="" disabled class="joSelect" data=""
                                     dataurl="pms/pmsDictionary/getListByDictionary/TECHNICAL_LEVEL" keyfield="dicValue"
                                     valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}'></select>
                         </div>
@@ -1031,14 +1031,19 @@
                             <input type="text" name="administrativeLevel" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                            <select async="true" name="administrativeLevel" lay-verify="" disabled class="joSelect"
+                            <select async="false" name="administrativeLevel" lay-verify="" disabled class="joSelect"
                                     data="" dataurl="pms/pmsDictionary/getListByDictionary/ADMINISTRATIVE_LEVEL"
                                     keyfield="dicValue" valuefield="dicValue"
                                     firstitem='{"dicValue":"","dicValue":""}'></select>
                         </div>
+                            <%--研究领域start--%>
                             <div class="col-item save">
-                                <input type="text" id="researchField" name="researchField" required
-                                       lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                <input type="text" name="researchField" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="col-item edit">
+                                <select async="false" name="researchField" lay-verify="" disabled class="joSelect" data=""
+                                        dataurl="pms/pmsDictionary/getListByDictionary/RESEARCH_FIELD" keyfield="dicValue"
+                                        valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}'></select>
                             </div>
                         <!-- 行政级别end -->
 <%--                        研究领域细分start
@@ -1116,7 +1121,7 @@
                             <input type="text" name="tempWorkExperience" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="col-item edit">
-                            <select async="true" name="tempWorkExperience" lay-verify="" class="joSelect"
+                            <select async="false" name="tempWorkExperience" lay-verify="" class="joSelect"
                                     data="" dataurl="pms/pmsDictionary/getListByDictionary/TEMPORARY_WORK_EXPERIENCE"
                                     keyfield="dicValue" valuefield="dicValue"
                                     firstitem='{"dicValue":"","dicValue":""}'></select>
@@ -1140,7 +1145,7 @@
                                     <input type="text" name="firstEducation" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="col-item edit">
-                                    <select async="true" name="firstEducation" lay-verify="" disabled class="joSelect" data=""
+                                    <select async="false" name="firstEducation" lay-verify="" disabled class="joSelect" data=""
                                             dataurl="pms/pmsDictionary/getListByDictionary/HIGHEST_EDUCATION"
                                             keyfield="dicValue" valuefield="dicValue"
                                             firstitem='{"dicValue":"","dicValue":""}'></select>
@@ -1155,7 +1160,7 @@
                                     <input type="text" name="firstDegree" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="col-item edit">
-                                    <select async="true" name="firstDegree" lay-verify="" disabled class="joSelect" data=""
+                                    <select async="false" name="firstDegree" lay-verify="" disabled class="joSelect" data=""
                                             dataurl="pms/pmsDictionary/getListByDictionary/HIGHEST_DEGREE" keyfield="dicValue"
                                             valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}'></select>
                                 </div>
@@ -1171,7 +1176,7 @@
             <input type="text" name="jobEducation" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
         </div>
         <div class="col-item edit">
-            <select async="true" name="jobEducation" lay-verify="" disabled class="joSelect" data=""
+            <select async="false" name="jobEducation" lay-verify="" disabled class="joSelect" data=""
                     dataurl="pms/pmsDictionary/getListByDictionary/HIGHEST_EDUCATION"
                     keyfield="dicValue" valuefield="dicValue"
                     firstitem='{"dicValue":"","dicValue":""}'></select>
@@ -1186,7 +1191,7 @@
             <input type="text" name="jobDegree" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
         </div>
         <div class="col-item edit">
-            <select async="true" name="jobDegree" lay-verify="" disabled class="joSelect" data=""
+            <select async="false" name="jobDegree" lay-verify="" disabled class="joSelect" data=""
                     dataurl="pms/pmsDictionary/getListByDictionary/HIGHEST_DEGREE" keyfield="dicValue"
                     valuefield="dicValue" firstitem='{"dicValue":"","dicValue":""}'></select>
         </div>
@@ -1210,7 +1215,7 @@
                <input type="text" name="overseasStudyExperience" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
            </div>
            <div class="col-item edit">
-               <select async="true" name="overseasStudyExperience" disabled lay-verify="" class="joSelect"
+               <select async="false" name="overseasStudyExperience" disabled lay-verify="" class="joSelect"
                        data="" dataurl="pms/pmsDictionary/getListByDictionary/OVERSEAS_STUDY_EXPERIENCE"
                        keyfield="dicValue" valuefield="dicValue"
                        firstitem='{"dicValue":"","dicValue":""}'></select>

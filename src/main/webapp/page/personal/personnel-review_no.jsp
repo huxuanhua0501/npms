@@ -83,10 +83,9 @@
         }
 
         joView.handleItem = function (oItem, iIndex) {
-            oItem._name = '<span  onclick="updateUserDoc(\'' + oItem.id + '\')">' +oItem.userName+'</span>';
-            oItem._cvm = (oItem.state == 1 ? "启用" : "禁用");
+            oItem._cvm = (oItem.trashFlag == 1 ? "禁用" : "启用");
             oItem._cvm += (oItem.dicName =='' ? "" :  "/"+oItem.dicName);
-            oItem._opt = (oItem.state == 0 ? '<span   onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
+            oItem._opt = (oItem.trashFlag == 1 ? '<span   onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">启用</span>' : '<span onclick="changeState(\'' + oItem.state + '\',\'' + oItem.id + '\')">禁用</span>');
             //  oItem._opt  += (oItem.state == 0 ? '<span onclick="lookUserDoc(\''  + oItem.id + '\')">&nbsp;查看</span>' : '<span onclick="lookUserDoc(\'' + oItem.id + '\')">&nbsp;查看</span>');
             // oItem._opt  += (oItem.state == 0 ? '<span  onclick="joView.edit(\''  + oItem.id + '\')">&nbsp;查看</span>' : '<span onclick="joView.edit(\'' + oItem.id + '\')">&nbsp;查看</span>');
 

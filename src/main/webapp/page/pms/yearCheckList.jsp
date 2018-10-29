@@ -286,13 +286,15 @@ if (jo.isValid(_edit)){
                 <div class="layui-form-item">
                     <label class="layui-form-label">年度考核等级</label>
                     <div class="layui-input-inline">
-                        <select name="checkScore" lay-verify="">
+                      <%--  <select name="checkScore" lay-verify="">
                             <option value=""></option>
                             <option value="优">优</option>
                             <option value="良">良</option>
                             <option value="合格">合格</option>
                             <option value="不合格">不合格</option>
-                        </select>
+                        </select>--%>
+                          <input type="text" name="checkScore" placeholder="" autocomplete="off" class="layui-input list-input" id="checkScore">
+
                     </div>
                 </div>
                 <div class="layui-form-item">
