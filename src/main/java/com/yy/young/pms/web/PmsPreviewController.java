@@ -2,12 +2,14 @@ package com.yy.young.pms.web;
 
 import com.yy.young.common.util.CommonUtil;
 import com.yy.young.common.util.Result;
+import com.yy.young.dal.util.Page;
 import com.yy.young.interfaces.log.annotation.Log;
 import com.yy.young.interfaces.model.User;
 import com.yy.young.pms.model.*;
 import com.yy.young.pms.service.IAuditPmsPreviewService;
 import com.yy.young.pms.service.IPmsPreviewService;
 import com.yy.young.pms.util.ExportExcelUtil;
+import com.yy.young.ums.service.IUmsDeptUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +18,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hu_xuanhua_hua
@@ -31,6 +34,28 @@ public class PmsPreviewController {
     IPmsPreviewService pmsPreviewService;//数据层服务
     @Resource(name = "auditPmsPreviewService")
     IAuditPmsPreviewService auditPmsPreviewService;//数据层服务
+    @Resource(
+            name = "umsDeptUserService"
+    )
+    IUmsDeptUserService umsDeptUserService;
+
+    @Log("分页查询部门用户信息")
+    @RequestMapping({"/getDeptUserPage"})
+    @ResponseBody
+    public Object getDeptUserPage(HttpServletRequest request) throws Exception {
+        Map<String, Object> parameter = CommonUtil.getParameterFromRequest(request);
+        Page page = CommonUtil.getPageFromRequest(request);
+        List<Map<String, Object>> list = null;
+        if ("2".equals(parameter.get("noDeptUser"))) {
+            list = pmsPreviewService.getNoDeptUser(parameter,page);
+
+        }else{
+        list  = this.umsDeptUserService.getDeptUserPage(parameter, page);
+        }
+        page.setData(list);
+        return page;
+    }
+
     @Log("导出xxx")
     @RequestMapping("/exportExcel")
     public void exportExcel(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {

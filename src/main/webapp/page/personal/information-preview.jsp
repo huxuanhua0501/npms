@@ -14,6 +14,8 @@
     <script src="<%=URL_STATIC%>static/prototype/js/layui.js"></script>
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/layui.css">
     <script src="<%=URL_STATIC%>static/final/js/jquery.min.js"></script>
+    <script src="<%=URL_STATIC%>static/prototype/js/jquery.PrintArea.js"></script>
+
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/font/font2/iconfont.css">
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/common.css">
     <link rel="stylesheet" href="<%=URL_STATIC%>static/prototype/css/person-document.css">
@@ -74,12 +76,12 @@
                     <div class="layui-inline button-group">
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export" onclick="exportExcel()">导出Excel
                         </button>
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary dayin">打印</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary dayin"  id="btnPrint">打印</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary back">返回</button>
                     </div>
                 </div>
             </div>
-            <form action="" class="person-content layui-form layui-form-box">
+            <form action="" class="person-content layui-form layui-form-box" id="printContent">
                 <div class="clear">
                     <div class="left image">
                         <%--<img src="../images/person.jpg" alt="">--%>
@@ -415,7 +417,7 @@
                             </select>
                         </div>
                         <div class="col-item save">
-                            <input type="text" id="highestEducation" name="highestEducation" required
+                            <input type="text" id="firstEducation" name="firstEducation" required
                                    lay-verify="required" placeholder="" autocomplete="off" class="layui-input"
                                    value="学士">
                         </div>
@@ -469,7 +471,7 @@
                             </select>
                         </div>
                         <div class="col-item save">
-                            <input type="text" id="highestDegree" name="highestDegree" required lay-verify="required"
+                            <input type="text" id="firstDegree" name="firstDegree" required lay-verify="required"
                                    placeholder="" autocomplete="off" class="layui-input" value="学士">
                         </div>
                         <div class="col-item edit">
@@ -646,7 +648,9 @@
     }
 
     $(function () {
-
+            $("#btnPrint").click(function(){
+                $("#printContent").printArea();
+            });
         layui.use(['form', 'laydate'], function () {
             var form = layui.form;
             var laydate = layui.laydate;
@@ -698,8 +702,8 @@
 
 
         //学历信息
-        $("#highestEducation").val(auditData.data[0].highestEducation);
-        $("#highestDegree").val(auditData.data[0].highestDegree);
+        $("#firstEducation").val(auditData.data[0].firstEducation);
+        $("#firstDegree").val(auditData.data[0].firstDegree);
         $("#specialty").val(auditData.data[0].specialty);
         $("#englishLevel").val(auditData.data[0].englishLevel);
         $("#jobEducation").val(auditData.data[0].jobEducation);

@@ -104,6 +104,25 @@
                 AND (SELECT string_agg(DE.ID,',') FROM TB_UMS_DEPT_USER DU LEFT JOIN TB_UMS_DEPT DE ON DU.DEPT_ID=DE.ID WHERE DU.USER_ID=O.ID) like '%${deptIds}%'
             </if>-->
     <!-- 查询 -->
+
+    <select id="getNoDeptUser" parameterType="map" resultType="map">
+        SELECT
+            U.ID AS "USER_ID",
+            U.NAME AS "USER_NAME",
+            U.ACCOUNT AS "ACCOUNT",
+            U.PASSWORD AS "PASSWORD",
+            U.BIRTHDAY AS "BIRTHDAY",
+            U.SEX AS "SEX",
+            U.TEL AS "TEL",
+            U.EMAIL AS "EMAIL",
+            U.STATE AS "STATE",
+            U.REMARK AS "REMARK"
+        FROM
+            tb_ums_user u
+        where u.id not in (select user_id from tb_ums_dept_user)
+        ORDER BY
+            U.NUM ASC
+     </select>
     <select id="getPmsUserList" parameterType="com.yy.young.pms.model.PmsUser"
             resultType="com.yy.young.pms.model.PmsUser">
         SELECT

@@ -2,6 +2,7 @@ package com.yy.young.pms.service.impl;
 
 import com.yy.young.common.util.StringUtils;
 import com.yy.young.dal.service.IDataAccessService;
+import com.yy.young.dal.util.Page;
 import com.yy.young.pms.model.Communication;
 import com.yy.young.pms.model.PmsUser;
 import com.yy.young.pms.service.IPmsPreviewService;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.net.URLDecoder;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author hu_xuanhua_hua
@@ -26,6 +29,11 @@ public class PmsPreviewServiceImpl implements IPmsPreviewService {
     public PmsUser getPmsUserById(String id) throws Exception {
 
         return (PmsUser)dataAccessService.getObject(PmsConstants.MAPPER.PMS_USER + ".getPmsUserById", id);
+    }
+
+    @Override
+    public List<Map<String, Object>> getNoDeptUser( Map<String, Object> parameter,Page page) throws Exception {
+        return  dataAccessService.getList(PmsConstants.MAPPER.PMS_USER + ".getNoDeptUser",parameter,page);
     }
 
     @Override

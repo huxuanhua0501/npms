@@ -39,6 +39,9 @@
             <if test="years != null and years != ''">
                 AND O.years = #{years}
             </if>
+            <if test="checkScore != null and checkScore != ''">
+                AND O.check_score like '%${checkScore}%'
+            </if>
             <if test="stype != null and stype != ''">
                 AND O.stype = #{stype}
             </if>
