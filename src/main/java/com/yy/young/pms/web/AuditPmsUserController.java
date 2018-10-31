@@ -188,7 +188,31 @@ public class AuditPmsUserController {
             AuditRecordBaseinfo.setItemId(tempList.get(0).getItemId());
         }
         AuditRecordBaseinfo.setAuditStatus(5);
-        list.add(auditRecordBaseinfoService.getList(AuditRecordBaseinfo).size());
+        List<AuditRecordBaseinfo> auditList=auditRecordBaseinfoService.getList(AuditRecordBaseinfo);//待审核字段
+        List<AuditFieldSet> auditFieldSetList = auditRecordBaseinfoService.getAuditFileList();//面审核字段
+        int resultnum =  0;
+        if (auditList != null && auditList.size() > 0) {
+            resultnum = auditList.size();
+        }
+         if (auditFieldSetList != null & auditFieldSetList.size() > 0) {
+            int size = auditFieldSetList.size();
+            for (int i = 0; i < size; i++) {
+                if (auditList != null && auditList.size() > 0) {
+                    int auditsize = auditList.size();
+
+                    for (int j = 0; j < auditsize; j++) {
+                        if (auditFieldSetList.get(i).getFieldName().equals(auditList.get(j).getFieldKey())) {
+                            resultnum--;
+                         }
+
+                    }
+                }
+
+            }
+        }
+
+
+        list.add(resultnum);
 
         AuditRecordCommunication AuditRecordCommunication = new AuditRecordCommunication();
         AuditRecordCommunication.setUserId(userId);
@@ -197,7 +221,38 @@ public class AuditPmsUserController {
             AuditRecordCommunication.setItemId(comuTempList.get(0).getItemId());
         }
         AuditRecordCommunication.setAuditStatus(5);
-        list.add(auditRecordCommunicationService.getList(AuditRecordCommunication).size());
+
+        List<AuditRecordCommunication> auditRecordCommunicationList=auditRecordCommunicationService.getList(AuditRecordCommunication);//待审核字段
+        int communicationNum =  0;
+        if (auditRecordCommunicationList != null && auditRecordCommunicationList.size() > 0) {
+            communicationNum = auditRecordCommunicationList.size();
+        }
+        if (auditFieldSetList != null & auditFieldSetList.size() > 0) {
+            int size = auditFieldSetList.size();
+            for (int i = 0; i < size; i++) {
+                if (auditRecordCommunicationList != null && auditRecordCommunicationList.size() > 0) {
+                    int auditsize = auditRecordCommunicationList.size();
+
+                    for (int j = 0; j < auditsize; j++) {
+                        if (auditFieldSetList.get(i).getFieldName().equals(auditRecordCommunicationList.get(j).getFieldKey())) {
+                            communicationNum--;
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+
+
+
+        list.add(communicationNum);
+
+
+
+
+
 
         AuditPmsRelations AuditPmsRelations = new AuditPmsRelations();
         AuditPmsRelations.setStatus(5);

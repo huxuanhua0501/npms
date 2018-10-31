@@ -255,8 +255,23 @@ public class AuditRecordCommunicationController {
             obj.setItemId(tempList.get(0).getItemId());
         }
         //筛选最后一次 end
-
         List<AuditRecordCommunication> auditList = service.getList(obj);
+        List<AuditFieldSet> auditFieldSetList = auditRecordBaseinfoService.getAuditFileList();
+        if (auditFieldSetList != null & auditFieldSetList.size() > 0) {
+            int size = auditFieldSetList.size();
+            for (int i = 0; i < size; i++) {
+                if (auditList != null && auditList.size() > 0) {
+                    int auditsize = auditList.size();
+                    for (int j = 0; j < auditsize; j++) {
+                        if (auditFieldSetList.get(i).getFieldName().equals(auditList.get(j).getFieldKey())) {
+                            auditList.get(j).setAuditStatus(1);
+                        }
+
+                    }
+                }
+
+            }
+        }
         List<Object> list = new ArrayList<Object>();
         list.add(auditList);
         return new Result(list);

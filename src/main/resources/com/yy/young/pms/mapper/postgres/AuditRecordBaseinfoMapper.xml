@@ -118,4 +118,12 @@
     <delete id="delete">
         DELETE FROM audit_record_baseinfo WHERE ID = #{id}
     </delete>
+    <select id="getAuditFileList"  resultType="com.yy.young.pms.model.AuditFieldSet">
+            SELECT
+                field_name AS fieldName
+            FROM
+                audit_field_set
+            WHERE
+                status =2
+    </select>
 </mapper>

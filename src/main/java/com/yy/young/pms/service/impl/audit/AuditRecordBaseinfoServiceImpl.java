@@ -4,6 +4,7 @@ import com.yy.young.common.util.CommonUtil;
 import com.yy.young.common.util.StringUtils;
 import com.yy.young.dal.service.IDataAccessService;
 import com.yy.young.dal.util.Page;
+import com.yy.young.pms.model.AuditFieldSet;
 import com.yy.young.pms.model.AuditRecordBaseinfo;
 import com.yy.young.pms.service.IAuditRecordBaseinfoService;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,12 @@ public class AuditRecordBaseinfoServiceImpl implements IAuditRecordBaseinfoServi
     @Override
     public List<AuditRecordBaseinfo> getList(AuditRecordBaseinfo obj) throws Exception {
         return dataAccessService.getList(MAPPER + ".getList", obj);
+    }
+
+    @Override
+    public List<AuditFieldSet> getAuditFileList() throws Exception {
+        AuditFieldSet auditFieldSet = new AuditFieldSet();
+         return dataAccessService.getList(MAPPER + ".getAuditFileList",auditFieldSet);
     }
 
     //获取数据列表(分页)

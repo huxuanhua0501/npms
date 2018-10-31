@@ -76,7 +76,7 @@
                     <div class="layui-inline button-group">
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export" onclick="exportExcel()">导出Excel
                         </button>
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary dayin"  id="btnPrint">打印</button>
+                   <%--     <button type="button" class="layui-btn layui-btn-radius layui-btn-primary dayin"  id="btnPrint">打印</button>--%>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary back">返回</button>
                     </div>
                 </div>

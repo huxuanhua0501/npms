@@ -33,17 +33,17 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
-* xxx服务
-* Created by rookie on 2018-04-03.
-*/
+ * xxx服务
+ * Created by rookie on 2018-04-03.
+ */
 @Controller
 @RequestMapping("/pms/auditRecordBaseinfo")
 public class AuditRecordBaseinfoController {
 
-    @Resource(name="auditRecordBaseinfoService")
+    @Resource(name = "auditRecordBaseinfoService")
     IAuditRecordBaseinfoService service;
 
-    @Resource(name="auditFieldBaseService")
+    @Resource(name = "auditFieldBaseService")
     IAuditFieldBaseService auditFieldBaseService;
 
     @Resource(name = "pmsUserService")
@@ -52,102 +52,105 @@ public class AuditRecordBaseinfoController {
     @Resource(name = "pmsUserService")
     ICommonService<PmsUser> pmsUserService2;
 
-    @Resource(name="auditPmsCommunicationService")
+    @Resource(name = "auditPmsCommunicationService")
     IAuditPmsCommunicationService auditPmsCommunicationService;
 
-    @Resource(name="auditPmsDeptService")
+    @Resource(name = "auditPmsDeptService")
     IAuditPmsDeptService auditPmsDeptService;
 
-    @Resource(name="auditPmsEducationService")
+    @Resource(name = "auditPmsEducationService")
     IAuditPmsEducationService auditPmsEducationService;
 
-    @Resource(name="auditPmsHonorTitleService")
+    @Resource(name = "auditPmsHonorTitleService")
     IAuditPmsHonorTitleService auditPmsHonorTitleService;
 
-    @Resource(name="auditPmsJoinProjectService")
+    @Resource(name = "auditPmsJoinProjectService")
     IAuditPmsJoinProjectService auditPmsJoinProjectService;
 
-    @Resource(name="auditPmsLeaderEvaluationService")
+    @Resource(name = "auditPmsLeaderEvaluationService")
     IAuditPmsLeaderEvaluationService auditPmsLeaderEvaluationService;
 
-    @Resource(name="auditPmsMainTechGroupService")
+    @Resource(name = "auditPmsMainTechGroupService")
     IAuditPmsMainTechGroupService auditPmsMainTechGroupService;
 
-    @Resource(name="auditPmsPaperService")
+    @Resource(name = "auditPmsPaperService")
     IAuditPmsPaperService auditPmsPaperService;
 
-    @Resource(name="auditPmsPatentService")
+    @Resource(name = "auditPmsPatentService")
     IAuditPmsPatentService auditPmsPatentService;
 
-    @Resource(name="auditPmsPublishService")
+    @Resource(name = "auditPmsPublishService")
     IAuditPmsPublishService auditPmsPublishService;
 
-    @Resource(name="auditPmsRelationsService")
+    @Resource(name = "auditPmsRelationsService")
     IAuditPmsRelationsService auditPmsRelationsService;
 
-    @Resource(name="auditPmsSelfEvaluationService")
+    @Resource(name = "auditPmsSelfEvaluationService")
     IAuditPmsSelfEvaluationService auditPmsSelfEvaluationService;
 
-    @Resource(name="auditPmsSupportProjectService")
+    @Resource(name = "auditPmsSupportProjectService")
     IAuditPmsSupportProjectService auditPmsSupportProjectService;
 
-    @Resource(name="auditPmsTechAwardsService")
+    @Resource(name = "auditPmsTechAwardsService")
     IAuditPmsTechAwardsService auditPmsTechAwardsService;
 
-    @Resource(name="auditPmsTechnologyBraceService")
+    @Resource(name = "auditPmsTechnologyBraceService")
     IAuditPmsTechnologyBraceService auditPmsTechnologyBraceService;
 
-    @Resource(name="auditPmsWorkService")
+    @Resource(name = "auditPmsWorkService")
     IAuditPmsWorkService auditPmsWorkService;
 
-    @Resource(name="auditPmsYearCheckService")
+    @Resource(name = "auditPmsYearCheckService")
     IAuditPmsYearCheckService auditPmsYearCheckService;
 
     @Resource(name = "cmsDBService")
     ICmsDBService cmsDBService;
 
-    @Resource(name="auditFieldService")
+    @Resource(name = "auditFieldService")
     IAuditFieldService auditFieldService;
 
-    @Resource(name="auditShowUserService")
+    @Resource(name = "auditShowUserService")
     IAuditShowUserService auditShowUserService;
 
-    @Resource(name="auditFieldCommuService")
+    @Resource(name = "auditFieldCommuService")
     IAuditFieldCommuService auditFieldCommuService;
 
-    @Resource(name="auditRecordCommunicationService")
+    @Resource(name = "auditRecordCommunicationService")
     IAuditRecordCommunicationService auditRecordCommunicationService;
 
     @Resource(
             name = "umsUserService"
     )
     IUmsUserService userService;
+
     /**
-    * 获取数据列表
-    * @param obj
-    * @param request
-    * @return
-    * @throws Exception
-    */
+     * 获取数据列表
+     *
+     * @param obj
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("查询xxx列表")
     @RequestMapping("/getList")
     @ResponseBody
-    public Object getList(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception{
+    public Object getList(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception {
         List<AuditRecordBaseinfo> list = service.getList(obj);
         return new Result(list);
     }
 
     /**
-    * 获取分页数据
-    * @param obj
-    * @param request
-    * @return
-    * @throws Exception
-    */
+     * 获取分页数据
+     *
+     * @param obj
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("分页查询xxx列表")
     @RequestMapping("/getPage")
     @ResponseBody
-    public Object getPage(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception{
+    public Object getPage(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception {
         Page page = CommonUtil.getPageFromRequest(request);
         List<AuditRecordBaseinfo> list = service.getPage(obj, page);
         page.setData(list);
@@ -155,60 +158,64 @@ public class AuditRecordBaseinfoController {
     }
 
     /**
-    * 获取单条数据
-    * @param id
-    * @param request
-    * @return
-    * @throws Exception
-    */
+     * 获取单条数据
+     *
+     * @param id
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("查询xxx")
     @RequestMapping("/get")
     @ResponseBody
-    public Object get(String id, HttpServletRequest request) throws Exception{
+    public Object get(String id, HttpServletRequest request) throws Exception {
         AuditRecordBaseinfo obj = service.get(id);
         return new Result(obj);
     }
 
     /**
-    * 统计数量
-    * @param obj
-    * @param request
-    * @return
-    * @throws Exception
-    */
+     * 统计数量
+     *
+     * @param obj
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("统计xxx数量")
     @RequestMapping("/count")
     @ResponseBody
-    public Object count(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception{
+    public Object count(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception {
         return new Result(service.count(obj));
     }
 
     /**
-    * 新增
-    * @param obj
-    * @param request
-    * @return
-    * @throws Exception
-    */
+     * 新增
+     *
+     * @param obj
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("新增xxx")
     @RequestMapping("/insert")
     @ResponseBody
-    public Object insert(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception{
+    public Object insert(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception {
         service.insert(obj);
         return new Result();
     }
 
     /**
-    * 修改
-    * @param obj
-    * @param request
-    * @return
-    * @throws Exception
-    */
+     * 修改
+     *
+     * @param obj
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("修改xxx")
     @RequestMapping("/update")
     @ResponseBody
-    public Object update(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception{
+    public Object update(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception {
         service.update(obj);
         return new Result();
     }
@@ -217,13 +224,13 @@ public class AuditRecordBaseinfoController {
     @Log("将过去信息加入审核库")
     @RequestMapping("/oldToAudit")
     @ResponseBody
-    public Object oldToAudit(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception{
+    public Object oldToAudit(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception {
         List<PmsUser> educationList = pmsUserService2.getList(new PmsUser());
         for (PmsUser item : educationList) {
             JSONObject jsonObject = JSONObject.fromObject(item);
             Iterator keys = jsonObject.keys();
             String userId = jsonObject.getString("id");
-            while(keys.hasNext()) {
+            while (keys.hasNext()) {
                 String key = keys.next().toString();
                 String val = jsonObject.getString(key);
                 AuditRecordBaseinfo AuditRecordBaseinfo = new AuditRecordBaseinfo();
@@ -231,16 +238,16 @@ public class AuditRecordBaseinfoController {
                 AuditRecordBaseinfo.setUserId(userId);
                 int size = service.getList(AuditRecordBaseinfo).size();
                 AuditRecordBaseinfo.setFieldVal(val);
-                if (("id").equals(key) || ("userId").equals(key) || ("num").equals(key) || ("photoAddress").equals(key) || ("trashFlag").equals(key) ) {
+                if (("id").equals(key) || ("userId").equals(key) || ("num").equals(key) || ("photoAddress").equals(key) || ("trashFlag").equals(key)) {
                     AuditRecordBaseinfo.setAuditStatus(1);
-                }else {
+                } else {
                     AuditRecordBaseinfo.setAuditStatus(5);
                 }
                 AuditRecordBaseinfo.setLockStatus(2);
                 AuditRecordBaseinfo.setItemId(1);//临时处理，库里一定没有数据
                 if (size > 0) {
                     service.update(AuditRecordBaseinfo);
-                }else {
+                } else {
                     service.insert(AuditRecordBaseinfo);
                 }
             }
@@ -259,18 +266,18 @@ public class AuditRecordBaseinfoController {
     @Log("管理员审核")
     @RequestMapping("/changeStatus")
     @ResponseBody
-    public Object changeStatus(String ids,Integer auditStatus,Integer lockStatus,String userId,String vStr,String vName, HttpServletRequest request) throws Exception{
+    public Object changeStatus(String ids, Integer auditStatus, Integer lockStatus, String userId, String vStr, String vName, HttpServletRequest request) throws Exception {
         Result result = new Result();
 
-        if(StringUtils.isNotBlank(ids)) {
+        if (StringUtils.isNotBlank(ids)) {
             String[] idArr = ids.split(",");
-            String[] vStrArr = vStr.split(",",-1);
+            String[] vStrArr = vStr.split(",", -1);
             String[] vNameArr = vName.split(",");
-            for (int i=0;i<idArr.length;i++) {
+            for (int i = 0; i < idArr.length; i++) {
                 AuditRecordBaseinfo obj = new AuditRecordBaseinfo();
                 if (!("on").equals(idArr[i])) {
                     obj.setId(idArr[i]);
-                }else {
+                } else {
                     obj.setId(CommonUtil.getUUID());
                 }
                 obj.setAuditStatus(auditStatus);
@@ -287,10 +294,10 @@ public class AuditRecordBaseinfoController {
                     int itemId;
                     AuditRecordBaseinfo temp = new AuditRecordBaseinfo();
                     temp.setUserId(userId);
-                    List<AuditRecordBaseinfo> tempList =  service.getList(temp);//降序
+                    List<AuditRecordBaseinfo> tempList = service.getList(temp);//降序
                     if (tempList.size() > 0) {
                         itemId = tempList.get(0).getItemId();
-                    }else {
+                    } else {
                         itemId = 1;
                     }
                     obj.setFieldKey(vNameArr[i]);
@@ -298,8 +305,7 @@ public class AuditRecordBaseinfoController {
                     obj.setUserId(userId);
                     //设置item_id end
                     service.insert(obj);
-                }
-                else {
+                } else {
                     service.update(obj);
                 }
                 idArr[i] = obj.getId();
@@ -323,10 +329,10 @@ public class AuditRecordBaseinfoController {
                             userService.updateUser(user);
                         }
                         if (("sex").equals(vNameArr[i])) {
-                            if ("男".equals(vStrArr[i])){
+                            if ("男".equals(vStrArr[i])) {
                                 user.setSex("1");
                                 userService.updateUser(user);
-                            }else if ("女".equals(vStrArr[i])){
+                            } else if ("女".equals(vStrArr[i])) {
                                 user.setSex("0");
                                 userService.updateUser(user);
                             }
@@ -342,7 +348,7 @@ public class AuditRecordBaseinfoController {
                         PmsUser pmsUser;
                         if (toShows.size() > 0) {
                             pmsUser = toShows.get(0).toAnother();
-                        }else{
+                        } else {
                             //没有审核通过的记录，把信息置为空
                             pmsUser = service.get(idArr[i]).noOkItem();
                         }
@@ -351,7 +357,7 @@ public class AuditRecordBaseinfoController {
                     }
                 }
             }
-        }else{
+        } else {
             result.setCode(-1);
             result.setInfo("操作失败：编号无效!");
         }
@@ -361,7 +367,7 @@ public class AuditRecordBaseinfoController {
         AuditShowUser.setUserId(userId);
         if (auditShowUserService.getList(AuditShowUser).size() > 0) {
 
-        }else {
+        } else {
             auditShowUserService.insert(AuditShowUser);
         }
         AuditShowUser.setPersonalShow(0);
@@ -369,7 +375,7 @@ public class AuditRecordBaseinfoController {
         AuditRecordBaseinfo AuditRecordBaseinfo = new AuditRecordBaseinfo();
         AuditRecordBaseinfo.setUserId(userId);
         //TODO 用户修改和审核不一样，使用库中最新的item_id 判断是否需要显示用户
-        List<AuditRecordBaseinfo> tempList =  service.getList(AuditRecordBaseinfo);//降序
+        List<AuditRecordBaseinfo> tempList = service.getList(AuditRecordBaseinfo);//降序
         if (tempList.size() > 0) {
             AuditRecordBaseinfo.setItemId(tempList.get(0).getItemId());
             AuditRecordBaseinfo.setAuditStatus(5);
@@ -381,7 +387,7 @@ public class AuditRecordBaseinfoController {
         AuditRecordCommunication AuditRecordCommunication = new AuditRecordCommunication();
         AuditRecordCommunication.setUserId(userId);
         //TODO 用户修改和审核不一样，使用库中最新的item_id 判断是否需要显示用户
-        List<AuditRecordCommunication> tempList1 =  auditRecordCommunicationService.getList(AuditRecordCommunication);//降序
+        List<AuditRecordCommunication> tempList1 = auditRecordCommunicationService.getList(AuditRecordCommunication);//降序
         if (tempList1.size() > 0) {
             AuditRecordCommunication.setItemId(tempList1.get(0).getItemId());
             AuditRecordCommunication.setAuditStatus(5);
@@ -496,7 +502,7 @@ public class AuditRecordBaseinfoController {
     @Log("获取用户审核信息")
     @RequestMapping("/getUserAuditInfo")
     @ResponseBody
-    public Object getUserAuditInfo (AuditRecordBaseinfo obj,HttpServletRequest request) throws Exception {
+    public Object getUserAuditInfo(AuditRecordBaseinfo obj, HttpServletRequest request) throws Exception {
 
         //筛选最后一次start
         AuditRecordBaseinfo AuditRecordBaseinfo = new AuditRecordBaseinfo();
@@ -507,7 +513,22 @@ public class AuditRecordBaseinfoController {
         }
         //筛选最后一次 end
         List<AuditRecordBaseinfo> auditList = service.getList(obj);
+        List<AuditFieldSet> auditFieldSetList = service.getAuditFileList();
+        if (auditFieldSetList != null & auditFieldSetList.size() > 0) {
+            int size = auditFieldSetList.size();
+            for (int i = 0; i < size; i++) {
+                if (auditList != null && auditList.size() > 0) {
+                    int auditsize = auditList.size();
+                    for (int j = 0; j < auditsize; j++) {
+                        if (auditFieldSetList.get(i).getFieldName().equals(auditList.get(j).getFieldKey())) {
+                            auditList.get(j).setAuditStatus(1);
+                        }
 
+                    }
+                }
+
+            }
+        }
         List<Object> list = new ArrayList<Object>();
         list.add(auditList);
         return new Result(list);
@@ -515,6 +536,7 @@ public class AuditRecordBaseinfoController {
 
     /**
      * 用户修改提交审核
+     *
      * @param pData
      * @param request
      * @return
@@ -524,7 +546,7 @@ public class AuditRecordBaseinfoController {
     @RequestMapping("/userUpdate")
     @ResponseBody
 //    {"id":"1","oldName":"李晓峰1","placeOfOrigin":"河北1","workStartTime":"2018-07-26"}提交所有数据
-    public Object userUpdate(String pData, HttpServletRequest request) throws Exception{
+    public Object userUpdate(String pData, HttpServletRequest request) throws Exception {
         //nowdate
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -542,10 +564,10 @@ public class AuditRecordBaseinfoController {
         int itemId;
         AuditRecordBaseinfo temp = new AuditRecordBaseinfo();
         temp.setUserId(userId);
-        List<AuditRecordBaseinfo> tempList =  service.getList(temp);//降序
+        List<AuditRecordBaseinfo> tempList = service.getList(temp);//降序
         if (tempList.size() > 0) {
             itemId = tempList.get(0).getItemId() + 1;
-        }else {
+        } else {
             itemId = 1;
         }
         //设置item_id end
@@ -557,7 +579,7 @@ public class AuditRecordBaseinfoController {
             AuditRecordBaseinfo AuditRecordBaseinfo = new AuditRecordBaseinfo();
             AuditRecordBaseinfo.setUserId(userId);
             AuditRecordBaseinfo.setFieldKey(key);
-            List<AuditRecordBaseinfo> list =  service.getList(AuditRecordBaseinfo);//降序
+            List<AuditRecordBaseinfo> list = service.getList(AuditRecordBaseinfo);//降序
             //获取上次记录 end
             int counts = list.size();
             int status;
@@ -574,7 +596,7 @@ public class AuditRecordBaseinfoController {
                         status = 5;
                     }
 
-                }else {
+                } else {
                     status = 5;
                 }
                 //new time start
@@ -583,20 +605,20 @@ public class AuditRecordBaseinfoController {
                         AuditRecordBaseinfo AuditRecordBaseinfo2 = new AuditRecordBaseinfo();
                         AuditRecordBaseinfo2.setUserId(userId);
                         AuditRecordBaseinfo2.setFieldKey("remarkModifyTime");
-                        List<AuditRecordBaseinfo> list2 =  service.getList(AuditRecordBaseinfo2);//降序
+                        List<AuditRecordBaseinfo> list2 = service.getList(AuditRecordBaseinfo2);//降序
                         int tempCount = list2.size();
                         if (tempCount > 0) {
                             AuditRecordBaseinfo rs_modify_bo = list2.get(0);
                             rTime = rs_modify_bo.getFieldVal();
-                        }else {
+                        } else {
                             rTime = nowStr;
                         }
-                    }else {
+                    } else {
                         rTime = nowStr;
                     }
                 }
                 //new time end
-            }else {
+            } else {
                 status = 5;
                 lockStatus = 2;
             }
@@ -638,10 +660,10 @@ public class AuditRecordBaseinfoController {
                     userService.updateUser(user);
                 }
                 if (("sex").equals(key)) {
-                    if ("男".equals(val)){
+                    if ("男".equals(val)) {
                         user.setSex("1");
                         userService.updateUser(user);
-                    }else if ("女".equals(val)){
+                    } else if ("女".equals(val)) {
                         user.setSex("0");
                         userService.updateUser(user);
                     }
@@ -662,7 +684,7 @@ public class AuditRecordBaseinfoController {
         AuditRecordBaseinfo AuditRecordBaseinfo3 = new AuditRecordBaseinfo();
         AuditRecordBaseinfo3.setUserId(userId);
         AuditRecordBaseinfo3.setFieldKey("remarkModifyTime");
-        List<AuditRecordBaseinfo> list3 =  service.getList(AuditRecordBaseinfo3);//降序
+        List<AuditRecordBaseinfo> list3 = service.getList(AuditRecordBaseinfo3);//降序
         int tempCount = list3.size();
         if (tempCount > 0) {
             AuditRecordBaseinfo3.setId(list3.get(0).getId());
@@ -677,7 +699,7 @@ public class AuditRecordBaseinfoController {
         AuditShowUser.setUserId(userId);
         if (auditShowUserService.getList(AuditShowUser).size() > 0) {
             System.out.println("有show");
-        }else {
+        } else {
             System.out.println("有show无");
             auditShowUserService.insert(AuditShowUser);
         }
@@ -687,7 +709,7 @@ public class AuditRecordBaseinfoController {
         AuditRecordBaseinfo.setAuditStatus(5);
         AuditRecordBaseinfo.setItemId(itemId);
         AuditRecordBaseinfo.setUserId(userId);
-        System.out.println("用户"+userId+"基本信息最后审核条目ID" + itemId);
+        System.out.println("用户" + userId + "基本信息最后审核条目ID" + itemId);
         if (service.getList(AuditRecordBaseinfo).size() > 0) {
             AuditShowUser.setPersonalShow(1);
         }
@@ -702,8 +724,8 @@ public class AuditRecordBaseinfoController {
             if (auditRecordCommunicationService.getList(AuditRecordCommunication).size() > 0) {
                 AuditShowUser.setPersonalShow(1);
             }
-            System.out.println("用户"+userId+"有通讯审核记录最后一次为" + comItemId);
-        }else {
+            System.out.println("用户" + userId + "有通讯审核记录最后一次为" + comItemId);
+        } else {
             System.out.println("用户没有通讯审核记录" + userId);
         }
 
@@ -807,24 +829,25 @@ public class AuditRecordBaseinfoController {
 
 
     /**
-    * 删除
-    * @param ids
-    * @param id
-    * @param request
-    * @return
-    * @throws Exception
-    */
+     * 删除
+     *
+     * @param ids
+     * @param id
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("删除xxx")
     @RequestMapping("/delete")
     @ResponseBody
-    public Object delete(String ids, String id, HttpServletRequest request) throws Exception{
+    public Object delete(String ids, String id, HttpServletRequest request) throws Exception {
         Result result = new Result();
-        if(StringUtils.isNotBlank(ids)) {
+        if (StringUtils.isNotBlank(ids)) {
             String[] idArr = ids.split(",");
             service.delete(idArr);
-        }else if(StringUtils.isNotBlank(id)){
+        } else if (StringUtils.isNotBlank(id)) {
             service.delete(id);
-        }else{
+        } else {
             result.setCode(-1);
             result.setInfo("删除失败:待删除编号无效!");
         }
@@ -832,16 +855,17 @@ public class AuditRecordBaseinfoController {
     }
 
     /**
-    * 导入
-    * @param file
-    * @param request
-    * @return
-    * @throws Exception
-    */
+     * 导入
+     *
+     * @param file
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @Log("导入xxx")
     @RequestMapping("/import")
     @ResponseBody
-    public Object importExcel(MultipartFile file, HttpServletRequest request) throws Exception{
+    public Object importExcel(MultipartFile file, HttpServletRequest request) throws Exception {
         Result result = new Result();
         try {
             if (file != null && !file.isEmpty()) {
@@ -849,10 +873,10 @@ public class AuditRecordBaseinfoController {
                 IExcelImport ei = new ExcelImport(file);//将文件转为ExcelImport对象
                 //从excel读取数据
                 List<AuditRecordBaseinfo> list = ei.getImportDataAsBean(AuditRecordBaseinfo.class);
-                if (list != null && list.size() > 0){
+                if (list != null && list.size() > 0) {
                     int num = service.batchInsert(list);//批量插入
                     result.setInfo("成功导入数据" + num + "条!");
-                }else {
+                } else {
                     result.setCode(-1);
                     result.setInfo("导入失败:excel解析后结果为空!");
                 }
@@ -877,21 +901,22 @@ public class AuditRecordBaseinfoController {
     }
 
     /**
-    * 导出
-    * @param obj 查询的参数
-    * @param request
-    * @param response
-    * @throws Exception
-    */
+     * 导出
+     *
+     * @param obj      查询的参数
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     @Log("导出xxx")
     @RequestMapping("/export")
     public void exportExcel(AuditRecordBaseinfo obj, HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<AuditRecordBaseinfo> list = service.getList(obj);
-        if (list != null && list.size() > 0){
+        if (list != null && list.size() > 0) {
             IExcelExport ee = new ExcelExport();
             ee.insertBeanList(list, AuditRecordBaseinfo.class);
             ee.write2Response(response, "excel_" + System.currentTimeMillis() + ".xls");
-        }else{
+        } else {
             response.getWriter().write("数据为空!");
         }
     }

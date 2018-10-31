@@ -1,6 +1,7 @@
 package com.yy.young.pms.service;
 
 import com.yy.young.dal.util.Page;
+import com.yy.young.pms.model.AuditFieldSet;
 import com.yy.young.pms.model.AuditRecordBaseinfo;
 import java.util.List;
 
@@ -17,6 +18,14 @@ public interface IAuditRecordBaseinfoService {
     * @throws Exception
     */
     List<AuditRecordBaseinfo> getList(AuditRecordBaseinfo obj) throws Exception;
+
+    /**
+     * 获取不需要审核的字段
+     * @param
+     * @return
+     * @throws Exception
+     */
+    List<AuditFieldSet> getAuditFileList() throws Exception;
 
     /**
     * 分页查询
