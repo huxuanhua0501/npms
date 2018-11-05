@@ -29,6 +29,9 @@
     <script src="<%=URL_STATIC%>static/js/common.js"></script>
     <%@ include file="/common/uploadHeadOfImg.jsp" %>
     <script type="text/javascript">
+         function deptEdit() {
+             $("#deptchoose").show();
+        }
         var userId = jo.getDefVal(jo.getUrlParam("id"), loginUser.id);
         var sf = jo.getDefVal(jo.getUrlParam("sf"),"");
         var _edit = jo.getDefVal(jo.getUrlParam("edit"),"");
@@ -655,7 +658,7 @@
                     <div class="layui-inline button-group">
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary export"  onclick="exportExcel()">导出Excel</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary preview">信息预览</button>
-                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary edit">编辑</button>
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary edit" onclick="deptEdit()">编辑</button>
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary save" id="save" onclick="save()">保存</button>
                     </div>
 <%--                    <div class="layui-inline">

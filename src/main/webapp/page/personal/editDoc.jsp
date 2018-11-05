@@ -743,7 +743,9 @@
                         </div>
                         <div class="layui-col-md6 col-item">
                             <div>
-                                <div class="label">所在部门</div>
+                                <div class="label">所在部门
+                                    <a class="cursor-hand" id="deptchoose"  style="cursor:pointer" onclick="choiceDept('deptIds', 'deptNames', false)">（选择）</a>
+                                </div>
                             </div>
                             <input type="hidden" id="deptIds" name="deptIds" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                             <ul class="dept_ul" style="min-width:600px;">
