@@ -298,7 +298,7 @@
                                    title="禁用">
                         </div>
                     </div>
-                    <div class="layui-form-item" style="line-height: 200%">
+                  <%--  <div class="layui-form-item" style="line-height: 200%">
                         <label class="layui-form-label">时间段</label>
                         <input type="text" name="start_time" required lay-verify="required" placeholder="2018-08"
                                autocomplete="off"
@@ -306,7 +306,7 @@
                         <input type="text" name="end_time" required lay-verify="required"placeholder="2018-10"
                                autocomplete="off"
                                class="layui-input list-input" id="endY" style="width: 100px;display: inline-block;">
-                    </div>
+                    </div>--%>
 
                     <div class="edit-item">
                         <label class="layui-form-label">所属部门</label>

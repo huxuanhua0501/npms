@@ -116,7 +116,8 @@
             U.TEL AS "TEL",
             U.EMAIL AS "EMAIL",
             U.STATE AS "STATE",
-            U.REMARK AS "REMARK"
+            U.REMARK AS "REMARK",
+            U.company_id as companyid
         FROM
             tb_ums_user u
         where u.id not in (select user_id from tb_ums_dept_user)
@@ -310,7 +311,7 @@
                 </foreach>
             </if>
             <if test="highestEducationList != null and highestEducationList != ''">
-                AND O.highest_education in
+                AND O.first_education in
                 <foreach collection="highestEducationList" item="item" separator="," open="(" close=")">
                     #{item}
                 </foreach>
@@ -318,7 +319,7 @@
 
 
             <if test="highestDegreeList != null and highestDegreeList != ''">
-                AND O.highest_degree in
+                AND O.first_degree in
                 <foreach collection="highestDegreeList" item="item" separator="," open="(" close=")">
                     #{item}
                 </foreach>

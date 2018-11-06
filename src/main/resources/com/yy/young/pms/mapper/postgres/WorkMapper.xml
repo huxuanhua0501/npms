@@ -21,6 +21,29 @@
     <!--关联查询相关sql-->
     <sql id="joinSql">
     </sql>
+    <select id="getWorksCollection" resultType="map">
+        SELECT id,
+            content,
+            lock_status  as lockStatus
+
+        FROM
+            pms_collect_work
+        where
+            lock_status=1
+          AND id=#{id}
+    </select>
+
+    <select id="EducationnCollectionMap" resultType="map">
+        SELECT id,
+        content,
+        lock_status  as lockStatus
+
+        FROM
+            pms_collect_edu
+        where
+        lock_status=1
+        AND id=#{id}
+    </select>
     <!-- 查询 -->
     <select id="getWorkList" parameterType="com.yy.young.pms.model.Work" resultType="com.yy.young.pms.model.Work">
         SELECT

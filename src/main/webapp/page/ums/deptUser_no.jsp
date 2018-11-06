@@ -324,6 +324,7 @@
                         var TEL = jo.getDefVal(list[i].TEL, '');
                         var EMAIL = jo.getDefVal(list[i].EMAIL, '');
                         var STATE = jo.getDefVal(list[i].STATE, '');
+                        var companyid = jo.getDefVal(list[i].companyid, '');
                         var DEPT_NAME = jo.getDefVal(list[i].DEPT_NAME, '');
                         if (SEX) {
                             SEX = SEX == 1 ? '男' : '女';
@@ -346,7 +347,7 @@
                             '      <td>' + stateName + '</td>\n' +
                             '      <td>' + DEPT_NAME + '</td>\n' +
                             '      <td>\n' +
-                            '      <a href="javascript:changeState(' + STATE + ',\'' + USER_ID + '\',\'' + noStateName + '\');" class="' + noStateClass + '">' + noStateName + '</a>\n' +
+                            '      <a href="javascript:changeState(' + STATE + ',\'' + USER_ID + '\',\''+ USER_NAME + '\',\'' +  companyid + '\',\'' +noStateName + '\');" class="' + noStateClass + '">' + noStateName + '</a>\n' +
                             '      <a href="javascript:lookUserDoc(\'' + USER_ID + '\');" class="look">查看</a>\n' +
                             '      </td>\n' +
                             '      </tr>';
@@ -391,7 +392,14 @@
     }
 
     //切换状态
-    function changeState(oldState, id, name) {
+    function changeState(oldState, id,USER_NAME,companyid, name) {
+        var reg = RegExp(/管理员/);
+        var reg1 = RegExp(/ROOT/);
+
+        if(USER_NAME.match(reg)||companyid.match(reg1)){
+            jo.showMsg(jo.getDefVal("管理员不能被禁用"));
+        }else{
+
         var state = oldState == 1 ? 0 : 1;
         jo.postAjax("ums/user/updateUser.action", {STATE: state, ID: id}, function (json) {
             if (json && json.code == 0) {
@@ -401,6 +409,8 @@
                 jo.showMsg(jo.getDefVal(json.info, name + "失败"));
             }
         });
+        }
+
     }
 
     //查看员工档案（宣化引用）

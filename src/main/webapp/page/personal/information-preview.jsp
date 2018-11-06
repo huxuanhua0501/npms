@@ -817,6 +817,24 @@
         // $("#addrelation").after(listline);
         //教育经历
         listline = "";
+        if(auditData.data[0].educationContent){
+            listline += '<div  class=\"layui-row row-two\"  name=\"addDivName\">';
+            listline += '<div class=\"layui-col-md1 tit\" style=\"margin-top: 0;width: 140px;\">';
+            listline += '<span class=\"typeName\">';
+            listline += '教育经历';
+            listline += '</span>';
+            listline += '</div>';
+            listline += '<div class=\"line\"></div>';
+            listline += '  <div class="layui-input-inline" style="width: calc(100% - 140px);">';
+            listline +=' <textarea class="layui-textarea" name="content" autoHeight="true" cols="50" style="height: 132px; margin-top: 10px; border: none; background: rgb(255, 255, 255);" readonly="readonly">';
+            // <textarea class="layui-textarea" name="content" placeholder="格式：起始时间--结束时间 详细内容。例如：2018.09--2019.06 北京大学。说明：时间之间用两个减号分割，内容与时间之间用空格即可，多条记录请按Enter!" id="content" autoHeight="true" cols="50" style="height:auto;margin-top:10px;border: none;background: #fff;"></textarea>
+            listline +=''+ auditData.data[0].educationContent +'';
+            listline +='</textarea>';
+            // listline += ' <div id="contentShow" class="layui-textarea"  autoHeight="true" cols="50" style="height:auto;margin-top:10px;border: none;background: #fff;" readonly="readonly">';
+            // listline += '</div>';
+            listline += '</div>';
+
+        }else{
         for (var i = 0; i < auditData.data[0].auditPmsEducationList.length; i++) {
             if ((auditData.data[0].auditPmsEducationList.length - 1) === i) {
                 listline += '<div  class=\"layui-row row-two\" name=\"addDivName\">';
@@ -903,68 +921,88 @@
             listline += '</div>';
 
         }
+        }
         // $("#addeducation").after(listline);
         $("div[name='addDivName']:last").after(listline);
 
 //工作经历
         listline = "";
-        for (var i = 0; i < auditData.data[0].auditPmsWorkList.length; i++) {
-            if ((auditData.data[0].auditPmsWorkList.length - 1) === i) {
-                listline += '<div  class=\"layui-row row-two\"  name=\"addDivName\">';
-            } else {
-                listline += '<div class=\"layui-row row-two\">';
-            }
-            listline += '<div class=\"layui-col-md1 tit\" style=\"margin-top: 0;width: 140px;\">';
+      if(auditData.data[0].workContent){
+          listline += '<div  class=\"layui-row row-two\"  name=\"addDivName\">';
+          listline += '<div class=\"layui-col-md1 tit\" style=\"margin-top: 0;width: 140px;\">';
+          listline += '<span class=\"typeName\">';
+          listline += '工作经历';
+          listline += '</span>';
+          listline += '</div>';
+          listline += '<div class=\"line\"></div>';
+          listline += '  <div class="layui-input-inline" style="width: calc(100% - 140px);">';
+          listline +=' <textarea class="layui-textarea" name="content" autoHeight="true" cols="50" style="height: 132px; margin-top: 10px; border: none; background: rgb(255, 255, 255);" readonly="readonly">';
+                  // <textarea class="layui-textarea" name="content" placeholder="格式：起始时间--结束时间 详细内容。例如：2018.09--2019.06 北京大学。说明：时间之间用两个减号分割，内容与时间之间用空格即可，多条记录请按Enter!" id="content" autoHeight="true" cols="50" style="height:auto;margin-top:10px;border: none;background: #fff;"></textarea>
+          listline +=''+ auditData.data[0].workContent +'';
+          listline +='</textarea>';
+          // listline += ' <div id="contentShow" class="layui-textarea"  autoHeight="true" cols="50" style="height:auto;margin-top:10px;border: none;background: #fff;" readonly="readonly">';
+          // listline += '</div>';
+          listline += '</div>';
 
-            if (i === 0) {
-                listline += '<span class=\"typeName\">';
-                listline += '工作经历';
-                listline += '</span>';
+      }else{
+          for (var i = 0; i < auditData.data[0].auditPmsWorkList.length; i++) {
+              if ((auditData.data[0].auditPmsWorkList.length - 1) === i) {
+                  listline += '<div  class=\"layui-row row-two\"  name=\"addDivName\">';
+              } else {
+                  listline += '<div class=\"layui-row row-two\">';
+              }
+              listline += '<div class=\"layui-col-md1 tit\" style=\"margin-top: 0;width: 140px;\">';
 
-            }
-            listline += '<div class=\"layui-input-inline col-item edit\">';
-            listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\"   >';
-            listline += '</div>';
-            listline += '<div class=\"layui-input-inline col-item save\">';
-            listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].startTime + '  >';
-            listline += '</div>';
-            listline += ' <div style=\"text-align: center;\">至</div>';
-            listline += '<div class=\"layui-input-inline col-item edit\">';
-            listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\"   >';
-            listline += '</div>';
-            listline += '<div class=\"layui-input-inline col-item save\">';
-            listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].stopTime + '  >';
-            listline += '</div>';
-            listline += '</div>';
-            listline += '<div class=\"line\"></div>';
-            listline += '  <div class=\"layui-col-md1\" style=\"margin-left: 30px;\">';
-            listline += '<div>';
-            listline += '<div class=\"label\">工作单位</div>';
-            listline += '</div>';
-            listline += '<div>';
-            listline += '<div class=\"label\">工作部门</div>';
-            listline += '</div>';
-            listline += '</div>';
-            listline += '<div class=\"layui-col-md3\">';
-            listline += '<div class=\"col-item\">';
-            listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].workCompany + '  >';
-            listline += '</div>';
-            listline += '<div class=\"col-item\">';
-            listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].workDept + '  >';
-            listline += '</div>';
-            listline += '</div>';
-            listline += '<div class=\"layui-col-md1\" style=\"margin-right: 20px;\">';
-            listline += '<div>';
-            listline += '<div class=\"label\">职务职称</div>';
-            listline += '</div>';
-            listline += '</div>';
-            listline += '<div class=\"layui-col-md3\">';
-            listline += '<div class=\"col-item\">';
-            listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].post + '  >';
-            listline += '</div>';
-            listline += '</div>';
-            listline += '</div>';
-        }
+              if (i === 0) {
+                  listline += '<span class=\"typeName\">';
+                  listline += '工作经历';
+                  listline += '</span>';
+
+              }
+              listline += '<div class=\"layui-input-inline col-item edit\">';
+              listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\"   >';
+              listline += '</div>';
+              listline += '<div class=\"layui-input-inline col-item save\">';
+              listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].startTime + '  >';
+              listline += '</div>';
+              listline += ' <div style=\"text-align: center;\">至</div>';
+              listline += '<div class=\"layui-input-inline col-item edit\">';
+              listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\"   >';
+              listline += '</div>';
+              listline += '<div class=\"layui-input-inline col-item save\">';
+              listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].stopTime + '  >';
+              listline += '</div>';
+              listline += '</div>';
+              listline += '<div class=\"line\"></div>';
+              listline += '  <div class=\"layui-col-md1\" style=\"margin-left: 30px;\">';
+              listline += '<div>';
+              listline += '<div class=\"label\">工作单位</div>';
+              listline += '</div>';
+              listline += '<div>';
+              listline += '<div class=\"label\">工作部门</div>';
+              listline += '</div>';
+              listline += '</div>';
+              listline += '<div class=\"layui-col-md3\">';
+              listline += '<div class=\"col-item\">';
+              listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].workCompany + '  >';
+              listline += '</div>';
+              listline += '<div class=\"col-item\">';
+              listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].workDept + '  >';
+              listline += '</div>';
+              listline += '</div>';
+              listline += '<div class=\"layui-col-md1\" style=\"margin-right: 20px;\">';
+              listline += '<div>';
+              listline += '<div class=\"label\">职务职称</div>';
+              listline += '</div>';
+              listline += '</div>';
+              listline += '<div class=\"layui-col-md3\">';
+              listline += '<div class=\"col-item\">';
+              listline += '<input type=\"text\" class=\"layui-input\" autocomplete=\"off\" lay-skin=\"primary\" value=' + auditData.data[0].auditPmsWorkList[i].post + '  >';
+              listline += '</div>';
+              listline += '</div>';
+              listline += '</div>';
+          }
+      }
         // $("#addwork").after(listline);
 
         $("div[name='addDivName']:last").after(listline);

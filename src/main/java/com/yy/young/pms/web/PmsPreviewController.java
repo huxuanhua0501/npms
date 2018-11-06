@@ -103,8 +103,6 @@ public class PmsPreviewController {
         auditPmsWork.setUserId(id);
         List<AuditPmsWork> auditPmsWorkList = auditPmsPreviewService.getWorksList(auditPmsWork);
 
-
-
         ExportExcelUtil export = new ExportExcelUtil();
 
 		String srcFilePath = "E:/导出模板.xlsx";
@@ -162,11 +160,14 @@ public class PmsPreviewController {
         AuditPmsEducation auditPmsEducation = new AuditPmsEducation();
         auditPmsEducation.setUserId(id);
         List<AuditPmsEducation> auditPmsEducationList = auditPmsPreviewService.getEducationList(auditPmsEducation);
+        Map<String,Object> EducationnCollectionMap=  pmsPreviewService.EducationnCollectionMap(id);
 
         //工作经历
         AuditPmsWork auditPmsWork = new AuditPmsWork();
         auditPmsWork.setUserId(id);
         List<AuditPmsWork> auditPmsWorkList = auditPmsPreviewService.getWorksList(auditPmsWork);
+        Map<String,Object> worksCollectionMap=  pmsPreviewService.getWorksCollection(id);
+
         //社团兼职
         AuditPmsMainTechGroup auditPmsMainTechGroup = new AuditPmsMainTechGroup();
         auditPmsMainTechGroup.setUserId(id);
@@ -223,6 +224,12 @@ public class PmsPreviewController {
         pmsUser.setAuditPmsTechnologyBraceList(auditPmsTechnologyBraceList);
         pmsUser.setAuditPmsSupportProjectList(auditPmsSupportProjectList);
         pmsUser.setAuditPmsYearCheckList(auditPmsYearCheckList);
+        if (worksCollectionMap != null&&worksCollectionMap.size()>0) {
+            pmsUser.setWorkContent(worksCollectionMap.get("content").toString());
+        }
+        if (EducationnCollectionMap != null&&EducationnCollectionMap.size()>0) {
+            pmsUser.setEducationContent(EducationnCollectionMap.get("content").toString());
+        }
         return new Result(pmsUser);
     }
 }

@@ -4,6 +4,7 @@ import com.yy.young.common.util.StringUtils;
 import com.yy.young.dal.service.IDataAccessService;
 import com.yy.young.dal.util.Page;
 import com.yy.young.pms.model.Communication;
+import com.yy.young.pms.model.PmsCollectWork;
 import com.yy.young.pms.model.PmsUser;
 import com.yy.young.pms.service.IPmsPreviewService;
 import com.yy.young.pms.util.PmsConstants;
@@ -39,5 +40,15 @@ public class PmsPreviewServiceImpl implements IPmsPreviewService {
     @Override
     public Communication getCommunicationById(String id) throws Exception {
         return (Communication)dataAccessService.getObject(PmsConstants.MAPPER.PMS_COMMUNICATION + ".getCommunicationById", id);
+    }
+
+    @Override
+    public Map<String,Object> getWorksCollection(String id) throws Exception {
+        return (Map<String, Object>) dataAccessService.getObject(PmsConstants.MAPPER.PMS_WORK + ".getWorksCollection", id);
+    }
+
+    @Override
+    public Map<String, Object> EducationnCollectionMap(String id) throws Exception {
+        return (Map<String, Object>) dataAccessService.getObject(PmsConstants.MAPPER.PMS_WORK + ".EducationnCollectionMap", id);
     }
 }
