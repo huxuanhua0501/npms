@@ -41,7 +41,32 @@
                 "changeStateUrl" : "pms/auditRecordBaseinfo/changeStatus.action"
             };
             joForm.initFormPage(jParams);//初始化
+            loadAjax();
+
         });
+        function loadAjax() {
+            jo.postAjax("pms/pmsDictionary/getListByDictionary/PERSON_TYPE", {}, function(obj){
+                var list = "", listline = "";
+                // listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value= "所有" title="所有">';
+                listline += '<option value=""></option>';
+                var remark = $("input[name='remark']").val();
+                for (var i = 0; i < obj.data.length; i++) {
+                    // listline += '<input type=\"checkbox\" name=\"remarkxxx\" class=\"col-item\" lay-skin=\"primary\" value=' + obj.data[i].dicValue + ' title=' + obj.data[i].dicValue + '>';
+                    if(remark!=undefined&&remark!==''&&remark=== obj.data[i].dicValue){
+                        listline += ' <option selected="selected" value=\' + obj.data[i].dicValue + \'>'+ obj.data[i].dicValue +'</option>';
+                    }else{
+                        listline += ' <option vvalue=' + obj.data[i].dicValue + '>'+ obj.data[i].dicValue +'</option>';
+
+                    }
+
+                }
+                $("#person_type").append("");
+                $("#person_type").append(listline);
+
+            }, false);
+            sfSet();//在初始化表格之前
+            joViewInitAboutDoc();//joView初始化处理
+        }
         joForm.spliceStatus = function(formAuditData){
             //在此处理拼接状态显示：start
             var elements = document.getElementById("pageForm").elements;
@@ -986,8 +1011,8 @@
                                             <input type="text" name="remark"  required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                                         </div>
                                         <div class="col-item edit">
-                                            <select name="remark" lay-verify="" >
-                                                <option value=""></option>
+                                            <select name="remark" lay-verify="" disabled="disabled" id="person_type">
+                                                <%--<option value=""></option>
                                                 <option value="在编">在编</option>
                                                 <option value="院聘">院聘</option>
                                                 <option value="劳务派遣">劳务派遣</option>
@@ -996,7 +1021,7 @@
                                                 <option value="退休">退休</option>
                                                 <option value="离休">离休</option>
                                                 <option value="博士后">博士后</option>
-                                                <option value="其他">其他</option>
+                                                <option value="其他">其他</option>--%>
                                             </select>
                                         </div>
 
