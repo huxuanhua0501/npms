@@ -83,7 +83,7 @@ COMMENT ON TABLE "public"."pms_announcement" IS '公告表';
    4.3  人事管理-统计报表-奖励分析  openPageOnMain('page/statistic/jiangliStatistics_no.jsp?edit=true')  层级-3  显示顺序-20
    4.3  组织结构-部门用户 openPageOnMain('page/ums/deptUser_no.jsp')  层级-2  显示顺序-1
    4.3  组织结构-机构管理 openPageOnMain('page/ums/deptList_no.jsp')  层级-2  显示顺序-2
-   4.3  组织结构-角色权限-角色管理 openPageOnMain('page/ums/deptList_no.jsp')  层级-2  显示顺序-20
+   4.3  组织结构-角色权限-角色管理 openPageOnMain('page/ums/roleList_no.jsp')  层级-2  显示顺序-20
    4.3  组织结构-角色权限-角色用户  openPageOnMain('page/ums/roleUser_no.jsp')  层级-2  显示顺序-30
    4.3  系统管理    层级-1  显示顺序-230
    4.3  系统管理-公告设置 openPageOnMain('page/portal/announcement_no.jsp')  层级-2  显示顺序-1
