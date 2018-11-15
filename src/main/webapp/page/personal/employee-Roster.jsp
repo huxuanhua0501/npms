@@ -295,11 +295,11 @@
                             <a class="layui-btn layui-btn-radius layui-btn-primary annual-check">年度考核</a>
                         </div>
 
-                        <div class="edit-item layui-col-md12 layui-col-xs12">
+                       <%-- <div class="edit-item layui-col-md12 layui-col-xs12">
                             <label class="layui-form-label">工作性质及状态</label>
                             <div class="layui-col-md10 layui-col-xs10" style="padding: 10px 15px;" id="checkbox_0">
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="edit-item layui-row">
                             <label class="layui-form-label">当前状态</label>
                             <div class="layui-col-md10 layui-col-xs10" style="padding: 10px 15px;">

@@ -97,7 +97,7 @@
                          </span>
                     </div>
                 </div>
-                <div class="edit-item layui-col-md12 layui-col-xs12">
+              <%--  <div class="edit-item layui-col-md12 layui-col-xs12">
                     <label class="layui-form-label">时间段</label>
                     <input type="text" idname="start_time" required lay-verify="required" placeholder="2018-08"
                            autocomplete="off"
@@ -105,7 +105,7 @@
                     <input type="text" name="end_time" required lay-verify="required" placeholder="2018-10"
                            autocomplete="off"
                            class="layui-input list-input" id="end_time" style="width: 100px;display: inline-block;">
-                </div>
+                </div>--%>
                 <div class="layui-form-item button-item">
                     <div class="layui-input-inline button-inline">
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary inquiry" onclick="loadBianzhi()">查询</button>

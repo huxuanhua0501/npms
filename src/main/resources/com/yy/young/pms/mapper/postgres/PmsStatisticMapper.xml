@@ -31,12 +31,12 @@
                 #{item}
             </foreach>
         </if>
-        <if test="start_time != null and start_time != ''">
+       <!-- <if test="start_time != null and start_time != ''">
             AND to_there_time  &gt;=#{start_time}
         </if>
         <if test="end_time != null and end_time != ''">
             AND to_there_time  &lt;=#{end_time}
-        </if>
+        </if>-->
         AND (trash_flag != '1'  or trash_flag is null)
         and  user_name NOT IN ('环科院管理员','超级管理员')
         <if test="startWorkTime != null and startWorkTime != ''">
@@ -117,12 +117,12 @@
                 #{item}
             </foreach>
         </if>
-        <if test="start_time != null and start_time != ''">
+       <!-- <if test="start_time != null and start_time != ''">
             AND to_there_time  &gt;=#{start_time}
         </if>
         <if test="end_time != null and end_time != ''">
             AND to_there_time  &lt;=#{end_time}
-        </if>
+        </if>-->
         AND (trash_flag != '1'  or trash_flag is null)
         and  user_name NOT IN ('环科院管理员','超级管理员')
         <if test="sex != null and sex != ''">
@@ -161,12 +161,12 @@
                 #{item}
             </foreach>
         </if>
-        <if test="start_time != null and start_time != ''">
+      <!--  <if test="start_time != null and start_time != ''">
             AND to_there_time  &gt;=#{start_time}
         </if>
         <if test="end_time != null and end_time != ''">
             AND to_there_time  &lt;=#{end_time}
-        </if>
+        </if>-->
         AND (trash_flag != '1'  or trash_flag is null)
         and  user_name NOT IN ('环科院管理员','超级管理员')
         <if test="highestEducation != null and highestEducation != ''">
@@ -210,12 +210,12 @@
                 #{item}
             </foreach>
         </if>
-        <if test="start_time != null and start_time != ''">
+      <!--  <if test="start_time != null and start_time != ''">
             AND to_there_time  &gt;=#{start_time}
         </if>
         <if test="end_time != null and end_time != ''">
             AND to_there_time  &lt;=#{end_time}
-        </if>
+        </if>-->
         AND (trash_flag != '1'  or trash_flag is null)
         and  user_name NOT IN ('环科院管理员','超级管理员')
 
@@ -334,12 +334,12 @@
                 #{item}
             </foreach>
         </if>
-        <if test="start_time != null and start_time != ''">
+      <!--  <if test="start_time != null and start_time != ''">
             AND to_there_time  &gt;=#{start_time}
         </if>
         <if test="end_time != null and end_time != ''">
             AND to_there_time  &lt;=#{end_time}
-        </if>
+        </if>-->
         AND (trash_flag != '1'  or trash_flag is null)
         and  user_name NOT IN ('环科院管理员','超级管理员')
         <if test="startWorkTime != null and startWorkTime != ''">
@@ -375,12 +375,12 @@
             </foreach>
             )
         </if>
-        <if test="start_time != null and start_time != ''">
+      <!--  <if test="start_time != null and start_time != ''">
             AND to_there_time &gt;=#{start_time}
         </if>
         <if test="end_time != null and end_time != ''">
             AND to_there_time &lt;=#{end_time}
-        </if>
+        </if>-->
         AND (trash_flag != '1' or trash_flag is null)
         and user_name NOT IN ('环科院管理员','超级管理员')
 
@@ -411,12 +411,12 @@
             </foreach>
             )
         </if>
-        <if test="start_time != null and start_time != ''">
+      <!--  <if test="start_time != null and start_time != ''">
             AND to_there_time &gt;=#{start_time}
         </if>
         <if test="end_time != null and end_time != ''">
             AND to_there_time &lt;=#{end_time}
-        </if>
+        </if>-->
         AND (trash_flag != '1' or trash_flag is null)
         and user_name NOT IN ('环科院管理员','超级管理员')
 
@@ -489,12 +489,12 @@
             </foreach>
             )
         </if>
-        <if test="start_time != null and start_time != ''">
+        <!--<if test="start_time != null and start_time != ''">
             AND to_there_time &gt;=#{start_time}
         </if>
         <if test="end_time != null and end_time != ''">
             AND to_there_time &lt;=#{end_time}
-        </if>
+        </if>-->
         AND (trash_flag != '1' or trash_flag is null)
         and user_name NOT IN ('环科院管理员','超级管理员')
 
