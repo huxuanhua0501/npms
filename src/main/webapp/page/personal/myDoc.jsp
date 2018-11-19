@@ -96,10 +96,11 @@
                 var element = $(inp[i]);
                 var key = jo.getDefVal(element.attr("name"),element.attr("id"));
                 for (var f=0;f<json.length;f++) {
-                    if ('levelOfAppointment' == json[f]["fieldKey"]) {//找到同name
+                     if ('levelOfAppointment' == json[f]["fieldKey"]) {//找到同name
                     }
 
                     if (key == json[f]["fieldKey"]){//找到同name
+
                         element.val(json[f]["fieldVal"]);//赋值
                         if (key == "photoAddress") {
                             if (typeof (formAuditData[f]["fieldVal"]) != "undefined") {
@@ -893,6 +894,9 @@
                         <div>
                             <div class="label">承担的工作</div>
                         </div>
+                        <div>
+                            <div class="label">婚姻状况</div>
+                        </div>
                     </div>
                     <div class="layui-col-md3">
                         <div class="col-item save">
@@ -939,6 +943,12 @@
                         <div class="col-item lang">
                             <input type="text" name="takeWork" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
+
+                        <div class="col-item">
+                            <input type="text" name="maritalStatus" disabled required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+
                     </div>
                     <div class="layui-col-md1">
                         <div>

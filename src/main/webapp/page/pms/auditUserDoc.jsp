@@ -700,7 +700,19 @@
                             </td>--%>
 
                         </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" autocomplete="off" name="baseinfo" status="" cname="maritalStatus" class="col-item" lay-skin="primary"  title="婚姻状况">
+                            </td>
+                            <td>
+                                <%--婚姻状况--%>
+                                <div class="col-item">
+                                    <input type="text" name="maritalStatus"  placeholder="" autocomplete="off" class="layui-input" >
 
+                                </div>
+                            </td>
+
+                        </tr>
                         </tbody>
                     </table>
 

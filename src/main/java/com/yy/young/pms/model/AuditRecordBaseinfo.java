@@ -192,6 +192,9 @@ public class AuditRecordBaseinfo{
         if (("remarkModifyTime").equals(this.fieldKey)) {
             obj.setRemarkModifyTime(this.fieldVal);
         }
+        if (("maritalStatus").equals(this.fieldKey)) {
+            obj.setMaritalStatus(this.fieldVal);
+        }
 //        部门暂且不考虑，用户自己无法更改部门
 /*        if (("deptIds").equals(this.field)) {
             obj.setDeptIds(this.fieldVal);
@@ -317,6 +320,9 @@ public class AuditRecordBaseinfo{
         }
         if (("remarkModifyTime").equals(this.fieldKey)) {
             obj.setRemarkModifyTime(this.fieldVal);
+        }
+        if (("maritalStatus").equals(this.fieldKey)) {
+            obj.setMaritalStatus(this.fieldVal);
         }
 //        部门暂且不考虑，用户自己无法更改部门
 /*        if (("deptIds").equals(this.field)) {

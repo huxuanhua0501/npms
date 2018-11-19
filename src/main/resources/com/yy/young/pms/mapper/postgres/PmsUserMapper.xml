@@ -753,6 +753,9 @@
             <if test="station != null">
                 station = #{station},
             </if>
+            <if test="maritalStatus != null">
+                marital_status = #{maritalStatus},
+            </if>
             <if test="takeWork != null">
                 take_work = #{takeWork},
             </if>
