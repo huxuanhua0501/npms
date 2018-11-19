@@ -333,6 +333,8 @@ public class PmsUserController extends AbstractCommonController<PmsUser> {
         } else {
             String id = CommonUtil.getUUID();
             String birth = (String) parameter.get("BIRTHDAY");
+            String deptIds = (String) parameter.get("deptIds");
+            String deptNames = (String) parameter.get("deptNames");
             String userName = (String) parameter.get("NAME");
             String userId = (String) parameter.get("ACCOUNT");
             String sex = (String) parameter.get("SEX");
@@ -353,6 +355,8 @@ public class PmsUserController extends AbstractCommonController<PmsUser> {
                 pmsUser.setBirth(birth);
                 pmsUser.setUserName(userName);
                 pmsUser.setUserId(userId);
+                pmsUser.setDeptIds(deptIds);
+                pmsUser.setDeptNames(deptNames);
                 if ("1".equals(sex)){
                     pmsUser.setSex("男");
                 }else if ("0".equals(sex)){
