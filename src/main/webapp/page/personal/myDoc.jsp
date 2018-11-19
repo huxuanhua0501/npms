@@ -66,8 +66,8 @@
                  $("#person_type").append(listline);
 
              }, false);
-             sfSet();//在初始化表格之前
-             joViewInitAboutDoc();//joView初始化处理
+             // sfSet();//在初始化表格之前
+             // joViewInitAboutDoc();//joView初始化处理
          }
 
          //加载基础信息
