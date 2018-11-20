@@ -159,7 +159,7 @@
             <td class="active must" hidden>所属部门</td>
             <td hidden>
                 <div class="input-group">
-                    <input type="hidden" id="deptIds" name="deptIds" class="form-control input-sm" ErrEmpty="所属单位不可以为空">
+                    <input type="hidden" id="deptIds" name="deptIds" class="form-control input-sm" >
                     <input type="text" id="names" name="names" class="form-control input-sm">
                     <span class="input-group-btn">
                             <button class="btn btn-default btn-sm" type="button"
@@ -191,10 +191,10 @@
     // }
     function choiceCompany(idInp, nameInp, bMore){
 
-        jo.selectTree('{URL_UMS}ums/tree/getCompanyTree.action',jo.getDefVal(idInp, 'PARENT_ID'),jo.getDefVal(nameInp, 'PARENT_NAME'),'ID','NAME', 'PARENT_ID', bMore);
+        jo.selectTree1('{URL_UMS}ums/tree/getCompanyTree.action',jo.getDefVal(idInp, 'PARENT_ID'),jo.getDefVal(nameInp, 'PARENT_NAME'),'ID','NAME', 'PARENT_ID', bMore);
         // showDept();
     }
-    jo.selectTree = function(sUrl,inpId,inpName,fieldId,fieldName,fieldPid,multiple,callback,zTreeParamOrCallBack,nodeCanChoiceCallBack,drawBeforeCallBack){
+    jo.selectTree1 = function(sUrl,inpId,inpName,fieldId,fieldName,fieldPid,multiple,callback,zTreeParamOrCallBack,nodeCanChoiceCallBack,drawBeforeCallBack){
         //[Attr] 选择框参数
         jo.selectParams = {
             "url" : sUrl,

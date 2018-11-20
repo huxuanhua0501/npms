@@ -252,8 +252,15 @@
                         parent.$("#"+joList.params["text"]).val(texts);
                     }
                     if(ids==='449143d6374445488e11d6fb2812a730'){
+                        parent.$("#deptIds").attr("ErrEmpty","所属部门不可以为空");
                         parent.$("td:hidden").each(function () {
                             $(this).show();
+                        });
+                    }else{
+                        parent.$("#deptIds").val();
+                        parent.$("#names").val();
+                        parent.$("td:last").each(function () {
+                            $(this).hide();
                         });
                     }
                     //alert(ids+"\n"+texts);

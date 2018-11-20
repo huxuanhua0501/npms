@@ -382,18 +382,14 @@
             var deptIds = $("#deptIds").val();
             var start_time = $("#start_time").val();
             var end_time = $("#end_time").val();
-            trashFlagArray = document.getElementsByName("administrativeLevel");
-            var  administrativeLevel=new Array();
-            for(b in trashFlagArray){
-                if(trashFlagArray[b].checked)
-                    administrativeLevel.push(trashFlagArray[b].value);
-            }
-            trashFlagArray = document.getElementsByName("technicalPosition");
-            var  technicalPosition=new Array();
-            for(b in trashFlagArray){
-                if(trashFlagArray[b].checked)
-                    technicalPosition.push(trashFlagArray[b].value);
-            }
+            var administrativeLevel= [];
+            $('input[name="administrativeLevel"]:checked').each(function(){
+                administrativeLevel.push($(this).val());
+            });
+            var technicalPosition= [];
+            $('input[name="technicalPosition"]:checked').each(function(){
+                technicalPosition.push($(this).val());
+            });
             //获取查询条件信息
             var selectObj = getQueryData();
             jo.postAjax("pms/statistic/getTalentEchelon",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time,"administrativeLevel":administrativeLevel,"technicalPosition":technicalPosition}, function(json){
@@ -583,18 +579,14 @@
             var deptIds = $("#deptIds").val();
             var start_time = $("#start_time").val();
             var end_time = $("#end_time").val();
-            trashFlagArray = document.getElementsByName("administrativeLevel");
-            var  administrativeLevel=new Array();
-            for(b in trashFlagArray){
-                if(trashFlagArray[b].checked)
-                    administrativeLevel.push(trashFlagArray[b].value);
-            }
-            trashFlagArray = document.getElementsByName("technicalPosition");
-            var  technicalPosition=new Array();
-            for(b in trashFlagArray){
-                if(trashFlagArray[b].checked)
-                    technicalPosition.push(trashFlagArray[b].value);
-            }
+            var administrativeLevel= [];
+            $('input[name="administrativeLevel"]:checked').each(function(){
+                administrativeLevel.push($(this).val());
+            });
+            var technicalPosition= [];
+            $('input[name="technicalPosition"]:checked').each(function(){
+                technicalPosition.push($(this).val());
+            });
             //获取查询条件信息
             var selectObj = getQueryData();
                 jo.postAjax("pms/statistic/getMenAndWomen",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time,"administrativeLevel":administrativeLevel,"technicalPosition":technicalPosition}, function(json){
@@ -754,18 +746,14 @@
             var deptIds = $("#deptIds").val();
             var start_time = $("#start_time").val();
             var end_time = $("#end_time").val();
-            trashFlagArray = document.getElementsByName("administrativeLevel");
-            var  administrativeLevel=new Array();
-            for(b in trashFlagArray){
-                if(trashFlagArray[b].checked)
-                    administrativeLevel.push(trashFlagArray[b].value);
-            }
-            trashFlagArray = document.getElementsByName("technicalPosition");
-            var  technicalPosition=new Array();
-            for(b in trashFlagArray){
-                if(trashFlagArray[b].checked)
-                    technicalPosition.push(trashFlagArray[b].value);
-            }
+            var administrativeLevel= [];
+            $('input[name="administrativeLevel"]:checked').each(function(){
+                administrativeLevel.push($(this).val());
+            });
+            var technicalPosition= [];
+            $('input[name="technicalPosition"]:checked').each(function(){
+                technicalPosition.push($(this).val());
+            });
             //获取查询条件信息
             var selectObj = getQueryData();
                 jo.postAjax("pms/statistic/getEducationSpread",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time,"administrativeLevel":administrativeLevel,"technicalPosition":technicalPosition}, function(json){
@@ -964,18 +952,14 @@
             var deptIds = $("#deptIds").val();
             var start_time = $("#start_time").val();
             var end_time = $("#end_time").val();
-            trashFlagArray = document.getElementsByName("administrativeLevel");
-            var  administrativeLevel=new Array();
-            for(b in trashFlagArray){
-                if(trashFlagArray[b].checked)
-                    administrativeLevel.push(trashFlagArray[b].value);
-            }
-            trashFlagArray = document.getElementsByName("technicalPosition");
-            var  technicalPosition=new Array();
-            for(b in trashFlagArray){
-                if(trashFlagArray[b].checked)
-                    technicalPosition.push(trashFlagArray[b].value);
-            }
+            var administrativeLevel= [];
+            $('input[name="administrativeLevel"]:checked').each(function(){
+                administrativeLevel.push($(this).val());
+            });
+            var technicalPosition= [];
+            $('input[name="technicalPosition"]:checked').each(function(){
+                technicalPosition.push($(this).val());
+            });
             //获取查询条件信息
             var selectObj = getQueryData();
                 jo.postAjax("pms/statistic/getWorkYear",{"deptIds":deptIds,"start_time":start_time,"end_time":end_time,"administrativeLevel":administrativeLevel,"technicalPosition":technicalPosition}, function(json){
